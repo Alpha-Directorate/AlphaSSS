@@ -11,5 +11,5 @@ Version: 1.0
 //add_filter('the_title', ucwords);
 
 add_filter('the_content', function($content) {
-	return $content . ' ' . time();
+	return $content . ' ' . 'Hello World 1' . ' ' .time();
 });
