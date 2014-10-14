@@ -13,6 +13,8 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 	define( 'DB_HOST', 'localhost' ); // Probably 'localhost'
 }
 
+define('WP_MEMORY_LIMIT', '96M');
+
 // ========================
 // Custom Content Directory
 // ========================
