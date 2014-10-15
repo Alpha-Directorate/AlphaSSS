@@ -7,7 +7,7 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 	include( dirname( __FILE__ ) . '/local-config.php' );
 } else {
 	define( 'WP_LOCAL_DEV', false );
-	define( 'DB_NAME', 'alpha55_alpha55' );
+	define( 'DB_NAME', 'alpha55_dev' );
 	define( 'DB_USER', 'alpha55_alpha55' );
 	define( 'DB_PASSWORD', '@93HumorOus_' );
 	define( 'DB_HOST', 'localhost' ); // Probably 'localhost'
