@@ -19,11 +19,11 @@ define('WP_MEMORY_LIMIT', '96M');
 // Custom Content Directory
 // ========================
 define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/content' );
-if ( WP_LOCAL_DEV ) {
+// if ( WP_LOCAL_DEV ) {
 	define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/alpha-social-development/content' );
-} else {
-	define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/content' );
-}
+// } else {
+//	define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/content' );
+// }
 
 // ================================================
 // You almost certainly do not want to change these
