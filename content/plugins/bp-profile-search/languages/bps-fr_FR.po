@@ -1,0 +1,323 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BP Profile Search\n"
+"POT-Creation-Date: 2014-03-28 19:01+0100\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Jean-Pierre Michaud <nexialys@yahoo.com>\n"
+"Language-Team: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr_FR\n"
+
+#: bps-form.php:18
+#, php-format
+msgid "%s: Error, you have not configured your search form."
+msgstr "%s: Erreur, vous n'avez pas configuré votre formulaire de recherche."
+
+#: bps-form.php:145 bps-form.php:238
+msgid "Clear"
+msgstr "Effacer"
+
+#: bps-form.php:171
+msgid "Search"
+msgstr "Recherche"
+
+#: bps-form.php:208
+msgid "min"
+msgstr "min"
+
+#: bps-form.php:210
+msgid "max"
+msgstr "max"
+
+#: bps-functions.php:9
+msgid "Overview"
+msgstr "Vue d'ensemble"
+
+#: bps-functions.php:12
+msgid "Configure the search form for your Members Directory, then display it:"
+msgstr ""
+"Configurez le formulaire de recherche pour le Répertoire des Membres, et "
+"affichez-le:"
+
+#: bps-functions.php:14
+#, php-format
+msgid "In your Members Directory page, selecting the option %s"
+msgstr "Dans votre Répertoire des Membres, sélectionnez l'option %s"
+
+#: bps-functions.php:14 bps-functions.php:40 bps-main.php:165
+msgid "Add to Directory"
+msgstr "Ajoutez au Répertoire"
+
+#: bps-functions.php:15
+#, php-format
+msgid "In a sidebar or widget area, using the widget %s"
+msgstr "Dans une Barre Latérale ou une zone de widget, utiliser le widget %s"
+
+#: bps-functions.php:15 bps-main.php:65 bps-main.php:109 bps-search.php:212
+msgid "Profile Search"
+msgstr "Recherche de Profil"
+
+#: bps-functions.php:16
+#, php-format
+msgid "In a post or page, using the shortcode %s"
+msgstr "Dans un article ou une page, utiliser le shortcode %s"
+
+#: bps-functions.php:17
+#, php-format
+msgid "Anywhere in your theme, using the PHP code %s"
+msgstr "Ailleurs dans votre thème, utiliser le code PHP %s"
+
+#: bps-functions.php:21 bps-main.php:152
+msgid "Form Fields"
+msgstr "Cases du Formulaire"
+
+#: bps-functions.php:24 bps-main.php:155
+msgid "Select the profile fields to show in your search form."
+msgstr ""
+"Sélectionner les cases de profil à afficher dans le formulaire de recherche."
+
+#: bps-functions.php:26
+msgid ""
+"Customize the field label and description, or leave them empty to use the "
+"default"
+msgstr ""
+"Personaliser les cases de titre et description ou les laisser vides pour "
+"utiliser l'original"
+
+#: bps-functions.php:27
+msgid ""
+"Tick <em>Range</em> to enable the <em>Value Range Search</em> for numeric "
+"fields, or the <em>Age Range Search</em> for date fields"
+msgstr ""
+"Clickez <em>Étendue</em> pour activer la <em>Recherche Étendue</em> pour les "
+"cases numériques, ou pour la <em>Case de l'Age</em>."
+
+#: bps-functions.php:28
+msgid ""
+"To reorder the fields in the form, drag them up or down by the handle on the "
+"left"
+msgstr ""
+"Pour changer l'ordre d'affichage des cases dans le formulaire, simplement "
+"les glisser de bas en haut avec le bouton sur la gauche"
+
+#: bps-functions.php:29
+msgid "To remove a field from the form, click the [x] on the right"
+msgstr ""
+"Pour effacer une case du formulaire, simplement clicker le [x] à droite"
+
+#: bps-functions.php:31
+msgid "Please note:"
+msgstr "Prenez note:"
+
+#: bps-functions.php:33
+msgid "To leave a label or description blank, enter a single blank character"
+msgstr ""
+"Pour laisser un titre ou une description vide, simplement entrer un \"espace"
+"\""
+
+#: bps-functions.php:34
+msgid "The <em>Age Range Search</em> option is mandatory for date fields"
+msgstr ""
+"L'option <em>Recherche Étendue de l'Age</em> est obligatoire pour les cases "
+"de date"
+
+#: bps-functions.php:35
+msgid "The <em>Value Range Search</em> works for numeric fields only"
+msgstr ""
+"L'option <em>Recherche de Valeur Étendue</em> ne fonctionne que pour les "
+"cases numériques"
+
+#: bps-functions.php:36
+msgid ""
+"The <em>Value Range Search</em> is not supported for <em>Multi Select Box</"
+"em> and <em>Checkboxes</em> fields"
+msgstr ""
+"L'option <em>Recherche de Valeur Étendue</em> n'est pas supportée pour les "
+"cases de <em>Sélections Multiples</em> et <em>Cases à Cocher</em>."
+
+#: bps-functions.php:43 bps-main.php:167
+msgid "Insert your search form in your Members Directory page."
+msgstr ""
+"Insérer le formulaire de recherche dans votre page du Répertoire des Membres."
+
+#: bps-functions.php:45
+msgid "Specify the optional form header"
+msgstr "Spécifier l'entête du formulaire *(optionel)"
+
+#: bps-functions.php:46
+msgid "Enable the <em>Toggle Form</em> feature"
+msgstr "Activer la fonction pour <em>Afficher/Cacher</em> le formulaire"
+
+#: bps-functions.php:47
+msgid "Enter the text for the <em>Toggle Form</em> button"
+msgstr "Entrer le texte du bouton <em>Afficher/Cacher</em>"
+
+#: bps-functions.php:49
+msgid ""
+"If you select <em>Add to Directory: No</em>, the above options are ignored."
+msgstr ""
+"Si vous choisissez de ne pas \"Ajouter au Répertoire\", cette option sera "
+"ignorée durant la recherche."
+
+#: bps-functions.php:52 bps-main.php:211
+msgid "Text Search Mode"
+msgstr "Mode de Recherche de Texte"
+
+#: bps-functions.php:55 bps-main.php:214
+msgid "Select your text search mode."
+msgstr "Sélectionner votre mode de recherche."
+
+#: bps-functions.php:57
+msgid ""
+"<em>Partial Match</em>: a search for <em>John</em> finds <em>John</em>, "
+"<em>Johnson</em>, <em>Long John Silver</em>, and so on"
+msgstr ""
+"<em>Correspondance Partielle</em>: une recherche de <em>John</em> va trouver "
+"<em>John</em>, <em>Johnson</em>, <em>Long John Silver</em>, et d'autres..."
+
+#: bps-functions.php:58
+msgid ""
+"<em>Exact Match</em>: a search for <em>John</em> finds <em>John</em> only"
+msgstr ""
+"<em>Correspondance Exacte</em>: une recherche de <em>John</em> va trouver "
+"<em>John</em> seulement"
+
+#: bps-functions.php:60
+msgid "In both modes, two wildcard characters are available:"
+msgstr "Dans les deux modes, deux caractères de remplacement sont disponibles:"
+
+#: bps-functions.php:62
+msgid "<em>% (percent sign)</em> matches any text, or no text at all"
+msgstr "<em>% (signe pourcent)</em> remplace n'importe quoi, ou rien du tout"
+
+#: bps-functions.php:63
+msgid "<em>_ (underscore)</em> matches any single character"
+msgstr "<em>_ (souligné)</em> remplace un caractère"
+
+#: bps-functions.php:68
+msgid "For more information:"
+msgstr "Pour plus d'information:"
+
+#: bps-functions.php:69
+msgid "Documentation"
+msgstr "Documentation"
+
+#: bps-functions.php:70
+msgid "Questions and Answers"
+msgstr "Questions et Réponses"
+
+#: bps-functions.php:71
+msgid "Incompatible plugins"
+msgstr "Plugins incompatibles"
+
+#: bps-functions.php:72
+msgid "Support Forum"
+msgstr "Forum de Support"
+
+#: bps-functions.php:90
+msgid "field"
+msgstr "champ"
+
+#: bps-functions.php:91
+msgid "label"
+msgstr "titre"
+
+#: bps-functions.php:92
+msgid "description"
+msgstr "description"
+
+#: bps-functions.php:93 bps-functions.php:163
+msgid "Range"
+msgstr "Étendue"
+
+#: bps-functions.php:171
+msgid "Add Field"
+msgstr "Ajouter une Case"
+
+#: bps-main.php:77
+msgid "Settings"
+msgstr "Réglages"
+
+#: bps-main.php:94
+msgid "<h4>Advanced Search</h4>"
+msgstr "<h4>Recherche Avancée</h4>"
+
+#: bps-main.php:96
+msgid "Toggle Form"
+msgstr "Afficher/Cacher"
+
+#: bps-main.php:104
+msgid "Form Configuration"
+msgstr "Configuration du Formulaire"
+
+#: bps-main.php:104
+msgid "Advanced Options"
+msgstr "Options Avancées"
+
+#: bps-main.php:156 bps-main.php:215
+msgid "Click the <em>Help</em> tab for more information."
+msgstr "Clicker le menu <em>Aide</em> pour plus d'information."
+
+#: bps-main.php:160
+msgid "Form Fields:"
+msgstr "Cases du Formulaire:"
+
+#: bps-main.php:170
+msgid "Add to Directory:"
+msgstr "Ajouter au Répertoire:"
+
+#: bps-main.php:172
+msgid "Yes"
+msgstr "Oui"
+
+#: bps-main.php:173
+msgid "No"
+msgstr "Non"
+
+#: bps-main.php:176
+msgid "Form Header:"
+msgstr "En-tête:"
+
+#: bps-main.php:179
+msgid "Toggle Form:"
+msgstr "Afficher/Cacher:"
+
+#: bps-main.php:180
+msgid "Enabled"
+msgstr "Activé"
+
+#: bps-main.php:182
+msgid "Toggle Form Button:"
+msgstr "Texte du Bouton d'Affichage:"
+
+#: bps-main.php:188 bps-main.php:228
+msgid "Save Settings"
+msgstr "Enregistrer les réglages"
+
+#: bps-main.php:219
+msgid "Text Search Mode:"
+msgstr "Mode de Recherche:"
+
+#: bps-main.php:221
+msgid "Partial Match"
+msgstr "Correspondance Partielle"
+
+#: bps-main.php:222
+msgid "Exact Match"
+msgstr "Correspondance Exacte"
+
+#: bps-main.php:250
+msgid "Settings saved."
+msgstr "Réglages enregistrés."
+
+#: bps-search.php:211
+msgid "Your Profile Search form."
+msgstr "Votre formulaire de Recherche de Profils."
+
+#: bps-search.php:239
+msgid "Title:"
+msgstr "Titre:"

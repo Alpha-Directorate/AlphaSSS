@@ -1,0 +1,264 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: bxcft\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-06-30 17:22+0100\n"
+"PO-Revision-Date: 2014-06-30 17:22+0100\n"
+"Last-Translator: miguel <donmik@gmail.com>\n"
+"Language-Team: \n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_x\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-SearchPath-0: /Volumes/Almacen/proyectos/php/test/wp-content/"
+"plugins/bp-xprofile-custom-fields-type-new\n"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/bp-xprofile-custom-fields-type-new.php:90
+msgid ""
+"Buddypress Xprofile Custom Fields Type plugin needs <b>Buddypress 2.0</b>, "
+"please install or upgrade Buddypress."
+msgstr ""
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/bp-xprofile-custom-fields-type-new.php:218
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/bp-xprofile-custom-fields-type-new.php:337
+msgid "yes"
+msgstr "да"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/bp-xprofile-custom-fields-type-new.php:218
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/bp-xprofile-custom-fields-type-new.php:337
+msgid "no"
+msgstr "нет"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/bp-xprofile-custom-fields-type-new.php:234
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/bp-xprofile-custom-fields-type-new.php:353
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_File.php:58
+msgid "Download file"
+msgstr "Скачать файл"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/bp-xprofile-custom-fields-type-new.php:403
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/bp-xprofile-custom-fields-type-new.php:421
+#, fuzzy
+msgid "This is a required field"
+msgstr "(required)"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/bp-xprofile-custom-fields-type-new.php:409
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/bp-xprofile-custom-fields-type-new.php:445
+#, php-format
+msgid "Image type not allowed: (%s)."
+msgstr ""
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/bp-xprofile-custom-fields-type-new.php:413
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/bp-xprofile-custom-fields-type-new.php:461
+#, php-format
+msgid "File type not allowed: (%s)."
+msgstr ""
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:12
+#, fuzzy
+msgid "Birthdate Selector"
+msgstr "День рождения"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:104
+msgid "Check this if you want to show age instead of birthdate:"
+msgstr "Отметьте, если нужно показывать возраст вместо даты рождения:"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:228
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:253
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:261
+msgid "----"
+msgstr ""
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:239
+msgid "January"
+msgstr "Январь"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:240
+msgid "February"
+msgstr "Февраль"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:241
+msgid "March"
+msgstr "Март"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:242
+msgid "April"
+msgstr "Апрель"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:243
+msgid "May"
+msgstr "Май"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:244
+msgid "June"
+msgstr "Июнь"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:245
+msgid "July"
+msgstr "Июль"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:246
+msgid "August"
+msgstr "Август"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:247
+msgid "September"
+msgstr "Сентябрь"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:248
+msgid "October"
+msgstr "Октябрь"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:249
+msgid "November"
+msgstr "Ноябрь"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Birthdate.php:250
+msgid "December"
+msgstr "Декабрь"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_CheckboxAcceptance.php:12
+#, fuzzy
+msgid "Checkbox Acceptance"
+msgstr "Чекбокс соглашения"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Color.php:12
+#, fuzzy
+msgid "Color (HTML5 field)"
+msgstr "цвет"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Datepicker.php:12
+#, fuzzy
+msgid "Datepicker (HTML5 field)"
+msgstr "Выбор даты"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Email.php:12
+#, fuzzy
+msgid "Email (HTML5 field)"
+msgstr "Email"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_File.php:12
+msgid "File"
+msgstr "Файл"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_File.php:60
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_File.php:67
+msgid "Check this to delete this file"
+msgstr "Отметьте, чтобы удалить этот файл"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Image.php:12
+msgid "Image"
+msgstr "Изображение"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Image.php:60
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Image.php:67
+msgid "Check this to delete this image"
+msgstr "Отметьте, чтобы удалить это изображение"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_MultiSelectCustomPostType.php:12
+msgid "Custom Post Type Multiselector"
+msgstr "Custom Post Type - Мультиселектор"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_MultiSelectCustomPostType.php:87
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_SelectCustomPostType.php:79
+#, fuzzy
+msgid ""
+"There is no custom post type. You need to create at least one to use this "
+"field."
+msgstr "Custom Post type не выбран"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_MultiSelectCustomPostType.php:92
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_SelectCustomPostType.php:84
+#, fuzzy
+msgid "Select a custom post type:"
+msgstr "Выберите тип поля"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_MultiSelectCustomPostType.php:94
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_SelectCustomPostType.php:86
+msgid "Select..."
+msgstr "Выбрать..."
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_SelectCustomPostType.php:12
+msgid "Custom Post Type Selector"
+msgstr "Custom Post Type - Селектор"
+
+#: /Volumes/Almacen/proyectos/php/test/wp-content/plugins/bp-xprofile-custom-fields-type-new/classes/Bxcft_Field_Type_Web.php:12
+#, fuzzy
+msgid "Website (HTML5 field)"
+msgstr "Вебсайт"
+
+#~ msgid "http://yourwebsite.com"
+#~ msgstr "http://вашвебсайт.ру"
+
+#~ msgid "example@mail.com"
+#~ msgstr "ваш_ящик@example.ru"
+
+#~ msgid "Field type unrecognized"
+#~ msgstr "Тип поля не распознан"
+
+#~ msgid "Email"
+#~ msgstr "Email"
+
+#~ msgid "Website"
+#~ msgstr "Вебсайт"
+
+#~ msgid "Datepicker"
+#~ msgstr "Выбор даты"
+
+#~ msgid "Custom Post Type:"
+#~ msgstr "Собственный тип поля:"
+
+#~ msgid "Show age (hide birthdate)"
+#~ msgstr "Показать возраст (спрятать дату рождения)"
+
+#~ msgid "*"
+#~ msgstr "(обязательно)"
+
+#~ msgid "Nobody"
+#~ msgstr "Никто"
+
+#~ msgid ""
+#~ "Please make sure you fill in all required fields in this profile field "
+#~ "group before saving."
+#~ msgstr ""
+#~ "Перед сохранением проверьте, что вы заполнили все обязательные поля "
+#~ "профиля."
+
+#~ msgid ""
+#~ "There was a problem updating some of your profile information, please try "
+#~ "again."
+#~ msgstr ""
+#~ "При обновлении информации вашего профиля произошла ошибка, попробуйте еще "
+#~ "раз."
+
+#~ msgid "Changes saved."
+#~ msgstr "Изменения сохранены."
+
+#~ msgid "yourwebsite.com"
+#~ msgstr "вашвебсайт.ру"
+
+#~ msgid "Color"
+#~ msgstr "цвет"
+
+#~ msgid "Number"
+#~ msgstr "число"
+
+#~ msgid "(required)"
+#~ msgstr "(required)"
+
+#~ msgid "Friends Suggest Widget"
+#~ msgstr "Widget Sugerencias Amigos"
+
+#~ msgid "Friend Suggestions"
+#~ msgstr "Sugerencias de Amigos"
+
+#~ msgid "Title"
+#~ msgstr "Título"
+
+#~ msgid "Max Number of suggestions:"
+#~ msgstr "Número máx. de sugerencias:"
+
+#~ msgid "We don't have enough details to sugggest a friend yet"
+#~ msgstr "No tenemos suficiente información para sugerir amigos todavía."

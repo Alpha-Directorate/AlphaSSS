@@ -1,0 +1,374 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BP Profile Search\n"
+"POT-Creation-Date: 2014-05-29 23:37:35+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: bps-form.php:27
+msgid "%s: Form %d was not found, or has no fields."
+msgstr ""
+
+#: bps-form.php:181 bps-search.php:123
+msgid "Clear"
+msgstr ""
+
+#: bps-form.php:208
+msgid "Search"
+msgstr ""
+
+#: bps-form.php:232
+msgid "A Profile Search form."
+msgstr ""
+
+#: bps-form.php:233 bps-functions.php:15 bps-main.php:72
+msgid "Profile Search"
+msgstr ""
+
+#: bps-form.php:263
+msgid "Title:"
+msgstr ""
+
+#: bps-form.php:267
+msgid "Form:"
+msgstr ""
+
+#: bps-form.php:276 bps-functions.php:256
+msgid "(no title)"
+msgstr ""
+
+#: bps-form.php:286
+msgid "You have not created any form yet."
+msgstr ""
+
+#: bps-functions.php:9
+msgid "Overview"
+msgstr ""
+
+#: bps-functions.php:12
+msgid "Configure your profile search form, then display it:"
+msgstr ""
+
+#: bps-functions.php:14
+msgid "In your Members Directory page, selecting the option %s"
+msgstr ""
+
+#: bps-functions.php:14 bps-functions.php:41 bps-main.php:100 bps-main.php:165
+#: bps-main.php:174
+msgid "Add to Directory"
+msgstr ""
+
+#: bps-functions.php:15
+msgid "In a sidebar or widget area, using the widget %s"
+msgstr ""
+
+#: bps-functions.php:16
+msgid "In a post or page, using the shortcode %s (*)"
+msgstr ""
+
+#: bps-functions.php:17
+msgid "Anywhere in your theme, using the PHP code %s (*)"
+msgstr ""
+
+#: bps-functions.php:19
+msgid "(*) Replace ID with your actual form ID."
+msgstr ""
+
+#: bps-functions.php:22 bps-main.php:164
+msgid "Form Fields"
+msgstr ""
+
+#: bps-functions.php:25
+msgid "Select the profile fields to show in your search form."
+msgstr ""
+
+#: bps-functions.php:27
+msgid ""
+"Customize the field label and description, or leave them empty to use the "
+"default"
+msgstr ""
+
+#: bps-functions.php:28
+msgid ""
+"Tick <em>Range</em> to enable the <em>Value Range Search</em> for numeric "
+"fields, or the <em>Age Range Search</em> for date fields"
+msgstr ""
+
+#: bps-functions.php:29
+msgid ""
+"To reorder the fields in the form, drag them up or down by the handle on the "
+"left"
+msgstr ""
+
+#: bps-functions.php:30
+msgid "To remove a field from the form, click the [x] on the right"
+msgstr ""
+
+#: bps-functions.php:32
+msgid "Please note:"
+msgstr ""
+
+#: bps-functions.php:34
+msgid ""
+"To leave a label or description blank, enter a single dash (-) character"
+msgstr ""
+
+#: bps-functions.php:35
+msgid "The <em>Age Range Search</em> option is mandatory for date fields"
+msgstr ""
+
+#: bps-functions.php:36
+msgid "The <em>Value Range Search</em> works for numeric fields only"
+msgstr ""
+
+#: bps-functions.php:37
+msgid ""
+"The <em>Value Range Search</em> is not supported for <em>Multi Select Box</"
+"em> and <em>Checkboxes</em> fields"
+msgstr ""
+
+#: bps-functions.php:44
+msgid "Insert your search form in your Members Directory page."
+msgstr ""
+
+#: bps-functions.php:46
+msgid "Specify the optional form header"
+msgstr ""
+
+#: bps-functions.php:47
+msgid "Enable the <em>Toggle Form</em> feature"
+msgstr ""
+
+#: bps-functions.php:48
+msgid "Enter the text for the <em>Toggle Form</em> button"
+msgstr ""
+
+#: bps-functions.php:50
+msgid ""
+"If you select <em>Add to Directory: No</em>, the above options are ignored."
+msgstr ""
+
+#: bps-functions.php:53 bps-main.php:166
+msgid "Form Method"
+msgstr ""
+
+#: bps-functions.php:56
+msgid "Select your form <em>method</em> attribute, POST or GET."
+msgstr ""
+
+#: bps-functions.php:59 bps-main.php:167
+msgid "Text Search Mode"
+msgstr ""
+
+#: bps-functions.php:62
+msgid "Select your text search mode."
+msgstr ""
+
+#: bps-functions.php:64
+msgid ""
+"LIKE: a search for <em>John</em> finds <em>John</em>, <em>Johnson</em>, "
+"<em>Long John Silver</em>, and so on"
+msgstr ""
+
+#: bps-functions.php:65
+msgid "SAME: a search for <em>John</em> finds <em>John</em> only"
+msgstr ""
+
+#: bps-functions.php:67
+msgid "In both modes, two wildcard characters are available:"
+msgstr ""
+
+#: bps-functions.php:69
+msgid "Percent sign (%): matches any text, or no text at all"
+msgstr ""
+
+#: bps-functions.php:70
+msgid "Underscore (_): matches any single character"
+msgstr ""
+
+#: bps-functions.php:75
+msgid "For more information:"
+msgstr ""
+
+#: bps-functions.php:76
+msgid "Documentation"
+msgstr ""
+
+#: bps-functions.php:77
+msgid "Questions and Answers"
+msgstr ""
+
+#: bps-functions.php:78
+msgid "Incompatible plugins"
+msgstr ""
+
+#: bps-functions.php:79
+msgid "Support Forum"
+msgstr ""
+
+#: bps-functions.php:96
+msgid "field"
+msgstr ""
+
+#: bps-functions.php:97
+msgid "label"
+msgstr ""
+
+#: bps-functions.php:98
+msgid "description"
+msgstr ""
+
+#: bps-functions.php:99 bps-functions.php:183
+msgid "Range"
+msgstr ""
+
+#: bps-functions.php:191
+msgid "Add Field"
+msgstr ""
+
+#: bps-functions.php:252 bps-functions.php:258
+msgid "unused"
+msgstr ""
+
+#: bps-main.php:34
+msgid "Settings"
+msgstr ""
+
+#: bps-main.php:51
+msgid "<h4>Advanced Search</h4>"
+msgstr ""
+
+#: bps-main.php:53 bps-main.php:183
+msgid "Toggle Form"
+msgstr ""
+
+#: bps-main.php:70
+msgid "Profile Search Forms"
+msgstr ""
+
+#: bps-main.php:71
+msgid "Profile Search Form"
+msgstr ""
+
+#: bps-main.php:73
+msgid "Add New"
+msgstr ""
+
+#: bps-main.php:74
+msgid "Add New Form"
+msgstr ""
+
+#: bps-main.php:75
+msgid "Edit Form"
+msgstr ""
+
+#: bps-main.php:76
+msgid "No forms found."
+msgstr ""
+
+#: bps-main.php:77
+msgid "No forms found in Trash."
+msgstr ""
+
+#: bps-main.php:98
+msgid "Form"
+msgstr ""
+
+#: bps-main.php:99
+msgid "Fields"
+msgstr ""
+
+#: bps-main.php:101
+msgid "Widget"
+msgstr ""
+
+#: bps-main.php:102
+msgid "Shortcode"
+msgstr ""
+
+#: bps-main.php:124
+msgid "Move to Trash"
+msgstr ""
+
+#: bps-main.php:125
+msgid "Restore"
+msgstr ""
+
+#: bps-main.php:126
+msgid "Delete Permanently"
+msgstr ""
+
+#: bps-main.php:176
+msgid "Yes"
+msgstr ""
+
+#: bps-main.php:177
+msgid "No"
+msgstr ""
+
+#: bps-main.php:180
+msgid "Form Header"
+msgstr ""
+
+#: bps-main.php:185
+msgid "Enabled"
+msgstr ""
+
+#: bps-main.php:186
+msgid "Disabled"
+msgstr ""
+
+#: bps-main.php:189
+msgid "Toggle Form Button"
+msgstr ""
+
+#: bps-main.php:199
+msgid "POST"
+msgstr ""
+
+#: bps-main.php:200
+msgid "GET"
+msgstr ""
+
+#: bps-main.php:210
+msgid "LIKE"
+msgstr ""
+
+#: bps-main.php:211
+msgid "SAME"
+msgstr ""
+
+#: bps-main.php:237
+msgid "Form updated."
+msgstr ""
+
+#: bps-main.php:242
+msgid "Form created."
+msgstr ""
+
+#: bps-main.php:258
+msgid "%s form permanently deleted."
+msgid_plural "%s forms permanently deleted."
+msgstr[0] ""
+msgstr[1] ""
+
+#: bps-main.php:259
+msgid "%s form moved to the Trash."
+msgid_plural "%s forms moved to the Trash."
+msgstr[0] ""
+msgstr[1] ""
+
+#: bps-main.php:260
+msgid "%s form restored from the Trash."
+msgid_plural "%s forms restored from the Trash."
+msgstr[0] ""
+msgstr[1] ""
+
+#: bps-search.php:88
+msgid "min"
+msgstr ""
+
+#: bps-search.php:90
+msgid "max"
+msgstr ""
