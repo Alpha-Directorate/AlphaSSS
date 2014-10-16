@@ -59,14 +59,14 @@ define( 'WPLANG', '' );
 // ===========
 // Hide errors
 // ===========
-ini_set( 'display_errors', 1 );
+// ini_set( 'display_errors', 1 );
 define( 'WP_DEBUG_DISPLAY', true );
 
 // =================================================================
 // Debug mode
 // Debugging? Enable these. Can also enable them in local-config.php
 // =================================================================
-define( 'SAVEQUERIES', true );
+// define( 'SAVEQUERIES', true );
 define( 'WP_DEBUG', true );
 
 // ======================================
