@@ -1,0 +1,455 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BP Profile Search\n"
+"POT-Creation-Date: 2014-06-01 21:44+0400\n"
+"PO-Revision-Date: 2014-06-02 15:27+0400\n"
+"Last-Translator: Ivan Dyakov <imdyakov@mac.com>\n"
+"Language-Team: Olymp <info@olymproject.org>\n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: bps-form.php:27
+#, php-format
+msgid "%s: Form %d was not found, or has no fields."
+msgstr "%s: Форма %d не найдена или не содержит полей."
+
+#: bps-form.php:181 bps-search.php:123
+msgid "Clear"
+msgstr "Очистить"
+
+#: bps-form.php:208
+msgid "Search"
+msgstr "Поиск"
+
+#: bps-form.php:232
+msgid "A Profile Search form."
+msgstr "Форма поиска профиля."
+
+#: bps-form.php:233 bps-functions.php:15 bps-main.php:72
+msgid "Profile Search"
+msgstr "Поиск профиля"
+
+#: bps-form.php:263
+msgid "Title:"
+msgstr "Название:"
+
+#: bps-form.php:267
+msgid "Form:"
+msgstr "Форма: "
+
+#: bps-form.php:276 bps-functions.php:256
+msgid "(no title)"
+msgstr "(без названия)"
+
+#: bps-form.php:286
+msgid "You have not created any form yet."
+msgstr "Вы пока не создали форму."
+
+#: bps-functions.php:9
+msgid "Overview"
+msgstr "Общая инфо"
+
+#: bps-functions.php:12
+msgid "Configure your profile search form, then display it:"
+msgstr "Настройте форму поиска участников и используйте её здесь:"
+
+#: bps-functions.php:14
+#, php-format
+msgid "In your Members Directory page, selecting the option %s"
+msgstr "На странице пользователей, выбрав вариант %s"
+
+#: bps-functions.php:14 bps-functions.php:41 bps-main.php:100 bps-main.php:165
+#: bps-main.php:174
+msgid "Add to Directory"
+msgstr "Отображать в списке участников"
+
+#: bps-functions.php:15
+#, php-format
+msgid "In a sidebar or widget area, using the widget %s"
+msgstr "В боковой панели или зоне для виджетов, используя виджет %s"
+
+#: bps-functions.php:16
+#, php-format
+msgid "In a post or page, using the shortcode %s (*)"
+msgstr "В записях или на страницах с использованием короткоого кода %s (*)"
+
+#: bps-functions.php:17
+#, php-format
+msgid "Anywhere in your theme, using the PHP code %s (*)"
+msgstr "Где-либо в Вашей теме оформления, используя PHP-код %s (*)"
+
+#: bps-functions.php:19
+msgid "(*) Replace ID with your actual form ID."
+msgstr "(*) Замените ID на фактический ID формы."
+
+#: bps-functions.php:22 bps-main.php:164
+msgid "Form Fields"
+msgstr "Поля формы"
+
+#: bps-functions.php:25
+msgid "Select the profile fields to show in your search form."
+msgstr ""
+"Выберите поля профиля, которые будут отображаться в Вашей форме поиска."
+
+#: bps-functions.php:27
+msgid ""
+"Customize the field label and description, or leave them empty to use the "
+"default"
+msgstr ""
+"Настройте метки полей или оставьте пустыми, если будете использовать "
+"стандартные"
+
+#: bps-functions.php:28
+msgid ""
+"Tick <em>Range</em> to enable the <em>Value Range Search</em> for numeric "
+"fields, or the <em>Age Range Search</em> for date fields"
+msgstr ""
+"Отметьте <em>Диапазон</em>, чтобы включить <em>Поиск по диапазону</em> для "
+"числовых полей или <em>Поиск по возрасту</em> для полей с форматом дата"
+
+#: bps-functions.php:29
+msgid ""
+"To reorder the fields in the form, drag them up or down by the handle on the "
+"left"
+msgstr ""
+"Для изменения последовательности, перемещайте поля вверх или вниз, используя "
+"иконку слева"
+
+#: bps-functions.php:30
+msgid "To remove a field from the form, click the [x] on the right"
+msgstr "Для удаления поля из формы, кликните [x] справа"
+
+#: bps-functions.php:32
+msgid "Please note:"
+msgstr "Важные комментарии:"
+
+#: bps-functions.php:34
+msgid ""
+"To leave a label or description blank, enter a single dash (-) character"
+msgstr "Чтобы оставить метку или описание пустым, введите в поле одно тире (-)"
+
+#: bps-functions.php:35
+msgid "The <em>Age Range Search</em> option is mandatory for date fields"
+msgstr ""
+"Вариант <em>Поиск по дате рождения</em> является обязательным для полей с "
+"датой"
+
+#: bps-functions.php:36
+msgid "The <em>Value Range Search</em> works for numeric fields only"
+msgstr ""
+"<em>Поиск по диапазону значений</em> работает только с числовыми полями"
+
+#: bps-functions.php:37
+msgid ""
+"The <em>Value Range Search</em> is not supported for <em>Multi Select Box</"
+"em> and <em>Checkboxes</em> fields"
+msgstr ""
+"<em>Поиск по диапазону значений</em> не работает с полями <em>Множественного "
+"выбора</em> и <em>Флажками</em>"
+
+#: bps-functions.php:44
+msgid "Insert your search form in your Members Directory page."
+msgstr "Добавить форму на страницу Участников."
+
+#: bps-functions.php:46
+msgid "Specify the optional form header"
+msgstr "Укажите название формы, если нужно"
+
+#: bps-functions.php:47
+msgid "Enable the <em>Toggle Form</em> feature"
+msgstr "Включите <em>Кнопку формы</em>, если необходимо"
+
+#: bps-functions.php:48
+msgid "Enter the text for the <em>Toggle Form</em> button"
+msgstr "Введите текст для <em>Кнопки открытия формы</em>"
+
+#: bps-functions.php:50
+msgid ""
+"If you select <em>Add to Directory: No</em>, the above options are ignored."
+msgstr ""
+"Если Вы выбрали Нет для опции <em>Добавить на страницу</em>, рекомендации "
+"выше можно игнорировать."
+
+#: bps-functions.php:53 bps-main.php:166
+msgid "Form Method"
+msgstr "HTML-метод обработки формы"
+
+#: bps-functions.php:56
+msgid "Select your form <em>method</em> attribute, POST or GET."
+msgstr ""
+"Выберите <em>метод работы</em> Вашей формы с параметром ОТПРАВИТЬ или "
+"ПОЛУЧИТЬ."
+
+#: bps-functions.php:59 bps-main.php:167
+msgid "Text Search Mode"
+msgstr "Параметры поиска данных"
+
+#: bps-functions.php:62
+msgid "Select your text search mode."
+msgstr "Выберите режим поиска данных."
+
+#: bps-functions.php:64
+msgid ""
+"LIKE: a search for <em>John</em> finds <em>John</em>, <em>Johnson</em>, "
+"<em>Long John Silver</em>, and so on"
+msgstr ""
+"ПОДОБИЕ: запрос поиска <em>Джон</em> выдаст резултаты <em>Джон</em>, "
+"<em>Джонсон</em>, <em>Лонг Джон Силвер</em> и т.п."
+
+#: bps-functions.php:65
+msgid "SAME: a search for <em>John</em> finds <em>John</em> only"
+msgstr ""
+"СОВПАДЕНИЕ: запрос поиска <em>Джон</em> выдаст только результат с именем "
+"<em>Джон</em>"
+
+#: bps-functions.php:67
+msgid "In both modes, two wildcard characters are available:"
+msgstr "В обоих режимах допускается два символа замены:"
+
+#: bps-functions.php:69
+msgid "Percent sign (%): matches any text, or no text at all"
+msgstr "Знак процент (%): заменяет любой текст или его отсутствие"
+
+#: bps-functions.php:70
+msgid "Underscore (_): matches any single character"
+msgstr "Нижнее подчёркивание (_): заменяет один любой знак"
+
+#: bps-functions.php:75
+msgid "For more information:"
+msgstr "Дополнительная информация:"
+
+#: bps-functions.php:76
+msgid "Documentation"
+msgstr "Документация"
+
+#: bps-functions.php:77
+msgid "Questions and Answers"
+msgstr "Вопросы и ответы"
+
+#: bps-functions.php:78
+msgid "Incompatible plugins"
+msgstr "Несовместимые плагины"
+
+#: bps-functions.php:79
+msgid "Support Forum"
+msgstr "Форум поддержки"
+
+#: bps-functions.php:96
+msgid "field"
+msgstr "поле"
+
+#: bps-functions.php:97
+msgid "label"
+msgstr "метка"
+
+#: bps-functions.php:98
+msgid "description"
+msgstr "описание"
+
+#: bps-functions.php:99 bps-functions.php:183
+msgid "Range"
+msgstr "Диапазон"
+
+#: bps-functions.php:191
+msgid "Add Field"
+msgstr "Добавить поле"
+
+#: bps-functions.php:252 bps-functions.php:258
+msgid "unused"
+msgstr "не используется"
+
+#: bps-main.php:34
+msgid "Settings"
+msgstr "Настройки"
+
+#: bps-main.php:51
+msgid "<h4>Advanced Search</h4>"
+msgstr "<h4>Расширенный поиск</h4>"
+
+#: bps-main.php:53 bps-main.php:183
+msgid "Toggle Form"
+msgstr "Форма поиска"
+
+#: bps-main.php:70
+msgid "Profile Search Forms"
+msgstr "Форма для поиска профиля"
+
+#: bps-main.php:71
+msgid "Profile Search Form"
+msgstr "Форма для поиска профиля"
+
+#: bps-main.php:73
+msgid "Add New"
+msgstr "Создать новую"
+
+#: bps-main.php:74
+msgid "Add New Form"
+msgstr "Новая форма"
+
+#: bps-main.php:75
+msgid "Edit Form"
+msgstr "Редактировать форму"
+
+#: bps-main.php:76
+msgid "No forms found."
+msgstr "Формы не найдены."
+
+#: bps-main.php:77
+msgid "No forms found in Trash."
+msgstr "Нет форм в корзине."
+
+#: bps-main.php:98
+msgid "Form"
+msgstr "Название формы"
+
+#: bps-main.php:99
+msgid "Fields"
+msgstr "Поля"
+
+#: bps-main.php:101
+msgid "Widget"
+msgstr "Виджет"
+
+#: bps-main.php:102
+msgid "Shortcode"
+msgstr "Короткий код"
+
+#: bps-main.php:124
+msgid "Move to Trash"
+msgstr "В корзину"
+
+#: bps-main.php:125
+msgid "Restore"
+msgstr "Восстановить"
+
+#: bps-main.php:126
+msgid "Delete Permanently"
+msgstr "Удалить совсем"
+
+#: bps-main.php:176
+msgid "Yes"
+msgstr "Да"
+
+#: bps-main.php:177
+msgid "No"
+msgstr "Нет"
+
+#: bps-main.php:180
+msgid "Form Header"
+msgstr "Название формы"
+
+#: bps-main.php:185
+msgid "Enabled"
+msgstr "Включена"
+
+#: bps-main.php:186
+msgid "Disabled"
+msgstr "Отключена"
+
+#: bps-main.php:189
+msgid "Toggle Form Button"
+msgstr "Текст кнопки открытия формы"
+
+#: bps-main.php:199
+msgid "POST"
+msgstr ""
+
+#: bps-main.php:200
+msgid "GET"
+msgstr ""
+
+#: bps-main.php:210
+msgid "LIKE"
+msgstr "ПОДОБИЕ"
+
+#: bps-main.php:211
+msgid "SAME"
+msgstr "СОВПАДЕНИЕ"
+
+#: bps-main.php:237
+msgid "Form updated."
+msgstr "Форма обновлена."
+
+#: bps-main.php:242
+msgid "Form created."
+msgstr "Форма создана."
+
+#: bps-main.php:258
+#, php-format
+msgid "%s form permanently deleted."
+msgid_plural "%s forms permanently deleted."
+msgstr[0] "%s форма удалена окончательно."
+msgstr[1] "%s формы удалены окончательно."
+msgstr[2] "%s форм удалено окончательно."
+
+#: bps-main.php:259
+#, php-format
+msgid "%s form moved to the Trash."
+msgid_plural "%s forms moved to the Trash."
+msgstr[0] "%s форма перемещена в корзину."
+msgstr[1] "%s формы перемещены в корзину."
+msgstr[2] "%s форм перемещено в корзину."
+
+#: bps-main.php:260
+#, php-format
+msgid "%s form restored from the Trash."
+msgid_plural "%s forms restored from the Trash."
+msgstr[0] "%s форма восстановлена из корзины."
+msgstr[1] "%s формы восстановлены из корзины."
+msgstr[2] "%s форм восстановлено из корзины."
+
+#: bps-search.php:88
+msgid "min"
+msgstr "мин"
+
+#: bps-search.php:90
+msgid "max"
+msgstr "макс"
+
+#~ msgid "%s: Error, you have not configured your search form."
+#~ msgstr "%s: Ошибка, Ваша форма поиска не настроена."
+
+#~ msgid "Form Configuration"
+#~ msgstr "Настройка формы"
+
+#~ msgid "Advanced Options"
+#~ msgstr "Дополнительные настройки "
+
+#~ msgid "Click the <em>Help</em> tab for more information."
+#~ msgstr ""
+#~ "Кликните закладку <em>Помощь</em> вверху справа для подробной информации."
+
+#~ msgid "Form Fields:"
+#~ msgstr "Поля профиля:"
+
+#~ msgid "Add to Directory:"
+#~ msgstr "Добавить на страницу:"
+
+#~ msgid "Toggle Form:"
+#~ msgstr "Кнопка открытия формы:"
+
+#~ msgid "Save Settings"
+#~ msgstr "Сохранить настройки"
+
+#~ msgid "Text Search Mode:"
+#~ msgstr "Режим поиска данных:"
+
+#~ msgid "Partial Match"
+#~ msgstr "Частичное совпадение"
+
+#~ msgid "Exact Match"
+#~ msgstr "Полное совпадение"
+
+#~ msgid "Settings saved."
+#~ msgstr "Настройки сохранены."

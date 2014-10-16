@@ -1,0 +1,399 @@
+# Copyright (C) 2013 
+# This file is distributed under the same license as the  package.
+msgid ""
+msgstr ""
+"Project-Id-Version: BP Profile Search\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/bp-profile-search\n"
+"POT-Creation-Date: 2014-05-29 23:37:35+00:00\n"
+"PO-Revision-Date: 2014-05-30 15:32+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.5\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: bps-form.php:27
+msgid "%s: Form %d was not found, or has no fields."
+msgstr "%s: Modulo %d non trovato, o privo di campi."
+
+#: bps-form.php:181 bps-search.php:123
+msgid "Clear"
+msgstr "Azzera"
+
+#: bps-form.php:208
+msgid "Search"
+msgstr "Cerca"
+
+#: bps-form.php:232
+msgid "A Profile Search form."
+msgstr "Un modulo di ricerca profili."
+
+#: bps-form.php:233 bps-functions.php:15 bps-main.php:72
+msgid "Profile Search"
+msgstr "Ricerca profili"
+
+#: bps-form.php:263
+msgid "Title:"
+msgstr "Titolo:"
+
+#: bps-form.php:267
+msgid "Form:"
+msgstr "Modulo:"
+
+#: bps-form.php:276 bps-functions.php:256
+msgid "(no title)"
+msgstr "(nessun titolo)"
+
+#: bps-form.php:286
+msgid "You have not created any form yet."
+msgstr "Non hai ancora creato alcun modulo."
+
+#: bps-functions.php:9
+msgid "Overview"
+msgstr "Panoramica"
+
+#: bps-functions.php:12
+msgid "Configure your profile search form, then display it:"
+msgstr "Dopo aver configurato il modulo di ricerca, puoi visualizzarlo:"
+
+#: bps-functions.php:14
+msgid "In your Members Directory page, selecting the option %s"
+msgstr "Nella pagina Directory Membri, selezionando l'opzione %s"
+
+#: bps-functions.php:14 bps-functions.php:41 bps-main.php:100 bps-main.php:165
+#: bps-main.php:174
+msgid "Add to Directory"
+msgstr "Aggiungi al Directory"
+
+#: bps-functions.php:15
+msgid "In a sidebar or widget area, using the widget %s"
+msgstr "In una sidebar o area per widget, usando il widget %s"
+
+#: bps-functions.php:16
+msgid "In a post or page, using the shortcode %s (*)"
+msgstr "In un articolo o una pagina, usando lo shortcode %s (*)"
+
+#: bps-functions.php:17
+msgid "Anywhere in your theme, using the PHP code %s (*)"
+msgstr "In qualsiasi parte del tema, usando il codice PHP %s (*)"
+
+#: bps-functions.php:19
+msgid "(*) Replace ID with your actual form ID."
+msgstr "(*) Sostituisci ID con l' ID del modulo scelto."
+
+#: bps-functions.php:22 bps-main.php:164
+msgid "Form Fields"
+msgstr "Campi del modulo"
+
+#: bps-functions.php:25
+msgid "Select the profile fields to show in your search form."
+msgstr "Seleziona i campi da includere nel modulo di ricerca."
+
+#: bps-functions.php:27
+msgid ""
+"Customize the field label and description, or leave them empty to use the "
+"default"
+msgstr ""
+"Immetti etichetta e descrizione del campo, o lasciali vuoti per usare il "
+"default"
+
+#: bps-functions.php:28
+msgid ""
+"Tick <em>Range</em> to enable the <em>Value Range Search</em> for numeric "
+"fields, or the <em>Age Range Search</em> for date fields"
+msgstr ""
+"Spunta <em>Intervallo</em> per abilitare la <em>Ricerca per intervallo di "
+"valori</em> per i campi numerici, o la <em>Ricerca per intervallo di età</"
+"em> per i campi data"
+
+#: bps-functions.php:29
+msgid ""
+"To reorder the fields in the form, drag them up or down by the handle on the "
+"left"
+msgstr ""
+"Per riordinare i campi nel modulo, trascinali tramite l'ancora a sinistra"
+
+#: bps-functions.php:30
+msgid "To remove a field from the form, click the [x] on the right"
+msgstr "Per rimuovere un campo dal modulo, clicca la [x] a destra"
+
+#: bps-functions.php:32
+msgid "Please note:"
+msgstr "Da notare:"
+
+#: bps-functions.php:34
+msgid ""
+"To leave a label or description blank, enter a single dash (-) character"
+msgstr "Per lasciare vuoto un nome o una descrizione, immetti un trattino (-)"
+
+#: bps-functions.php:35
+msgid "The <em>Age Range Search</em> option is mandatory for date fields"
+msgstr ""
+"Per i campi data l'opzione <em>Ricerca per intervallo di età</em> è "
+"obbligatoria"
+
+#: bps-functions.php:36
+msgid "The <em>Value Range Search</em> works for numeric fields only"
+msgstr ""
+"L'opzione <em>Ricerca per intervallo di valori</em> funziona solo per i "
+"campi numerici"
+
+#: bps-functions.php:37
+msgid ""
+"The <em>Value Range Search</em> is not supported for <em>Multi Select Box</"
+"em> and <em>Checkboxes</em> fields"
+msgstr ""
+"L'opzione <em>Ricerca per intervallo di valori</em> non è supportata per i "
+"campi <em>Box Selezione Multipla</em> e <em>Caselle di Controllo</em>"
+
+#: bps-functions.php:44
+msgid "Insert your search form in your Members Directory page."
+msgstr "Visualizza il modulo nella pagina Directory Membri."
+
+#: bps-functions.php:46
+msgid "Specify the optional form header"
+msgstr "Specifica la testata del modulo (opzionale)"
+
+#: bps-functions.php:47
+msgid "Enable the <em>Toggle Form</em> feature"
+msgstr "Attiva la funzione <em>Mostra/Nascondi</em>"
+
+#: bps-functions.php:48
+msgid "Enter the text for the <em>Toggle Form</em> button"
+msgstr "Immetti il testo per il bottone <em>Mostra/Nascondi</em>"
+
+#: bps-functions.php:50
+msgid ""
+"If you select <em>Add to Directory: No</em>, the above options are ignored."
+msgstr ""
+"Se selezioni <em>Aggiungi al Directory: No</em>, queste opzioni saranno "
+"ignorate."
+
+#: bps-functions.php:53 bps-main.php:166
+msgid "Form Method"
+msgstr "Metodo di invio modulo"
+
+#: bps-functions.php:56
+msgid "Select your form <em>method</em> attribute, POST or GET."
+msgstr "Seleziona il metodo di invio del modulo, POST o GET."
+
+#: bps-functions.php:59 bps-main.php:167
+msgid "Text Search Mode"
+msgstr "Modalità di ricerca testo"
+
+#: bps-functions.php:62
+msgid "Select your text search mode."
+msgstr "Scegli la modalità di ricerca testo."
+
+#: bps-functions.php:64
+msgid ""
+"LIKE: a search for <em>John</em> finds <em>John</em>, <em>Johnson</em>, "
+"<em>Long John Silver</em>, and so on"
+msgstr ""
+"Simile: la ricerca di  <em>John</em> trova <em>John</em>, <em>Johnson</em>, "
+"<em>Long John Silver</em>, e così via"
+
+#: bps-functions.php:65
+msgid "SAME: a search for <em>John</em> finds <em>John</em> only"
+msgstr "Uguale: la ricerca di <em>John</em> trova soltanto <em>John</em>"
+
+#: bps-functions.php:67
+msgid "In both modes, two wildcard characters are available:"
+msgstr "In entrambi i modi, sono disponibili due caratteri jolly:"
+
+#: bps-functions.php:69
+msgid "Percent sign (%): matches any text, or no text at all"
+msgstr "Percento (%): corrisponde a un testo qualsiasi, o anche a nessun testo"
+
+#: bps-functions.php:70
+msgid "Underscore (_): matches any single character"
+msgstr "Sottolinea (_): corrisponde a un carattere qualsiasi"
+
+#: bps-functions.php:75
+msgid "For more information:"
+msgstr "Per ulteriori informazioni:"
+
+#: bps-functions.php:76
+msgid "Documentation"
+msgstr "Documentazione"
+
+#: bps-functions.php:77
+msgid "Questions and Answers"
+msgstr "Domande e risposte"
+
+#: bps-functions.php:78
+msgid "Incompatible plugins"
+msgstr "Plugin non compatibili"
+
+#: bps-functions.php:79
+msgid "Support Forum"
+msgstr "Forum di supporto"
+
+#: bps-functions.php:96
+msgid "field"
+msgstr "campo"
+
+#: bps-functions.php:97
+msgid "label"
+msgstr "etichetta"
+
+#: bps-functions.php:98
+msgid "description"
+msgstr "descrizione"
+
+#: bps-functions.php:99 bps-functions.php:183
+msgid "Range"
+msgstr "Intervallo"
+
+#: bps-functions.php:191
+msgid "Add Field"
+msgstr "Aggiungi un campo"
+
+#: bps-functions.php:252 bps-functions.php:258
+msgid "unused"
+msgstr "non usato"
+
+#: bps-main.php:34
+msgid "Settings"
+msgstr "Impostazioni"
+
+#: bps-main.php:51
+msgid "<h4>Advanced Search</h4>"
+msgstr "<h4>Ricerca avanzata</h4>"
+
+#: bps-main.php:53 bps-main.php:183
+msgid "Toggle Form"
+msgstr "Mostra/nascondi"
+
+#: bps-main.php:70
+msgid "Profile Search Forms"
+msgstr "Moduli di ricerca profili"
+
+#: bps-main.php:71
+msgid "Profile Search Form"
+msgstr "Modulo di ricerca profili"
+
+#: bps-main.php:73
+msgid "Add New"
+msgstr "Aggiungi nuovo"
+
+#: bps-main.php:74
+msgid "Add New Form"
+msgstr "Aggiungi nuovo modulo"
+
+#: bps-main.php:75
+msgid "Edit Form"
+msgstr "Modifica modulo"
+
+#: bps-main.php:76
+msgid "No forms found."
+msgstr "Nessun modulo trovato."
+
+#: bps-main.php:77
+msgid "No forms found in Trash."
+msgstr "Nessun modulo trovato nel Cestino."
+
+#: bps-main.php:98
+msgid "Form"
+msgstr "Modulo"
+
+#: bps-main.php:99
+msgid "Fields"
+msgstr "Campi"
+
+#: bps-main.php:101
+msgid "Widget"
+msgstr "Widget"
+
+#: bps-main.php:102
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: bps-main.php:124
+msgid "Move to Trash"
+msgstr "Sposta nel cestino"
+
+#: bps-main.php:125
+msgid "Restore"
+msgstr "Ripristina"
+
+#: bps-main.php:126
+msgid "Delete Permanently"
+msgstr "Cancella definitivamente"
+
+#: bps-main.php:176
+msgid "Yes"
+msgstr "Sì"
+
+#: bps-main.php:177
+msgid "No"
+msgstr "No"
+
+#: bps-main.php:180
+msgid "Form Header"
+msgstr "Testata del modulo"
+
+#: bps-main.php:185
+msgid "Enabled"
+msgstr "Attivato"
+
+#: bps-main.php:186
+msgid "Disabled"
+msgstr "Disattivato"
+
+#: bps-main.php:189
+msgid "Toggle Form Button"
+msgstr "Bottone mostra/nascondi"
+
+#: bps-main.php:199
+msgid "POST"
+msgstr "POST"
+
+#: bps-main.php:200
+msgid "GET"
+msgstr "GET"
+
+#: bps-main.php:210
+msgid "LIKE"
+msgstr "Simile"
+
+#: bps-main.php:211
+msgid "SAME"
+msgstr "Uguale"
+
+#: bps-main.php:237
+msgid "Form updated."
+msgstr "Modulo aggiornato."
+
+#: bps-main.php:242
+msgid "Form created."
+msgstr "Modulo creato."
+
+#: bps-main.php:258
+msgid "%s form permanently deleted."
+msgid_plural "%s forms permanently deleted."
+msgstr[0] "%s modulo cancellato definitivamente."
+msgstr[1] "%s moduli cancellati definitivamente."
+
+#: bps-main.php:259
+msgid "%s form moved to the Trash."
+msgid_plural "%s forms moved to the Trash."
+msgstr[0] "%s modulo spostato nel Cestino."
+msgstr[1] "%s moduli spostati nel Cestino."
+
+#: bps-main.php:260
+msgid "%s form restored from the Trash."
+msgid_plural "%s forms restored from the Trash."
+msgstr[0] "%s modulo ripristinato dal Cestino."
+msgstr[1] "%s moduli ripristinati dal Cestino."
+
+#: bps-search.php:88
+msgid "min"
+msgstr "min"
+
+#: bps-search.php:90
+msgid "max"
+msgstr "max"
