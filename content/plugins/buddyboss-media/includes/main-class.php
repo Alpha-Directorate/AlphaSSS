@@ -70,6 +70,8 @@ class BuddyBoss_Media_Plugin
 	private $default_options = array(
 		'enabled'             => true,
 
+		'rotation_fix'        => false,
+
 		'notices_legacy'      => true,
 
 		'UPDATE_MENUS'        => true,
@@ -402,10 +404,10 @@ class BuddyBoss_Media_Plugin
 	{
 		$domain = 'buddyboss-media';
 		$locale = apply_filters('plugin_locale', get_locale(), $domain);
-		
+
 		//first try to load from wp-contents/languages/plugins/ directory
 		load_textdomain($domain, WP_LANG_DIR.'/plugins/'.$domain.'-'.$locale.'.mo');
-		
+
 		//if not found, then load from buddboss-media/languages/ directory
 		load_plugin_textdomain( 'buddyboss-media', false, $this->lang_dir );
 	}

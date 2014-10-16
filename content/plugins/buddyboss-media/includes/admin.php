@@ -141,7 +141,8 @@ class BuddyBoss_Media_Admin
 		// add_settings_section( 'style_section', 'Style Settings', array( $this, 'section_style' ), __FILE__ );
 
 		//general options
-		add_settings_field( 'enabled', __( 'Enable Media Component', 'buddyboss-media' ), array( $this, 'setting_enabled' ), __FILE__, 'general_section' );
+		add_settings_field( 'enabled', __( 'Media Component', 'buddyboss-media' ), array( $this, 'setting_enabled' ), __FILE__, 'general_section' );
+		add_settings_field( 'rotation-fix', __( 'Mobile Rotation Fix', 'buddyboss-media' ), array( $this, 'setting_rotation_fix' ), __FILE__, 'general_section' );
 		add_settings_field( 'component-slug', __( 'User Photos Slug', 'buddyboss-media' ), array( $this, 'setting_component_slug' ), __FILE__, 'general_section');
 		//@todo: should it be photos or 'media' in general? (considering we might have support for video in future)
 		add_settings_field( 'all-media-page', __( 'Global Photos Page', 'buddyboss-media' ), array( $this, 'setting_all_media_page' ), __FILE__, 'general_section');
@@ -283,6 +284,44 @@ class BuddyBoss_Media_Admin
 	}
 
 	/**
+	 * Setting > BuddyBoss Media Rotation Fixer Enabled
+	 *
+	 * @since BuddyBoss Media (1.0.0)
+	 *
+	 * @uses BuddyBoss_Media_Admin::option() Get plugin option
+	 */
+	public function setting_rotation_fix()
+	{
+		$value = $this->option( 'rotation_fix' );
+
+		$checked = '';
+
+		if ( $value )
+		{
+			$checked = ' checked="checked" ';
+		}
+
+		$memory_limit = @ini_get( 'memory_limit' );
+
+		if ( empty( $memory_limit ) )
+		{
+			$memory_limit = 'N/A';
+		}
+
+		echo "<input ".$checked." id='enabled' name='buddyboss_media_plugin_options[rotation_fix]' type='checkbox' />  ";
+
+		_e( "Enable fix for mobile uploads rotating.", 'buddyboss-media' );
+
+		echo '<p class="description">';
+		_e( "It's recommended that you have at least 256M-512M of RAM allocated to PHP, otherwise photo uploads may fail.", "buddyboss-media" );
+		echo "<br/>";
+		_e( "Your current memory limit is ", "buddyboss-media" );
+		echo "<strong>$memory_limit</strong>. ";
+		_e( "You can contact your web host to increase the memory limit.", "buddyboss-media" );
+		echo '</p>';
+	}
+
+	/**
 	 * Setting > Photos Url
 	 *
 	 * @since BuddyBoss Media (1.0.1)
@@ -295,11 +334,11 @@ class BuddyBoss_Media_Admin
 		if( !$slug ){
 			$slug = buddyboss_media_default_component_slug();
 		}
-		
+
 		echo "<input id='component-slug' name='buddyboss_media_plugin_options[component-slug]' type='text' value='" . esc_attr( $slug ) . "' />";
 		echo '<p class="description">' . __( 'Example: ', 'buddyboss-media' ) . '<a href="'.bp_loggedin_user_domain() . $slug .'"profile/edit">' . bp_loggedin_user_domain() . '<strong>' . $slug . '</strong>/</a>' . '</p>';
 	}
-	
+
 	/**
 	 * Setting > all media page
 	 *
@@ -310,7 +349,7 @@ class BuddyBoss_Media_Admin
 	public function setting_all_media_page()
 	{
 		$all_media_page = $this->option( 'all-media-page' );
-		
+
 		echo wp_dropdown_pages( array(
 			'name'             => 'buddyboss_media_plugin_options[all-media-page]',
 			'echo'             => false,
@@ -320,7 +359,7 @@ class BuddyBoss_Media_Admin
 		echo '<a href="' . admin_url( add_query_arg( array( 'post_type' => 'page' ), 'post-new.php' ) ) . '" class="button-secondary">' . __( 'New Page', 'buddyboss-media' ) .'</a>';
 		echo '<p class="description">' . __( 'Use a WordPress page to display all media uploaded by all users. (Optional)', 'buddyboss-media' ) . '</p>';
 	}
-	
+
 	/**
 	 * Setting > iPad Theme
 	 *

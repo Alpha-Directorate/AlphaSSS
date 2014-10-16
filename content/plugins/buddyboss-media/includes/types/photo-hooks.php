@@ -50,20 +50,29 @@ class BuddyBoss_Media_Photo_Hooks
   {
     global $activities_template;
 
-    $current_activity = $activities_template->current_activity;
+    $current_activity_index = $activities_template->current_activity;
 
-    $current_activity_id = $activities_template->activities[ $current_activity ]->id;
+    $current_activity       = $activities_template->activities[ $current_activity_index ];
+
+    $current_activity_id    = $current_activity->id;
 
     $buddyboss_media_action = buddyboss_media_compat_get_meta( $current_activity_id, 'activity.action_keys' );
 
     if ( $buddyboss_media_action )
     {
-      $with_meta = $buddyboss_media_action  . ' <a class="activity-time-since"><span class="time-since">' . bp_core_time_since( bp_get_activity_date_recorded() ) . '</span></a>';
+      // Strip any legacy time since placeholders from BP 1.0-1.1
+      $content = str_replace( '<span class="time-since">%s</span>', '', $buddyboss_media_action );
 
-      if ( $with_meta )
-        return $with_meta;
+      // Insert the time since.
+      $time_since = apply_filters_ref_array( 'bp_activity_time_since', array( '<span class="time-since">' . bp_core_time_since( $activities_template->activity->date_recorded ) . '</span>', &$activities_template->activity ) );
 
-      return $buddyboss_media_action;
+      // Insert the permalink
+      if ( !bp_is_single_activity() )
+        $content = apply_filters_ref_array( 'bp_activity_permalink', array( sprintf( '%1$s <a href="%2$s" class="view activity-time-since" title="%3$s">%4$s</a>', $content, bp_activity_get_permalink( $activities_template->activity->id, $activities_template->activity ), esc_attr__( 'View Discussion', 'buddypress' ), $time_since ), &$activities_template->activity ) );
+      else
+        $content .= str_pad( $time_since, strlen( $time_since ) + 2, ' ', STR_PAD_BOTH );
+
+      return apply_filters( 'buddyboss_media_activity_action', $content );
     }
 
     return $action;

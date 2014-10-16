@@ -177,7 +177,7 @@ class BuddyBoss_Wall_BP_Component extends BP_Component {
 		if ( $load_css )
 		{
 			// Wall stylesheet.
-			wp_enqueue_style( 'buddyboss-wall-main', buddyboss_wall()->assets_url . '/css/buddyboss-wall.min.css', array(), '1.0.1', 'all' );
+			wp_enqueue_style( 'buddyboss-wall-main', buddyboss_wall()->assets_url . '/css/buddyboss-wall.min.css', array(), '1.0.7', 'all' );
 		}
 
 		// Scripts
@@ -186,7 +186,7 @@ class BuddyBoss_Wall_BP_Component extends BP_Component {
 			wp_enqueue_script( 'buddyboss-wall-tooltip', buddyboss_wall()->assets_url . '/js/jquery.tooltipster.min.js', array( 'jquery' ), '3.0.5', true );
 		}
 
-		wp_enqueue_script( 'buddyboss-wall-main', buddyboss_wall()->assets_url . '/js/buddyboss-wall.min.js', array( 'jquery', 'buddyboss-wall-tooltip' ), '1.0.1', true );
+		wp_enqueue_script( 'buddyboss-wall-main', buddyboss_wall()->assets_url . '/js/buddyboss-wall.min.js', array( 'jquery', 'buddyboss-wall-tooltip' ), '1.0.7', true );
 
 		// Localization
 		$js_vars_array = array_merge(
@@ -205,7 +205,7 @@ class BuddyBoss_Wall_BP_Component extends BP_Component {
 	 */
 	public function script_template_greeting()
 	{
-		if ( is_user_logged_in() ){ 
+		if ( is_user_logged_in() ){
 			$greeting = '';
 			if ( bp_is_group() ){
 				$greeting = sprintf( __( "What's new in %s, %s?", 'buddyboss-wall' ), bp_get_current_group_name(), bp_get_user_firstname() );
@@ -214,13 +214,13 @@ class BuddyBoss_Wall_BP_Component extends BP_Component {
 			} else {
 				$greeting = sprintf( __( "What's new, %s?", 'buddyboss-wall' ), bp_get_user_firstname() );
 			}
-			
+
 			$greeting = apply_filters( 'buddyboss_wall_greeting_template', $greeting );
 			?>
 			<script type="text/html" id="buddyboss-wall-tpl-greeting">
 				<?php echo $greeting; ?>
 			</script>
-			<?php 
+			<?php
 		}
 	}
 

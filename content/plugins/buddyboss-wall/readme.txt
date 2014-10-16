@@ -28,6 +28,40 @@ Release Notes: http://www.buddyboss.com/release-notes/
 CHANGELOG
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
+1.0.7 - October 13, 2014
+--------------------------------------------------------------*/
+
+BUG FIXES:
+
+	Fixed replies showing 'Error getting likes'
+	Fixed replies showing 'Like' link when logged out
+	Fixed certain timestamps not displaying hyperlink
+	Fixed Group activity text structure
+	Fixed Like text getting removed when liking/unliking a parent activity
+	Fixed 'Favorites' translation on Activity index 'My Likes' tab
+	Fixed user mentioning another user displaying that they mentioned themself
+
+CHANGED FILES:
+
+	/assets/css/buddyboss-wall.css
+	/assets/css/buddyboss-wall.min.css
+	/assets/js/buddyboss-wall.js
+	/assets/js/buddyboss-wall.min.js
+	buddyboss-wall.php
+	/includes/wall-class.php
+	/includes/wall-filters.php
+	/includes/wall-hooks.php
+	/includes/wall-template.php
+	/languages/buddyboss-wall-en_US.po
+	/languages/buddyboss-wall-en_US.mo
+	readme.txt
+
+TESTED WITH:
+
+	WordPress 3.8, 3.9, 4.0
+	BuddyPress 2.0, 2.1+
+
+/*--------------------------------------------------------------
 1.0.6 - October 6, 2014
 --------------------------------------------------------------*/
 

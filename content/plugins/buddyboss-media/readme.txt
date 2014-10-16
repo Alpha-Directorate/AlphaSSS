@@ -28,6 +28,39 @@ Release Notes: http://www.buddyboss.com/release-notes/
 CHANGELOG
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
+1.0.6 - October 14, 2014
+--------------------------------------------------------------*/
+
+FEATURES:
+
+	Admin option to enable/disable image rotation fix
+
+BUG FIXES:
+
+	Fixed photo uploads breaking due to server memory limit
+	Fixed Heartbeat and Photoswipe conflict
+	Fixed activity timestamps not having hyperlinks
+
+CHANGED FILES:
+
+ 	/assets/js/buddyboss-media.js
+ 	/assets/js/buddyboss-media.min.js
+	buddyboss-media.php
+	/includes/admin.php
+	/includes/main-class.php
+	/includes/types/photo-class.php
+	/includes/types/photo-hooks.php
+	/includes/vendor/image-rotation-fixer.php
+	/languages/buddyboss-media-en_US.po
+	/languages/buddyboss-media-en_US.mo
+	readme.txt
+
+TESTED WITH:
+
+	WordPress 3.8, 3.9, 4.0+
+	BuddyPress 2.0, 2.1
+
+/*--------------------------------------------------------------
 1.0.5 - October 4, 2014
 --------------------------------------------------------------*/
 

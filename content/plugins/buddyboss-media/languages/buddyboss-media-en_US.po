@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BuddyBoss Media v1.0.5\n"
+"Project-Id-Version: BuddyBoss Media v1.0.6\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-10-04 14:38-0800\n"
+"PO-Revision-Date: 2014-10-14 22:56-0800\n"
 "Last-Translator: BuddyBoss <support@buddyboss.com>\n"
 "Language-Team: BuddyBoss <support@buddyboss.com>\n"
 "MIME-Version: 1.0\n"
@@ -20,32 +20,32 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 # @ default
-#: includes/admin.php:218
+#: includes/admin.php:219
 msgid "Save Changes"
 msgstr ""
 
 # @ buddyboss-media
-#: includes/admin.php:282
+#: includes/admin.php:283
 msgid "Enable Media Component."
 msgstr ""
 
 # @ buddyboss-media
-#: includes/admin.php:344
+#: includes/admin.php:383
 msgid "Enable mobile theme on iPad."
 msgstr ""
 
 # @ buddyboss-media
-#: includes/admin.php:394
+#: includes/admin.php:433
 msgid "Choose a theme for mobile phones."
 msgstr ""
 
 # @ buddyboss-media
-#: includes/admin.php:473
+#: includes/admin.php:512
 msgid "   image size must be 114 x 114 px"
 msgstr ""
 
 # @ buddyboss-media
-#: includes/main-class.php:216 includes/main-class.php:223
+#: includes/main-class.php:218 includes/main-class.php:225
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
@@ -139,8 +139,8 @@ msgid "Last"
 msgstr ""
 
 # @ buddyboss-media
-#: includes/types/photo-class.php:78 includes/types/photo-class.php:325
-#: includes/types/photo-class.php:346
+#: includes/types/photo-class.php:78 includes/types/photo-class.php:326
+#: includes/types/photo-class.php:347
 msgid "Photos"
 msgstr ""
 
@@ -175,12 +175,12 @@ msgid "Failed"
 msgstr ""
 
 # @ buddyboss-media
-#: includes/types/photo-class.php:175 includes/types/photo-class.php:262
+#: includes/types/photo-class.php:175 includes/types/photo-class.php:263
 msgid "Add Photo"
 msgstr ""
 
 # @ buddyboss-media
-#: includes/types/photo-class.php:176 includes/types/photo-hooks.php:268
+#: includes/types/photo-class.php:176 includes/types/photo-hooks.php:277
 #, php-format
 msgid "Add a photo, %s"
 msgstr ""
@@ -191,13 +191,13 @@ msgid "Photo is currently uploading, please wait!"
 msgstr ""
 
 # @ buddyboss-media
-#: includes/types/photo-class.php:315
+#: includes/types/photo-class.php:316
 #, php-format
 msgid "Photos <span>%d</span>"
 msgstr ""
 
 # @ buddyboss-media
-#: includes/types/photo-class.php:353
+#: includes/types/photo-class.php:354
 msgid "View"
 msgstr ""
 
@@ -237,12 +237,12 @@ msgid "There were no photos found."
 msgstr ""
 
 # @ buddyboss-media
-#: includes/main-class.php:682
+#: includes/main-class.php:684
 msgid "Disable Notice"
 msgstr ""
 
 # @ buddyboss-media
-#: includes/main-class.php:681
+#: includes/main-class.php:683
 msgid ""
 "To use the <strong>BuddyBoss Media</strong> plugin, please manually update "
 "your BuddyBoss theme to version 4.0 or above first. <a href=\"http://www."
@@ -250,22 +250,22 @@ msgid ""
 msgstr ""
 
 # @ buddyboss-media
-#: includes/admin.php:300
+#: includes/admin.php:339
 msgid "Example: "
 msgstr ""
 
 # @ buddyboss-media
-#: includes/admin.php:317
+#: includes/admin.php:356
 msgid "- None -"
 msgstr ""
 
 # @ buddyboss-media
-#: includes/admin.php:320
+#: includes/admin.php:359
 msgid "New Page"
 msgstr ""
 
 # @ buddyboss-media
-#: includes/admin.php:321
+#: includes/admin.php:360
 msgid ""
 "Use a WordPress page to display all media uploaded by all users. (Optional)"
 msgstr ""
@@ -276,16 +276,48 @@ msgid "General Settings"
 msgstr ""
 
 # @ buddyboss-media
-#: includes/admin.php:144
-msgid "Enable Media Component"
-msgstr ""
-
-# @ buddyboss-media
-#: includes/admin.php:145
+#: includes/admin.php:146
 msgid "User Photos Slug"
 msgstr ""
 
 # @ buddyboss-media
-#: includes/admin.php:147
+#: includes/admin.php:148
 msgid "Global Photos Page"
+msgstr ""
+
+# @ buddyboss-media
+#: includes/admin.php:144
+msgid "Media Component"
+msgstr ""
+
+# @ buddyboss-media
+#: includes/admin.php:145
+msgid "Mobile Rotation Fix"
+msgstr ""
+
+# @ buddyboss-media
+#: includes/admin.php:313
+msgid "Enable fix for mobile uploads rotating."
+msgstr ""
+
+# @ buddyboss-media
+#: includes/admin.php:316
+msgid ""
+"It's recommended that you have at least 256M-512M of RAM allocated to PHP, "
+"otherwise photo uploads may fail."
+msgstr ""
+
+# @ buddyboss-media
+#: includes/admin.php:318
+msgid "Your current memory limit is "
+msgstr ""
+
+# @ buddyboss-media
+#: includes/admin.php:320
+msgid "You can contact your web host to increase the memory limit."
+msgstr ""
+
+# @ buddypress
+#: includes/types/photo-hooks.php:71
+msgid "View Discussion"
 msgstr ""

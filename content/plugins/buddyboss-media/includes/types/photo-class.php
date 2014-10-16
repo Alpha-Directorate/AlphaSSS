@@ -68,7 +68,7 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 		$component_slug = $this->option('component-slug');
 		if( !$component_slug )
 			$component_slug = buddyboss_media_default_component_slug();
-		
+
 		$slug = $this->slug = apply_filters( 'buddyboss_media_type_photo_slug', $component_slug );
 
 		$this->hooks = new BuddyBoss_Media_Photo_Hooks();
@@ -114,7 +114,7 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 		if ( $this->option( 'enabled' ) )
 		{
 			add_action( 'bp_activity_after_save', array( $this->hooks, 'bp_activity_after_save' ) );
-			add_filter( 'bp_get_activity_action', array( $this->hooks, 'bp_get_activity_action' ) );
+			add_filter( 'bp_get_activity_action', array( $this->hooks, 'bp_get_activity_action' ), 11 );
 			add_filter( 'bp_get_activity_content_body', array( $this->hooks, 'bp_get_activity_content_body' ) );
 		}
 		else {
@@ -211,7 +211,7 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 
     	// FontAwesome icon fonts. If browsing on a secure connection, use HTTPS.
 		wp_register_style('fontawesome', "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css", false, null);
-    	wp_enqueue_style( 'fontawesome');
+    wp_enqueue_style( 'fontawesome');
 
 		// CSS > Main
 		wp_enqueue_style( 'buddyboss-media-main', $assets . '/css/buddyboss-media.min.css', array( 'fontawesome' ), '1.0.4', 'all' );
@@ -227,7 +227,8 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 		wp_enqueue_script( 'plupload', $assets . '/vendor/plupload2/plupload.dev.js', array( 'jquery', 'moxie' ), '2.1.2' );
 
 		// JS > Main
-		wp_enqueue_script( 'buddyboss-media-main', $assets . '/js/buddyboss-media.min.js', array( 'jquery', 'plupload' ), '1.0.3', true );
+		// wp_enqueue_script( 'buddyboss-media-main', $assets . '/js/buddyboss-media.js', array( 'jquery', 'plupload' ), '1.0.3', true );
+		wp_enqueue_script( 'buddyboss-media-main', $assets . '/js/buddyboss-media.min.js', array( 'jquery', 'plupload' ), '1.0.6', true );
 	}
 
 	/**

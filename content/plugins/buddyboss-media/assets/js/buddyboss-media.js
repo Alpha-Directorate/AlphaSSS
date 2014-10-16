@@ -163,7 +163,12 @@ window.Code.BuddyBossSwiper = ( function( window, PhotoSwipe_Util, PhotoSwipe ) 
     reset: function() {
 
       if ( buddyboss_mediawipe !== false ) {
-        PhotoSwipe.detatch( buddyboss_mediawipe );
+        try {
+          PhotoSwipe.detatch( buddyboss_mediawipe );
+        }
+        catch( e ) {
+
+        }
       }
 
       BuddyBossSwiperClass.start();
@@ -238,12 +243,22 @@ window.Code.BuddyBossSwiper = ( function( window, PhotoSwipe_Util, PhotoSwipe ) 
   BuddyBossSwiperClass.start();
 
   function ajaxSuccessHandler( e, xhr, options ) {
+
+    var action        = bbmedia_getQueryVariable( options.data, 'action' );
+    var resetCallback = function( action ) {
+      return function() {
+        if ( action !== 'heartbeat' ) {
+          BuddyBossSwiperClass.reset();
+        }
+      }
+    }( action );
+
     // Most BuddyPress animations finish after 200ms
-    window.setTimeout( BuddyBossSwiperClass.reset, 205 );
+    window.setTimeout( resetCallback, 205 );
 
     // Perform again once after a longer delay just in case
     // @TODO: Get a dom observer
-    window.setTimeout( BuddyBossSwiperClass.reset, 750 );
+    window.setTimeout( resetCallback, 750 );
   }
 
   $(document).ajaxSuccess( ajaxSuccessHandler );
@@ -401,9 +416,12 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
      * @return {void}
      */
     prefilter: function( options, origOptions, jqXHR ) {
-	var action = bbmedia_getQueryVariable(options.data, 'action');
-	if( typeof action == 'undefined' || action!='post_update')
-	    return;
+
+      var action = bbmedia_getQueryVariable( options.data, 'action' );
+
+      if( typeof action == 'undefined' || action != 'post_update')
+	     return;
+
       var new_data,
           pic_html;
 
@@ -724,11 +742,16 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
 ));
 
 /* get querystring value */
-function bbmedia_getQueryVariable(query, variable){
-       var vars = query.split("&");
-       for (var i=0;i<vars.length;i++) {
-               var pair = vars[i].split("=");
-               if(pair[0] == variable){return pair[1];}
-       }
-       return(false);
+function bbmedia_getQueryVariable( query, variable ) {
+
+  var vars = query.split("&");
+
+  for ( var i = 0; i < vars.length; i++ ) {
+    var pair = vars[i].split( "=" );
+
+    if ( pair[0] == variable ) {
+      return pair[1];
+    }
+  }
+  return(false);
 }

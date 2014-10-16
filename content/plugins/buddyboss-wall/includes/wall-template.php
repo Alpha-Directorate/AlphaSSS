@@ -129,8 +129,14 @@ function get_wall_add_likes_comments( $activity_id, $refetch_users_who_liked=fal
   // If user is logged in, show names and tooltip
   else {
     $users_who_liked = buddyboss_wall_get_users_who_liked( $activity_id );
-	if( !$users_who_liked && $refetch_users_who_liked ){
+	//if( !$users_who_liked && $refetch_users_who_liked ){
+	if( !$users_who_liked ){
 		$users_who_liked = buddyboss_wall_refetch_users_who_liked( $activity_id );
+	}
+	
+	if( !$user_likes_this && ( !$users_who_liked || empty( $users_who_liked ) ) ){
+        //can occur if user who liked is deleted
+        return false;
 	}
 
     $like_txt = $count . ( $user_likes_this ? 'y' : 'n' );
