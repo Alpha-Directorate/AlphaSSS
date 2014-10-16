@@ -5,7 +5,7 @@
  * Description: BuddyBoss Wall
  * Author:      BuddyBoss
  * Author URI:  http://buddyboss.com
- * Version:     1.0.6
+ * Version:     1.0.7
  */
 
 // Exit if accessed directly
@@ -19,7 +19,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 // Codebase version
 if ( ! defined( 'BUDDYBOSS_WALL_PLUGIN_VERSION' ) ) {
-  define( 'BUDDYBOSS_WALL_PLUGIN_VERSION', '1.0.6' );
+  define( 'BUDDYBOSS_WALL_PLUGIN_VERSION', '1.0.7' );
 }
 
 // Database version

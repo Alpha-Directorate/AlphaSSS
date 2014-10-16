@@ -32,20 +32,56 @@ function buddyboss_wall_read_filter( $action )
 {
   global $activities_template;
 
-  $curr_id = $activities_template->current_activity;
+  $current_activity_index = $activities_template->current_activity;
 
-  $act_id = $activities_template->activities[$curr_id]->id;
+  $current_activity = $activities_template->activities[$current_activity_index];
 
-  $bbwall_action = bp_activity_get_meta( $act_id, 'buddyboss_wall_action' );
+  $current_activity_id = $current_activity->id;
+
+  // Check if the activity meta table has an associated wall action
+  $bbwall_action = bp_activity_get_meta( $current_activity_id, 'buddyboss_wall_action' );
+
+  // This section formats a group status update
+  //
+  // If you're looking at your own activity it should say:
+  // You posted an update to [group name]
+  //
+  // Without this formatting it would say:
+  // [username] posted an update to [group name]
+  //
+  // That doesn't make sense when you're looking at your own activity stream
+  if ( bp_is_my_profile() && $current_activity->component === 'groups' &&
+       (int)$current_activity->user_id === bp_loggedin_user_id() )
+  {
+    $to_replace = bp_core_get_userlink( bp_loggedin_user_id() );
+
+    $you_text   = sprintf( '<span class="buddyboss-you-text">%s</span>', __( 'You', 'buddyboss-wall' ) );
+
+    $bbwall_action = str_replace( $to_replace, $you_text, $action );
+
+    // echo '<pre>';
+    // var_dump( $to_replace, $current_activity_id );
+    // echo '<hr/>';
+    // var_dump( $current_activity );
+    // echo '</pre>';
+  }
+  // var_dump( bp_loggedin_user_id(), bp_is_my_profile(), $current_activity->component );
 
   if ( $bbwall_action )
   {
-    $with_meta = $bbwall_action . ' <a class="activity-time-since"><span class="time-since">' . bp_core_time_since( bp_get_activity_date_recorded() ) . '</span></a>';
+    // Strip any legacy time since placeholders from BP 1.0-1.1
+    $content = str_replace( '<span class="time-since">%s</span>', '', $bbwall_action );
 
-    if ( $with_meta )
-      return $with_meta;
+    // Insert the time since.
+    $time_since = apply_filters_ref_array( 'bp_activity_time_since', array( '<span class="time-since">' . bp_core_time_since( $activities_template->activity->date_recorded ) . '</span>', &$activities_template->activity ) );
 
-    return $bbwall_action;
+    // Insert the permalink
+    if ( !bp_is_single_activity() )
+      $content = apply_filters_ref_array( 'bp_activity_permalink', array( sprintf( '%1$s <a href="%2$s" class="view activity-time-since" title="%3$s">%4$s</a>', $content, bp_activity_get_permalink( $activities_template->activity->id, $activities_template->activity ), esc_attr__( 'View Discussion', 'buddypress' ), $time_since ), &$activities_template->activity ) );
+    else
+      $content .= str_pad( $time_since, strlen( $time_since ) + 2, ' ', STR_PAD_BOTH );
+
+    return apply_filters( 'bp_insert_activity_meta', $content );
   }
 
   return $action;
@@ -174,10 +210,10 @@ function buddyboss_wall_input_filter_oldfunction( &$activity )
 
     bp_activity_update_meta( $activity->id, 'buddyboss_wall_action', $new_action );
 	bp_activity_update_meta( $activity->id, 'buddyboss_wall_initiator', bp_loggedin_user_id() );
-	
+
 	if( isset( $tgt->id ) )
 		bp_activity_update_meta( $activity->id, 'buddyboss_wall_target', $tgt->id );
-	
+
   }
 
 }
@@ -190,105 +226,126 @@ function buddyboss_wall_input_filter_oldfunction( &$activity )
 function buddyboss_wall_input_filter( &$activity ) {
   global $bp, $buddyboss_wall;
 
-  $user = $bp->loggedin_user;
-  $tgt  = $bp->displayed_user;
+  $user       = $bp->loggedin_user;
+  $tgt        = $bp->displayed_user;
   $new_action = false;
-  
-  //are we on wall(my own or someone else's) or on sitewide activity page?
-  $is_activity_component = bp_is_current_component( 'activity' );
+  $object     = null;
 
-  if( !empty($activity->content) && ( $is_activity_component || $bp->current_action == 'forum' ) ){
-	/**
-	 * is it mention?
-	 *	yes
-	 *		- does it mention multiple people?
-	 *			yes
-	 *				- it should be '%INITIATOR% mentioned .......'
-	 *			no
-	 *				only one user was mentioned.
-	 *				it can happen in 2 cases:
-	 *				1. member1 posting on member2's wall
-	 *				2. member1 mentioning member2(from anywhere else on the website)
-	 *				
-	 *				are we on someone else's profile?
-	 *					yes
-	 *						- it should be '%INITIATOR% posted on %TARGET% wall'
-	 *					no
-	 *						- it should be '%INITIATOR% mentioned .......'
-	 *	no
-	 *		- continue
-	 * is it a forum post
-	 *	yes
-	 *		- do something incomprehensible!
-	 *	no
-	 *		its not a mention.
-	 *		its not a forum post.
-	 *		so it must a siimple status update
-	 *		
-	 *		- it should be '%INITIATOR% posted an update ...'
-	 */
-	$activity_target_user_id = $tgt->id;
-	//key value pairs of userid=>username
-	$mentioned = bp_activity_find_mentions($activity->content);
-
-	$len = !empty($mentioned) ? count($mentioned) : 0;
-	
-	//is it a mention?
-	if( $len>0 ){
-		//yes its a mention
-		
-		//does it mention multiple people?
-		if( $len> 1 ){
-			//yes, multiple mention
-			$new_action = "%INITIATOR% " . __( 'mentioned' , 'buddyboss-wall' ) ." ".$len." " . __( 'people' , 'buddyboss-wall' );
-		} else {
-			//no, single mention
-			
-			//are we on someone else's profile?
-			if( $tgt->id && $user->id != $tgt->id ){
-				//yes, we are on someone else's profile
-				
-				//it should be '%INITIATOR% posted on %TARGET% wall'
-				$new_action = sprintf( __( "%s wrote on %s Wall", 'buddyboss-wall' ), '%INITIATOR%' , '%TARGET%' );
-			} else {
-				//nope.
-				
-				//it should be '%INITIATOR% mentioned @member3 in a public message.......'
-				//cant save userid as %TARGET%, for while displaying, an apostrophe s will be added and will render the sentence incorrect
-				//temporary solution
-				$arrayKeys = array_keys($mentioned); 
-				$user_link = bp_core_get_userlink( $arrayKeys[0] );
-				$new_action = sprintf( __( "%s mentioned %s in a public message", 'buddyboss-wall' ), '%INITIATOR%' , $user_link );
-				$activity_target_user_id = false;
-			}
-		}
-	} else {
-		//not a mention
-		
-		//is it a forum post?
-		if( $bp->current_action == 'forum' ){
-			//yes, its a forum
-			
-			//dont know what to do here
-		} else {
-			//nope. not a forum. so it must be a simple status update
-			
-			//it should be '%INITIATOR% posted an update ...'
-			$new_action = sprintf( __( "%s posted an update", 'buddyboss-wall' ), '%INITIATOR%' );
-			$activity_target_user_id = false;
-		}
-	}
+  // Need to check the object
+  if ( ! empty( $_POST['whats-new-post-object'] ) ) {
+    $object = apply_filters( 'bp_activity_post_update_object', $_POST['whats-new-post-object'] );
   }
-  
+  else if ( ! empty( $_POST['object'] ) ) {
+    $object = apply_filters( 'bp_activity_post_update_object', $_POST['object'] );
+  }
+
+  // Are we on wall (my own or someone else's) or on sitewide activity page?
+  //
+  // If we're on the sitewide activity page the user can still select to
+  // post to a group so we check that here as well
+  //
+  // Our conditional will make sure that the object is empty. The object is
+  // always empty when we're posting in our activity or someone else's (wall),
+  // so to be forward thinking it's best to check for an empty object rather
+  // than if $object !== 'groups'
+  //
+  // This way future plugin conflicts will be resolved, because a plugin can
+  // define an object like "clan" and we'd run into the same problems.
+  //
+  $is_wall_action = bp_is_current_component( 'activity' ) && empty( $object );
+
+  if( !empty($activity->content) && ( $is_wall_action || $bp->current_action == 'forum' ) ){
+  	/**
+  	 * is it mention?
+  	 *	yes
+  	 *		- does it mention multiple people?
+  	 *			yes
+  	 *				- it should be '%INITIATOR% mentioned .......'
+  	 *			no
+  	 *				only one user was mentioned.
+  	 *				it can happen in 2 cases:
+  	 *				1. member1 posting on member2's wall
+  	 *				2. member1 mentioning member2(from anywhere else on the website)
+  	 *
+  	 *				are we on someone else's profile?
+  	 *					yes
+  	 *						- it should be '%INITIATOR% posted on %TARGET% wall'
+  	 *					no
+  	 *						- it should be '%INITIATOR% mentioned .......'
+  	 *	no
+  	 *		- continue
+  	 * is it a forum post
+  	 *	yes
+  	 *		- do something incomprehensible!
+  	 *	no
+  	 *		its not a mention.
+  	 *		its not a forum post.
+  	 *		so it must a siimple status update
+  	 *
+  	 *		- it should be '%INITIATOR% posted an update ...'
+  	 */
+  	$activity_target_user_id = $tgt->id;
+  	//key value pairs of userid=>username
+  	$mentioned = bp_activity_find_mentions($activity->content);
+
+  	$len = !empty($mentioned) ? count($mentioned) : 0;
+
+  	//is it a mention?
+  	if( $len>0 ){
+  		//yes its a mention
+
+  		//does it mention multiple people?
+  		if( $len> 1 ){
+  			//yes, multiple mention
+  			$new_action = "%INITIATOR% " . __( 'mentioned' , 'buddyboss-wall' ) ." ".$len." " . __( 'people' , 'buddyboss-wall' );
+  		} else {
+  			//no, single mention
+
+  			//are we on someone else's profile?
+  			if( $tgt->id && $user->id != $tgt->id ){
+  				//yes, we are on someone else's profile
+
+  				//it should be '%INITIATOR% posted on %TARGET% wall'
+  				$new_action = sprintf( __( "%s wrote on %s Wall", 'buddyboss-wall' ), '%INITIATOR%' , '%TARGET%' );
+  			} else {
+  				//nope.
+
+  				//it should be '%INITIATOR% mentioned @member3 in a public message.......'
+  				//cant save userid as %TARGET%, for while displaying, an apostrophe s will be added and will render the sentence incorrect
+  				//temporary solution
+  				$arrayKeys = array_keys($mentioned);
+  				$user_link = bp_core_get_userlink( $arrayKeys[0] );
+  				$new_action = sprintf( __( "%s mentioned %s in a public message", 'buddyboss-wall' ), '%INITIATOR%' , $user_link );
+  				$activity_target_user_id = false;
+  			}
+  		}
+  	} else {
+  		//not a mention
+
+  		//is it a forum post?
+  		if( $bp->current_action == 'forum' ){
+  			//yes, its a forum
+
+  			//dont know what to do here
+  		} else {
+  			//nope. not a forum. so it must be a simple status update
+
+  			//it should be '%INITIATOR% posted an update ...'
+  			$new_action = sprintf( __( "%s posted an update", 'buddyboss-wall' ), '%INITIATOR%' );
+  			$activity_target_user_id = false;
+  		}
+  	}
+  }
+
   if ( $new_action ){
     $new_action = apply_filters( 'buddyboss-wall-new-action', $new_action, $user, $tgt );
 
     bp_activity_update_meta( $activity->id, 'buddyboss_wall_action', $new_action );
 	bp_activity_update_meta( $activity->id, 'buddyboss_wall_initiator', bp_loggedin_user_id() );
-	
+
 	if( $activity_target_user_id )
 		bp_activity_update_meta( $activity->id, 'buddyboss_wall_target', $activity_target_user_id );
-	
+
   }
 }
 
@@ -540,23 +597,23 @@ function buddyboss_wall_format_mention_notification( $notification, $at_mention_
  */
 //add_filter( 'bp_get_activity_action', 'buddyboss_wall_format_post_initiator_name', 11, 3 );
 function buddyboss_wall_format_post_initiator_name( $action, $activity, $args ){
-	
+
 	if( 'activity_update'==bp_get_activity_type() && is_user_logged_in() ){
 		//if logged in user had posted it, lets replced his/her name with 'You'
 		$initiator_id = bp_activity_get_meta($activity->id, 'buddyboss_wall_initiator', true);
-		
+
 		if( bp_loggedin_user_id()==$initiator_id ){
 			$myprofile_link = '<a href="'. esc_url( bp_loggedin_user_domain() ) .'" title="' . esc_attr( bp_get_loggedin_user_fullname() ) . '">'. bp_get_loggedin_user_fullname() .'</a>';
-			
+
 			$action = str_replace($myprofile_link, __( 'You', 'buddyboss-wall`' ), $action);
 		}
-		
+
 		//if it was posted on loggein user's wall, lets replce his/her name with 'your'
 		$target_id = bp_activity_get_meta($activity->id, 'buddyboss_wall_target', true);
 		if( bp_loggedin_user_id()==$target_id ){
 			global $bp;
 			$tgt = $bp->loggedin_user;
-			
+
 			if ( substr( $tgt->fullname, -1 ) === 's' ){
 				$target_possesive_fullname = sprintf( __( "%s'", 'buddyboss-wall' ), $tgt->fullname );
 			}
@@ -572,20 +629,20 @@ function buddyboss_wall_format_post_initiator_name( $action, $activity, $args ){
 				esc_attr( $action_href_title ),
 				$target_possesive_fullname
 			);
-			
+
 			$action = str_replace($tgt_url, __( 'your', 'buddyboss-wall`' ), $action);
 		}
 	}
-	
+
 	return $action;
 }
 
 function buddyboss_wall_replace_placeholders_with_url( $action, $activity ){
-	
+
 	if( 1==1 ){
 		$initiator_id = bp_activity_get_meta($activity->id, 'buddyboss_wall_initiator', true);
 		$target_id = bp_activity_get_meta($activity->id, 'buddyboss_wall_target', true);
-		
+
 		// replace %INITIATOR% with userlink/You
 		if( is_user_logged_in() && bp_loggedin_user_id()==$initiator_id ){
 			$action = str_replace( '%INITIATOR%', __( 'You', 'buddyboss-wall`' ), $action);
@@ -603,10 +660,10 @@ function buddyboss_wall_replace_placeholders_with_url( $action, $activity ){
 			else{
 				$initiator_profile_link = __( 'Deleted User', 'buddyboss-wall' );
 			}
-			
+
 			$action = str_replace( '%INITIATOR%', $initiator_profile_link, $action);
 		}
-		
+
 		// replace %TARGET% with userlink/your
 		if( is_user_logged_in() && bp_loggedin_user_id()==$target_id ){
 			$action = str_replace( '%TARGET%', __( 'your', 'buddyboss-wall`' ), $action);
@@ -632,7 +689,7 @@ function buddyboss_wall_replace_placeholders_with_url( $action, $activity ){
 			$action = str_replace( '%TARGET%', $target_profile_link, $action);
 		}
 	}
-	
+
 	return $action;
 }
 
@@ -640,11 +697,13 @@ function buddyboss_wall_replace_placeholders_with_url( $action, $activity ){
  * add 'like/favorite' button on activity comments
  */
 function buddyboss_wall_comments_add_like(){
-	if ( !bp_get_comment_is_favorite() ) : ?>
-		<a href="<?php bp_comment_favorite_link(); ?>" class="acomment-like fav-comment bp-secondary-action" title="<?php esc_attr_e( 'Mark as Favorite', 'buddypress' ); ?>" onclick="return budyboss_wall_comment_like_unlike(this);"><?php _e( 'Favorite', 'buddypress' ); ?></a>
-	<?php else : ?>
-		<a href="<?php bp_comment_unfavorite_link(); ?>" class="acomment-like unfav-comment bp-secondary-action" title="<?php esc_attr_e( 'Remove Favorite', 'buddypress' ); ?>" onclick="return budyboss_wall_comment_like_unlike(this);"><?php _e( 'Remove Favorite', 'buddypress' ); ?></a>
-	<?php endif; 
+	if( is_user_logged_in() ):
+		if ( !bp_get_comment_is_favorite() ) : ?>
+			<a href="<?php bp_comment_favorite_link(); ?>" class="acomment-like fav-comment bp-secondary-action" title="<?php esc_attr_e( 'Mark as Favorite', 'buddypress' ); ?>" onclick="return budyboss_wall_comment_like_unlike(this);"><?php _e( 'Favorite', 'buddypress' ); ?></a>
+		<?php else : ?>
+			<a href="<?php bp_comment_unfavorite_link(); ?>" class="acomment-like unfav-comment bp-secondary-action" title="<?php esc_attr_e( 'Remove Favorite', 'buddypress' ); ?>" onclick="return budyboss_wall_comment_like_unlike(this);"><?php _e( 'Remove Favorite', 'buddypress' ); ?></a>
+		<?php endif;
+	endif;
 }
 add_action( 'bp_activity_comment_options', 'buddyboss_wall_comments_add_like' );
 
@@ -664,7 +723,9 @@ function bp_get_comment_is_favorite() {
  * dlisplay likes for activity comments
  */
 function buddyboss_wall_comments_display_likes(){
-	echo replies_get_wall_add_likes_comments( bp_get_activity_comment_id() );
+	if( is_user_logged_in() ){
+		echo replies_get_wall_add_likes_comments( bp_get_activity_comment_id() );
+	}
 }
 add_action( 'bp_activity_comment_options', 'buddyboss_wall_comments_display_likes', 999 );
 ?>

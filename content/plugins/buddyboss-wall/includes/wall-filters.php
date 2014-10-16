@@ -9,17 +9,25 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 function buddyboss_wall_gettext_filter( $translated_text, $text, $domain )
 {
-  if ( $domain === 'buddypress' && $text === 'Favorite' )
+  if ( $text === 'Favorite' )
   {
     $translated_text = __( 'Like', 'buddyboss-wall' );
   }
-  else if ( $domain === 'buddypress' && $text === 'Remove Favorite' )
+  else if ( $text === 'Remove Favorite' )
   {
     $translated_text = __( 'Unlike', 'buddyboss-wall' );
   }
-  
-  if( $domain === 'buddypress' && $text === 'Mark as Favorite' ){
+  else if ( $text === 'Mark as Favorite' )
+  {
 	  $translated_text = __( 'Like this', 'buddyboss-wall' );
+  }
+  else if ( $text === "The activity I've marked as a favorite." )
+  {
+    $translated_text = __( "The activity I've liked.", 'buddyboss-wall' );
+  }
+  else if ( $text === "My Favorites <span>%s</span>" )
+  {
+    $translated_text = __( 'My Likes <span>%s</span>', 'buddyboss-wall' );
   }
 
   return $translated_text;

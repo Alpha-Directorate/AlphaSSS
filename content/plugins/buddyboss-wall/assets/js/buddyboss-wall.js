@@ -105,20 +105,9 @@ window.Code.BuddyBoss_Wall = ( function( window, $, util, undefined ) {
       // Activity greeting
       var $greeting_tpl = $('#buddyboss-wall-tpl-greeting').html(),
           $greeting     = $('#whats-new-form .activity-greeting');
-	  
+
       if ( $greeting.length && !! $greeting_tpl ) {
         $greeting.html( $greeting_tpl ).show();
-      }
-
-      // Fav/My likes tab
-      var $fav_tab = $('#activity-favorites'),
-          tab_text = state.fav_tab_name || false,
-          $tab_span;
-
-      if ( $fav_tab.length && tab_text ) {
-        $tab_span = $fav_tab.find('span');
-
-        $fav_tab.find('a').html( tab_text ).append( $tab_span ).addClass( 'localized' );
       }
 
     },
@@ -127,7 +116,7 @@ window.Code.BuddyBoss_Wall = ( function( window, $, util, undefined ) {
     },
     prefilter: function( options, origOptions, jqXHR ) {
 	item_type = origOptions.data && origOptions.data.item_type || '';
-	
+
       var act_id         = parseInt( origOptions.data && origOptions.data.id || 0 ),
           action         = origOptions.data && origOptions.data.action || '',
           is_like_action = ( action === 'activity_mark_fav' || action === 'activity_mark_unfav' ),
@@ -148,7 +137,7 @@ window.Code.BuddyBoss_Wall = ( function( window, $, util, undefined ) {
 
         target = $( '#activity-' + act_id ).find( '.button.loading' );
         type   = target.hasClass('fav') ? 'fav' : 'unfav';
-	
+
 	if( is_a_comment ){
 	    target = $( '#acomment-' + act_id ).find( '.acomment-like.loading' );
 	    type   = target.hasClass('fav-comment') ? 'fav' : 'unfav';
@@ -171,7 +160,7 @@ window.Code.BuddyBoss_Wall = ( function( window, $, util, undefined ) {
 
     },
     success: function( target, type, is_a_comment, response, text, xhr ) {
-	
+
       /* BuddyBoss: Modified to get number of likes */
       var has_like_text = false,
           but_text = '',
@@ -214,10 +203,10 @@ window.Code.BuddyBoss_Wall = ( function( window, $, util, undefined ) {
             item               = button.parents('.activity-item'),
             comments_wrap      = item.find('.activity-comments'),
             comments_ul        = comments_wrap.find('ul').first(),
-            existing_like_text = comments_wrap.find('.activity-like-count'),
+            existing_like_text = comments_wrap.find('.activity-like-count:not(.reply-like-count)'),
             existing_comments  = comments_wrap.find('li').not('.activity-like-count'),
             new_like_text      = num_likes_text;
-	    
+
 	if( is_a_comment ){
 	    comments_wrap	= button.parents('.acomment-options');
 	    comments_ul		= comments_wrap.find('ul').first();
@@ -497,7 +486,7 @@ window.Code.BuddyBoss_Wall = ( function( window, $, util, undefined ) {
    */
   Tooltips.getTooltipContent = function( origin, content ) {
     var $content = origin.parent().find('.buddyboss-wall-tt-content').detach().html();
-    
+
     return $content;
   }
 
@@ -505,8 +494,8 @@ window.Code.BuddyBoss_Wall = ( function( window, $, util, undefined ) {
       Tooltips.load_tooltips = true;
 	//Tooltips.init();
   }
-  jQuery(document).ready(function(){ 
-    if( Tooltips.load_tooltips===true ) 
+  jQuery(document).ready(function(){
+    if( Tooltips.load_tooltips===true )
 	Tooltips.initTooltips();
  });
 }
@@ -519,7 +508,7 @@ window.Code.BuddyBoss_Wall = ( function( window, $, util, undefined ) {
 function budyboss_wall_comment_like_unlike(target){
     jq = jQuery;
     target = jq(target);
-    
+
    /* Favoriting activity stream items */
     if ( target.hasClass('fav-comment') || target.hasClass('unfav-comment') ) {
 	    var type = target.hasClass('fav-comment') ? 'fav' : 'unfav';
@@ -547,7 +536,7 @@ function budyboss_wall_comment_like_unlike(target){
 			    if ( !jq('.item-list-tabs #activity-favs-personal-li').length ) {
 				    if ( !jq('.item-list-tabs #activity-favorites').length )
 					    jq('.item-list-tabs ul #activity-mentions').before( '<li id="activity-favorites"><a href="#">' + BP_DTheme.my_favs + ' <span>0</span></a></li>');
-				    
+
 				    jq('.item-list-tabs ul #activity-favorites span').html( Number( jq('.item-list-tabs ul #activity-favorites span').html() ) + 1 );
 			    }
 
@@ -571,6 +560,6 @@ function budyboss_wall_comment_like_unlike(target){
 		    /*if ( 'activity-favorites' == jq( '.item-list-tabs li.selected').attr('id') )
 			    target.closest( '.activity-item' ).slideUp( 100 );*/
 	    });
-    } 
+    }
     return false;
 }

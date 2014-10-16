@@ -15,7 +15,7 @@ Credits: http://iamceege.github.io/tooltipster/
 /* MISC/TO SORT: */
 .item-list-tabs #activity-favorites a,
 .activity-type-tabs #activity-favorites a {
-  visibility: hidden;
+  /*visibility: hidden;*/
 }
 .item-list-tabs #activity-favorites .localized,
 .activity-type-tabs #activity-favorites .localized {
