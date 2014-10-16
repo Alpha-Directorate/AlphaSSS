@@ -7,7 +7,7 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 	include( dirname( __FILE__ ) . '/local-config.php' );
 } else {
 	define( 'WP_LOCAL_DEV', false );
-	define( 'DB_NAME', 'alpha55_dev' );
+	define( 'DB_NAME', 'alpha55_alpha55' );
 	define( 'DB_USER', 'alpha55_alpha55' );
 	define( 'DB_PASSWORD', '@93HumorOus_' );
 	define( 'DB_HOST', 'localhost' ); // Probably 'localhost'
@@ -60,14 +60,14 @@ define( 'WPLANG', '' );
 // Hide errors
 // ===========
 // ini_set( 'display_errors', 1 );
-define( 'WP_DEBUG_DISPLAY', true );
+// define( 'WP_DEBUG_DISPLAY', true );
 
 // =================================================================
 // Debug mode
 // Debugging? Enable these. Can also enable them in local-config.php
 // =================================================================
 // define( 'SAVEQUERIES', true );
-define( 'WP_DEBUG', true );
+// define( 'WP_DEBUG', true );
 
 // ======================================
 // Load a Memcached config if we have one
