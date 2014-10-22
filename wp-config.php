@@ -5,6 +5,9 @@
 if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 	define( 'WP_LOCAL_DEV', true );
 	include( dirname( __FILE__ ) . '/local-config.php' );
+} else if ( file_exists( dirname( __FILE__ ) . '/server-config.php' ) ) {
+	define( 'WP_LOCAL_DEV', false );
+	include( dirname( __FILE__ ) . '/server-config.php' );
 } else {
 	define( 'WP_LOCAL_DEV', false );
 	define( 'DB_NAME', 'alpha55_live' );
