@@ -1,5 +1,6 @@
 /shared
 /local-config.php
+/server-config.php
 /sql-dump-*.sql
 /db-sync
 /content/upgrade/
