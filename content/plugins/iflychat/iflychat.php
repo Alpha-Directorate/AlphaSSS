@@ -1,14 +1,14 @@
 <?php
 /**
  * @package iflychat
- * @version 2.7.0
+ * @version 2.8.0
  */
 /*
 Plugin Name: iFlyChat
 Plugin URI: http://wordpress.org/extend/plugins/iflychat/
 Description: One on one chat, Multiple chatrooms, Embedded chatrooms
 Author: Shashwat Srivastava, Shubham Gupta - iFlyChat Team
-Version: 2.7.0
+Version: 2.8.0
 Author URI: https://iflychat.com/
 */
 
@@ -44,7 +44,12 @@ function iflychat_get_user_name() {
   get_currentuserinfo();
   global $wpdb;
   if($current_user->ID) {
-    return (empty($current_user->display_name)?$current_user->user_login:$current_user->display_name);
+    if(empty($current_user->display_name) || (iflychat_get_option('iflychat_use_display_name') == '2')) {
+      return $current_user->user_login;
+    }
+    else {
+      return $current_user->display_name;
+    }
   }
   else {
     return iflychat_get_current_guest_name();
@@ -323,6 +328,15 @@ function iflychat_set_options(){
 				'yes' => 'yes',
 				'no' => 'no')
 			),
+    'use_display_name' => array (
+			'name' => 'iflychat_use_display_name',
+			'default' => '1',
+			'desc' => 'Specify whether to use display name or username for logged-in user',
+			'input_type' => 'dropdown',
+			'data' => array(
+				'1' => 'Display Name',
+				'2' => 'Username')
+			),  
 		'theme' => array (
 			'name' => 'iflychat_theme',
 			'default' => 'no',
@@ -388,7 +402,7 @@ function iflychat_set_options(){
 			),
 		'anon_prefix' => array(
 			'name' => 'iflychat_anon_prefix',
-            'desc' => 'Prefix to be used with anonymous users (4 to 7 characters)',
+            'desc' => 'Prefix to be used with anonymous user (4 to 7 characters)',
             'default' => 'Guest',
 			'input_type' => 'text',
 			),
@@ -768,7 +782,7 @@ function iflychat_settings() {
       	  'font_color' => iflychat_get_option('iflychat_chat_font_color'),
       	  'chat_list_header' => iflychat_get_option('iflychat_chat_list_header'),
       	  'public_chatroom_header' => iflychat_get_option('iflychat_public_chatroom_header'),
-      	  'version' => 'WP-2.7.0',
+      	  'version' => 'WP-2.8.0',
       	  'show_admin_list' => (iflychat_get_option('iflychat_show_admin_list') == "1")?'1':'2',
       	  'clear' => iflychat_get_option('iflychat_allow_single_message_delete'),
           'delmessage' => iflychat_get_option('iflychat_allow_clear_room_history'),

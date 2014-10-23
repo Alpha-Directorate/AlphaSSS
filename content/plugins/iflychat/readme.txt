@@ -8,7 +8,7 @@ Requires at least: 3.0
 
 Tested up to: 4.0
 
-Stable tag: 2.7.0
+Stable tag: 2.8.0
 
 License: GPLv2 or later
 
@@ -153,6 +153,9 @@ No, our chat works by utilizing HTML, JS and CSS.
 
 == Changelog ==
 
+= 2.8.0 =
+Add option to display name or username in chat. Translation for French and Italian.
+
 = 2.7.0 =
 Add filters to allow other plugins to set current user's profile URL and avatar URL in chat.
 
@@ -281,6 +284,9 @@ iFlyChat Sync Release.
 iFlyChat Support Chat released. New emoticons added. Added Screenshots.
 
 == Upgrade Notice ==
+
+= 2.8.0 =
+After updating, go to iFlyChat Settings page and click on Update button.
 
 = 2.7.0 =
 After updating, go to iFlyChat Settings page and click on Update button.
