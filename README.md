@@ -7,4 +7,4 @@
 
 For documentation and functional requirements description, [go to our wiki](https://github.com/alpha-social-club/alpha-social-development/wiki).
 
-Join and contribute.
+Join and contribute. We appreciate it, and never will forget it.
