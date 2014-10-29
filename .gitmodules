@@ -4,3 +4,6 @@
 [submodule "content/plugins/gravityforms"]
 	path = content/plugins/gravityforms
 	url = git://github.com/alpha-social-club/gravityforms.git
+[submodule "content/plugins/gravityformsuserregistration"]
+	path = content/plugins/gravityformsuserregistration
+	url = git@github.com:alpha-social-club/gravityformsuserregistration.git
