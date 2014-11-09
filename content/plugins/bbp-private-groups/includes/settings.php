@@ -299,7 +299,10 @@ global $rpg_settingsf ;
 					foreach ($users as $user) {
 					
 					$check=  get_user_meta( $user, 'private_group',true);
+					//single user check
 					if ($check==$name) $countu++ ;
+					//multiple group set
+					if (strpos($check, '*'.$name.'*') !== FALSE) $countu++;
 					}
 					echo $countu ;
 					?>
