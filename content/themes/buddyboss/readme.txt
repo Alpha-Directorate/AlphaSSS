@@ -30,6 +30,7 @@ CHANGELOG
 ----------------------------------------------------------------
 Version 4
 ----------------------------------------------------------------
+4.0.8 - November 15, 2014
 4.0.7 - October 9, 2014
 4.0.6 - September 23, 2014
 4.0.5 - September 18, 2014
@@ -108,6 +109,41 @@ Version 1
 /*--------------------------------------------------------------
 Version 4
 --------------------------------------------------------------*/
+/*--------------------------------------------------------------
+4.0.8 - November 15, 2014
+--------------------------------------------------------------*/
+
+BUG FIXES:
+
+	Fixed WordPress video uploads not playing (FitVids conflict)
+	Fixed hidden items in Toolbar when using certain plugins
+
+CHANGED FILES:
+
+	/buddyboss-inc/theme-functions.php
+	/css/adminbar-desktop-fixed.css
+	/js/buddyboss.js
+	readme.txt
+	style.css
+
+TESTED WITH:
+
+	-- WordPress --
+	WordPress 3.8, 3.9, 4.0
+	BuddyPress 1.9, 2.0, 2.1
+	bbPress 2.4, 2.5+
+
+	-- Mobile --
+	iOS 6, 7
+	Android 4.1+ 
+	Windows Phone
+
+	-- Browsers --
+	Chrome
+	Safari
+	Firefox
+	Internet Explorer 9+
+
 /*--------------------------------------------------------------
 4.0.7 - October 9, 2014
 --------------------------------------------------------------*/

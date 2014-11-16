@@ -186,7 +186,6 @@ The default admin-bar.min.css is deregistered via
 
 	#wpadminbar .ab-empty-item {
 		outline: none;
-		display: none !important;
 	}
 
 	#wpadminbar .quicklinks .ab-top-secondary > li {
