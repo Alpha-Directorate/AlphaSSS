@@ -161,7 +161,7 @@ function buddyboss_scripts_styles()
 	 * Adds custom BuddyBoss JavaScript functionality.
 	 */
 	if ( !is_admin() ) {
-		wp_enqueue_script( 'buddyboss-main', get_template_directory_uri().'/js/buddyboss.js', array( 'jquery' ), '4.0.2' );
+		wp_enqueue_script( 'buddyboss-main', get_template_directory_uri().'/js/buddyboss.js', array( 'jquery' ), '4.0.8' );
 	}
 
 	// Add BuddyBoss words that we need to use in JS to the end of the page
@@ -246,7 +246,7 @@ function buddyboss_scripts_styles()
 		// Activate our own mobile adminbar stylesheet. Load FontAwesome and GoogleFonts first.
 		wp_enqueue_style( 'buddyboss-wp-adminbar-mobile', get_template_directory_uri().'/css/adminbar-mobile.css', array( 'fontawesome', 'googlefonts' ), '4.0.4', 'all' );
 		// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
-		wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-'.esc_attr( get_theme_mod( 'boss_adminbar_layout', 'fixed' ) ), get_template_directory_uri().'/css/adminbar-desktop-'.esc_attr( get_theme_mod( 'boss_adminbar_layout', 'fixed' ) ).'.css', array( 'dashicons', 'googlefonts' ), '4.0.0', 'all' );
+		wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-'.esc_attr( get_theme_mod( 'boss_adminbar_layout', 'fixed' ) ), get_template_directory_uri().'/css/adminbar-desktop-'.esc_attr( get_theme_mod( 'boss_adminbar_layout', 'fixed' ) ).'.css', array( 'dashicons', 'googlefonts' ), '4.0.8', 'all' );
 	}
 
 }

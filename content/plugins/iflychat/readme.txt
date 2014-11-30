@@ -2,13 +2,13 @@
 
 Contributors: darklrd, shubhamgupta
 
-Tags: buddypress, chat, chat room, community, embed chat, group chat, html5 chat, one to one chat, popup chat, live chat, friends, mobile chat
+Tags: buddypress, chat, chat room, community, embed chat, friends, group chat, html5 chat, one to one chat, popup chat, live chat, mobile chat
 
 Requires at least: 3.0
 
 Tested up to: 4.0
 
-Stable tag: 2.8.0
+Stable tag: 2.8.2
 
 License: GPLv2 or later
 
@@ -152,6 +152,12 @@ Yes, our chat works across all mobile platforms.
 No, our chat works by utilizing HTML, JS and CSS.
 
 == Changelog ==
+
+= 2.8.2 =
+Update README.
+
+= 2.8.1 =
+Minor backend update.
 
 = 2.8.0 =
 Add option to display name or username in chat. Translation for French and Italian.
