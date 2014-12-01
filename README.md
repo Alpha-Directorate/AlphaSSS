@@ -35,9 +35,10 @@ Alpha Social Club is a social environment for members to explore their sexuality
 
 10.	**The club is all inclusive.**
 
-## [The Use Cases]
+## The Use Cases
 * **UC1 – Invite Someone**
-A visitor can only become a new member when invited by a current member.
+
+   A visitor can only become a new member when invited by a current member.
 
 * **UC2 – Register**
 
