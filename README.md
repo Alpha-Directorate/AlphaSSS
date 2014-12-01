@@ -1,10 +1,61 @@
-# [Alpha Social Club](http://alphasocialclub.com)
+# [Alpha Social Club](http://alphasocial.club)
 
-> Sex. Almost everyone does it, but almost no one wants to talk about. It is quite the paradox when you consider how vital sex is to human life. Not only is it the act that propels our species forward, but it is also a way to bond with a romantic partner, a way to relieve the stress of daily life, not to mention an enjoyable way to pass the time.
-> - Justin J. Lehmiller, Ph.D. (2014), *The Psychology of Human Sexuality.* Harvard University: John Wiley & Sons.
+*More information is available at [alphasocial.club](http://alphasocial.club) blog. Login: `admin / Alpha.Omega`*
 
-# [Wiki](https://github.com/alpha-social-club/alpha-social-development/wiki)
+## What is it?
+Alpha Social Club is a social environment for members to explore their sexuality in non-pornographic context. Sex is one of the most fundamental social activities.
 
-For documentation and functional requirements description, [go to our wiki](https://github.com/alpha-social-club/alpha-social-development/wiki).
+## Key Values and Principles
+1.	**Sexuality is healthy.**
 
-Join and contribute. We appreciate it, and never will forget it.
+
+2.	**Sexuality is private.**
+
+
+3.	**Privacy is absolute.**
+
+
+4.	**Club membership is by invitation only.**
+
+
+5.	**Pornographic visual media are not permitted.**
+
+
+6.	**Community governed.**
+
+
+7.	**Membership is free.**
+
+
+8.	**Revenue voluntary donations only.**
+
+
+9.	**Openness and transparency.**
+
+
+10.	**The club is all inclusive.**
+
+## The Use Cases
+* **UC1 – Invite Someone**
+
+* **UC2 – Register**
+
+* **UC3 – Browse Listing**
+
+* **UC4 – Log In/Out**
+
+* **UC5 – Edit Profile**
+
+* **UC6 – Search**
+
+* **UC7 – Comment in Blog**
+
+* **UC8 – Participate in Forum**
+
+* **UC9 – Private Group Chat**
+
+## Roadmap
+
+## How to contribute
+
+## License
