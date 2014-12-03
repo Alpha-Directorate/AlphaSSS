@@ -43,21 +43,21 @@ We use WordPress not just a CMS but as our application development platform. Our
 
 * **UC1 – Invite Someone**<br>A visitor can only become a new member when invited by a current member. Presently, the invitation mechanism works by means of invitation codes.
 
-* **UC2 – Register**<br>Simple form using Gravity Forms. Email address is not collected to satisfy the project vision, above. (Password recovery strategy will be described later.)
+* **UC2 – Register**<br>Implemented with Gravity Forms. Email is not collected to comply with the project vision, item 4. (Password recovery will need further elaboration.)
 
 * **UC3 – Browse Listing**<br>There are a few important aspect to this: sorting, filtering and criteria. This use case calls UC11 "Points Accumulation" to sort the results output.
 
-* **UC4 – Log In/Out**
+* **UC4 – Log In/Out**<br>Basic functionality provided by WordPress. In the future, it would be nice to customize the appearance, look-and-feel of the login form.
 
-* **UC5 – Edit Profile**
+* **UC5 – Edit Profile**<br>The functionality is built atop the BuddyPress and Gravity Forms. In the future, the pilots will need additional set of form(s) for their data submission.
 
-* **UC6 – Search**
+* **UC6 – Search**<br>This is only applicable to searching member profiles. Many plugins available. Currently using the BP Profile Search. Also, see UC3 for results ordering.
 
-* **UC7 – Comment in Blog**
+* **UC7 – Comment in Blog**<br>Just the basic functionality off-the-shelf functionality provided with WordPress. Only logged-in members can comment.
 
-* **UC8 – Participate in Forum**
+* **UC8 – Participate in Forum**<br>Functionality provided by bbPress. There is one general forum for all members. Pilots own private groups, using bbP Private Groups plugin.
 
-* **UC9 – Private Group Chat**
+* **UC9 – Private Group Chat**<br>The use case allows any pilot to have his/her own private group. There is only one such group chat for each pilot. Using iFlyChat plugin.
 
 * **UC10 - Voice Video Chat**
 
