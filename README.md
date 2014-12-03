@@ -1,19 +1,19 @@
 # [Alpha Social Club](http://alphasocial.club)
 
-*More information is available at [alphasocial.club](http://alphasocial.club) blog. Login:* `admin / Alpha.Omega`
+*A little more info available at <a href="http://www.alphasocial.club" target="_blank">alphasocial.club</a> blog. Login:* `admin / Alpha.Omega`
 
-## What is this project?
-(XXX—needs revisions. we are adult content, but no explicit content, as governed by community. Adult discretion required.)
+## What Is This?
+(TODO—needs revisions. we are adult content, but no explicit content, as governed by community. Adult discretion required.)
 Alpha Social Club is a social environment for members to explore their sexuality in non-pornographic context. Sex is one of the most fundamental social activities.
 
-## The Project Vision Outline
+## The Vision Outline
 1.	**Sexuality is healthy.**<br>It mediates biological, physiological processes (allostasis). It builds social relationships. It stimulates brain cognition and slows down aging processes.
 
-2.	**Sexuality is private.**<br>Scientists tell as that humans are quite a unique members of the animal kingdom that prefer to have sex in private… (Who would've thought?)
+2.	**Sexuality is a private activity.**<br>Scientists tell as that humans are quite unique among members of the animal kingdom, preferring to have sex in private… (Who would've thought?)
 
-5.	**Pornographic visual media are not permitted.**<br>As the corollary to the above, we do not permit porn. Porn is a public manifestation of sexuality. But private sexual encounters online are OK.
+5.	**Pornographic visual media are not permitted.**<br>As the corollary to the above, we do not permit porn. Porn is a *public* manifestation of sexuality. But *private* sexual encounters online are OK.
 
-3.	**Personal data privacy is absolute.**<br>We are paranoid about your privacy. We collect absolutely no personal information; e.g.: we strip IP addresses; and do not collect email addresses. [Read more...](http://www.alphasocial.club/where-has-our-privacy-online-gone/) `(admin / Alpha.Omega)`
+3.	**Security and privacy of personal information.**<br>We are paranoid about this. We collect absolutely nothing about users. For example, we obliterate IP addresses, and we do not collect email addresses. <a href="http://www.alphasocial.club/where-has-our-privacy-online-gone/" target="_blank">Read more...</a> `(admin / Alpha.Omega)`
 
 4.	**Club membership is by invitation only.**<br>Firstly, invitation-only membership creates a certain level of exclusivity. Secondly, it helps us further control and safe-guard minors' participation.
 
@@ -25,16 +25,26 @@ Alpha Social Club is a social environment for members to explore their sexuality
 
 8.	**Revenue based on voluntary donations only.**<br>As a footnote to the above, we are a company who expands significant costs to run the infrastructure and pay developers. Donations are always welcome.
 
-9.	**Openness and transparency.**<br>This project is completely open-sourced to the online community. Of course, we must except any security-sensitive data or code (accessible to admins).
+9.	**Openness and transparency.**<br>This project is completely open-sourced to the community. Except, of course we do not disclose any security-sensitive data or code (admin-accessible).
 
-## The Use Cases
-(XXX WordPress thank you.)
+## Use Case-Driven Development
+We use WordPress not just a CMS but as our *application development platform*. Thank you Matt Mullenweg and all contributors for making it possible!
 
-* **UC1 – Invite Someone**<br>A visitor can become a new member when invited by a current member.
+* **Actors**
+  * Visitor<br>A user that is not recognized by the system as an existing member.
 
-* **UC2 – Register**
+  * Member<br>A user who is recognized by (e.g. via a cookie) or logged in to the system.
 
-* **UC3 – Browse Listing**
+  * Pilot<br>A subtype of a member who can initiate a private group chat and voice video chat. A member cannot initiate those use cases (see below).
+
+  * Admin<br>This is equivalent to the WordPress administrator role. The all-powerful user.
+
+
+* **UC1 – Invite Someone**<br>A visitor can only become a new member when invited by a current member. Presently, the invitation mechanism works by means of invitation codes.
+
+* **UC2 – Register**<br>Simple form using Gravity Forms. Email address is not collected to satisfy the project vision, above. (Password recovery strategy will be described later.)
+
+* **UC3 – Browse Listing**<br>There are a few important aspect to this: sorting, filtering and criteria. This use case calls UC11 "Points Accrual" to determine the default order of results.
 
 * **UC4 – Log In/Out**
 
@@ -48,10 +58,18 @@ Alpha Social Club is a social environment for members to explore their sexuality
 
 * **UC9 – Private Group Chat**
 
+* **UC10 - Voice Video Chat**
+
+* **UC11 - Points Accumulation**
+
 ## Roadmap
+TBD
 
 ## How to install
+TBD
 
 ## How to contribute
+TBD
 
 ## License
+TBD
