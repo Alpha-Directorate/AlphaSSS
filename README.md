@@ -29,7 +29,7 @@ Alpha Social Club is a social network of like-minded individuals exploring their
 ## Use Case-Driven Development
 We use WordPress not just a CMS but as our application development platform. Our gratitude goes to Mr. Matt Mullenweg and all contributors for making it possible!
 
-![Alpha Social Club UML use case diagram](https://github.com/alpha-social-club/alpha-social-development/tree/master/images/ASC-Use-Case-Diagram-V1.png "Alpha Social Club UML use case diagram")
+![Alpha Social Club UML use case diagram](https://raw.githubusercontent.com/alpha-social-club/alpha-social-development/master/images/ASC-Use-Case-Diagram-V1.png?token=AJAywHhBq6yRi3ZSj2aA4QhqsilXZv-Tks5UiImiwA%3D%3D "Alpha Social Club UML use case diagram")
 
 * **Actors**
   * **Visitor**<br>A user that is not recognized by the system as an existing member.
