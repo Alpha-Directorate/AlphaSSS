@@ -1,10 +1,9 @@
-# [Alpha Social Club](http://alphasocial.club)
+# Alpha Social Club
 
-*A little more info available at <a href="http://www.alphasocial.club" target="_blank">alphasocial.club</a> blog. Login:* `admin / Alpha.Omega`
+*<a href="http://www.alphasocial.club" target="_blank">www.alphasocial.club</a>. Login:* `admin / Alpha.Omega`
 
 ## What Is This?
-(TODO—needs revisions. we are adult content, but no explicit content, as governed by community. Adult discretion required.)
-Alpha Social Club is a social environment for members to explore their sexuality in non-pornographic context. Sex is one of the most fundamental social activities.
+Alpha Social Club is a social network of like-minded individuals exploring their sexuality in a safe and friendly environment. Sex is not porn. Sex is beautiful, rewarding and healthy. Sex is at the very core of human social interactions.
 
 ## The Vision Outline
 1.	**Sexuality is healthy.**<br>It mediates biological, physiological processes (allostasis). It builds social relationships. It stimulates brain cognition and slows down aging processes.
@@ -31,13 +30,13 @@ Alpha Social Club is a social environment for members to explore their sexuality
 We use WordPress not just a CMS but as our *application development platform*. Thank you Matt Mullenweg and all contributors for making it possible!
 
 * **Actors**
-  * Visitor<br>A user that is not recognized by the system as an existing member.
+  * **Visitor**<br>A user that is not recognized by the system as an existing member.
 
-  * Member<br>A user who is recognized by (e.g. via a cookie) or logged in to the system.
+  * **Member**<br>A user who is recognized by (e.g. via a cookie) or logged in to the system.
 
-  * Pilot<br>A subtype of a member who can initiate a private group chat and voice video chat. A member cannot initiate those use cases (see below).
+  * **Pilot**<br>A subtype of a member who can initiate a private group chat and voice video chat. A member cannot initiate those use cases (see below).
 
-  * Admin<br>This is equivalent to the WordPress administrator role. The all-powerful user.
+  * **Admin**<br>This is equivalent to the WordPress administrator role. The all-powerful user.
 
 
 * **UC1 – Invite Someone**<br>A visitor can only become a new member when invited by a current member. Presently, the invitation mechanism works by means of invitation codes.
