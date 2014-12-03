@@ -5,12 +5,12 @@
 ## What Is This?
 Alpha Social Club is a social network of like-minded individuals exploring their sexuality in a safe and friendly environment. Sex is not porn. Sex is beautiful, rewarding and healthy. Sex is at the very core of human social interactions.
 
-## The Vision Outline
+## Ten-Point Vision
 1.	**Sexuality is healthy.**<br>It mediates biological, physiological processes (allostasis). It builds social relationships. It stimulates brain cognition and slows down aging processes.
 
 2.	**Sexuality is a private activity.**<br>Scientists tell as that humans are quite unique among members of the animal kingdom, preferring to have sex in private… (Who would've thought?)
 
-5.	**Pornographic visual media are not permitted.**<br>As the corollary to the above, we do not permit porn. Porn is a *public* manifestation of sexuality. But *private* sexual encounters online are OK.
+5.	**Pornographic visual media are not permitted.**<br>As the corollary to the above, we do not permit porn. Porn is a *public* manifestation of sexuality. But! *private* sexual meetings online are normative.
 
 3.	**Security and privacy of personal information.**<br>We are paranoid about this. We collect absolutely nothing about users. For example, we obliterate IP addresses, and we do not collect email addresses. <a href="http://www.alphasocial.club/where-has-our-privacy-online-gone/" target="_blank">Read more...</a> `(admin / Alpha.Omega)`
 
