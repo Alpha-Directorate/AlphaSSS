@@ -12,7 +12,7 @@ Alpha Social Club is a social network of like-minded individuals exploring their
 
 5.	**Pornographic visual media are not permitted.**<br>As the corollary to the above, we do not permit porn. Porn is a *public* manifestation of sexuality. But! *private* sexual meetings online are normative.
 
-3.	**Security and privacy of personal information.**<br>We are paranoid about this. We collect absolutely nothing about users. For example, we obliterate IP addresses, and we do not collect email addresses. <a href="http://www.alphasocial.club/where-has-our-privacy-online-gone/" target="_blank">Read more...</a> `(admin / Alpha.Omega)`
+3.	**Security and privacy of personal information.**<br>We are paranoid about this. We collect absolutely nothing about users. For example, we obliterate IP addresses, and we do not collect email addresses. <a href="http://www.alphasocial.club/where-has-our-privacy-online-gone/" target="_blank">Read more...</a> *Login:* `admin / Alpha.Omega`
 
 4.	**Club membership is by invitation only.**<br>Firstly, invitation-only membership creates a certain level of exclusivity. Secondly, it helps us further control and safe-guard minors' participation.
 
@@ -27,14 +27,14 @@ Alpha Social Club is a social network of like-minded individuals exploring their
 9.	**Openness and transparency.**<br>This project is completely open-sourced to the community. Except, of course we do not disclose any security-sensitive data or code (admin-accessible).
 
 ## Use Case-Driven Development
-We use WordPress not just a CMS but as our *application development platform*. Thank you Matt Mullenweg and all contributors for making it possible!
+We use WordPress not just a CMS but as our application development platform. Our gratitude goes to Mr. Matt Mullenweg and all contributors for making it possible!
 
 * **Actors**
   * **Visitor**<br>A user that is not recognized by the system as an existing member.
 
-  * **Member**<br>A user who is recognized by (e.g. via a cookie) or logged in to the system.
+  * **Member**<br>A user who is recognized by (e.g. via a cookie) or currently logged-in to the system.
 
-  * **Pilot**<br>A subtype of a member who can initiate a private group chat and voice video chat. A member cannot initiate those use cases (see below).
+  * **Pilot**<br>A subtype of a member who can initiate a private group chat and voice video chat use cases. Regular member cannot do that.
 
   * **Admin**<br>This is equivalent to the WordPress administrator role. The all-powerful user.
 
@@ -43,7 +43,7 @@ We use WordPress not just a CMS but as our *application development platform*. T
 
 * **UC2 – Register**<br>Simple form using Gravity Forms. Email address is not collected to satisfy the project vision, above. (Password recovery strategy will be described later.)
 
-* **UC3 – Browse Listing**<br>There are a few important aspect to this: sorting, filtering and criteria. This use case calls UC11 "Points Accrual" to determine the default order of results.
+* **UC3 – Browse Listing**<br>There are a few important aspect to this: sorting, filtering and criteria. This use case calls UC11 "Points Accumulation" to sort the results output.
 
 * **UC4 – Log In/Out**
 
