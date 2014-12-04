@@ -75,7 +75,9 @@ Alpha Social Club is a social network of like-minded individuals exploring their
 * **UC11 - Points Accumulation**<br>TBD
 
 ## License
-TBD
+*Alpha Directorate LLC*, the organization funding this project, has chosen to release the *Alpha Social Club* project under the terms of the <a href="http://opensource.org/licenses/MIT" target="_blank">MIT License</a>.
+
+The MIT License is simple, permissible, easy to understand and compatible with most other open source licenses. It places practically no restrictions on what you can do with our project.
 
 ## How To Install
 TBD
