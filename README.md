@@ -36,7 +36,7 @@ Alpha Social Club is a social network of like-minded individuals exploring their
 
 8.	**Revenue based on voluntary donations only.**<br>As a footnote to the above, we are a company who expands significant costs to run the infrastructure and pay developers. Donations are always welcome.
 
-9.	**Openness and transparency.**<br>This project is completely open-sourced to the community. Except, of course we do not disclose any security-sensitive data or code (admin-accessible).
+9.	**Openness and transparency.**<br>This project is completely open-sourced to the community. Except, of course, we do not disclose any security-sensitive data or code (admin-accessible).
 
 ## Use Case-Driven Development
 
