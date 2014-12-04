@@ -12,7 +12,7 @@ In addition to this README:
 [How To Install](https://github.com/alpha-social-club/alpha-social-development#how-to-install)<br>
 [How to Contribute](https://github.com/alpha-social-club/alpha-social-development#how-to-contribute)<br>
 [Roadmap](https://github.com/alpha-social-club/alpha-social-development#roadmap)<br>
-[Credits & Acknowledgements]()
+[Credits & Acknowledgements](https://github.com/alpha-social-club/alpha-social-development#credits--acknowledgements)
 
 ## What Is This?
 Alpha Social Club is a social network of like-minded individuals exploring their sexuality in a safe and friendly environment. Sex is not porn. Sex is beautiful, rewarding and healthy. Sex is at the very core of human social interactions.
@@ -68,7 +68,7 @@ Alpha Social Club is a social network of like-minded individuals exploring their
 
 * **UC8 – Participate in Forum**<br>Functionality provided by bbPress. There is one general forum for all members. Pilots own private groups, using <a href="https://wordpress.org/plugins/bbp-private-groups/" target="_blank">bbP Private Groups</a> plugin.
 
-* **UC9 – Private Group Chat**<br>The use case allows any pilot to have his/her own private group. There is only one such group chat for each pilot. Using <a href="https://wordpress.org/plugins/iflychat/">iFlyChat</a> plugin.
+* **UC9 – Private Group Chat**<br>The use case allows any pilot to have his/her own private group. There is only one such group chat for each pilot. Using <a href="https://wordpress.org/plugins/iflychat/" target="_blank">iFlyChat</a> plugin.
 
 * **UC10 - Voice Video Chat**<br>TBD
 
