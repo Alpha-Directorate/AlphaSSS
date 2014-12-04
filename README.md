@@ -8,7 +8,7 @@ In addition to this README:
 [What is This?](https://github.com/alpha-social-club/alpha-social-development#what-is-this)<br>
 [Ten-Point Vision](https://github.com/alpha-social-club/alpha-social-development#ten-point-vision)<br>
 [Use Case-Driven Development](https://github.com/alpha-social-club/alpha-social-development#use-case-driven-development)<br>
-[License](https://github.com/alpha-social-club/alpha-social-development#license)
+[License](https://github.com/alpha-social-club/alpha-social-development#license)<br>
 [How To Install](https://github.com/alpha-social-club/alpha-social-development#how-to-install)<br>
 [How to Contribute](https://github.com/alpha-social-club/alpha-social-development#how-to-contribute)<br>
 [Roadmap](https://github.com/alpha-social-club/alpha-social-development#roadmap)<br>
