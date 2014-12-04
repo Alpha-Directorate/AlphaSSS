@@ -2,7 +2,7 @@
 In addition to this README:
 
 * <a href="http://www.alphasocial.club" target="_blank">www.alphasocial.club</a> (blog only, for now). Login: `admin / Alpha.Omega`
-* Our <a href="https://github.com/alpha-social-club/alpha-social-development/wiki" target="_blank">wiki pages</a>
+* Our [wiki pages](https://github.com/alpha-social-club/alpha-social-development/wiki)
 
 ## README Table of Content
 [What is This?](https://github.com/alpha-social-club/alpha-social-development#what-is-this)<br>
