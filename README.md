@@ -1,8 +1,10 @@
 # Alpha Social Club
+In addition to this README:
 
-*<a href="http://www.alphasocial.club" target="_blank">www.alphasocial.club</a>. Login:* `admin / Alpha.Omega`
+* <a href="http://www.alphasocial.club" target="_blank">www.alphasocial.club</a> (blog only, for now). Login: `admin / Alpha.Omega`
+* Our <a href="https://github.com/alpha-social-club/alpha-social-development/wiki" target="_blank">wiki pages</a>
 
-## Table of Content
+## README Table of Content
 [What is This?](https://github.com/alpha-social-club/alpha-social-development#what-is-this)<br>
 [Ten-Point Vision](https://github.com/alpha-social-club/alpha-social-development#ten-point-vision)<br>
 [Use Case-Driven Development](https://github.com/alpha-social-club/alpha-social-development#use-case-driven-development)<br>
@@ -10,6 +12,7 @@
 [How To Install](https://github.com/alpha-social-club/alpha-social-development#how-to-install)<br>
 [How to Contribute](https://github.com/alpha-social-club/alpha-social-development#how-to-contribute)<br>
 [Roadmap](https://github.com/alpha-social-club/alpha-social-development#roadmap)<br>
+[Credits & Acknowledgements]()
 
 ## What Is This?
 Alpha Social Club is a social network of like-minded individuals exploring their sexuality in a safe and friendly environment. Sex is not porn. Sex is beautiful, rewarding and healthy. Sex is at the very core of human social interactions.
@@ -36,7 +39,6 @@ Alpha Social Club is a social network of like-minded individuals exploring their
 9.	**Openness and transparency.**<br>This project is completely open-sourced to the community. Except, of course we do not disclose any security-sensitive data or code (admin-accessible).
 
 ## Use Case-Driven Development
-We use WordPress not just a CMS but as our application development platform. Our gratitude goes to Mr. Matt Mullenweg and all contributors for making it possible!
 
 ![Alpha Social Club UML use case diagram](https://raw.githubusercontent.com/alpha-social-club/alpha-social-development/master/images/ASC-Use-Case-Diagram-V1.png?token=AJAywHhBq6yRi3ZSj2aA4QhqsilXZv-Tks5UiImiwA%3D%3D "Alpha Social Club UML use case diagram")
 
@@ -45,7 +47,7 @@ We use WordPress not just a CMS but as our application development platform. Our
 
   * **Member**<br>A user who is recognized by (e.g. via a cookie) or currently logged-in to the system.
 
-  * **Pilot**<br>A subtype of a member who can initiate a private group chat and voice video chat use cases. Regular member cannot do that.
+  * **Pilot**<br>A subtype of a member who can initiate private group chat (UC9) and voice video chat (UC10) use cases. Regular member cannot do that.
 
   * **Admin**<br>This is equivalent to the WordPress administrator role. The all-powerful user.
 
@@ -60,26 +62,29 @@ We use WordPress not just a CMS but as our application development platform. Our
 
 * **UC5 – Edit Profile**<br>The functionality is built atop the BuddyPress and Gravity Forms. In the future, the pilots will need additional set of form(s) for their data submission.
 
-* **UC6 – Search**<br>This is only applicable to searching member profiles. Many plugins available. Currently using the BP Profile Search. Also, see UC3 for results ordering.
+* **UC6 – Search**<br>This is only applicable to searching member profiles. Many plugins available. Currently using the <a href="https://wordpress.org/plugins/bp-profile-search/" target="_blank">BP Profile Search</a> . Also, see UC3 for results ordering.
 
 * **UC7 – Comment in Blog**<br>Just the basic functionality off-the-shelf functionality provided with WordPress. Only logged-in members can comment.
 
-* **UC8 – Participate in Forum**<br>Functionality provided by bbPress. There is one general forum for all members. Pilots own private groups, using bbP Private Groups plugin.
+* **UC8 – Participate in Forum**<br>Functionality provided by bbPress. There is one general forum for all members. Pilots own private groups, using <a href="https://wordpress.org/plugins/bbp-private-groups/" target="_blank">bbP Private Groups</a> plugin.
 
-* **UC9 – Private Group Chat**<br>The use case allows any pilot to have his/her own private group. There is only one such group chat for each pilot. Using iFlyChat plugin.
+* **UC9 – Private Group Chat**<br>The use case allows any pilot to have his/her own private group. There is only one such group chat for each pilot. Using <a href="https://wordpress.org/plugins/iflychat/">iFlyChat</a> plugin.
 
-* **UC10 - Voice Video Chat**
+* **UC10 - Voice Video Chat**<br>TBD
 
-* **UC11 - Points Accumulation**
+* **UC11 - Points Accumulation**<br>TBD
+
+## License
+TBD
+
+## How To Install
+TBD
+
+## How To Contribute
+ASC is a massively ambitious project that is changing our approach to blah blah blah…. XXXXX Most primal and fundamental driving force to interact socially online.
 
 ## Roadmap
 TBD
 
-## How to install
-TBD
-
-## How to contribute
-TBD
-
-## License
-TBD
+## Credits & Acknowledgements
+(XXX needs editing and reduction in size) We use WordPress not just a CMS but as our application development platform. Our gratitude goes to Mr. Matt Mullenweg and all contributors for making it possible!
