@@ -62,7 +62,7 @@ Alpha Social Club is a social network of like-minded individuals exploring their
 
 * **UC5 – Edit Profile**<br>The functionality is built atop the BuddyPress and Gravity Forms. In the future, the pilots will need additional set of form(s) for their data submission.
 
-* **UC6 – Search**<br>This is only applicable to searching member profiles. Many plugins available. Currently using the <a href="https://wordpress.org/plugins/bp-profile-search/" target="_blank">BP Profile Search</a> . Also, see UC3 for results ordering.
+* **UC6 – Search**<br>This is only applicable to searching member profiles. Many plugins available. Currently using the <a href="https://wordpress.org/plugins/bp-profile-search/" target="_blank">BP Profile Search</a>. Also, see UC3 for results ordering.
 
 * **UC7 – Comment in Blog**<br>Just the basic functionality off-the-shelf functionality provided with WordPress. Only logged-in members can comment.
 
