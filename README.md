@@ -15,7 +15,7 @@ In addition to this README:
 [Credits & Acknowledgements](https://github.com/alpha-social-club/alpha-social-development#credits--acknowledgements)
 
 ## What Is This?
-Alpha Social Club is a social network of like-minded individuals exploring their sexuality in a safe and friendly environment. Sex is not porn. Sex is beautiful, rewarding and healthy. Sex is at the very core of human social interactions.
+(TODO. Review & revise.) Alpha Social Club is a social network of like-minded individuals exploring their sexuality in a safe and friendly environment. Sex is not porn. Sex is beautiful, rewarding and healthy. Sex is at the very core of human social interactions.
 
 ## Ten-Point Vision
 1.	**Sexuality is healthy.**<br>It mediates biological, physiological processes (allostasis). It builds social relationships. It stimulates brain cognition and slows down aging processes.
@@ -39,6 +39,8 @@ Alpha Social Club is a social network of like-minded individuals exploring their
 9.	**Openness and transparency.**<br>This project is completely open-sourced to the community. Except, of course, we do not disclose any security-sensitive data or code (admin-accessible).
 
 ## Use Case-Driven Development
+
+TODO: Note about requirements not being *"set in stone"*.
 
 ![Alpha Social Club UML use case diagram](https://raw.githubusercontent.com/alpha-social-club/alpha-social-development/master/images/ASC-Use-Case-Diagram-V1.png?token=AJAywHhBq6yRi3ZSj2aA4QhqsilXZv-Tks5UiImiwA%3D%3D "Alpha Social Club UML use case diagram")
 
@@ -68,7 +70,7 @@ Alpha Social Club is a social network of like-minded individuals exploring their
 
 * **UC8 – Participate in Forum**<br>Functionality provided by bbPress. There is one general forum for all members. Pilots own private groups, using <a href="https://wordpress.org/plugins/bbp-private-groups/" target="_blank">bbP Private Groups</a> plugin.
 
-* **UC9 – Private Group Chat**<br>The use case allows any pilot to have his/her own private group. There is only one such group chat for each pilot. Using <a href="https://wordpress.org/plugins/iflychat/" target="_blank">iFlyChat</a> plugin.
+* **UC9 – Private Group Chat**<br>The use case allows any pilot to have his/her own private group. There is only one such group chat for each pilot. Using <a href="https://wordpress.org/plugins/iflychat/" target="_blank">iFlyChat</a> plugin. [Read more…](https://github.com/alpha-social-club/alpha-social-development/wiki/UC9-Private-Group-Chat)
 
 * **UC10 - Voice Video Chat**<br>TBD
 
@@ -80,13 +82,13 @@ Alpha Social Club is a social network of like-minded individuals exploring their
 The MIT License is simple, permissible, easy to understand and compatible with most other open source licenses. It places practically no restrictions on what you can do with our project.
 
 ## How To Install
-TBD
+TODO
 
 ## How To Contribute
-ASC is a massively ambitious project that is changing our approach to blah blah blah…. XXXXX Most primal and fundamental driving force to interact socially online.
+ASC is a massively ambitious project that is changing our approach to blah blah blah…. TODO Most primal and fundamental driving force to interact socially online.
 
 ## Roadmap
-TBD
+TODO
 
 ## Credits & Acknowledgements
-(XXX needs editing and reduction in size) We use WordPress not just a CMS but as our application development platform. Our gratitude goes to Mr. Matt Mullenweg and all contributors for making it possible!
+(TODO needs editing and reduction in size) We use WordPress not just a CMS but as our application development platform. Our gratitude goes to Mr. Matt Mullenweg and all contributors for making it possible!
