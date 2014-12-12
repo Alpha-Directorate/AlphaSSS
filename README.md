@@ -42,7 +42,7 @@ In addition to this README:
 
 TODO: Note about requirements not being *"set in stone"*.
 
-![Alpha Social Club UML use case diagram](https://raw.githubusercontent.com/alpha-social-club/alpha-social-development/master/images/ASC-Use-Case-Diagram-V1.png?token=AJAywHhBq6yRi3ZSj2aA4QhqsilXZv-Tks5UiImiwA%3D%3D "Alpha Social Club UML use case diagram")
+![UML Use Case Diagram](images/ASC-Use-Case-Diagram-V1.png)
 
 * **Actors**
   * **Non-Member**<br>Any user that is not recognized by the system as an existing member.
