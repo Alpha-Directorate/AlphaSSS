@@ -92,4 +92,3 @@ TODO
 
 ## Credits & Acknowledgements
 (TODO needs editing and reduction in size) We use WordPress not just a CMS but as our application development platform. Our gratitude goes to Mr. Matt Mullenweg and all contributors for making it possible!
->>>>>>> FETCH_HEAD
