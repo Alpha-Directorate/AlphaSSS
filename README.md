@@ -40,7 +40,7 @@ In addition to this README:
 
 ## Use Case-Driven Development
 
-TODO: Note about requirements not being *"set in stone"*.
+TODO: Note about requirements not being **"set in stone"**.
 
 ![UML Use Case Diagram](images/ASC-Use-Case-Diagram-V1.png)
 
