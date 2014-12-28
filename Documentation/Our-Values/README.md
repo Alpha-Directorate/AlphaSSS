@@ -27,7 +27,7 @@ During the initial formation of the community, it is inevitable that the company
 
 ### Open Source
 
-The company supports open source community and makes all software and system development documentation available [freely to the public](././LICENSE.txt). Go ahead and fork us. Please.
+The company supports open source community and makes all software and system development documentation available [freely to the public](/LICENSE.txt). Go ahead and fork us. Please.
 
 Indeed, we are deeply grateful to and inspired by all the pioneers of open source software that preceded us. It is thus the company's grand dream to enable a movement of a true *Open-Source Self-Government*. Wouldn't that be grand!
 
