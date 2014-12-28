@@ -21,13 +21,13 @@ It is important to recognize that a sufficient number of members must exist in o
 
 ### Transparency
 
-A dichotomy exists between individual *[Right to Privacy](TODO)* principle and the information freedom: the transparency. Thus, the dichotomy must be resolved through the community discussion, voting  and establishment of rules on a case-by-case basis.
+A dichotomy exists between individual *[Right to Privacy](#two-fundamental-principles)* principle and the information freedom: the transparency. Thus, the dichotomy must be resolved through the community discussion, voting  and establishment of rules on a case-by-case basis.
 
 During the initial formation of the community, it is inevitable that the company shall make judgment calls where such dichotomies exist. In the future, the company-established rules may be modified through the community self-governance process.
 
 ### Open Source
 
-The company supports open source community and makes all software and system development documentation available [freely to the public](TODO license). Go ahead and fork us. Please.
+The company supports open source community and makes all software and system development documentation available [freely to the public](././LICENSE.txt). Go ahead and fork us. Please.
 
 Indeed, we are deeply grateful to and inspired by all the pioneers of open source software that preceded us. It is thus the company's grand dream to enable a movement of a true *Open-Source Self-Government*. Wouldn't that be grand!
 
@@ -45,6 +45,6 @@ The initial ranking rules shall be openly published. At a future time, once the 
 
 ### Payment Anonymity
 
-### Founding Company Coexistence
+### Existence Within The Founding Company
 
-### Existence Within The United States
+### Existence Within The US
