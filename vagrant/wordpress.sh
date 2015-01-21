@@ -10,7 +10,7 @@ then
 	mysql -uroot -pvagrant alphasocialdev < /vagrant/vagrant/dump/dump.sql
 
 	# set correct host name
-	mysql -uroot -pvagrant -e "use alphasocialdev; update wp_options set value = 'http://alpha-social.dev/' where option_id IN (3,4);"
+	mysql -uroot -pvagrant -e "use alphasocialdev; update wp_options set option_value = 'http://alpha-social.dev/' where option_id IN (3,4);"
 
 
 	#sudo cp /vagrant/vagrant/etc/nginx/sites-available/default /etc/nginx/sites-available/default
