@@ -10,11 +10,13 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 	include( dirname( __FILE__ ) . '/server-config.php' );
 } else {
 	define( 'WP_LOCAL_DEV', false );
-	define( 'DB_NAME', '-' );
-	define( 'DB_USER', '-' );
-	define( 'DB_PASSWORD', '-' );
+	define( 'DB_NAME', 'alpha-social.dev' );
+	define( 'DB_USER', 'root' );
+	define( 'DB_PASSWORD', 'collapse' );
 	define( 'DB_HOST', 'localhost' ); // Probably 'localhost'
 }
+
+
 
 define('WP_MEMORY_LIMIT', '96M');
 
@@ -26,11 +28,8 @@ define('CONCATENATE_SCRIPTS', false);
 // Custom Content Directory
 // ========================
 define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/content' );
-if ( WP_LOCAL_DEV ) {
-	define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/alpha-social-development/content' );
-} else {
-	define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/content' );
-}
+define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/content' );
+
 
 // ================================================
 // You almost certainly do not want to change these
@@ -74,7 +73,7 @@ define( 'WPLANG', '' );
 // Debugging? Enable these. Can also enable them in local-config.php
 // =================================================================
 // define( 'SAVEQUERIES', true );
-// define( 'WP_DEBUG', true );
+ define( 'WP_DEBUG', true );
 
 // ======================================
 // Load a Memcached config if we have one
