@@ -1,4 +1,4 @@
-# Installtion (dev env)
+# Installation (dev env)
 
 Download and install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 
