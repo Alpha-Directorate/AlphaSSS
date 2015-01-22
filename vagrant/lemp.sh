@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -f /etc/nginx/sites-available/default ];
+if [ ! -f /var/www/alpha-social.dev/local-config.php ];
 then
 	sudo echo 'mysql-server mysql-server/root_password password vagrant' | debconf-set-selections
 	sudo echo 'mysql-server mysql-server/root_password_again password vagrant' | debconf-set-selections
