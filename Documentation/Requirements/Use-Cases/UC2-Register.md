@@ -113,7 +113,7 @@ The use case is started by a non-member. It allows him/her to become a member by
   See the mockup below.
 
 ![Mockup for UC2-Register: Nickname, Password Validation Errors](images/UC2-Validation-Nickname-Password.png)<br>
-**Registration first step -- an example mockup showing example validation errors.**
+**Registration first step -- an example mockup showing multiple validation errors: E-2, E-3, E-4.**
 
 * <a name="2.22"></a>`2.22` The non-member re-enters the checkbox. The use case continues.
 
