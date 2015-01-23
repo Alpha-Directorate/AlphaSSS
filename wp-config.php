@@ -2,22 +2,10 @@
 // ===================================================
 // Load database info and local development parameters
 // ===================================================
-if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
-	define( 'WP_LOCAL_DEV', true );
-	include( dirname( __FILE__ ) . '/local-config.php' );
-} else if ( file_exists( dirname( __FILE__ ) . '/server-config.php' ) ) {
-	define( 'WP_LOCAL_DEV', false );
-	include( dirname( __FILE__ ) . '/server-config.php' );
-} else {
-	define( 'WP_LOCAL_DEV', false );
-	define( 'DB_NAME', 'alpha-social.dev' );
-	define( 'DB_USER', 'root' );
-	define( 'DB_PASSWORD', 'collapse' );
-	define( 'DB_HOST', 'localhost' ); // Probably 'localhost'
-}
-
-
-
+define( 'DB_NAME', getenv("DB_NAME") );
+define( 'DB_USER', getenv("DB_USER") );
+define( 'DB_PASSWORD', getenv("DB_PASSWORD") );
+define( 'DB_HOST', getenv("DB_HOST") );
 define('WP_MEMORY_LIMIT', '96M');
 
 // Hoping to fix "White Text" problem.
@@ -29,7 +17,6 @@ define('CONCATENATE_SCRIPTS', false);
 // ========================
 define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/content' );
 define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/content' );
-
 
 // ================================================
 // You almost certainly do not want to change these
@@ -73,7 +60,7 @@ define( 'WPLANG', '' );
 // Debugging? Enable these. Can also enable them in local-config.php
 // =================================================================
 // define( 'SAVEQUERIES', true );
- define( 'WP_DEBUG', true );
+ define( 'WP_DEBUG', getenv("WP_DEBUG") === 'true' );
 
 // ======================================
 // Load a Memcached config if we have one
@@ -92,4 +79,5 @@ define( 'STAGING_DOMAIN', '%%WP_STAGING_DOMAIN%%' ); // Does magic in WP Stack t
 // ===================
 if ( !defined( 'ABSPATH' ) )
 	define( 'ABSPATH', dirname( __FILE__ ) . '/wp/' );
+
 require_once( ABSPATH . 'wp-settings.php' );

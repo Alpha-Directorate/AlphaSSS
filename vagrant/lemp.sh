@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -f /var/www/alphasss.dev/local-config.php ];
+if [ ! -f /etc/apache2/sites-available/alphasss.dev.conf ];
 then
 	sudo echo 'mysql-server mysql-server/root_password password vagrant' | debconf-set-selections
 	sudo echo 'mysql-server mysql-server/root_password_again password vagrant' | debconf-set-selections
