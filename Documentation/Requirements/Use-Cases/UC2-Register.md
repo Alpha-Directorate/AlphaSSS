@@ -61,7 +61,7 @@ The use case is started by a non-member. It allows him/her to become a member by
   1. The code does not match, *case-insensitive*, any existing and valid codes in the database:
     * Error message: "This is not a valid invitation code. If you don't have one, just ask for it."
 
-  1. The time elapsed since the code has been generated has exceeded a predefined time limit. See also UC1 Invite Someone > System Requirements > Invitation Code Generation Rules, requirements *[(1.9)](UC1-Invite-Someone#1.9)* and *[(1.25)](UC1-Invite-Someone#1.25)*.
+  1. The time elapsed since the code has been generated has exceeded a predefined time limit. See also UC1 Invite Someone > System Requirements > Invitation Code Generation Rules, requirements *[(1.9)](UC1-Invite-Someone.md#1.9)* and *[(1.25)](UC1-Invite-Someone.md#1.25)*.
     * Error message: "This code is older than 24 hours, and is no longer valid. Simply request a new invitation code."
 
   See the mockup below.
