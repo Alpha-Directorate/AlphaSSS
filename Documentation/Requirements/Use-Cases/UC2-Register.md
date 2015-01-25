@@ -42,9 +42,9 @@ The use case is started by a non-member. It allows him/her to become a member by
 
 ### S-1. Non-member submits invitation code at a later time.
 
-* <a name="2.26"></a>`2.26` If the non-member successfully completes the main flow sequence of the following steps listed above: *[(2.4)](UC2-Register#2.4)*, *[(2.12)](UC2-Register#2.12)*, *[(2.11)](UC2-Register#2.11)* and *[(2.13)](UC2-Register#2.13)*; then the non-member should be able to log in to the site at a future time. However, until he/she submits the valid invitation code, this non-member can only log in to check if he/she has received an invitation code, and then use it to complete the final registration step. See also an example mockup below.
+* <a name="2.26"></a>`2.26` If the non-member successfully completes the main flow sequence of the following steps listed above: *[(2.4)](#2.4)*, *[(2.12)](#2.12)*, *[(2.11)](#2.11)* and *[(2.13)](#2.13)*; then the non-member should be able to log in to the site at a future time. However, until he/she submits the valid invitation code, this non-member can only log in to check if he/she has received an invitation code, and then use it to complete the final registration step. See also an example mockup below.
 
-* <a name="2.27"></a>`2.27` This subflow continues with the main flow requirement *[(2.1)](UC2-Register#2.1)*
+* <a name="2.27"></a>`2.27` This subflow continues with the main flow requirement *[(2.1)](#2.1)*
 
 ![Mockup for UC2-Register: Non-member logs-in to submit invitation code later](images/UC2-Register-Subflow-S1-Invitation-Code.png)<br>
 **An example mockup of a non-member login action to check invitation codes.**
