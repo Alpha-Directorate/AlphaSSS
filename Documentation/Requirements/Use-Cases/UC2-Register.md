@@ -133,7 +133,7 @@ The use case is started by a non-member. It allows him/her to become a member by
 
 * <a name="2.17"></a>`2.17` A non-member has a limited number of invitation code guessing attempts, or errors, that he/she can generate during a single session. (The purpose of this requirement is to discourage users from excessive guessing, or brute-force hacking attacks.)
 
-* <a name="2.18"></a>`2.18` If the number of invitation code erroneous submissions *[(E-1)](#e-1-invitation-code-validation-fails)* exceeds a predefined maximum limit, then a new page is displayed with instructions how to obtain a new code and a link/button to "Request Invitation Code" leading to *[UC12 - Request Invitation, requirement 12.13](UC12-Request-Invitation#12.13)*. Also see requirement *[(2.19)](#2.19)* directly below. The use case ends.
+* <a name="2.18"></a>`2.18` If the number of invitation code erroneous submissions *[(E-1)](#e-1-invitation-code-validation-fails)* exceeds a predefined maximum limit, then a new page is displayed with instructions how to obtain a new code and a link/button to "Request Invitation Code", see *[12.13](UC12-Request-Invitation.md#12.13)*. Also see requirement *[(2.19)](#2.19)* directly below. The use case ends.
 
 See the mockup below.
 
