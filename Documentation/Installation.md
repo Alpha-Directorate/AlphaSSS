@@ -18,7 +18,6 @@ Run vagrant
 vagrant up
 ```
 
-
 Add to your hosts file a record:
 ```nano
  192.168.33.10 alpha-social.dev
