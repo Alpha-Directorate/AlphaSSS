@@ -17,7 +17,6 @@ if ( file_exists( dirname( __FILE__ ) . '/local-config.php' ) ) {
 }
 
 
-
 define('WP_MEMORY_LIMIT', '96M');
 
 // Hoping to fix "White Text" problem.
