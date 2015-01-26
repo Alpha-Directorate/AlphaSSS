@@ -13,6 +13,7 @@ Go to project folder
 cd alpha-social-development
 ```
 
+
 Run vagrant
 ```bash
 vagrant up
