@@ -9,5 +9,5 @@ I believe a great project, like a great man, must grow from great requirements a
 <hr>
 
 * [**Installation Instructions**](Installation.md)  
-The simplest possible method to set up and install the whole thing on your local machine – thus leading to many years of joy and happiness.  
+The simplest possible method to set up and install the whole thing on your local machine, thus leading to many years of joy and happiness.  
 <hr>
