@@ -10,7 +10,7 @@
 We develop **self-governing** social space. It's the vision of online nation with its own government, micro-economy and strategic action fields.  
   
 `2`  
-We develop **anonymous** system. Anonymity means liberty and freedom. Anonymity is not criminal, but the right guaranteed to all the people.  
+We develop **anonymous** system. Anonymity implies no criminality, but the right protected by the Constitution. Anonymity is liberty, freedom.  
   
 `3`  
 We develop **bitcoin** integration. We believe the cryptocurrency is the future of our online nation micro-economy. Donations are voluntary.
