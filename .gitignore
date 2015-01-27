@@ -6,5 +6,4 @@
 /content/upgrade/
 .DS_Store
 Vagrantfile
-vagrant
 .vagrant
