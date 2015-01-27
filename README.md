@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/alpha-social-club/alpha-social-development.svg)](https://travis-ci.org/alpha-social-club/alpha-social-development)
+
 # Alpha Self-governing Social Space = Alpha S.S.S.
 
 <!--
