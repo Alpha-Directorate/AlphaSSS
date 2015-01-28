@@ -23,6 +23,8 @@ then
 	curl -sS https://getcomposer.org/installer | php
 	mv composer.phar /usr/local/bin/composer
 
+	cd /var/www/alphasss.dev
+
 	composer install
 
 	sudo service apache2 restart
