@@ -22,15 +22,27 @@
 		
 		if ($group=='all') $users= get_users () ;
 		if ($group == 'nogroup') $users = get_users( array( 'meta_key' => 'private_group','meta_compare' => 'NOT EXISTS'  )) ;
-		if (substr($group,0,5) =='group') $users = get_users( array( 'meta_key' => 'private_group', 'meta_value' => $group )) ;
-						
-		$title = 'User Management' ;
-	
+		if (substr($group,0,5) =='group') {
+		$users1 = get_users( array( 'meta_key' => 'private_group', 'meta_value' => $group )) ;
+		$filtercheck='*'.$group.'*' ;
+		$users2 = get_users( array( 
+            'meta_key' => 'private_group',
+            'meta_value' => '*'.$group.'*',
+            'meta_compare' => 'LIKE'
+        )
+		) ;
+		$users=array_merge($users1,$users2);
+		
+		}
+
 		?>
 
-		<div class="icon32" id="icon-users"><br></div><h2><?php echo $title ?></h2>
-		<p> <b>Warning : The 'bulk actions' CANNOT be used to set a multiple groups group against a user or users</b> </p>
-		<p> <b>          Edit users at individual level if allocating multiple groups to users </b></p>
+		<div class="icon32" id="icon-users"><br></div>
+		<p> <b>
+		<?php _e('Warning : The "bulk actions" CANNOT be used to set a multiple groups group against a user or users' , 'bbp-private-groups' ) ; ?></b> </p>
+		<p> <b>
+		<?php _e( 'Edit users at individual level if allocating multiple groups to users.' , 'bbp-private-groups' ) ; ?>
+		</b></p>
 
 
 		<form method="post">
@@ -39,8 +51,8 @@
 
 			<div class="tablenav top">
 				<select name="action">
-					<option value=""><?php _e( 'Bulk Actions' ); ?></option>
-					<option value="no-group"> <?php _e( 'No-Group') ?></option>
+					<option value=""><?php _e( 'Bulk Actions', 'bbp-private-groups' ); ?></option>
+					<option value="no-group"> <?php _e( 'No-Group', 'bbp-private-groups') ?></option>
 					<?php
 					//sets up the groups as actions
 						$count=count ($rpg_groups) ;
@@ -48,19 +60,20 @@
 						$g=$i+1 ;
 						$name="group".$g ;
 						$item=$name.'  '.$rpg_groups[$name] ;
+						$display=__( 'Group', 'bbp-private-groups' ).$g.'  '.$rpg_groups[$name]  ;
 						?>
-						<option value="<?php echo $name ?>"><?php echo $item ?></option>
+						<option value="<?php echo $name ?>"><?php echo $display ?></option>
 						<?php			
 						}
 			?>
 				</select>
-				<input type="submit" value="<?php _e( 'Apply' ); ?>" class="button action doaction" name="">
+				<input type="submit" value="<?php _e( 'Apply' , 'bbp-private-groups' ); ?>" class="button action doaction" name="">
 				
 				
 				<select name="action2">
-					<option value=""><?php _e( 'Filter user list' ); ?></option>
-					<option value="filterall"> <?php _e( 'All Groups') ?></option>
-					<option value="filternogroup"> <?php _e( 'No-Group-set') ?></option>
+					<option value=""><?php _e( 'Filter user list' , 'bbp-private-groups' ); ?></option>
+					<option value="filterall"> <?php _e( 'All Groups' , 'bbp-private-groups') ?></option>
+					<option value="filternogroup"> <?php _e( 'No-Group-set' , 'bbp-private-groups' ) ?></option>
 					<?php
 					//sets up the groups as actions
 						for ($i = 0 ; $i < $count ; ++$i) {
@@ -68,23 +81,24 @@
 						$name="group".$g ;
 						$name2="filtergroup".$g ;
 						$item=$name.'  '.$rpg_groups[$name] ;
+						$display=__( 'Group', 'bbp-private-groups' ).$g.'  '.$rpg_groups[$name]  ;
 						?>
-						<option value="<?php echo $name2 ?>"><?php echo $item ?></option>
+						<option value="<?php echo $name2 ?>"><?php echo $display ?></option>
 						<?php			
 						}
 			?>
 				</select>
-				<input type="submit" value="<?php _e( 'Filter' ); ?>" class="button action doaction" name="" >
+				<input type="submit" value="<?php _e( 'Filter' , 'bbp-private-groups' ); ?>" class="button action doaction" name="" >
 			</div>
 
 			<table class="widefat">
 				<thead>
 					<tr>
 						<th id="cb"><input type="checkbox" name="check-all" valle="Check all"></th>
-						<th id="gravatar"><?php _e( 'Gravatar', 'confirm-user-registration' ); ?></th>
-						<th id="display_name"><?php _e( 'Name', 'private_groups' ); ?></th>
-						<th id="private_group"><?php _e( 'Private Group(s)', 'private_groups' ); ?></th>
-						<th id="role"><?php _e( 'Wordpress & bbPress Roles', 'private_groups' ); ?></th>
+						<th id="gravatar"><?php _e( 'Gravatar', 'bbp-private-groups' ); ?></th>
+						<th id="display_name"><?php _e( 'Name', 'bbp-private-groups' ); ?></th>
+						<th id="private_group"><?php _e( 'Private Group(s)', 'bbp-private-groups' ); ?></th>
+						<th id="role"><?php _e( 'Wordpress & bbPress Roles', 'bbp-private-groups' ); ?></th>
 						
 						
 					</tr>
@@ -110,7 +124,7 @@
 									<a href="user-edit.php?user_id=<?php echo $user->ID ?>"><?php echo $user->display_name ?></a>
 									<div class="row-actions">
 										<?php if ( current_user_can( 'edit_user',  $user->ID ) ) : ?>
-											<span class="edit"><a href="<?php echo admin_url( 'user-edit.php?user_id=' . $user->ID  ) ?>"><?php _e( 'Edit' ); ?></a>
+											<span class="edit"><a href="<?php echo admin_url( 'user-edit.php?user_id=' . $user->ID  ) ?>"><?php _e( 'Edit', 'bbp-private-groups' ); ?></a>
 										<?php endif; ?>
 										<?php if ( current_user_can( 'edit_user',  $user->ID ) && current_user_can( 'delete_user', $user->ID ) && $user_ID != $user->ID ) : ?>
 											&nbsp;|&nbsp;</span>
@@ -123,16 +137,22 @@
 								
 								<td><?php
 								//if no groups
-								if ($private_group == '') echo 'no group set' ;
+								if ($private_group == '') _e ('no group set', 'bbp-private-groups') ;
 								//if multiple groups
 								elseif (strpos($private_group, '*')!== FALSE) {
-								foreach ( $rpg_groups as $group => $details ) {
-									if (strpos($private_group, '*'.$group.'*') !== FALSE) echo $group." ".$details.'<br>' ; ;
-													
-								}
+									foreach ( $rpg_groups as $group => $details ) {
+										if (strpos($private_group, '*'.$group.'*') !== FALSE) {
+										$groupname=__('Group','bbp-private-groups').substr($group,5,strlen($group)) ;
+										echo $groupname." ".$details.'<br>' ; 
+										}
+									}
 								}
 								//if only one group
-								else echo $private_group.' '.$rpg_groups[$private_group] ;
+								
+								else {
+								$groupname=__('Group','bbp-private-groups').substr($private_group,5,strlen($private_group)) ;
+								echo $groupname.' '.$rpg_groups[$private_group] ;
+								}
 								?>
 								</td>
 								<td>
@@ -142,15 +162,13 @@
 										foreach ( $user_data->roles as $role ) :
 										if ((substr($role,0,4)) == 'bbp_') $role = substr($role,4,strlen($role)) ;    
 
-											echo _x( ucfirst( $role ), 'User role' ) . '<br>';
+											echo _x( ucfirst( $role ), 'bbp-private-groups' ) . '<br>';
 
 										endforeach;
 
 									endif;
 									?>
 								</td>
-								<?php //<td><?php echo $user_registered ?>
-								<?php //</td> ?>
 								
 								
 							</tr>
@@ -162,7 +180,7 @@
 
 						?>
 						<tr>
-							<td colspan="6"><strong><?php _e( 'No Users found', 'private_groups' ); ?></strong></td>
+							<td colspan="6"><strong><?php _e( 'No Users found', 'bbp-private-groups' ); ?></strong></td>
 						</tr>
 						<?php
 
@@ -196,9 +214,9 @@
 			?>
 			<div class="updated message">
 				<?php if ( 1 == count( $user_ids) ) : ?>
-					<p><?php _e( '1 user amended', 'confirm-user-registration' ) ?></p>
+					<p><?php _e( '1 user amended', 'bbp-private-groups' ) ?></p>
 				<?php else : ?>
-					<p><?php echo count( $user_ids ) .  ' ' . __( 'users amended', 'private groups' ) ?></p>
+					<p><?php echo count( $user_ids ) .  ' ' . __( 'users amended', 'bbp-private-groups' ) ?></p>
 				<?php endif; ?>
 			</div>
 			<?php
@@ -226,9 +244,9 @@
 			?>
 			<div class="updated message">
 				<?php if ( 1 == count( $user_ids) ) : ?>
-					<p><?php _e( '1 user amended', 'confirm-user-registration' ) ?></p>
+					<p><?php _e( '1 user amended', 'bbp-private-groups' ) ?></p>
 				<?php else : ?>
-					<p><?php echo count( $user_ids ) .  ' ' . __( 'users amended', 'private groups' ) ?></p>
+					<p><?php echo count( $user_ids ) .  ' ' . __( 'users amended', 'bbp-private-groups' ) ?></p>
 				<?php endif; ?>
 			</div>
 			<?php

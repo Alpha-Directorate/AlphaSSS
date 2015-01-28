@@ -13,13 +13,17 @@ Function pg_role_assignment () { ?>
 			<table class="form-table">
 			
 			<tr valign="top">
-			<th colspan="2"><p>This section is optional and designed to allow those of you who use membership plugins etc. to assign a group against a wordpress or custom role.
+			<th colspan="2"><p>
+			<?php _e ('This section is optional and designed to allow those of you who use membership plugins etc. to assign a group against a wordpress or custom role.', 'bbp-private-groups') ; ?>
 			</p>
-			<p> By entering a group against a role, new users with that role will be allocated the group automatically as part of the registration process.  You can subsequently change individual users, and changing elements in this tab will only affect new registrations, not change anyone who has already registered.</p>
-					
-			<p>For instance you may want all wordpress authors to automatically belong to a particular group, or you may have created a role called 'member' in your membership plugin, and want to automatically give these access to a private group called say membership.
+			<p> 
+			<?php _e ( 'By entering a group against a role, new users with that role will be allocated the group automatically as part of the registration process.  You can subsequently change individual users, and changing elements in this tab will only affect new registrations, not change anyone who has already registered.', 'bbp-private-groups'); ?>
 			</p>
-			<p>This section only applies to wordpress roles !
+			<p>
+			<?php _e ('For instance you may want all wordpress authors to automatically belong to a particular group, or you may have created a role called "member" in your membership plugin, and want to automatically give these access to a private group called say membership.' , 'bbp-private-groups') ; ?>
+			</p>
+			<p>
+			<?php _e ('This section only applies to wordpress roles !' , 'bbp-private-groups' ) ; ?>
 			</p>
 			</th></tr>
 				
@@ -37,17 +41,19 @@ Function pg_role_assignment () { ?>
 				 	<?php if ($rpg_roles[$role] != 'no-Group') {
 					$name2= $rpg_roles[$role] ;
 					$item2=$name2.'  '.$rpg_groups[$name2] ;
+					if ($name2 != '') $item2=__( 'Group', 'bbp-private-groups' ).$g.'  '.$rpg_groups[$name2]  ;
 					?>
 					<option value="<?php echo $name2 ?>"><?php echo $item2 ?></option>
 					<?php  }		?>			
-					<option value="no-group"> <?php _e( 'no-Group') ?></option>
+					<option value="no-group"> <?php _e( 'no-Group', 'bbp-private-groups') ?></option>
 					<?php
 					//sets up the groups as actions
 						$count=count ($rpg_groups) ;
 						for ($i = 0 ; $i < $count ; ++$i) { 
 						$g=$i+1 ;
 						$name2="group".$g ;
-						$item2=$name2.'  '.$rpg_groups[$name2] ;
+						$item2=__( 'Group', 'bbp-private-groups' ).$g.'  '.$rpg_groups[$name2]  ;
+						//$item2=$name2.'  '.$rpg_groups[$name2] ;
 						?>
 						<option value="<?php echo $name2 ?>"><?php echo $item2 ?></option>
 								
@@ -62,7 +68,7 @@ Function pg_role_assignment () { ?>
 					</table>
 					<!-- save the options -->
 				<p class="submit">
-					<input type="submit" value="<?php _e( 'Save Changes' ); ?>" class="button action doaction" name="">
+					<input type="submit" value="<?php _e( 'Save Changes','bbp-private-groups' ); ?>" class="button action doaction" name="">
 				</p>
 				</form>
 		</div><!--end sf-wrap-->

@@ -14,7 +14,7 @@ add_action( 'save_post', 'private_groups_save_meta', 1, 2 );
 
 
 function private_groups_create_meta_box() {
-	add_meta_box( 'forum-group-meta-box', 'Forum Groups', 'private_groups_meta_box', 'forum', 'normal', 'high' );
+	add_meta_box( 'forum-group-meta-box', __( 'Forum Groups' , 'bbp-private-groups') , 'private_groups_meta_box', 'forum', 'normal', 'high' );
 	//add_meta_box( 'forum-group-meta-box', 'Forum Groups', 'private_groups_meta_box', 'topic', 'normal', 'high' );
 	//add_meta_box( 'forum-group-meta-box', 'Forum Groups', 'private_groups_meta_box', 'reply', 'normal', 'high' );
 }
@@ -30,7 +30,7 @@ function private_groups_meta_box( $object, $box ) {
 	<input type="hidden" name="private_groups_meta_nonce" value="<?php echo wp_create_nonce(plugin_basename(__FILE__)); ?>" />
 
 	<p>
-		<label for="groups"><?php _e('<strong>Groups:</strong> Restrict the content to these groups on the front end of the site.  If all boxes are left unchecked, everyone can view the content.', 'private_groups'); ?></label>
+		<label for="groups"><?php _e('<strong>Groups:</strong> Restrict the content to these groups on the front end of the site.  If all boxes are left unchecked, everyone can view the content.', 'bbp-private_groups'); ?></label>
 	</p>
 
 	<div style="overflow: hidden;">
@@ -44,7 +44,7 @@ function private_groups_meta_box( $object, $box ) {
 
 		/* Loop through each of the available roles. */
 		if(empty($rpg_groups)) {
-		echo '<b>No groups have yet been set up - go to Dashboard>Settings>bbp Private Groups to set</b>' ; 
+		echo _e('<b>No groups have yet been set up - go to Dashboard>Settings>bbp Private Groups to set</b>', 'bbp-private_groups') ; 
 		}
 		else {
 		foreach ( $rpg_groups as $group => $details ) {
@@ -56,8 +56,9 @@ function private_groups_meta_box( $object, $box ) {
 
 			<p style="width: 32%; float: left; margin-right: 0;">
 				<label for="group-<?php echo $group; ?>">
+				<?php $groupname=__('Group','bbp-private-groups').substr($group,5,strlen($group)) ; ?>
 					<input type="checkbox" name=<?php echo $group ; ?> id=<?php echo $group ; ?> <?php echo $checked; ?> value="<?php echo $group; ?>" /> 
-					<?php echo $group." ".$details ; ?>
+					<?php echo $groupname." ".$details ; ?>
 				</label>
 			</p>
 			

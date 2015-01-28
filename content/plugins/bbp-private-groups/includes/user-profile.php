@@ -14,13 +14,13 @@ function rpg_user_profile_field() {
 	 <table class="form-table">
 			<tbody>
 				<tr>
-					<th><label for="bbp-private-groups"><?php esc_html_e( 'Private Groups', 'private-groups' ); ?></label></th>
+					<th><label for="bbp-private-groups"><?php esc_html_e( 'Private Groups', 'bbp-private-groups' ); ?></label></th>
 					<td>
 
 						<?php global $rpg_groups ;
 							if (empty( $rpg_groups ) ) : ?>
 							
-							<option value=""><?php esc_html_e( '&mdash; No groups yet set up &mdash;', 'private-groups' ); ?></option>
+							<option value=""><?php esc_html_e( '&mdash; No groups yet set up &mdash;', 'bbp-private-groups' ); ?></option>
 
 							<?php else : ?>
 							
@@ -31,7 +31,8 @@ function rpg_user_profile_field() {
 					
 					<?php foreach ( $rpg_groups as $group => $details ) : ?>
 						<tr valign="top">  
-						<th><?php echo $group." ".$details ; ?></th>
+						<?php $groupname=__('Group','bbp-private-groups').substr($group,5,strlen($group)) ; ?>
+						<th><?php echo $groupname." ".$details ; ?></th>
 						<td>
 						<?php
 						$check=0 ;
@@ -40,7 +41,8 @@ function rpg_user_profile_field() {
 						//echo $check;
 						echo '<input name="'.$group.'" id="group" type="checkbox" ' ;
 						if( $check ) echo 'checked="checked"'; 
-						echo ' /> Click to add this group';
+						echo ' />' ;
+						_e ('Click to add this group', 'bbp-private-groups' );
 						?>
 						</td>
 						</tr>

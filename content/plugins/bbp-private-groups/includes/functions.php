@@ -108,8 +108,9 @@ function private_group_enforce_permissions() {
         return;
 
     // Bail if not viewing a single item or if user has caps
-    if (!is_singular() || bbp_is_user_keymaster() || current_user_can('read_hidden_forums'))
-        return;
+    if (!is_singular() || bbp_is_user_keymaster() )
+        
+		return;
 
     if (!private_groups_check_can_user_view_post()) {
         if (!is_user_logged_in()) {
@@ -137,7 +138,7 @@ function private_group_enforce_permissions() {
 //removes 'private' and protected prefix for forums
 function pg_remove_private_title($title) {
 	global $rpg_settingsg ;
-	if( $rpg_settingsg['activate_remove_private_prefix']) {
+	if (isset( $rpg_settingsg['activate_remove_private_prefix']) &&is_bbpress() ) {
 	return '%s';
 	}
 		else {
@@ -147,7 +148,7 @@ function pg_remove_private_title($title) {
 
 function pg_remove_protected_title($title) {
 	global $rpg_settingsg ;
-	if( $rpg_settingsg['activate_remove_private_prefix']) {
+	if (isset ($rpg_settingsg['activate_remove_private_prefix']) &&is_bbpress() ) {
 	return '%s';
 	}
 		else {

@@ -35,13 +35,13 @@ global $rpg_settingsf ;
 		<?php // sets up the tabs ?>			
 		<h2 class="nav-tab-wrapper">
 		
-	<a href="?page=bbp-private-group-settings&tab=forum_visibility_settings" class="nav-tab <?php echo $active_tab == 'forum_visibility_settings' ? 'nav-tab-active' : ''; ?>">Forum Visibility settings</a>
-	<a href="?page=bbp-private-group-settings&tab=general_settings" class="nav-tab <?php echo $active_tab == 'general_settings' ? 'nav-tab-active' : ''; ?>">General Settings</a>
- 	<a href="?page=bbp-private-group-settings&tab=group_name_settings" class="nav-tab <?php echo $active_tab == 'group_name_settings' ? 'nav-tab-active' : ''; ?>">Group Name Settings</a>
-	<a href="?page=bbp-private-group-settings&tab=help" class="nav-tab <?php echo $active_tab == 'help' ? 'nav-tab-active' : ''; ?>">Help</a>
-	<a href="?page=bbp-private-group-settings&tab=management_information"  class="nav-tab <?php echo $active_tab == 'Management_information' ? 'nav-tab-active' : ''; ?>">Management Information</a>
-	<a href="?page=bbp-private-group-settings&tab=user_management"  class="nav-tab <?php echo $active_tab == 'user_management' ? 'nav-tab-active' : ''; ?>">User Management</a>	
-	<a href="?page=bbp-private-group-settings&tab=role_assignment"  class="nav-tab <?php echo $active_tab == 'role_assignment' ? 'nav-tab-active' : ''; ?>">Assign groups to roles</a></h2>	
+	<a href="?page=bbp-private-group-settings&tab=forum_visibility_settings" class="nav-tab <?php echo $active_tab == 'forum_visibility_settings' ? 'nav-tab-active' : ''; ?>"><?php _e('Forum Visibility settings' , 'bbp-private-groups' ) ; ?></a>
+	<a href="?page=bbp-private-group-settings&tab=general_settings" class="nav-tab <?php echo $active_tab == 'general_settings' ? 'nav-tab-active' : ''; ?>"><?php _e('General Settings' , 'bbp-private-groups' ) ; ?></a>
+ 	<a href="?page=bbp-private-group-settings&tab=group_name_settings" class="nav-tab <?php echo $active_tab == 'group_name_settings' ? 'nav-tab-active' : ''; ?>"><?php _e('Group Name Settings' , 'bbp-private-groups' ) ; ?></a>
+	<a href="?page=bbp-private-group-settings&tab=help" class="nav-tab <?php echo $active_tab == 'help' ? 'nav-tab-active' : ''; ?>"><?php _e('Help' , 'bbp-private-groups' ) ; ?></a>
+	<a href="?page=bbp-private-group-settings&tab=management_information"  class="nav-tab <?php echo $active_tab == 'Management_information' ? 'nav-tab-active' : ''; ?>"><?php _e('Management Information' , 'bbp-private-groups' ) ; ?></a>
+	<a href="?page=bbp-private-group-settings&tab=user_management"  class="nav-tab <?php echo $active_tab == 'user_management' ? 'nav-tab-active' : ''; ?>"><?php _e('User Management' , 'bbp-private-groups' ) ; ?></a>	
+	<a href="?page=bbp-private-group-settings&tab=role_assignment"  class="nav-tab <?php echo $active_tab == 'role_assignment' ? 'nav-tab-active' : ''; ?>"><?php _e('Assign groups to roles' , 'bbp-private-groups' ) ; ?></a></h2>	
 	<table class="form-table">
 			<tr>
 			
@@ -53,7 +53,7 @@ global $rpg_settingsf ;
 <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
 </form>
 </td><td>
-<?php _e("If you find this plugin useful, please consider donating just a couple of dollars to help me develop and maintain it. You support will be appreciated", 'bbp-last-post'); ?>
+<?php _e("If you find this plugin useful, please consider donating just a couple of dollars to help me develop and maintain it. You support will be appreciated", 'bbp-private-groups'); ?>
 
 
 </td>
@@ -73,7 +73,7 @@ global $rpg_settingsf ;
 			
 			<tr valign="top">
 						<th><h3><?php _e('Forum Visibility', 'bbp-private-groups'); ?></h3></th>
-						<td><p><?php _e('By default only users with access to a forum will see the forum titles in the indexes.  However you may want everyone to see that a forum exists (ie see the title) but not be able to access topics and replies within this.  In this case, set the forum visibility below.  If you want only logged in users to see these forums exist, then also set the forum to private within the dashboard>forums settings', 'bbp-private-groups') ?> <b> See help tab for more information</b></p></td>
+						<td><p><?php _e('By default only users with access to a forum will see the forum titles in the indexes.  However you may want everyone to see that a forum exists (ie see the title) but not be able to access topics and replies within this.  In this case, set the forum visibility below.  If you want only logged in users to see these forums exist, then also set the forum to private within the dashboard>forums settings', 'bbp-private-groups') ?> <b> <?php _e ('See help tab for more information' , 'bbp-private-groups') ; ?></b></p></td>
 			</tr>
 			
 			<!-- checkbox to activate -->
@@ -103,7 +103,7 @@ global $rpg_settingsf ;
 					<th><?php _e('URL of redirect page for NON-LOGGED-IN', 'bbp-private-groups'); ?></th>
 					<td>
 						<input id="rpg_settingsf[redirect_page2]" class="large-text" name="rpg_settingsf[redirect_page2]" type="text" value="<?php echo isset( $rpg_settingsf['redirect_page2'] ) ? esc_html( $rpg_settingsf['redirect_page2'] ) : '';?>" /><br/>
-						<label class="description" for="rpg_settingsf[redirect_page]"><?php _e( 'Enter the full url (permalink) of the page to redirect users without access to eg http://www.mysite.com/sign-up.  This can be the same as the LOGGED-IN page, just giving the opportunity to have different pages if you want them !  If you leave this blank, users will be sent to the wordpress login page', 'bbp-private-groups' ); ?></label><br/>
+						<label class="description" for="rpg_settingsf[redirect_page]"><?php _e( 'Enter the full url (permalink) of the page to redirect users without access to eg http://www.mysite.com/sign-up.  This can be the same as the LOGGED-IN page, just giving the opportunity to have different pages if you want them !  If you leave this blank, users will be sent to the Wordpress login page', 'bbp-private-groups' ); ?></label><br/>
 					</td>
 					</tr>
 					
@@ -222,19 +222,21 @@ global $rpg_settingsf ;
 			<table class="form-table">
 			
 			<tr valign="top">
-			<th colspan="2"><p> This section allows you to set up groups.  Enter a Description for each group eg gamers, teachers, group1 etc.</p></th>
+			<th colspan="2"><p>
+			<?php _e('This section allows you to set up groups.  Enter a Description for each group eg gamers, teachers, group1 etc.' , 'bbp-private-groups' ) ; ?></p></th>
 			</tr>
 			<?php 
 			$count=count ($rpg_groups) ;
 			if ($count==1) $count=2 ;
 			for ($i = 0 ; $i < $count ; ++$i) {
 			$g=$i+1 ;
+			$display=__( 'Group', 'bbp-private-groups' ).$g ;
 			$name="group".$g ;
 			$item="rpg_groups[".$name."]" ;
 			?>
 			<!-------------------------  Group  --------------------------------------------->		
 					<tr valign="top">
-					<th><?php echo $name ?></th>
+					<th><?php echo $display ?></th>
 					<td>
 					<?php echo '<input id="'.$item.'" class="large-text" name="'.$item.'" type="text" value="'.esc_html( $rpg_groups[$name] ).'"<br>' ;
 				?>
@@ -282,16 +284,17 @@ global $rpg_settingsf ;
 			$count=count ($rpg_groups) ;
 			for ($i = 0 ; $i < $count ; ++$i) {
 			$g=$i+1 ;
+			$display=__( 'Group', 'bbp-private-groups' ).$g ;
 			$name="group".$g ;
 			$item="rpg_groups[".$name."]" ;
 			?>
 			<!-------------------------  Group  --------------------------------------------->		
 					<tr valign="top">
-					<th><?php echo $name ?></th>
+					<th><?php echo $display ?></th>
 					<td>
-					Group name : 
+					<?php _e('Group name :', 'bbp-private-groups') ; ?>
 					<?php echo esc_html( $rpg_groups[$name] ).'<br>' ; ?>
-					No. users in this group : 
+					<?php _e('No. users in this group : ' , 'bbp-private-groups') ; ?>
 					<?php 
 					global $wpdb;
 					$users=$wpdb->get_col("select ID from $wpdb->users") ;
@@ -308,7 +311,7 @@ global $rpg_settingsf ;
 					?>
 					
 
-					<br>Forums in this group :
+					<br><?php _e('Forums in this group :' , 'bbp-private-groups') ; ?>
 					<?php global $wpdb;
 					$forum = bbp_get_forum_post_type() ;
 					$forums=$wpdb->get_col("select ID from $wpdb->posts where post_type='$forum'") ;
@@ -327,7 +330,8 @@ global $rpg_settingsf ;
 					}
 					echo '</ul></i>' ;
 					
-					echo 'No. forums that have this group set : '.$countu ;
+					_e('No. forums that have this group set : ', 'bbp-private-groups' ) ;
+					echo $countu ;
 					?>
 					</td></tr>
 					<?php }
@@ -395,32 +399,38 @@ add_action('admin_menu', 'rpg_settings_menu');
 function activate_forum_visibility_checkbox() {
  	global $rpg_settingsf ;
 	$item5 =  $rpg_settingsf['set_forum_visibility'] ;
-	echo '<input name="rpg_settingsf[set_forum_visibility]" id="rpg_settingsf[set_forum_visibility]" type="checkbox" value="1" class="code" ' . checked( 1,$item5, false ) . ' /> Click to activate forum visibility';
+	echo '<input name="rpg_settingsf[set_forum_visibility]" id="rpg_settingsf[set_forum_visibility]" type="checkbox" value="1" class="code" ' . checked( 1,$item5, false ) . ' />' ;
+	_e ('Click to activate forum visibility' , 'bbp-private-groups') ;
   }
   function freshness_checkbox() {
  	global $rpg_settingsf ;
 	$item4 =  $rpg_settingsf['set_freshness_message'] ;
-	echo '<input name="rpg_settingsf[set_freshness_message]" id="rpg_settingsf[set_freshness_message]" type="checkbox" value="1" class="code" ' . checked( 1,$item4, false ) . ' /> Click to activate a freshness message';
+	echo '<input name="rpg_settingsf[set_freshness_message]" id="rpg_settingsf[set_freshness_message]" type="checkbox" value="1" class="code" ' . checked( 1,$item4, false ) . ' />' ;
+	_e ('Click to activate a freshness message', 'bbp-private-groups' );
   }
   
 function activate_hide_counts_checkbox() {
  	global $rpg_settingsg ;
 	$item1 =  $rpg_settingsg['hide_counts'] ;
-	echo '<input name="rpg_settingsg[hide_counts]" id="rpg_settingsg[hide_counts]" type="checkbox" value="1" class="code" ' . checked( 1,$item1, false ) . ' /> Hide topic and reply counts';
+	echo '<input name="rpg_settingsg[hide_counts]" id="rpg_settingsg[hide_counts]" type="checkbox" value="1" class="code" ' . checked( 1,$item1, false ) . ' />' ;
+	_e ('Hide topic and reply counts', 'bbp-private-groups' );
   }
   function activate_descriptions_checkbox() {
  	global $rpg_settingsg ;
 	$item2 =  $rpg_settingsg['activate_descriptions'] ;
-	echo '<input name="rpg_settingsg[activate_descriptions]" id="rpg_settingsg[activate_descriptions]" type="checkbox" value="1" class="code" ' . checked( 1,$item2, false ) . ' /> Show forum content (Descriptions) on main index';
+	echo '<input name="rpg_settingsg[activate_descriptions]" id="rpg_settingsg[activate_descriptions]" type="checkbox" value="1" class="code" ' . checked( 1,$item2, false ) . ' />' ;
+	_e ('Show forum content (Descriptions) on main index' , 'bbp-private-groups' );
   }
   function activate_private_prefix_checkbox() {
  	global $rpg_settingsg ;
 	$item3 =  $rpg_settingsg['activate_remove_private_prefix'] ;
-	echo '<input name="rpg_settingsg[activate_remove_private_prefix]" id="rpg_settingsg[activate_remove_private_prefix]" type="checkbox" value="1" class="code" ' . checked( 1,$item3, false ) . ' /> Remove Private prefix';
+	echo '<input name="rpg_settingsg[activate_remove_private_prefix]" id="rpg_settingsg[activate_remove_private_prefix]" type="checkbox" value="1" class="code" ' . checked( 1,$item3, false ) . ' />' ;
+	_e ('Remove Private prefix' , 'bbp-private-groups' );
   }
 function activate_new_group() {
  	global $rpg_groups ;
 	$item6 =  $rpg_groups['activate_new_group'] ;
-	echo '<input name="rpg_groups[activate_new_group]" id="rpg_groups[activate_new_group]" type="checkbox" value="1" class="code"  /> Click and then press "save groups" to add a new group' ;
+	echo '<input name="rpg_groups[activate_new_group]" id="rpg_groups[activate_new_group]" type="checkbox" value="1" class="code"  />' ;
+	_e ('Click and then press "save groups" to add a new group' , 'bbp-private-groups' ) ;
   }
   

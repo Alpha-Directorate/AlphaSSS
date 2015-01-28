@@ -32,10 +32,10 @@ class pg_Forums_Widget extends WP_Widget {
     public function __construct() {
         $widget_ops = apply_filters('pg_forums_widget_options', array(
             'classname' => 'widget_display_forums',
-            'description' => __('A list of forums with an option to set the parent.', 'private groups')
+            'description' => __('A list of forums with an option to set the parent.', 'bbp-private groups')
         ));
 
-        parent::__construct(false, __('(Private Groups) Forums List', 'private-groups'), $widget_ops);
+        parent::__construct(false, __('(Private Groups) Forums List', 'bbp-private-groups'), $widget_ops);
     }
 
     /**
@@ -172,7 +172,7 @@ class pg_Forums_Widget extends WP_Widget {
 
             <br />
 
-            <small><?php _e('"0" to show only root - "any" to show all', 'private groups'); ?></small>
+            <small><?php _e('"0" to show only root - "any" to show all', 'bbp-private-groups'); ?></small>
         </p>
 
         <?php
@@ -219,10 +219,10 @@ class pg_Topics_Widget extends WP_Widget {
     public function __construct() {
         $widget_ops = apply_filters('pg_topics_widget_options', array(
             'classname' => 'widget_display_topics',
-            'description' => __('A list of recent topics, sorted by popularity or freshness.', 'private groups')
+            'description' => __('A list of recent topics, sorted by popularity or freshness.', 'bbp-private-groups')
         ));
 
-        parent::__construct(false, __('(Private Groups) Recent Topics', 'private groups'), $widget_ops);
+        parent::__construct(false, __('(Private Groups) Recent Topics', 'bbp-private-groups'), $widget_ops);
     }
 
     /**
@@ -482,10 +482,10 @@ class pg_Replies_Widget extends WP_Widget {
     public function __construct() {
         $widget_ops = apply_filters('pg_replies_widget_options', array(
             'classname' => 'widget_display_replies',
-            'description' => __('A list of the most recent replies.', 'private groups')
+            'description' => __('A list of the most recent replies.', 'bbp-private-groups')
         ));
 
-        parent::__construct(false, __('(Private Groups) Recent Replies', 'private groups'), $widget_ops);
+        parent::__construct(false, __('(Private Groups) Recent Replies', 'bbp-private-groups'), $widget_ops);
     }
 
     /**
@@ -666,7 +666,7 @@ class pg_Replies_Widget extends WP_Widget {
      */
     public function parse_settings($instance = array()) {
         return bbp_parse_args($instance, array(
-            'title' => __('Recent Replies', 'private groups'),
+            'title' => __('Recent Replies', 'bbp-private-groups'),
             'max_shown' => 5,
             'show_date' => false,
             'show_user' => false

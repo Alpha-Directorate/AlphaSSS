@@ -3,6 +3,7 @@
 //this function filters to the bbp search function to allow only returns from allowed forums
 
 function pg_has_search_results( $args = '' ) {
+	
 	global $wp_rewrite;
 //start with code as per bbp search !
 	/** Defaults **************************************************************/
@@ -44,15 +45,24 @@ function pg_has_search_results( $args = '' ) {
 		$default['perm'] = 'readable';
 	}
 	
-	//PG then loop to find allowable forums
-	//Get an array of IDs which the current user has permissions to view
-    $allowed_posts = private_groups_get_permitted_post_ids(new WP_Query($default));
-
-    // The default forum query with allowed forum ids array added
+	//PRIVATE GROUPS then loop to find allowable results
+	//bail from this part if there are no search terms, as otherwise it sorts the whole database and overflows memory
+	if (! bbp_get_search_terms() == '' ) {
+	//change page default to allow filter against all search results - otherwise allowed posts is only the first page of results ie whatever is in  bbp_get_replies_per_page()
+	$default['posts_per_page'] = -1;
+	$allowed_posts = private_groups_get_permitted_post_ids(new WP_Query( $default ));
+	// Then add allowed forum ids to the default query 
     $default['post__in'] = $allowed_posts;
 	if (empty ($allowed_posts )) $default['post__in'] = array(0) ;
-    
+	//then set per page back (so that we get the correct pagination )
+	$default['posts_per_page'] = bbp_get_replies_per_page();
+	
+	}
+	
+	
+	
 	//then return to bbp search code
+	
 	/** Setup *****************************************************************/
 
 	// Parse arguments against default values
@@ -131,3 +141,5 @@ function pg_has_search_results( $args = '' ) {
 }
 
 add_filter ('bbp_has_search_results', 'pg_has_search_results') ; 
+
+	

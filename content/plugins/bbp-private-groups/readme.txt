@@ -3,8 +3,8 @@ Contributors: Robin Wilson
 Tags: forum, bbpress, bbp, private, groups
 Requires at least: 3.0.1
 Donate link: http://www.rewweb.co.uk/donate
-Tested up to: 4.0
-Stable tag: 2.4
+Tested up to: 4.1
+Stable tag: 2.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -45,7 +45,7 @@ The widgets (bbpress) forums list, (bbpress) recent replies, and (bbpress) recen
 
 
 
-Works with bbpress 2.5.3
+Works with bbpress 2.5.3 or higher
 
 
 
@@ -153,6 +153,14 @@ A shortcode to list users either across all groups or per group
 
 
 == Changelog ==
+
+2.5.3 fix search pagnination
+
+2.5.2 correction to moderator role to prevent moderators seeing other private forums
+
+2.5.1 minor error fix for 'remove private prefix' casuing illegal offset
+
+2.5 updated to allow internationalization
 
 2.4 Correction to management information user count
 
