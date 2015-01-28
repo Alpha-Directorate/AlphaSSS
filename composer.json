@@ -19,8 +19,10 @@
   "require": {
     "php": ">=5.3.0",
     "wordpress": "4.1",
-    "fancyguy/webroot-installer": "1.1.0",
-    "codeception/codeception": "2.0.*"
+    "fancyguy/webroot-installer": "1.1.0"
+  },
+  "require-dev":{
+     "codeception/codeception": "2.0.*"
   },
   "extra": {
     "webroot-dir": "wp",
