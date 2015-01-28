@@ -1,5 +1,4 @@
 /shared
-/local-config.php
 /server-config.php
 /sql-dump-*.sql
 /db-sync
@@ -7,3 +6,6 @@
 .DS_Store
 Vagrantfile
 .vagrant
+vendor
+composer.lock
+wp
