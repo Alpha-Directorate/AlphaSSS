@@ -19,6 +19,12 @@ then
 
 	sudo a2ensite alphasss.dev
 
+	# Install composer
+	curl -sS https://getcomposer.org/installer | php
+	mv composer.phar /usr/local/bin/composer
+
+	composer install
+
 	sudo service apache2 restart
 	#sudo service nginx restart
 	#sudo service php5-fpm restart
