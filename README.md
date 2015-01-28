@@ -1,6 +1,8 @@
 [![Build Status](https://travis-ci.org/alpha-social-club/alpha-social-development.svg)](https://travis-ci.org/alpha-social-club/alpha-social-development)
 
 # Alpha Self-governing Social Space
+
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/alpha-social-club/alpha-social-development?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 <!--
 * <a href="http://www.alphasocial.club" target="_blank">www.alphasocial.club</a> (blog only, for now). Login: `admin / Alpha.Omega`
 -->
