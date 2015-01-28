@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/alpha-social-club/alpha-social-development.svg)](https://travis-ci.org/alpha-social-club/alpha-social-development)[![Gitter] (https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/alpha-social-club/alpha-social-development?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/alpha-social-club/alpha-social-development.svg)](https://travis-ci.org/alpha-social-club/alpha-social-development) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/alpha-social-club/alpha-social-development?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # Alpha Self-governing Social Space
 
