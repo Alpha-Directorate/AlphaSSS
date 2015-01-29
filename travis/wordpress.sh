@@ -4,18 +4,16 @@ if [ ! -f /etc/apache2/sites-available/alphasss.dev.conf ];
 then
 
 	# Create database
-	mysql -uroot -pvagrant -e "CREATE DATABASE IF NOT EXISTS alphasssdev;"
+	mysql -uroot -e "CREATE DATABASE IF NOT EXISTS alphasssdev;"
 
 	# insert data into local database
-	mysql -uroot -pvagrant alphasssdev < /var/www/alphasss.dev/vagrant/dump/dump.sql
+	mysql -uroot alphasssdev < ./vagrant/dump/dump.sql
 
 	# set correct host name
 	mysql -uroot -pvagrant -e "use alphasssdev; update wp_options set option_value = 'http://alphasss.dev/wp' where option_id = 3;"
 	mysql -uroot -pvagrant -e "use alphasssdev; update wp_options set option_value = 'http://alphasss.dev' where option_id = 4;"
 
-	#sudo cp /vagrant/vagrant/etc/nginx/sites-available/default /etc/nginx/sites-available/default
-
-	sudo cp /var/www/alphasss.dev/vagrant/etc/apache2/sites-available/alphasss.dev.conf /etc/apache2/sites-available
+	sudo cp ./travis/etc/apache2/sites-available/alphasss.dev.conf /etc/apache2/sites-available
 
 	sudo a2ensite alphasss.dev
 
@@ -23,13 +21,11 @@ then
 	curl -sS https://getcomposer.org/installer | php
 	sudo mv composer.phar /usr/local/bin/composer
 
-	cd /var/www/alphasss.dev
-
 	composer install
 
 	sudo rm /etc/hosts 
 
+	sudo cp ./travis/etc/hosts /etc/hosts 
+
 	sudo service apache2 restart
-	#sudo service nginx restart
-	#sudo service php5-fpm restart
 fi
