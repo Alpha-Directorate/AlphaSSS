@@ -1,6 +1,9 @@
-[![Build Status](https://travis-ci.org/alpha-social-club/alpha-social-development.svg)](https://travis-ci.org/alpha-social-club/alpha-social-development)
+[![Build Status](https://travis-ci.org/Alpha-Directorate/AlphaSSS.svg?branch=master)](https://travis-ci.org/Alpha-Directorate/AlphaSSS)
 
 # Alpha Self-governing Social Space
+
+[![Join the chat at https://gitter.im/Alpha-Directorate/AlphaSSS](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Alpha-Directorate/AlphaSSS?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 <!--
 * <a href="http://www.alphasocial.club" target="_blank">www.alphasocial.club</a> (blog only, for now). Login: `admin / Alpha.Omega`
 -->
