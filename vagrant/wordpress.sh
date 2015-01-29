@@ -27,6 +27,8 @@ then
 
 	composer install
 
+	sudo mv /var/www/alphasss.dev/vagrant/etc/hosts /etc/hosts 
+
 	sudo service apache2 restart
 	#sudo service nginx restart
 	#sudo service php5-fpm restart
