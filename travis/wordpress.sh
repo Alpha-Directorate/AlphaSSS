@@ -4,10 +4,10 @@ if [ ! -f /etc/apache2/sites-available/alphasss.dev.conf ];
 then
 
 	# Create database
-	mysql -root -e "CREATE DATABASE IF NOT EXISTS alphasssdev;"
+	mysql -uroot -e "CREATE DATABASE IF NOT EXISTS alphasssdev;"
 
 	# insert data into local database
-	mysql -root alphasssdev < ./vagrant/dump/dump.sql
+	mysql -uroot alphasssdev < ./vagrant/dump/dump.sql
 
 	# set correct host name
 	mysql -uroot -e "use alphasssdev; update wp_options set option_value = 'http://alphasss.dev/wp' where option_id = 3;"
@@ -21,7 +21,7 @@ then
 	curl -sS https://getcomposer.org/installer | php
 	sudo mv composer.phar /usr/local/bin/composer
 
-	composer install
+	composer install --dev
 
 	sudo rm /etc/hosts 
 
