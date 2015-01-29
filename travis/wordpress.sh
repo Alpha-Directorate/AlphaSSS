@@ -14,6 +14,7 @@ then
 	mysql -uroot -e "use alphasssdev; update wp_options set option_value = 'http://alphasss.dev' where option_id = 4;"
 
 	sudo cp ./travis/etc/apache2/sites-available/alphasss.dev.conf /etc/apache2/sites-available
+	sudo cp ./travis/etc/apache2/sites-available/alphasss.dev.conf /etc/apache2/sites-enabled
 
 	sudo a2ensite alphasss.dev
 
