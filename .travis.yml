@@ -7,3 +7,5 @@ before_install:
   - sh ./travis/lamp.sh
   - sh ./travis/wordpress.sh
 script: ./vendor/bin/codecept run
+after_failure:
+  - sudo cat /var/log/apache2/error.log
