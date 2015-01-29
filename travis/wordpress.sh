@@ -13,10 +13,8 @@ then
 	mysql -uroot -e "use alphasssdev; update wp_options set option_value = 'http://alphasss.dev/wp' where option_id = 3;"
 	mysql -uroot -e "use alphasssdev; update wp_options set option_value = 'http://alphasss.dev' where option_id = 4;"
 
-	sudo cp ./travis/etc/apache2/sites-available/alphasss.dev.conf /etc/apache2/sites-available
-	sudo cp ./travis/etc/apache2/sites-available/alphasss.dev.conf /etc/apache2/sites-enabled
-
-	sudo a2ensite alphasss.dev
+	sudo rm /etc/apache2/sites-available/default
+	sudo mv ./travis/etc/apache2/sites-available/alphasss.dev.conf /etc/apache2/sites-available
 
 	# Install composer
 	curl -sS https://getcomposer.org/installer | php
