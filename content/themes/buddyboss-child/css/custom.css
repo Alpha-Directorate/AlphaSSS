@@ -107,3 +107,25 @@ You're the boss, so have fun editing!
 
 
 }/* don't delete this closing bracket */
+
+.page-id-36 #content .entry-header .entry-title {
+	display: none;
+}
+
+#label_4_8_1 .gfield_required {
+	font-weight: bold;
+}
+
+#field_4_8 .gfield_label .gfield_required {
+	display: none;
+}
+
+.registration-form-text,
+#input_4_4_1_container label,
+#input_4_4_2_container label {
+	font-family: "Verdana",sans-serif;
+	font-size: 13px;
+	color: #333;
+	letter-spacing:0px;
+}
+
