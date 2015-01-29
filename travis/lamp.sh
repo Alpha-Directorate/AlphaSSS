@@ -2,13 +2,11 @@
 
 if [ ! -f /etc/apache2/sites-available/alphasss.dev.conf ];
 then
-	sudo apt-get install -y mysql-client php5-mysql libapache2-mod-auth-mysql
-
-	sudo apt-get install -y php5 libapache2-mod-php5 php5-mcrypt
-
-	sudo apt-get install -y apache2
-
-	sudo service apache2 restart
-
-	sudo a2enmod rewrite
+   sudo apt-get install apache2 libapache2-mod-fastcgi
+   # enable php-fpm
+   sudo cp ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf.default ~/.phpenv/versions/$(phpenv version-name)/etc/php-fpm.conf
+   sudo a2enmod rewrite actions fastcgi alias
+   echo "cgi.fix_pathinfo = 1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+   ~/.phpenv/versions/$(phpenv version-name)/sbin/php-fpm
+   sudo service apache2 restart
 fi
