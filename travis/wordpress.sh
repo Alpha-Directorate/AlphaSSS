@@ -10,8 +10,8 @@ mysql -uroot alphasssdev < ./vagrant/dump/dump.sql
 mysql -uroot -e "use alphasssdev; update wp_options set option_value = 'http://alphasss.dev/wp' where option_id = 3;"
 mysql -uroot -e "use alphasssdev; update wp_options set option_value = 'http://alphasss.dev' where option_id = 4;"
 
-sudo rm /etc/apache2/sites-available/000-default
-sudo mv ./travis/etc/apache2/sites-available/alphasss.dev.conf /etc/apache2/sites-available/000-default
+sudo rm /etc/apache2/sites-available/default
+sudo mv ./travis/etc/apache2/sites-available/alphasss.dev.conf /etc/apache2/sites-available/default
 
 # Install composer
 curl -sS https://getcomposer.org/installer | php
