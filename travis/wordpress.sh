@@ -19,8 +19,7 @@ sudo mv composer.phar /usr/local/bin/composer
 
 composer install --dev
 
-sudo rm /etc/hosts 
-
-sudo cp ./travis/etc/hosts /etc/hosts 
-
 sudo service apache2 restart
+
+wget --output-document=index.html http://alphasss.dev
+cat index.html
