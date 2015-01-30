@@ -2,10 +2,13 @@ language: php
 php:
   - "5.5"
   - "5.4"
+
+addons:
+  hosts:
+    - alphasss.dev
+
 before_install:
   - sh ./vagrant/ubuntu-packages-update.sh
   - sh ./travis/lamp.sh
   - sh ./travis/wordpress.sh
 script: ./vendor/bin/codecept run
-after_failure:
-  - sudo cat /var/log/apache2/error.log
