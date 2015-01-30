@@ -12,3 +12,9 @@ before_install:
   - sh ./travis/lamp.sh
   - sh ./travis/wordpress.sh
 script: ./vendor/bin/codecept run
+
+notifications:
+  email:
+    recipients:
+      - fractal-overflow@alphadirectorate.com
+      - andrew@alphadirectorate.com
