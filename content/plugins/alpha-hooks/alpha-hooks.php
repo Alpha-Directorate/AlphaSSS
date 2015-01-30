@@ -9,6 +9,53 @@ Author URI:
 */
 
 // Gravity forms custom validation filter hook.
+add_filter( 'gform_validation_4', function($validation_result){
+
+    $form = $validation_result["form"];
+
+    foreach ( $form['fields'] as &$field ) {
+
+        switch($field['id']) {
+
+            // Username validation rules
+            case 3:
+                $is_username_validation_error = false;
+
+                if ( $username = rgpost( "input_3" ) ) {
+
+                    if (! preg_match('/^[a-z0-9\'_.-]+$/i', $username)) {
+
+                        $is_username_validation_error = true;
+                        $field['validation_message']  = "You may use only the following characters: letters (a-z), numbers (0-9), dashes (-), underscores (_), apostrophes ('), and periods (.). Try again please.";
+                    }
+
+                    // User exists? Show validation error
+                    if ( username_exists($username) ) {
+
+                        $is_username_validation_error = true;
+                        $field['validation_message']  = 'This nickname is already taken. Please choose another one';
+                    }
+
+
+                }
+
+                // Mark form validation as failed
+                if ( $is_username_validation_error ) {
+                    $validation_result['is_valid'] = false;
+                    $field['failed_validation']    = true;
+                }
+            break;
+            //--
+        }
+    }
+
+    // Assign custom validation results back 
+    $validation_result['form'] = $form;
+
+    return $validation_result;
+});
+
+// Gravity forms custom validation filter hook.
 add_filter( 'gform_validation_1', 'confirm_invitation_code');
 
 /*
