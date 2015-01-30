@@ -33,7 +33,7 @@ add_filter( 'gform_validation_4', function($validation_result){
                     if ( username_exists($username) ) {
 
                         $is_username_validation_error = true;
-                        $field['validation_message']  = 'This nickname is already taken. Please choose another one';
+                        $field['validation_message']  = "This nickname is already taken. Please choose another one.";
                     }
 
 
