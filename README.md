@@ -8,4 +8,4 @@
 
 `3` We believe that **cryptocurrency** is the future of financial economy. That's why we believe in Bitcoin. AlphaSSS will always be free to use. Any token donations will be appreciated.  
 
-## [Documentation](Documentation)
+### [Documentation](Documentation)
