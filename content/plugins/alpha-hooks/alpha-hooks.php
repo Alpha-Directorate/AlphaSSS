@@ -52,13 +52,13 @@ add_filter( 'gform_validation_4', function($validation_result){
                 $password_strength = rgpost( "input_4_strength" );
 
                 if ( $password != $confirm_password ) {
-                    $field['validation_message']   = "The 2 passwords do not match. Please try again.";
+                    $field['validation_message']   = 'The 2 passwords do not match. Please try again.';
                     $validation_result['is_valid'] = false;
                     $field['failed_validation']    = true;
                 }
 
                 if ( !$field['validation_message'] && $password_strength != "strong" ) {
-                    $field['validation_message']   = "Your password must be strong. It's for your own protection.";
+                    $field['validation_message']   = 'Your password must be strong. It\'s for your own protection.';
                     $validation_result['is_valid'] = false;
                     $field['failed_validation']    = true;
                 }
