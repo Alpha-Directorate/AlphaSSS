@@ -72,6 +72,22 @@ add_filter( 'gform_validation_4', function($validation_result){
     return $validation_result;
 });
 
+add_filter("gform_pre_render_4", function($form){
+
+    foreach ( $form['fields'] as &$field ) {
+
+        switch($field['id']) {
+
+            case 17:
+                $field['content'] = str_replace("%%nickname%%", rgpost( "input_3" ), $field['content']);
+                $field['content'] = str_replace("%%password%%", rgpost( "input_4" ), $field['content']);
+            break;
+        }
+    }
+
+    return $form;
+});
+
 // Gravity forms custom validation filter hook.
 add_filter( 'gform_validation_1', 'confirm_invitation_code');
 

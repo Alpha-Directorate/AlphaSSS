@@ -116,7 +116,13 @@ You're the boss, so have fun editing!
 	font-weight: bold;
 }
 
-#field_4_8 .gfield_label .gfield_required {
+#field_4_8 .gfield_label .gfield_required,
+#field_4_15 .gfield_label .gfield_required
+ {
+	display: none;
+}
+
+#gf_page_steps_4 {
 	display: none;
 }
 
@@ -127,5 +133,10 @@ You're the boss, so have fun editing!
 	font-size: 13px;
 	color: #333;
 	letter-spacing:0px;
+}
+
+.red-data {
+	font-weight: bold;
+	color: red;
 }
 
