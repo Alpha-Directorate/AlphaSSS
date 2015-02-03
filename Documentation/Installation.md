@@ -21,7 +21,7 @@ vagrant up
 
 Add to your hosts file a record:
 ```nano
- 192.168.33.10 alpha-social.dev
+ 192.168.33.10 alphasss.dev
 ```
 
 ## System Requirements

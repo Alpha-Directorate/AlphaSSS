@@ -79,8 +79,8 @@ add_filter("gform_pre_render_4", function($form){
         switch($field['id']) {
 
             case 17:
-                $field['content'] = str_replace("%%nickname%%", rgpost( "input_3" ), $field['content']);
-                $field['content'] = str_replace("%%password%%", rgpost( "input_4" ), $field['content']);
+                $field['content'] = str_replace( "%%nickname%%", rgpost( "input_3" ), $field['content'] );
+                $field['content'] = str_replace( "%%password%%", rgpost( "input_4" ), $field['content'] );
             break;
         }
     }
