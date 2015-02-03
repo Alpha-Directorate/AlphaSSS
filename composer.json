@@ -19,7 +19,8 @@
   "require": {
     "php": ">=5.3.0",
     "wordpress": "4.1",
-    "fancyguy/webroot-installer": "1.1.0"
+    "fancyguy/webroot-installer": "1.1.0",
+    "wp-cli/wp-cli": "*"
   },
   "require-dev":{
      "codeception/codeception": "2.0.*"
