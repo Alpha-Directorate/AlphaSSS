@@ -16,7 +16,8 @@ define( 'CONCATENATE_SCRIPTS', false );
 // Custom Content Directory
 // ========================
 define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/content' );
-define( 'WP_CONTENT_URL', 'http://' . sanitize_text_field( $_SERVER['HTTP_HOST'] ) . '/content' );
+define( 'WP_CONTENT_URL', 'http://' . getenv( 'WP_HOST' )  . '/content' );
+
 
 // ================================================
 // You almost certainly do not want to change these
@@ -60,7 +61,7 @@ define( 'WPLANG', '' );
 // Debugging? Enable these. Can also enable them in local-config.php
 // =================================================================
 // define( 'SAVEQUERIES', true );
-define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', true );
 
 // ======================================
 // Load a Memcached config if we have one
