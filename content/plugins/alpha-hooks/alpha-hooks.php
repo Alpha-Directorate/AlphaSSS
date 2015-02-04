@@ -15,7 +15,7 @@ add_filter( 'gform_validation_4', function($validation_result){
 
     foreach ( $form['fields'] as &$field ) {
 
-        switch($field['id']) {
+        switch ( $field['id']) {
 
             // Username validation rules
             case 3:
@@ -35,8 +35,6 @@ add_filter( 'gform_validation_4', function($validation_result){
                         $is_username_validation_error = true;
                         $field['validation_message']  = "This nickname is already taken. Please choose another one.";
                     }
-
-
                 }
 
                 // Mark form validation as failed
@@ -61,6 +59,28 @@ add_filter( 'gform_validation_4', function($validation_result){
                     $field['validation_message']   = 'Your password must be strong. It\'s for your own protection.';
                     $validation_result['is_valid'] = false;
                     $field['failed_validation']    = true;
+                }
+            break;
+
+            // Confirm user registration data
+            case 15:
+                // Isset user confirmed property and user not exists
+                if ( isset($_POST["input_15_1"]) && ! username_exists(rgpost( "input_3" )) ) {
+                    $is_register_data_approved = $_POST["input_15_1"];
+
+                    // Data confirmed?
+                    if ( $is_register_data_approved == 'Yes' ) {
+                        // Create a new user
+                        wp_create_user( rgpost( "input_3" ), rgpost( "input_4" ), md5(time()) . '@alphasss.com' );
+                    }
+                }
+            break;
+
+            // Invitation code validation
+            case 20:
+                if ( isset($_POST["input_20"]) && $invite_code = rgpost( 'input_20' )) {
+                    $validation_result['is_valid'] = true;
+                    $field['failed_validation']    = false;
                 }
             break;
         }
