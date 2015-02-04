@@ -11,168 +11,123 @@ Author URI:
 // Gravity forms custom validation filter hook.
 add_filter( 'gform_validation_4', function($validation_result){
 
-    $form = $validation_result["form"];
+	$form = $validation_result['form'];
 
-    foreach ( $form['fields'] as &$field ) {
+	foreach ( $form['fields'] as &$field ) {
 
-        switch ( $field['id']) {
+		switch ( $field['id'] ) {
 
-            // Username validation rules
-            case 3:
-                $is_username_validation_error = false;
+			// Username validation rules
+			case 3:
+				$is_username_validation_error = false;
 
-                if ( $username = rgpost( "input_3" ) ) {
+				if ( $username = rgpost( 'input_3' ) ) {
 
-                    if (! preg_match('/^[a-z0-9\'_.-]+$/i', $username)) {
+					if ( ! preg_match( '/^[a-z0-9\'_.-]+$/i', $username ) ) {
 
-                        $is_username_validation_error = true;
-                        $field['validation_message']  = "You may use only the following characters: letters (a-z), numbers (0-9), dashes (-), underscores (_), apostrophes ('), and periods (.). Try again please.";
-                    }
+						$is_username_validation_error = true;
+						$field['validation_message']  = "You may use only the following characters: letters (a-z), numbers (0-9), dashes (-), underscores (_), apostrophes ('), and periods (.). Try again please.";
+					}
 
-                    // User exists? Show validation error
-                    if ( username_exists($username) ) {
+					// User exists? Show validation error
+					if ( username_exists( $username ) ) {
 
-                        $is_username_validation_error = true;
-                        $field['validation_message']  = "This nickname is already taken. Please choose another one.";
-                    }
-                }
+						$is_username_validation_error = true;
+						$field['validation_message']  = 'This nickname is already taken. Please choose another one.';
+					}
+				}
 
-                // Mark form validation as failed
-                if ( $is_username_validation_error ) {
-                    $validation_result['is_valid'] = false;
-                    $field['failed_validation']    = true;
-                }
-            break;
-                
-            case 4:
-                $password          = rgpost( "input_4" );
-                $confirm_password  = rgpost( "input_4_2" );
-                $password_strength = rgpost( "input_4_strength" );
+				// Mark form validation as failed
+				if ( $is_username_validation_error ) {
+					$validation_result['is_valid'] = false;
+					$field['failed_validation']    = true;
+				}
+			break;
 
-                if ( $password != $confirm_password ) {
-                    $field['validation_message']   = 'The 2 passwords do not match. Please try again.';
-                    $validation_result['is_valid'] = false;
-                    $field['failed_validation']    = true;
-                }
+			case 4:
+				$password          = rgpost( 'input_4' );
+				$confirm_password  = rgpost( 'input_4_2' );
+				$password_strength = rgpost( 'input_4_strength' );
 
-                if ( !$field['validation_message'] && $password_strength != "strong" ) {
-                    $field['validation_message']   = 'Your password must be strong. It\'s for your own protection.';
-                    $validation_result['is_valid'] = false;
-                    $field['failed_validation']    = true;
-                }
-            break;
+				if ( $password != $confirm_password ) {
+					$field['validation_message']   = 'The 2 passwords do not match. Please try again.';
+					$validation_result['is_valid'] = false;
+					$field['failed_validation']    = true;
+				}
 
-            // Confirm user registration data
-            case 15:
-                // Isset user confirmed property and user not exists
-                if ( isset($_POST["input_15_1"]) && ! username_exists(rgpost( "input_3" )) ) {
-                    $is_register_data_approved = $_POST["input_15_1"];
+				if ( ! $field['validation_message'] && 'strong' != $password_strength ) {
+					$field['validation_message']   = 'Your password must be strong. It\'s for your own protection.';
+					$validation_result['is_valid'] = false;
+					$field['failed_validation']    = true;
+				}
+				break;
 
-                    // Data confirmed?
-                    if ( $is_register_data_approved == 'Yes' ) {
-                        // Create a new user
-                        wp_create_user( rgpost( "input_3" ), rgpost( "input_4" ), md5(time()) . '@alphasss.com' );
-                    }
-                }
-            break;
+			// Confirm user registration data
+			case 15:
+				// Isset user confirmed property and user not exists
+				if ( isset( $_POST['input_15_1'] ) && ! username_exists( rgpost( 'input_3' ) ) ) {
+					$is_register_data_approved = sanitize_text_field( $_POST['input_15_1'] );// input var okay
 
-            // Invitation code validation
-            case 20:
-                if ( isset($_POST["input_20"]) && $invite_code = rgpost( 'input_20' )) {
-                    $validation_result['is_valid'] = true;
-                    $field['failed_validation']    = false;
-                }
-            break;
-        }
-    }
+					// Data confirmed?
+					if ( 'Yes' == $is_register_data_approved ) {
+						// Create a new user
+						wp_create_user( rgpost( 'input_3' ), rgpost( 'input_4' ), md5( time() ) . '@alphasss.com' );
+					}
+				}
+			break;
 
-    // Assign custom validation results back 
-    $validation_result['form'] = $form;
+			// Invitation code validation
+			case 20:
+				if ( isset($_POST['input_20']) && $invite_code = rgpost( 'input_20' ) ) {
+					$validation_result['is_valid'] = true;
+					$field['failed_validation']    = false;
+				}
+			break;
+		}
+	}
 
-    return $validation_result;
+	// Assign custom validation results back
+	$validation_result['form'] = $form;
+
+	return $validation_result;
 });
 
-add_filter("gform_pre_render_4", function($form){
+add_filter( 'gform_pre_render_4', function($form){
 
-    foreach ( $form['fields'] as &$field ) {
+	foreach ( $form['fields'] as &$field ) {
 
-        switch($field['id']) {
+		switch ( $field['id'] ) {
 
-            case 17:
-                $field['content'] = str_replace( "%%nickname%%", rgpost( "input_3" ), $field['content'] );
-                $field['content'] = str_replace( "%%password%%", rgpost( "input_4" ), $field['content'] );
-            break;
-        }
-    }
+			case 17:
+				$field['content'] = str_replace( '%%nickname%%', rgpost( 'input_3' ), $field['content'] );
+				$field['content'] = str_replace( '%%password%%', rgpost( 'input_4' ), $field['content'] );
+			break;
+		}
+	}
 
-    return $form;
+	return $form;
 });
 
-// Gravity forms custom validation filter hook.
-add_filter( 'gform_validation_1', 'confirm_invitation_code');
-
 /*
- * Read the user inputted invitation code and verify that it matches one of
- * the valid codes inside 'includes/invitation-codes.php'
- */
-function confirm_invitation_code( $validation_result, $invitation_code ) {
-
-    $form = $validation_result["form"];
-
-    $current_page = rgpost( 'gform_source_page_number_' . $form['id'] ) ? 
-            rgpost( 'gform_source_page_number_' . $form['id'] ) : 1;
-
-    foreach ( $form['fields'] as &$field ) {
-
-        if ( strpos( $field['cssClass'], 'invitation-code' ) === false ) {
-            continue;
-        }
-
-        $field_page = $field['pageNumber'];
-
-        if( $field_page != $current_page ) {
-            continue;
-        }
-
-        $field_value = rgpost( "input_{$field['id']}" );
-
-        $is_valid = is_the_code_correct( $field_value, $invitation_code );
-
-        if ( $is_valid ) {
-            continue;
-        }
-
-        $validation_result['is_valid'] = false;
-
-        $field['failed_validation'] = true;
-        $field['validation_message'] = 'The invitation code is not valid.';
-    }
-
-    $validation_result['form'] = $form;
-
-    return $validation_result;
-}
-
-/*
- * This functions uses strcasecmp for case-insensitive comparison of the user
- * inputted string with the existing valid codes.
- */
+* This functions uses strcasecmp for case-insensitive comparison of the user
+* inputted string with the existing valid codes.
+*/
 function is_the_code_correct( $field_value, $invitation_code ) {
 
-    // Get the current, valid invitation code from the file below.
-    require 'includes/invitation-codes.php';
-    
-    $code_confirmed = false;
-    
-    // Loop through the array of the codes to find if any one is matching.
-    foreach ( $invitation_code as $inviter => $code ) {
+	// Get the current, valid invitation code from the file below.
+	require 'includes/invitation-codes.php';
 
-        // strcasecmp returns zero if two strings are case-insensitive equal.
-        if ( strcasecmp( $field_value, $code ) == 0 ) {
-            $code_confirmed = true;
-            break;
-        }
-    }
+	$code_confirmed = false;
 
-    return $code_confirmed;
+	// Loop through the array of the codes to find if any one is matching.
+	foreach ( $invitation_code as $inviter => $code ) {
+
+		// strcasecmp returns zero if two strings are case-insensitive equal.
+		if ( 0 == strcasecmp( $field_value, $code ) ) {
+			$code_confirmed = true;
+				break;
+		}
+	}
+
+	return $code_confirmed;
 }
