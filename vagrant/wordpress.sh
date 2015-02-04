@@ -27,6 +27,8 @@ then
 
 	composer install
 
+	sudo ./vendor/bin/phpcs --config-set installed_paths /var/www/alphasss.dev/vendor/wp-coding-standards/wpcs/
+
 	sudo rm /etc/hosts 
 
 	sudo service apache2 restart

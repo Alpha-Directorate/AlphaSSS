@@ -23,7 +23,8 @@
     "wp-cli/wp-cli": "*"
   },
   "require-dev":{
-     "codeception/codeception": "2.0.*"
+     "codeception/codeception": "2.0.*",
+     "wp-coding-standards/wpcs": "*"
   },
   "extra": {
     "webroot-dir": "wp",

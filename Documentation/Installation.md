@@ -6,13 +6,21 @@ Download and Install [Vagrant](https://www.vagrantup.com/downloads.html)
 
 Clone repository (if didn't before)
 ```bash
-git clone --recursive https://github.com/alpha-social-club/alpha-social-development
+git clone --recursive https://github.com/Alpha-Directorate/AlphaSSS alphasss.dev
 ```
 Go to project folder
 ```bash
-cd alpha-social-development
+cd alphasss.dev
 ```
-
+Add CodeSniffer hooks to git
+```bash
+cp ./hooks/pre-commit .git/hooks
+chmod +x .git/hooks/pre-commit
+```
+Open .git/hooks/pre-commit file for edit and setup path to CodeSniffer like:
+```nano
+PHPCS_BIN=/full/path/to/folder/alphasss.dev/vendor/bin/phpcs
+```
 
 Run vagrant
 ```bash
