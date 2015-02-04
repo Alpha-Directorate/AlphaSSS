@@ -2,21 +2,21 @@
 // ===================================================
 // Load database info and local development parameters
 // ===================================================
-define( 'DB_NAME', getenv("DB_NAME") );
-define( 'DB_USER', getenv("DB_USER") );
-define( 'DB_PASSWORD', getenv("DB_PASSWORD") );
-define( 'DB_HOST', getenv("DB_HOST") );
-define('WP_MEMORY_LIMIT', '96M');
+define( 'DB_NAME', getenv( 'DB_NAME' ) );
+define( 'DB_USER', getenv( 'DB_USER' ) );
+define( 'DB_PASSWORD', getenv( 'DB_PASSWORD' ) );
+define( 'DB_HOST', getenv( 'DB_HOST' ) );
+define( 'WP_MEMORY_LIMIT', '96M' );
 
 // Hoping to fix "White Text" problem.
 // http://www.wpbeginner.com/wp-tutorials/how-to-fix-white-text-and-missing-buttons-in-wordpress-visual-editor/comment-page-1/
-define('CONCATENATE_SCRIPTS', false);
+define( 'CONCATENATE_SCRIPTS', false );
 
 // ========================
 // Custom Content Directory
 // ========================
 define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/content' );
-define( 'WP_CONTENT_URL', 'http://' . $_SERVER['HTTP_HOST'] . '/content' );
+define( 'WP_CONTENT_URL', 'http://' . sanitize_text_field( $_SERVER['HTTP_HOST'] ) . '/content' );
 
 // ================================================
 // You almost certainly do not want to change these
@@ -60,13 +60,14 @@ define( 'WPLANG', '' );
 // Debugging? Enable these. Can also enable them in local-config.php
 // =================================================================
 // define( 'SAVEQUERIES', true );
- define( 'WP_DEBUG', getenv("WP_DEBUG") === 'true' );
+define( 'WP_DEBUG', false );
 
 // ======================================
 // Load a Memcached config if we have one
 // ======================================
-if ( file_exists( dirname( __FILE__ ) . '/memcached.php' ) )
+if ( file_exists( dirname( __FILE__ ) . '/memcached.php' ) ) {
 	$memcached_servers = include( dirname( __FILE__ ) . '/memcached.php' );
+}
 
 // ===========================================================================================
 // This can be used to programatically set the stage when deploying (e.g. production, staging)
@@ -77,7 +78,7 @@ define( 'STAGING_DOMAIN', '%%WP_STAGING_DOMAIN%%' ); // Does magic in WP Stack t
 // ===================
 // Bootstrap WordPress
 // ===================
-if ( !defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', dirname( __FILE__ ) . '/wp/' );
 }
 
