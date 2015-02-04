@@ -18,7 +18,6 @@ define( 'CONCATENATE_SCRIPTS', false );
 define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/content' );
 define( 'WP_CONTENT_URL', 'http://' . getenv( 'WP_HOST' )  . '/content' );
 
-
 // ================================================
 // You almost certainly do not want to change these
 // ================================================
