@@ -2,6 +2,10 @@
 
 First of all, thank you for wanting to contribute to AlphaSSS! We really appreciate all the awesome support we get from our community. We want to keep it as easy as possible to contribute changes that get things working in your environment. There are a few guidelines that we need contributors to follow so that we have a chance of keeping on top of things.
 
+# How to pickup an issue
+
+We provide two issue lists, [planned issues](https://alphasss.atlassian.net/secure/RapidBoard.jspa?rapidView=1&view=planning&selectedIssue=ASSS-84&epics=visible) and [sprint issues](https://alphasss.atlassian.net/secure/RapidBoard.jspa?rapidView=1). Planned are issues that we will include for future releases. Sprint issues must be done during cureent sprint (for now one sprint is one week). If you not sure that will complete the sprint issue then better take one from the planned list.
+
 ## Making Changes
 
 1. [Fork](http://help.github.com/forking/) on GitHub
