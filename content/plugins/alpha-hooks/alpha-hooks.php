@@ -55,7 +55,7 @@ add_filter( 'gform_validation_4', function($validation_result){
 					$field['failed_validation']    = true;
 				}
 
-				if ( ! $field['validation_message'] && 'strong' != $password_strength ) {
+				if ( isset( $field['validation_message'] ) && ! $field['validation_message'] && 'strong' != $password_strength ) {
 					$field['validation_message']   = 'Your password must be strong. It\'s for your own protection.';
 					$validation_result['is_valid'] = false;
 					$field['failed_validation']    = true;
