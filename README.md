@@ -12,3 +12,8 @@
 `3` We believe that **cryptocurrency** is the future of financial economy. That's why we believe in Bitcoin. AlphaSSS will always be free to use. Any token donations will be appreciated.  
 
 ### [Documentation](Documentation)
+
+### Issues
+We are use Atlassian Jira Agile for manage this project and there are links below: 
+[All issues](https://alphasss.atlassian.net/secure/RapidBoard.jspa?rapidView=1&view=planning)
+[Issues in current Sprint](https://alphasss.atlassian.net/secure/RapidBoard.jspa?rapidView=1)
