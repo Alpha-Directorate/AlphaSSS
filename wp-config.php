@@ -60,7 +60,7 @@ define( 'WPLANG', '' );
 // Debugging? Enable these. Can also enable them in local-config.php
 // =================================================================
 // define( 'SAVEQUERIES', true );
-define( 'WP_DEBUG', true );
+define( 'WP_DEBUG', getenv( 'WP_DEBUG' ) == 'true' );
 
 // ======================================
 // Load a Memcached config if we have one
