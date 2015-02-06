@@ -15,5 +15,7 @@
 
 ### Issues
 We are use Atlassian Jira Agile for manage this project and there are links below: 
+
 [All issues](https://alphasss.atlassian.net/secure/RapidBoard.jspa?rapidView=1&view=planning)
+
 [Issues in current Sprint](https://alphasss.atlassian.net/secure/RapidBoard.jspa?rapidView=1)
