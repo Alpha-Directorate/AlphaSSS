@@ -3,4 +3,4 @@
 
 # AlphaSSS (Self-governing Social Space)
 
-### [**Wiki →**](https://github.com/Alpha-Directorate/AlphaSSS/wiki)
+### See [**Wiki →**](https://github.com/Alpha-Directorate/AlphaSSS/wiki)
