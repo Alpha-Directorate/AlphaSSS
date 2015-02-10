@@ -2130,11 +2130,17 @@ div#register-page #signup_form.standard-form div.submit input {
 	}
 	#buddypress ul#activity-stream li.activity-item,
 	body.has-activity #buddypress div.item-list-tabs,
-	body.has-activity #buddypress form#whats-new-form {
+	body.has-activity #buddypress form#whats-new-form,
+	body.photos #buddypress form#whats-new-form {
 		clear: both;
 		padding: 0;
 		background-color: #eef1f1;
 		margin-bottom: 15px !important;
+	}
+	body.photos #buddypress form#whats-new-form {
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
 	}
 	#buddypress ul#activity-stream li.activity-item {
 		margin-left: 42px;
