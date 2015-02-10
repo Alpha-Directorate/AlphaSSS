@@ -17,33 +17,24 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 ?>
-<?php if ( buddyboss_has_photos() ) : ?>
-	<div class="gallery has-sidebar" id="buddyboss-media-grid">
-	<?php while ( buddyboss_has_photos() ) : buddyboss_the_photo(); ?>
-
-		<?php
-		$image = get_buddyboss_media_photo_image();
-		$tn = get_buddyboss_media_photo_tn();
-		if ( is_array( $image ) && !empty( $image ) && is_array( $tn ) && !empty( $tn ) ):
-		?>
-			<dl class="gallery-item">
-				<dt class="gallery-icon">
-					<a rel="gal_item" href="<?php echo get_buddyboss_media_photo_link(); ?>">
-						<img src="<?php echo esc_url( $tn[0] ); ?>" width="<?php echo (int)$tn[1]; ?>" height="<?php echo (int)$tn[2]; ?>" data-permalink="<?php echo get_buddyboss_media_photo_permalink(); ?>" />
-					</a>
-					<?php echo get_buddyboss_media_photo_action(); ?>
-				</dt>
-			</dl>
-		<?php endif; ?>
-
-	<?php endwhile; ?>
+<div id="buddypress">
+	<div class="item-list-tabs no-ajax" id="subnav" role="navigation">
+		<ul>
+			<?php $global_media_permalink = trailingslashit( get_permalink( buddyboss_media()->option('all-media-page') ) ); ?>
+			<li class="selected" id="photos-all"><a href="<?php echo esc_url( $global_media_permalink );?>"><?php _e( 'All Photos', 'buddyboss-media' );?></a></li>
+			<li id="albums-personal"><a href="<?php echo esc_url( $global_media_permalink );?>albums/"><?php _e( 'All Albums', 'buddyboss-media' );?></a></li>
+		</ul>
 	</div>
-
-	<?php buddyboss_media_pagination(); ?>
-
-<?php else: ?>
-
-	<div class="info" id="message"><p><?php _e( 'There were no photos found.', 'buddyboss-media' ); ?></p></div>
-
-<?php endif; ?>
-
+	
+	<?php if ( is_user_logged_in() ) : ?>
+		<?php bp_get_template_part( 'activity/post-form' ) ?>
+	<?php endif; ?>
+	
+	<div class="activity">
+		<?php if( buddyboss_media_check_custom_activity_template_load() ):?>
+			<?php bp_get_template_part( 'activity/buddyboss-media-activity-loop' ) ?>
+		<?php else : ?>
+			<?php bp_get_template_part( 'activity/activity-loop' ) ?>
+		<?php endif; ?>
+	</div><!-- .activity -->
+</div>

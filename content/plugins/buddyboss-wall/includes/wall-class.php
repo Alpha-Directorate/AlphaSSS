@@ -13,7 +13,8 @@ if ( ! class_exists( 'BuddyBoss_Wall_BP_Component' ) ):
  * BuddyBoss Wall BuddyPress Component
  * ***********************************
  */
-class BuddyBoss_Wall_BP_Component extends BP_Component {
+class BuddyBoss_Wall_BP_Component extends BP_Component
+{
 	/**
 	 * BUDDYPRESS ACTIVITIES
 	 *
@@ -89,6 +90,9 @@ class BuddyBoss_Wall_BP_Component extends BP_Component {
 	 */
 	public function setup_actions()
 	{
+		// Add body class
+		add_filter( 'body_class', array( $this, 'body_class' ) );
+		
 		// Inject "Whats new" area
 		add_action( 'wp_footer', array( $this, 'script_template_greeting' ) );
 
@@ -133,6 +137,17 @@ class BuddyBoss_Wall_BP_Component extends BP_Component {
 		parent::setup_actions();
 	}
 
+	/**
+	* Add active wall class
+	*
+	* @since BuddyBoss Wall (1.1.1)
+	*/
+	public function body_class( $classes )
+	{
+		$classes[] = apply_filters( 'buddyboss_wall_body_class', 'buddyboss-wall-active' );
+		return $classes;
+	}
+	
 	/**
 	 * Prepare array with translated messages/strings to use in JS
 	 *
@@ -337,37 +352,35 @@ class BuddyBoss_Wall_BP_Component extends BP_Component {
 
 		// RENAME PERSONAL/WALL TAB
 		bp_core_new_subnav_item( array(
-			'name' => __( 'Wall', 'buddyboss-wall' ),
-			'slug' => 'just-me',
-			'parent_url' => $profile_link,
-			'parent_slug' => $bp->activity->slug,
-			'screen_function' =>
-			'bp_activity_screen_my_activity' ,
-			"position" => 10
+			'name'            => __( 'Wall', 'buddyboss-wall' ),
+			'slug'            => 'just-me',
+			'parent_url'      => $profile_link,
+			'parent_slug'     => $bp->activity->slug,
+			'screen_function' => 'bp_activity_screen_my_activity' ,
+			'position'        => 10
 		) );
 
 		// ADD NEWS FEED TAB
 		if ( bp_is_my_profile() )
 		{
 			bp_core_new_subnav_item( array(
-				'name' => __( 'News Feed', 'buddyboss-wall' ),
-				'slug' => 'news-feed',
-				'parent_url' => $profile_link,
-				'parent_slug' => $bp->activity->slug,
-				'screen_function' =>
-				'bp_activity_screen_my_activity' ,
-				"position" => 11
+				'name'            => __( 'News Feed', 'buddyboss-wall' ),
+				'slug'            => 'news-feed',
+				'parent_url'      => $profile_link,
+				'parent_slug'     => $bp->activity->slug,
+				'screen_function' =>'bp_activity_screen_my_activity' ,
+				'position'        => 11
 			) );
 		}
 
 		// RENAME FAVORITES TAB
 		bp_core_new_subnav_item( array(
-			'name' => __( 'My Likes', 'buddyboss-wall' ),
-			'slug' => 'favorites',
-			'parent_url' => $profile_link,
-			'parent_slug' => $bp->activity->slug,
+			'name'            => __( 'My Likes', 'buddyboss-wall' ),
+			'slug'            => 'favorites',
+			'parent_url'      => $profile_link,
+			'parent_slug'     => $bp->activity->slug,
 			'screen_function' => 'bp_activity_screen_favorites',
-			'position' => 12
+			'position'        => 12
 		) );
 	}
 
@@ -386,6 +399,7 @@ class BuddyBoss_Wall_BP_Component extends BP_Component {
 			add_filter( 'logout_url', array( $this, 'set_newsfeed_logout_url' ) );
 		}
 	}
+	
 	public function set_newsfeed_logout_url( $logout_url )
 	{
 		global $bp;
@@ -621,22 +635,59 @@ class BuddyBoss_Wall_BP_Component extends BP_Component {
 		buddyboss_wall_log( "Looking at $user_id" );
 
 		// Get friend's user IDs
-		$user_ids = friends_get_friend_user_ids(	$user_id, false, false );
+		if ( function_exists( 'friends_get_friend_user_ids' ) )
+		{
+			$user_ids = friends_get_friend_user_ids( $user_id, false, false );
+		}
+		else {
+			$user_ids = array();
+		}
 
-		// Add logged in user to news feed results
-		// $user_ids[] = $user_id;
+		// Get user's groups
+		if ( function_exists( 'groups_get_user_groups' ) )
+		{
+			$groups = groups_get_user_groups( $user_id, false, false );
+			
+			if ( empty( $groups['groups'] ) )
+			{
+				$group_ids = array();
+			}
+			else {
+				$group_ids = $groups['groups'];
+			}
+		}
+		else {
+			$group_ids = array();
+		}
 
-		$user_list = implode( ',', $user_ids );
+		$user_list  = implode( ',', $user_ids );
+		$group_list = implode( ',', $group_ids );
+
+		$groups_object = $bp->groups->id;
+
+		// @todo: We should check if both friend's component and groups component is 
+		// active, then check if we have IDs for either and generate a query based
+		// on that information. For now we'll force ID 0 so an empty query doesn't
+		// generate an error
+		if ( empty( $user_list ) )
+		{
+			$user_list = 0;
+		}
+
+		if ( empty( $group_list ) )
+		{
+			$group_list = 0;
+		}
 
 		// buddyboss_wall_log( $friend_id_list );
 		$table = bp_core_get_table_prefix() . 'bp_activity';
 		$table2 = bp_core_get_table_prefix() . 'bp_activity_meta';
 
-		// Default WHERE
+		// Gets friend's updates. If friend's component isn't enabled this returns nothing.
 		$where = "WHERE ( $table.user_id IN ($user_list) AND $table.type != 'activity_comment' )";
 
-		// Add when user joined a group
-		$group_modifier = "OR ( $table.user_id = $user_id AND $table.component = 'groups' ) ";
+		// Get's updates from user's groups
+		$group_modifier = "OR ( $table.item_id IN ($group_list) AND $table.component = '$groups_object' ) ";
 
 		// If we have a filter enabled, let's handle that
 		$ajax_qs = ! empty( $buddyboss_ajax_qs )

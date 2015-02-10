@@ -28,6 +28,120 @@ Release Notes: http://www.buddyboss.com/release-notes/
 CHANGELOG
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
+1.1.2 - December 24, 2014
+--------------------------------------------------------------*/
+
+FEATURES:
+
+	Adding quick link to "Settings" in plugin list
+
+BUG FIXES:
+
+	Fixed double timestamp bug when posting into Groups
+
+CHANGED FILES:
+
+	buddyboss-wall.php
+	/includes/wall-hooks.php
+	/languages/buddyboss-wall-en_US.po
+	/languages/buddyboss-wall-en_US.mo
+	readme.txt
+
+TESTED WITH:
+
+	WordPress 4.0+
+	BuddyPress 2.1+
+
+/*--------------------------------------------------------------
+1.1.1 - November 22, 2014
+--------------------------------------------------------------*/
+
+BUG FIXES:
+
+	Added body class "buddyboss-wall-active" for custom styling
+
+CHANGED FILES:
+
+	buddyboss-wall.php
+	/includes/wall-class.php
+	readme.txt
+
+TESTED WITH:
+
+	WordPress 3.8, 3.9, 4.0
+	BuddyPress 2.0, 2.1+
+
+/*--------------------------------------------------------------
+1.1.0 - November 13, 2014
+--------------------------------------------------------------*/
+
+BUG FIXES:
+	
+	@mention Notifications now link to Mentions tab on Activity index
+
+CHANGED FILES:
+
+	buddyboss-wall.php
+	/includes/main-class.php
+	/includes/wall-class.php
+	/includes/wall-functions.php
+	/includes/wall-hooks.php
+	/languages/buddyboss-wall-en_US.po
+	/languages/buddyboss-wall-en_US.mo
+	readme.txt
+
+TESTED WITH:
+
+	WordPress 3.8, 3.9, 4.0
+	BuddyPress 2.0, 2.1+
+
+/*--------------------------------------------------------------
+1.0.9 - October 30, 2014
+--------------------------------------------------------------*/
+
+BUG FIXES:
+
+	Fixed Friend activity in the News Feed
+	Fixed Group activity in the News Feed
+
+CHANGED FILES:
+
+	buddyboss-wall.php
+	/includes/wall-class.php
+	readme.txt
+
+TESTED WITH:
+
+	WordPress 3.8, 3.9, 4.0
+	BuddyPress 2.0, 2.1+
+
+/*--------------------------------------------------------------
+1.0.8 - October 27, 2014
+--------------------------------------------------------------*/
+
+BUG FIXES:
+
+	Fixed Notifications in WordPress Toolbar not clearing when clicked
+	Fixed News Feed errors when BuddyPress Friends Compontent is disabled
+	Fixed Wall post replies overriding the original poster
+	Fixed conflict with "Bump to Top" plugin
+	Improved photo upload text on Members directory
+
+CHANGED FILES:
+
+	buddyboss-wall.php
+	/includes/wall-class.php
+	/includes/wall-functions.php
+	/includes/wall-hooks.php
+	/includes/widgets.php
+	readme.txt
+
+TESTED WITH:
+
+	WordPress 3.8, 3.9, 4.0
+	BuddyPress 2.0, 2.1+
+
+/*--------------------------------------------------------------
 1.0.7 - October 13, 2014
 --------------------------------------------------------------*/
 

@@ -110,7 +110,7 @@ function buddyboss_media_merty_fix_rotation( $source )
   $exif = null;
   $ort  = 0;
 
-	if( function_exists( 'exif_read_data' ) )
+	if ( function_exists( 'exif_read_data' ) )
 	{
 		$exif = @exif_read_data( $source );
 		$ort = $exif['Orientation'];

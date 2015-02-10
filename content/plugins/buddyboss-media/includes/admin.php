@@ -146,6 +146,13 @@ class BuddyBoss_Media_Admin
 		add_settings_field( 'component-slug', __( 'User Photos Slug', 'buddyboss-media' ), array( $this, 'setting_component_slug' ), __FILE__, 'general_section');
 		//@todo: should it be photos or 'media' in general? (considering we might have support for video in future)
 		add_settings_field( 'all-media-page', __( 'Global Photos Page', 'buddyboss-media' ), array( $this, 'setting_all_media_page' ), __FILE__, 'general_section');
+		add_settings_field( 'activity-photo-size', __( 'Activity Photo Size', 'buddyboss-media' ), array( $this, 'setting_activity_photo_size' ), __FILE__, 'general_section');
+		add_settings_field( 'activity-custom-template', __( 'Photo Layout', 'buddyboss-media' ), array( $this, 'setting_activity_custom_template' ), __FILE__, 'general_section');
+		
+		//tagging feature, only if friends component is enabled
+		if( bp_is_active( 'friends' ) ){
+			add_settings_field( 'enable-tagging', __( 'Friend Tagging', 'buddyboss-media' ), array( $this, 'setting_enable_tagging' ), __FILE__, 'general_section');
+		}
 	}
 
 	/**
@@ -209,8 +216,7 @@ class BuddyBoss_Media_Admin
 	{
 	?>
 		<div class="wrap">
-			<div class="icon32" id="icon-options-general"><br></div>
-			<h2>BuddyBoss Media</h2>
+			<h2><?php _e( 'BuddyBoss Media', 'buddyboss-media' ); ?></h2>
 			<form action="options.php" method="post">
 			<?php settings_fields( 'buddyboss_media_plugin_options' ); ?>
 			<?php do_settings_sections( __FILE__ ); ?>
@@ -359,7 +365,79 @@ class BuddyBoss_Media_Admin
 		echo '<a href="' . admin_url( add_query_arg( array( 'post_type' => 'page' ), 'post-new.php' ) ) . '" class="button-secondary">' . __( 'New Page', 'buddyboss-media' ) .'</a>';
 		echo '<p class="description">' . __( 'Use a WordPress page to display all media uploaded by all users. (Optional)', 'buddyboss-media' ) . '</p>';
 	}
+	
+	/**
+	 * Setting > activity photo size
+	 *
+	 * @since BuddyBoss Media (1.1.2)
+	 *
+	 * @uses BuddyBoss_Media_Admin::option() Get plugin option
+	 */
+	public function setting_activity_photo_size(){
+		$activity_photo_size = $this->option( 'activity-photo-size' );
 
+		echo '<select name="buddyboss_media_plugin_options[activity-photo-size]">';
+		
+		$options = array(
+			'medium'						=> __( 'Medium', 'buddyboss-media' ),
+			'buddyboss_media_photo_wide'	=> __( 'Full Size', 'buddyboss-media' ),
+		);
+		foreach( $options as $option=>$label ){
+			$selected = $option==$activity_photo_size ? ' selected' : '';
+			echo '<option value="' . esc_attr( $option ).  '" ' . $selected . '>' . $label . '</option>';
+		}
+		
+		echo '</select>';
+		
+		echo '<p class="description">' . __( 'Image size displayed in activity posts.', 'buddyboss-media' ) . '</p>';
+	}
+
+	/**
+	 * Setting > activity custom template
+	 *
+	 * @since BuddyBoss Media (1.1.2)
+	 *
+	 * @uses BuddyBoss_Media_Admin::option() Get plugin option
+	 */
+	public function setting_activity_custom_template(){
+		$activity_custom_template = $this->option( 'activity-custom-template' );
+		if( !$activity_custom_template ){
+			$activity_custom_template = 'yes';
+		}
+		
+		$options = array(
+			'yes'	=> __( 'Grid', 'buddyboss-media' ),
+			'no'	=> __( 'Activity Posts', 'buddyboss-media' )
+		);
+		foreach( $options as $option=>$label ){
+			$checked = $activity_custom_template == $option ? ' checked' : '';
+			echo '<label><input type="radio" name="buddyboss_media_plugin_options[activity-custom-template]" value="'. $option . '" '. $checked . '>' . $label . '</label>&nbsp;&nbsp;';
+		}
+		
+		echo '<p class="description">' . __( 'In your albums, you can display photos in a grid or as activity posts.', 'buddyboss-media' ) . '</p>';
+	}
+	
+	/**
+	 * Setting > Friends Tagging Enabled
+	 *
+	 * @since BuddyBoss Media (1.1.2)
+	 *
+	 * @uses BuddyBoss_Media_Admin::option() Get plugin option
+	 */
+	public function setting_enable_tagging()
+	{
+		$value = $this->option( 'enable_tagging' );
+
+		$checked = '';
+
+		if ( $value=='yes' ){
+			$checked = ' checked="checked" ';
+		}
+
+		echo "<label><input ".$checked." id='enabled' name='buddyboss_media_plugin_options[enable_tagging]' type='checkbox' value='yes' />" . __( 'Enable Tagging.', 'buddyboss-media' ) . "</label>";
+		echo '<p class="description">' . __( 'Allow members to tag friends in media uploads.', 'buddyboss-media' ) . '</p>';
+	}
+	
 	/**
 	 * Setting > iPad Theme
 	 *

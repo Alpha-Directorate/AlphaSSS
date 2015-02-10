@@ -10,7 +10,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // @TODO: Fix this madness!!
-$ii = 0;
+$buddyboss_media_ii = 0;
 
 /**
  * Check if a picture grid has pictures
@@ -19,8 +19,15 @@ $ii = 0;
  */
 function buddyboss_has_photos()
 {
-  global $buddyboss_media, $ii;
-  $ii++; if ( $ii > 25 ) return false;
+  global $buddyboss_media, $buddyboss_media_ii;
+
+  $buddyboss_media_ii++;
+
+  if ( $buddyboss_media_ii > 25 )
+  {
+    return false;
+  }
+
   if ( $buddyboss_media->types->photo->grid_has_run === false )
   {
     buddyboss_media_screen_photo_grid_content();
@@ -86,6 +93,7 @@ function get_buddyboss_media_html_grid()
 {
   return $buddyboss_media->html_grid;
 }
+
 function get_buddyboss_media_photo_attachment_id()
 {
   global $buddyboss_media;
@@ -95,6 +103,7 @@ function get_buddyboss_media_photo_attachment_id()
 
   return '';
 }
+
 function get_buddyboss_media_photo_image()
 {
   global $buddyboss_media;
@@ -104,6 +113,7 @@ function get_buddyboss_media_photo_image()
 
   return array();
 }
+
 function get_buddyboss_media_photo_tn()
 {
   global $buddyboss_media;
@@ -113,6 +123,7 @@ function get_buddyboss_media_photo_tn()
 
   return array();
 }
+
 function get_buddyboss_media_photo_permalink()
 {
   global $buddyboss_media;
@@ -122,6 +133,7 @@ function get_buddyboss_media_photo_permalink()
 
   return '';
 }
+
 function get_buddyboss_media_photo_ajaxlink()
 {
   global $buddyboss_media;
@@ -131,6 +143,7 @@ function get_buddyboss_media_photo_ajaxlink()
 
   return '';
 }
+
 function get_buddyboss_media_photo_link()
 {
   global $buddyboss_media;
@@ -140,21 +153,30 @@ function get_buddyboss_media_photo_link()
 
   return '';
 }
-function get_buddyboss_media_photo_action()
+
+
+function buddyboss_media_photo_caption()
+{
+  echo get_buddyboss_media_photo_caption();
+}
+
+function get_buddyboss_media_photo_caption()
 {
   global $buddyboss_media;
 
-  if ( isset( $buddyboss_media->types->photo->grid_data[ $buddyboss_media->types->photo->grid_current_pic ]['action'] ) )
-    return $buddyboss_media->types->photo->grid_data[ $buddyboss_media->types->photo->grid_current_pic ]['action'];
+  if ( isset( $buddyboss_media->types->photo->grid_data[ $buddyboss_media->types->photo->grid_current_pic ]['caption'] ) )
+    return $buddyboss_media->types->photo->grid_data[ $buddyboss_media->types->photo->grid_current_pic ]['caption'];
 
   return '';
 }
+
 function buddyboss_media_pagination()
 {
   global $buddyboss_media;
 
   echo $buddyboss_media->types->photo->grid_pagination->fetchPagedNavigation();
 }
+
 function buddyboss_media_ajax_photo( $activity_id )
 {
   global $bp, $wpdb, $buddyboss_media;
@@ -166,11 +188,13 @@ function buddyboss_media_ajax_photo( $activity_id )
 
   $wpdb->show_errors = BUDDYBOSS_DEBUG;
 
+  $meta_keys = buddyboss_media_compat( 'activity.item_keys' );
+	$meta_keys_csv = "'" . implode( "','", $meta_keys ) . "'";
   $sql = $wpdb->prepare( "SELECT a.*, am.meta_value FROM
           $activity_table a INNER JOIN $activity_meta_table am
           ON a.id = am.activity_id
           WHERE a.user_id = %d
-          AND (meta_key = 'buddyboss_media_aid' OR meta_key = 'bboss_pics_aid')
+          AND meta_key IN ( $meta_keys_csv ) 
           AND activity_id = %d
           ORDER BY a.date_recorded DESC", $user_id, $activity_id );
 

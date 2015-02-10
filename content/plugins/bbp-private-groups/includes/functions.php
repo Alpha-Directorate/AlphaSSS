@@ -4,7 +4,8 @@ add_action('bbp_template_redirect', 'private_group_enforce_permissions', 1);
 add_filter('protected_title_format', 'pg_remove_protected_title');
 add_filter('private_title_format', 'pg_remove_private_title');
 add_filter('bbp_get_forum_freshness_link', 'custom_freshness_link' );
-add_filter('bbp_get_author_link', 'pg_get_author_link' ) ;
+//removed as you can't filter topics and replies ans they 'return' before the filter
+//add_filter('bbp_get_author_link', 'pg_get_author_link' ) ;
 add_action ('bbp_user_register', 'pg_role_group') ;
 
 
@@ -242,7 +243,7 @@ global $rpg_settingsf ;
 	}
 
 
-	
+//This function is no longer used - bbp_get_author_link does not have the required filters for this function to work as it send return to topic and reply before filter
 function pg_get_author_link( ) {
 $user_id2 = wp_get_current_user()->ID;
 	
