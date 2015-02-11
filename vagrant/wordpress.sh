@@ -29,7 +29,15 @@ then
 
 	sudo ./vendor/bin/phpcs --config-set installed_paths /var/www/alphasss.dev/vendor/wp-coding-standards/wpcs/
 
-	sudo rm /etc/hosts 
+	sudo rm /etc/hosts
+
+	export WP_LOCAL_DEV=true
+    export DB_NAME=alphasssdev
+    export DB_USER=root
+    export DB_PASSWORD=vagrant
+    export DB_HOST=localhost
+    export WP_DEBUG=true
+    export WP_HOST=alphasss.dev
 
 	sudo service apache2 restart
 	#sudo service nginx restart
