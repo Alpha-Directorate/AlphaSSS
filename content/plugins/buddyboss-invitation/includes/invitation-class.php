@@ -38,6 +38,20 @@ if ( ! class_exists( 'BuddyBoss_Invitation_BP_Component' ) ):
 			parent::setup_globals();
 		}
 
+		public function setup_actions()
+		{
+			// Add body class
+			//add_filter( 'body_class', array( $this, 'body_class' ) );
+
+			parent::setup_actions();
+		}
+
+		public function body_class()
+		{
+			//$classes[] = apply_filters( 'buddyboss_invitation_body_class', 'buddyboss-invitation' );
+			//return $classes;
+		}
+
 		/**
 		 * RENAME MENU TABS ON PROFILE
 		 */
@@ -51,11 +65,37 @@ if ( ! class_exists( 'BuddyBoss_Invitation_BP_Component' ) ):
 			$profile_link = $domain . $bp->activity->slug . '/';
 
 			bp_core_new_nav_item( array(
-				'name'     => __( 'Invitations', 'buddyboss-invitations' ),
-				'slug'     => 'invitations',
-				'position' => 100,
+				'name'                => __( 'Invitations', 'buddyboss-invitation' ),
+				'slug'                => 'invitations',
+				'position'            => 100,
+				'screen_function'     => 'buddyboss_invitation_screen_grid',
+				'default_subnav_slug' => 'my-invitations'
+			) );
+
+			$buddyboss_invitation_link = $bp->displayed_user->domain . $this->slug . '/';
+
+			bp_core_new_subnav_item( array(
+				'name'            => __( 'Invitations', 'buddyboss-invitation' ),
+				'slug'            => 'invitations',
+				'parent_slug'     => $this->slug,
+				'parent_url'      => $buddyboss_invitation_link,
+				'screen_function' => 'buddyboss_invitation_screen_grid',
+				'position'        => 10
 			) );
 		}
+	}
+
+	function buddyboss_invitation_screen_grid() {
+		add_action( 'bp_template_content', function() {
+			buddyboss_invitation_load_template( 'members/single/buddyboss-invitation-index' );
+		} );
+		bp_core_load_template( apply_filters( 'buddyboss_invitation_screen_grid', 'members/single/plugins' ) );
+	}
+
+	function buddyboss_invitation_load_template($template) {
+		$template .= '.php';
+
+		include_once buddyboss_invitation()->templates_dir.'/'.$template;
 	}
 endif;
 ?>

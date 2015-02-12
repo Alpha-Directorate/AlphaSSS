@@ -1,0 +1,18 @@
+.buddyboss-invitation-hidden {
+	display: none;
+}
+
+.in-place-message {
+	background-color: #e9ffd9;
+    border: 3px solid #cfe2c0;
+    border-radius: 2px;
+    font-size: 1.2em;
+    margin: 1em 0;
+    padding: 1em;
+}
+
+#invitation-code {
+	font-weight: bold;
+	font-size: 1.6em;
+	margin-left: 15px;
+}

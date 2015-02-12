@@ -68,4 +68,29 @@ function buddyboss_invitation()
   return $buddyboss_invitation;
 }
 
+add_action( 'wp_ajax_get_invitation_code', function(){
+
+	header('Content-Type: application/json');
+
+	if ( ! current_user_can('generate_invitation_code') ) {
+
+		status_header(404);
+
+		wp_die();
+	}
+
+	$data = array(
+		'data' => array(
+			'invitation_code' => buddyboss_invitation()->get_invitation_code()
+		)
+	);
+
+	echo json_encode($data);
+
+	wp_die();
+});
+
+// Setup database
+//register_activation_hook( __FILE__, 'buddyboss_invitation_setup_db_tables' );
+
 ?>

@@ -98,6 +98,16 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 			return true;//$this->option( 'enabled' ) === true || $this->option( 'enabled' ) === 'on';
 		}
 
+		public function get_invitation_code()
+		{
+			return 'AAF4';
+		}
+
+		public function css_path()
+		{
+			return $this->assets_url . '/css/'; 
+		}
+
 		/**
 		 * Convenience function to access plugin options, returns false by default
 		 *
