@@ -76,22 +76,29 @@ function buddyboss_invitation()
   return $buddyboss_invitation;
 }
 
+/**
+ * This action returns generated invitation code
+ */
 add_action( 'wp_ajax_get_invitation_code', function(){
 
 	header('Content-Type: application/json');
 
+	// Not have credentials? Return 404
 	if ( ! current_user_can('generate_invitation_code') ) {
 
 		status_header(404);
 
 		wp_die();
 	}
+	//--
 
+	// Prepare data
 	$data = array(
 		'data' => array(
 			'invitation_code' => buddyboss_invitation()->get_invitation_code()
 		)
 	);
+	//--
 
 	echo json_encode($data);
 

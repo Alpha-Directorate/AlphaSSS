@@ -53,18 +53,20 @@ if ( ! class_exists( 'BuddyBoss_Invitation_BP_Component' ) ):
 		}
 
 		/**
-		 * RENAME MENU TABS ON PROFILE
+		 * Method add new intem in profile menu
 		 */
 		public function update_bp_menus()
 		{
-			if ( ! is_user_logged_in() ) return;
-
-			buddyboss_wall_log('Updating Menus');
 			global $bp;
 
-			$domain = (!empty($bp->displayed_user->id)) ? $bp->displayed_user->domain : $bp->loggedin_user->domain;
+			if ( 
+				! is_user_logged_in() || 
+				! current_user_can('generate_invitation_code') || 
+				( $bp->displayed_user->domain != $bp->loggedin_user->domain ) ) return;
 
-			$profile_link = $domain . $bp->activity->slug . '/';
+			buddyboss_wall_log('Updating Menus');
+
+			$profile_link = $bp->loggedin_user->domain . $bp->activity->slug . '/';
 
 			bp_core_new_nav_item( array(
 				'name'                => __( 'Invitations', 'buddyboss-invitation' ),

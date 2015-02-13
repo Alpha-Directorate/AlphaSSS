@@ -11,7 +11,7 @@
 
 	<h2>Space Pilot 3000</h2>
 	
-	<p>dgd</p>
+	<p>I've got to find a way to escape the horrible ravages of youth. Suddenly, I'm going to the bathroom like clockwork, every three hours. And those jerks at Social Security stopped sending me checks. Now 'I" have to pay "them'! Please, Don-Bot... look into your hard drive, and open your mercy file!</p>
 
 	<div id="invitation_code_message" class="buddyboss-invitation-hidden in-place-message">
 		<p>Here's the invitation code that you can use:<br />

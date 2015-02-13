@@ -70,8 +70,17 @@ add_filter( 'gform_validation_4', function($validation_result){
 
 					// Data confirmed?
 					if ( 'Yes' == $is_register_data_approved ) {
+
 						// Create a new user
-						wp_create_user( rgpost( 'input_3' ), rgpost( 'input_4' ), md5( time() ) . '@alphasss.com' );
+						$user_id = wp_create_user(
+							sanitize_text_field ( rgpost( 'input_3' ) ), 
+							sanitize_text_field ( rgpost( 'input_4' ) ),
+							md5( time() ) . '@alphasss.com'
+						);
+						//--
+						
+						// Set Pre Citizen Role to user
+						wp_update_user( array ('ID' => $user_id, 'role' => 'pre_citizen' ) ) ;
 					}
 				}
 			break;
@@ -86,7 +95,19 @@ add_filter( 'gform_validation_4', function($validation_result){
 						$validation_result['is_valid'] = true;
 						$field['failed_validation']    = false;
 
-						//$users = new WP_User(NULL, rgpost( 'input_3' ));
+						if ( $user = get_userdatabylogin(sanitize_text_field ( rgpost( 'input_3' ) ) ) ) {
+							// Set Citizen Role to user
+							wp_update_user( array (
+								'ID'   => $user->ID, 
+								'role' => 'citizen' ) 
+							);
+
+							buddyboss_invitation()->update_invitation_code($invite_code, array('activated_member_id' => $user->ID));
+						} else {
+							$validation_result['is_valid'] = false;
+							$field['failed_validation']    = true;
+							$field['validation_message']   = __('Please contact admin');
+						}
 						
 					} else {
 						$validation_result['is_valid'] = false;

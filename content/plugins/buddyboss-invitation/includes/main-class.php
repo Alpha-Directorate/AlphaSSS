@@ -153,7 +153,7 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 				SELECT * FROM 
 					`%s`
 				WHERE 
-					member_id IS NOT NULL AND is_active="YES" AND invitation_code = "%s"'
+					member_id IS NOT NULL AND is_active="YES" AND invitation_code = "%s" AND activated_member_id IS NULL'
 				, sanitize_text_field(BUDDYBOSS_INVITATION_TABLENAME), $invitation_code ), ARRAY_A );
 
 			if ( $record ) {
@@ -170,6 +170,17 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 			}
 
 			return $result;
+		}
+
+		public function update_invitation_code($invitation_code, $data)
+		{
+			global $wpdb;
+
+			$wpdb->update( 
+				sanitize_text_field(BUDDYBOSS_INVITATION_TABLENAME), 
+				$data,
+				array( 'invitation_code' => $invitation_code ) 
+			);
 		}
 
 		public function css_path()
