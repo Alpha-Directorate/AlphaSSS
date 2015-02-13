@@ -91,6 +91,33 @@ add_action( 'wp_ajax_get_invitation_code', function(){
 });
 
 // Setup database
-//register_activation_hook( __FILE__, 'buddyboss_invitation_setup_db_tables' );
+register_activation_hook( __FILE__, 'buddyboss_invitation_setup_db_tables' );
+
+/**
+* Setup database table for invitation codes.
+* Runs on plugin activation.
+*/
+function buddyboss_invitation_setup_db_tables( ){
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . 'buddyboss_invitation_codes';
+
+	$sql = "CREATE TABLE " . $table_name . " (
+			`id` int(32) unsigned NOT NULL AUTO_INCREMENT,
+			`invitation_code` varchar(10) CHARACTER SET utf8 NOT NULL,
+			`member_id` int(20) unsigned DEFAULT NULL,
+			`requested_member_id` int(20) unsigned DEFAULT NULL,
+			`activated_member_id` int(20) unsigned DEFAULT NULL,
+			`created_date` datetime DEFAULT NULL,
+			`expired_date` datetime DEFAULT NULL,
+			`is_active` enum('YES','NO') DEFAULT 'NO',
+			PRIMARY KEY (`id`),
+			KEY `invitation_code_member_idx` (`invitation_code`,`member_id`)
+		)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	);";
+
+	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+	dbDelta( $sql );
+}
 
 ?>

@@ -57,6 +57,8 @@ if ( ! class_exists( 'BuddyBoss_Invitation_BP_Component' ) ):
 		 */
 		public function update_bp_menus()
 		{
+			if ( ! is_user_logged_in() ) return;
+
 			buddyboss_wall_log('Updating Menus');
 			global $bp;
 

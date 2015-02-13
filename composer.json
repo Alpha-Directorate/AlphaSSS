@@ -20,7 +20,8 @@
     "php": ">=5.3.0",
     "wordpress": "4.1",
     "fancyguy/webroot-installer": "1.1.0",
-    "wp-cli/wp-cli": "*"
+    "wp-cli/wp-cli": "*",
+    "nesbot/carbon": "~1.14"
   },
   "require-dev":{
      "codeception/codeception": "2.0.*",

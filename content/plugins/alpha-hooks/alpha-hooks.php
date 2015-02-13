@@ -79,8 +79,20 @@ add_filter( 'gform_validation_4', function($validation_result){
 			// Invitation code validation
 			case 20:
 				if ( isset( $_POST['input_20'] ) && $invite_code = rgpost( 'input_20' ) ) {
-					$validation_result['is_valid'] = true;
-					$field['failed_validation']    = false;
+
+					$invitation_validation_result  = buddyboss_invitation()->validate_invitation_code($invite_code);
+
+					if ( $invitation_validation_result['is_success'] ) {
+						$validation_result['is_valid'] = true;
+						$field['failed_validation']    = false;
+
+						$users = new WP_User(NULL, rgpost( 'input_3' ));
+						
+					} else {
+						$validation_result['is_valid'] = false;
+						$field['failed_validation']    = true;
+						$field['validation_message']   = $invitation_validation_result['message'];
+					}
 				}
 			break;
 		}

@@ -9,6 +9,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 
+	require_once(BASEPATH . 'vendor/nesbot/carbon/src/Carbon/Carbon.php');
+
 	class BuddyBoss_Invitation_Plugin
 	{
 
@@ -98,9 +100,76 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 			return true;//$this->option( 'enabled' ) === true || $this->option( 'enabled' ) === 'on';
 		}
 
+		/**
+		 * Method retuns unused registration code
+		 * 
+		 * @return string
+		 */
 		public function get_invitation_code()
 		{
-			return 'AAF4';
+			global $wpdb;
+
+			$sort = array('ASC', 'DESC');
+			
+			$results = $wpdb->get_results( sprintf('
+				SELECT * FROM 
+					`wp_buddyboss_invitation_codes` 
+				WHERE 
+					member_id IS NULL AND is_active="NO" 
+				ORDER BY 
+					id %s 
+				LIMIT 50;', $sort[ array_rand( $sort )] ), ARRAY_A );
+
+			$result = $results[ array_rand( $results ) ];
+
+			$wpdb->update( 
+				'wp_buddyboss_invitation_codes', 
+				array( 
+					'member_id'    => get_current_user_id(),
+					'is_active'    => 'YES',
+					'created_date' => \Carbon\Carbon::now(),
+					'expired_date' => \Carbon\Carbon::now()->addDay()
+				), 
+				array( 'id' => $result['id'] ) 
+			);
+			
+			return $result['invitation_code'];
+		}
+
+		/**
+		 * Method validate invitation code on errors
+		 * 
+		 * @return array
+		 */
+		public function validate_invitation_code($invitation_code)
+		{
+			global $wpdb;
+
+			$result['is_success'] = true;
+
+			$invitation_code = sanitize_text_field(strtoupper($invitation_code));
+
+			$record = $wpdb->get_results( sprintf('
+				SELECT * FROM 
+					`wp_buddyboss_invitation_codes` 
+				WHERE 
+					member_id IS NOT NULL AND is_active="YES" AND invitation_code = "%s"'
+				, $invitation_code ), ARRAY_A );
+
+			if ( $record ) {
+				$record = $record[0];
+
+				if ( \Carbon\Carbon::now()->timestamp > \Carbon\Carbon::parse($record['expired_date'])->timestamp ){
+					$result['is_success'] = false;
+					$result['message']    = __('This code is older than 24 hours, and is no longer valid. Simply request a new invitation code.');
+				}
+
+			} else {
+				$result['is_success'] = false;
+				$result['message']    = __('This is not a valid invitation code. If you don\'t have one, just ask for it.');
+			}
+
+			return $result;
 		}
 
 		public function css_path()
