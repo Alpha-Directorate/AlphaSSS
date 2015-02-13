@@ -86,7 +86,7 @@ add_filter( 'gform_validation_4', function($validation_result){
 						$validation_result['is_valid'] = true;
 						$field['failed_validation']    = false;
 
-						$users = new WP_User(NULL, rgpost( 'input_3' ));
+						//$users = new WP_User(NULL, rgpost( 'input_3' ));
 						
 					} else {
 						$validation_result['is_valid'] = false;
