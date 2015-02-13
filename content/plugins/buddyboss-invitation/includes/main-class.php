@@ -113,17 +113,17 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 			
 			$results = $wpdb->get_results( sprintf('
 				SELECT * FROM 
-					`wp_buddyboss_invitation_codes` 
+					`%s` 
 				WHERE 
 					member_id IS NULL AND is_active="NO" 
 				ORDER BY 
 					id %s 
-				LIMIT 50;', $sort[ array_rand( $sort )] ), ARRAY_A );
+				LIMIT 50;', sanitize_text_field(BUDDYBOSS_INVITATION_TABLENAME), $sort[ array_rand( $sort )] ), ARRAY_A );
 
 			$result = $results[ array_rand( $results ) ];
 
 			$wpdb->update( 
-				'wp_buddyboss_invitation_codes', 
+				sanitize_text_field(BUDDYBOSS_INVITATION_TABLENAME), 
 				array( 
 					'member_id'    => get_current_user_id(),
 					'is_active'    => 'YES',
@@ -151,10 +151,10 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 
 			$record = $wpdb->get_results( sprintf('
 				SELECT * FROM 
-					`wp_buddyboss_invitation_codes` 
+					`%s`
 				WHERE 
 					member_id IS NOT NULL AND is_active="YES" AND invitation_code = "%s"'
-				, $invitation_code ), ARRAY_A );
+				, sanitize_text_field(BUDDYBOSS_INVITATION_TABLENAME), $invitation_code ), ARRAY_A );
 
 			if ( $record ) {
 				$record = $record[0];

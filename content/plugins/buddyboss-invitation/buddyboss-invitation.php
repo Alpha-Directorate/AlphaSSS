@@ -13,7 +13,15 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Directory
 if ( ! defined( 'BUDDYBOSS_INVITATION_PLUGIN_DIR' ) ) {
-  define( 'BUDDYBOSS_INVITATION_PLUGIN_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
+	define( 'BUDDYBOSS_INVITATION_PLUGIN_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
+}
+
+if ( ! defined( 'BUDDYBOSS_INVITATION_TABLENAME' ) ) {
+	global $wpdb;
+
+	$table_name = $wpdb->prefix . 'buddyboss_invitation_codes';
+
+	define( 'BUDDYBOSS_INVITATION_TABLENAME', $wpdb->prefix . 'buddyboss_invitation_codes' );
 }
 
 // Url
@@ -98,9 +106,6 @@ register_activation_hook( __FILE__, 'buddyboss_invitation_setup_db_tables' );
 * Runs on plugin activation.
 */
 function buddyboss_invitation_setup_db_tables( ){
-	global $wpdb;
-
-	$table_name = $wpdb->prefix . 'buddyboss_invitation_codes';
 
 	$sql = "CREATE TABLE " . $table_name . " (
 			`id` int(32) unsigned NOT NULL AUTO_INCREMENT,
