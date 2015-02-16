@@ -60,7 +60,7 @@ define( 'WPLANG', '' );
 // Debugging? Enable these. Can also enable them in local-config.php
 // =================================================================
 // define( 'SAVEQUERIES', true );
-define( 'WP_DEBUG', true );
+define( 'WP_DEBUG', getenv( true ) );
 
 // ======================================
 // Load a Memcached config if we have one
@@ -81,5 +81,7 @@ define( 'STAGING_DOMAIN', '%%WP_STAGING_DOMAIN%%' ); // Does magic in WP Stack t
 if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', dirname( __FILE__ ) . '/wp/' );
 }
+
+define( 'BASEPATH', dirname(__FILE__) . '/' );
 
 require_once( ABSPATH . 'wp-settings.php' );

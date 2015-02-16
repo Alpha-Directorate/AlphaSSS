@@ -8,6 +8,29 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
+ * 
+ */
+function buddyboss_wall_check_mentions_notifications()
+{
+  if ( ! bp_is_active( 'activity' ) || ! bp_is_active( 'notifications' ) || ! bp_activity_do_mentions() )
+  {
+    return;
+  }
+
+  // If we the global activity directory is disabled handle this on the user's profile
+  if ( bp_is_my_profile() && bp_is_current_component( 'activity' ) && ! bp_activity_has_directory() )
+  {
+    buddyboss_wall_clear_at_mentions_notifications();
+  }
+  // Otherwise we'll try to force the mentions tab on the activity page to be active
+  else if ( bp_activity_has_directory() )
+  {
+    buddyboss_wall_check_force_mentions_tab();
+  }
+}
+add_action( 'bp_init', 'buddyboss_wall_check_mentions_notifications' );
+
+/**
  * This echos inline styles that we need to ensure are used,
  * hides post-in select box on the what new (post update) form.
  *
@@ -58,14 +81,7 @@ function buddyboss_wall_read_filter( $action )
     $you_text   = sprintf( '<span class="buddyboss-you-text">%s</span>', __( 'You', 'buddyboss-wall' ) );
 
     $bbwall_action = str_replace( $to_replace, $you_text, $action );
-
-    // echo '<pre>';
-    // var_dump( $to_replace, $current_activity_id );
-    // echo '<hr/>';
-    // var_dump( $current_activity );
-    // echo '</pre>';
   }
-  // var_dump( bp_loggedin_user_id(), bp_is_my_profile(), $current_activity->component );
 
   if ( $bbwall_action )
   {
@@ -74,14 +90,19 @@ function buddyboss_wall_read_filter( $action )
 
     // Insert the time since.
     $time_since = apply_filters_ref_array( 'bp_activity_time_since', array( '<span class="time-since">' . bp_core_time_since( $activities_template->activity->date_recorded ) . '</span>', &$activities_template->activity ) );
-
+    
+    // if group component then pass blank time_since
+    if($current_activity->component === 'groups'){
+        $time_since = '';
+    }
+    
     // Insert the permalink
     if ( !bp_is_single_activity() )
       $content = apply_filters_ref_array( 'bp_activity_permalink', array( sprintf( '%1$s <a href="%2$s" class="view activity-time-since" title="%3$s">%4$s</a>', $content, bp_activity_get_permalink( $activities_template->activity->id, $activities_template->activity ), esc_attr__( 'View Discussion', 'buddypress' ), $time_since ), &$activities_template->activity ) );
     else
       $content .= str_pad( $time_since, strlen( $time_since ) + 2, ' ', STR_PAD_BOTH );
 
-    return apply_filters( 'bp_insert_activity_meta', $content );
+    return apply_filters( 'buddyboss_wall_activity_action', $content );
   }
 
   return $action;
@@ -252,9 +273,11 @@ function buddyboss_wall_input_filter( &$activity ) {
   // This way future plugin conflicts will be resolved, because a plugin can
   // define an object like "clan" and we'd run into the same problems.
   //
-  $is_wall_action = bp_is_current_component( 'activity' ) && empty( $object );
+  $is_wall_action = bp_is_current_component( 'activity' ) && empty( $object )
+                    && ! empty( $_POST['action'] ) && $_POST['action'] === 'post_update';
 
-  if( !empty($activity->content) && ( $is_wall_action || $bp->current_action == 'forum' ) ){
+  if ( !empty($activity->content) && ( $is_wall_action || $bp->current_action == 'forum' ) )
+  {
   	/**
   	 * is it mention?
   	 *	yes
@@ -337,15 +360,15 @@ function buddyboss_wall_input_filter( &$activity ) {
   	}
   }
 
-  if ( $new_action ){
+  if ( $new_action )
+  {
     $new_action = apply_filters( 'buddyboss-wall-new-action', $new_action, $user, $tgt );
 
     bp_activity_update_meta( $activity->id, 'buddyboss_wall_action', $new_action );
-	bp_activity_update_meta( $activity->id, 'buddyboss_wall_initiator', bp_loggedin_user_id() );
+  	bp_activity_update_meta( $activity->id, 'buddyboss_wall_initiator', bp_loggedin_user_id() );
 
-	if( $activity_target_user_id )
-		bp_activity_update_meta( $activity->id, 'buddyboss_wall_target', $activity_target_user_id );
-
+    if ( $activity_target_user_id )
+      bp_activity_update_meta( $activity->id, 'buddyboss_wall_target', $activity_target_user_id );
   }
 }
 
@@ -481,9 +504,10 @@ function buddyboss_wall_remove_original_update_functions()
 }
 add_action( 'after_setup_theme', 'buddyboss_wall_remove_original_update_functions', 9999 );
 
-function buddyboss_wall_load_template_filter( $found_template, $templates ) {
-
+function buddyboss_wall_load_template_filter( $found_template, $templates )
+{
   global $bp;
+
   if ( ! buddyboss_wall()->is_enabled() )
     return $found_template;
 
@@ -565,11 +589,16 @@ function buddyboss_wall_prepare_likes_filter( $activity, $activities_template )
  */
 function buddyboss_wall_format_mention_notification( $notification, $at_mention_link, $total_items, $activity_id, $poster_user_id )
 {
-  global $wp_admin_bar, $bp;
+  // Default activity link
+  $activity_link = trailingslashit( bp_loggedin_user_domain() . bp_get_activity_slug() );
+  
+  // If there's a global activity page, link user to mentions tab
+  // We check for this query string in wall-functions.php
+  if ( bp_activity_has_directory() )
+  {
+    $activity_link = trailingslashit( bp_get_activity_directory_permalink() ) . '?buddyboss_wall_mentions_tab=1';
+  }
 
-  $domain = $bp->loggedin_user->domain;
-  $activity_link = trailingslashit( $domain . $bp->activity->slug );
-  $at_mention_link  = bp_loggedin_user_domain() . bp_get_activity_slug() . '/mentions/';
   $at_mention_title = sprintf( __( '@%s Mentions', 'buddyboss-wall' ), bp_get_loggedin_user_username() );
 
   if ( (int) $total_items > 1 ) {

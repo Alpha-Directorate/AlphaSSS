@@ -13,6 +13,18 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class BuddyBoss_Media_Photo_Hooks
 {
+	protected $activity_photo_size;
+	
+	public function activity_photo_size(){
+		if( !$this->activity_photo_size ){
+			$this->activity_photo_size = buddyboss_media()->option( 'activity-photo-size' );
+			if( !$this->activity_photo_size )
+				$this->activity_photo_size = 'medium';
+		}
+		
+		return $this->activity_photo_size;
+	}
+	
   // Fires when the activity item is saved
   public function bp_activity_after_save( &$activity )
   {
@@ -28,9 +40,24 @@ class BuddyBoss_Media_Photo_Hooks
     if ( $user && $compat_class_search && isset($_POST['has_pic'])
          && isset($_POST['has_pic']['attachment_id']) )
     {
-      $action  = '<a href="'.$user->domain.'">'.$user->fullname.'</a> '
-        . __( 'posted a new picture', 'buddyboss-media' );
-
+      /*$action  = '<a href="'.$user->domain.'">'.$user->fullname.'</a> '
+        . __( 'posted a photo', 'buddyboss-media' );*/
+		
+		$action  = '%USER% ' . __( 'posted a photo', 'buddyboss-media' );
+		
+		/**
+		 * If the activity is posted in a group
+		 */
+		if( 'groups'==$activity->component ){
+			if( bp_has_groups( array( 'include'=>$activity->item_id ) ) ){
+				while( bp_groups() ){
+					bp_the_group();
+					$group_link = sprintf( "<a href='%s'>%s</a>", bp_get_group_permalink(), bp_get_group_name() );
+					$action .= ' ' . __( 'in the group', 'buddyboss-media' ) . ' ' . $group_link;
+				}
+			}
+		}
+		
       $attachment_id = (int)$_POST['has_pic']['attachment_id'];
 
       $action_key = buddyboss_media_compat( 'activity.action_key' );
@@ -45,6 +72,7 @@ class BuddyBoss_Media_Photo_Hooks
       // Prevent BuddyPress from sending notifications, we'll send our own
     }
   }
+
   // Filter's the activity item's action text
   public function bp_get_activity_action( $action )
   {
@@ -60,6 +88,20 @@ class BuddyBoss_Media_Photo_Hooks
 
     if ( $buddyboss_media_action )
     {
+		//convert placeholder into real user link
+		//display You if its current users activity
+		$replacement = '';
+		if( $current_activity->user_id == get_current_user_id() ){
+			$replacement = __( 'You', 'buddyboss-media' );
+		} else {
+			$userdomain = bp_core_get_user_domain( $current_activity->user_id );
+			$user_fullname = bp_core_get_user_displayname( $current_activity->user_id );
+			
+			$replacement = '<a href="'.esc_url( $userdomain ).'">' . $user_fullname . '</a>';
+		}
+		
+		$buddyboss_media_action = str_replace( '%USER%', $replacement, $buddyboss_media_action );
+		
       // Strip any legacy time since placeholders from BP 1.0-1.1
       $content = str_replace( '<span class="time-since">%s</span>', '', $buddyboss_media_action );
 
@@ -68,7 +110,7 @@ class BuddyBoss_Media_Photo_Hooks
 
       // Insert the permalink
       if ( !bp_is_single_activity() )
-        $content = apply_filters_ref_array( 'bp_activity_permalink', array( sprintf( '%1$s <a href="%2$s" class="view activity-time-since" title="%3$s">%4$s</a>', $content, bp_activity_get_permalink( $activities_template->activity->id, $activities_template->activity ), esc_attr__( 'View Discussion', 'buddypress' ), $time_since ), &$activities_template->activity ) );
+        $content = apply_filters_ref_array( 'bp_activity_permalink', array( sprintf( '%1$s <a href="%2$s" class="view activity-time-since" title="%3$s">%4$s</a>', $content, bp_activity_get_permalink( $activities_template->activity->id, $activities_template->activity ), esc_attr__( 'View Discussion', 'buddyboss-media' ), $time_since ), &$activities_template->activity ) );
       else
         $content .= str_pad( $time_since, strlen( $time_since ) + 2, ' ', STR_PAD_BOTH );
 
@@ -77,6 +119,7 @@ class BuddyBoss_Media_Photo_Hooks
 
     return $action;
   }
+
   // Filter's the activity item's content
   public function bp_get_activity_content_body( $content )
   {
@@ -115,7 +158,15 @@ class BuddyBoss_Media_Photo_Hooks
     // Photo
     if ( $type === 'photo' && ! empty( $media_id ) )
     {
-      $img_size = 'buddyboss_media_photo_wide';
+	  /**
+	   * if we are displaying grid layout instead of activity post layout, images should be 'thumbnail' size
+	   */
+	  if( buddyboss_media_check_custom_activity_template_load() ){
+		  $img_size = 'thumbnail';//hardcoded !?
+	  } else {
+		//$img_size = 'buddyboss_media_photo_wide';
+		$img_size = $this->activity_photo_size();
+	  }
 
       $image = wp_get_attachment_image_src( $media_id, $img_size );
 
@@ -124,6 +175,11 @@ class BuddyBoss_Media_Photo_Hooks
         $src = $image[0];
         $w = $image[1];
         $h = $image[2];
+		
+		//alt tag
+		$clean_content = wp_strip_all_tags( $content, true );
+		$alt_text = !empty( $clean_content ) ? substr( $clean_content, 0, 100 ) : '';//first 100 characters ?
+		$alt = ' alt="' . esc_attr( $alt_text ) . '"';
 
         $full = wp_get_attachment_image_src( $media_id, 'full' );
 
@@ -131,17 +187,19 @@ class BuddyBoss_Media_Photo_Hooks
 
         if ( $full !== false && is_array( $full ) && count( $full ) > 2 )
         {
+		$owner = ($activities_template->activities[$curr_id]->user_id == get_current_user_id())?'1':'0';
           $content .= '<a class="buddyboss-media-photo-wrap" href="'.$full[0].'">';
-          $content .= '<img data-permalink="'. bp_get_activity_thread_permalink() .'" class="buddyboss-media-photo" src="'.$src.'"'.$width_markup.' /></a>';
+          $content .= '<img data-permalink="'. bp_get_activity_thread_permalink() .'" class="buddyboss-media-photo" src="'.$src.'"'.$width_markup.' ' . $alt . ' data-media="'.$act_id.'" data-owner="'.$owner.'"/></a>';
         }
         else {
-          $content .= '<img data-permalink="'. bp_get_activity_thread_permalink() .'" class="buddyboss-media-photo" src="'.$src.'"'.$width_markup.' />';
+          $content .= '<img data-permalink="'. bp_get_activity_thread_permalink() .'" data-media="'.$act_id.'" data-owner="'.$owner.'" class="buddyboss-media-photo" src="'.$src.'"'.$width_markup.' ' . $alt .' />';
         }
       }
     }
 
     return $content;
   }
+
   // Filter's the activity item's content when the plugin is off
   public function off_bp_get_activity_content_body( $content )
   {
@@ -165,8 +223,47 @@ class BuddyBoss_Media_Photo_Hooks
 
     return $content;
   }
-}
 
+  public function bp_get_member_latest_update( $update )
+  {
+    global $members_template;
+
+    if ( !bp_is_active( 'activity' ) || empty( $members_template->member->latest_update ) || !$update = maybe_unserialize( $members_template->member->latest_update ) )
+      return false;
+
+    $current_activity_id    = $update['id'];
+
+    $buddyboss_media_action = buddyboss_media_compat_get_meta( $current_activity_id, 'activity.action_keys' );
+
+    if ( $buddyboss_media_action )
+    {
+      // Strip any legacy time since placeholders from BP 1.0-1.1
+      $content = str_replace( '<span class="time-since">%s</span>', '', $buddyboss_media_action );
+	  
+	  //remove user placeholder
+	  $content = str_replace( "%USER%", "", $content );
+	  
+      $activity_action_text = __( 'new photo', 'buddyboss-media' );
+
+      // Look for 'posted a photo' and linkify
+      if ( stristr( $content, $activity_action_text ) )
+      {
+        $permalink_href = bp_activity_get_permalink( $current_activity_id );
+
+        if ( ! empty( $permalink_href ) )
+        {
+          $permalink = sprintf( '<a href="%s" title="%s">%s</a>', $permalink_href, strip_tags( $content ), $activity_action_text );
+
+          $content = str_replace( $activity_action_text, $permalink, $content );
+        }
+      }
+
+      return apply_filters( 'buddyboss_media_activity_action', $content );
+    }
+
+    return $update['content'];
+  }
+}
 
 // AJAX update picture
 function buddyboss_media_post_photo()
@@ -210,7 +307,8 @@ function buddyboss_media_post_photo()
   {
     $name = $attachment->post_title;
 
-    $img_size = 'buddyboss_media_photo_wide';
+    //$img_size = 'buddyboss_media_photo_wide';
+	$img_size = 'buddyboss_media_photo_tn';
 
     $url_nfo = wp_get_attachment_image_src( $aid, $img_size );
 

@@ -101,7 +101,7 @@ function buddyboss_load_fonts()
 	if ( !is_admin() ) {
 
         // FontAwesome icon fonts. If browsing on a secure connection, use HTTPS.
-		wp_register_style('fontawesome', "//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css", false, null);
+		wp_register_style('fontawesome', "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css", false, null);
         wp_enqueue_style( 'fontawesome');
 
         // Dashicons icon fonts (packaged with WordPress 3.8+)
@@ -191,9 +191,6 @@ function buddyboss_scripts_styles()
 		wp_enqueue_script( 'bp-jquery-bgiframe', BP_PLUGIN_URL . "bp-messages/js/autocomplete/jquery.bgiframe{$min}.js", array(), bp_get_version() );
 	}
 
-	// BuddyPress Activity Privacy plugin compatibility
-	if( function_exists( 'bp_activity_privacy_add_js' ) ) wp_deregister_script( 'bp-activity-privacy-js' );
-
 
 	/****************************** STYLES ******************************/
 
@@ -201,7 +198,7 @@ function buddyboss_scripts_styles()
 	// Main WordPress stylesheet
 	if ( !is_admin() ) {
 		// Activate our primary WordPress stylesheet. Load FontAwesome and GoogleFonts first.
-		wp_enqueue_style( 'buddyboss-wp-frontend', get_template_directory_uri().'/css/wordpress.css', array( 'fontawesome', 'googlefonts' ), '4.0.4', 'all' );
+		wp_enqueue_style( 'buddyboss-wp-frontend', get_template_directory_uri().'/css/wordpress.css', array( 'fontawesome', 'googlefonts' ), '4.0.9', 'all' );
 	}
 
 	/*
@@ -216,7 +213,7 @@ function buddyboss_scripts_styles()
 		wp_deregister_style( 'bp-parent-css' );
 		wp_deregister_style( 'bp-legacy-css' );
 		// Activate our own BuddyPress stylesheet. Load FontAwesome and GoogleFonts first.
-		wp_enqueue_style( 'buddyboss-bp-frontend', get_template_directory_uri().'/css/buddypress.css', array( 'fontawesome', 'googlefonts' ), '4.0.5', 'all' );
+		wp_enqueue_style( 'buddyboss-bp-frontend', get_template_directory_uri().'/css/buddypress.css', array( 'fontawesome', 'googlefonts' ), '4.0.9', 'all' );
 	}
 
 	/*
@@ -236,7 +233,7 @@ function buddyboss_scripts_styles()
 
 	// Load our CSS support for 3rd party plugins here.
 	if ( !is_admin() ) {
-		wp_enqueue_style( 'buddyboss-wp-plugins', get_template_directory_uri().'/css/plugins.css', array( 'fontawesome', 'googlefonts' ), '4.0.0', 'all' );
+		wp_enqueue_style( 'buddyboss-wp-plugins', get_template_directory_uri().'/css/plugins.css', array( 'fontawesome', 'googlefonts' ), '4.1.0', 'all' );
 	}
 
 	// Load our own adminbar (Toolbar) styles.
@@ -246,7 +243,7 @@ function buddyboss_scripts_styles()
 		// Activate our own mobile adminbar stylesheet. Load FontAwesome and GoogleFonts first.
 		wp_enqueue_style( 'buddyboss-wp-adminbar-mobile', get_template_directory_uri().'/css/adminbar-mobile.css', array( 'fontawesome', 'googlefonts' ), '4.0.4', 'all' );
 		// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
-		wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-'.esc_attr( get_theme_mod( 'boss_adminbar_layout', 'fixed' ) ), get_template_directory_uri().'/css/adminbar-desktop-'.esc_attr( get_theme_mod( 'boss_adminbar_layout', 'fixed' ) ).'.css', array( 'dashicons', 'googlefonts' ), '4.0.8', 'all' );
+		wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-'.esc_attr( get_theme_mod( 'boss_adminbar_layout', 'fixed' ) ), get_template_directory_uri().'/css/adminbar-desktop-'.esc_attr( get_theme_mod( 'boss_adminbar_layout', 'fixed' ) ).'.css', array( 'dashicons', 'googlefonts' ), '4.1.1', 'all' );
 	}
 
 }
@@ -919,9 +916,8 @@ function buddyboss_custom_login_logo()
             echo '<style type="text/css">
                     #login h1 a {
                         background-image: url('.esc_url($logo).');
-                        background-size: '.intval($width).'px '.intval($height).'px;
+                        background-size: '.intval($width).'px '.intval($height).'px !important;
                         min-height: 87px;
-                        min-width: 326px;
                         width: '.intval($width).'px;
                         height: '.intval($height).'px;
                         overflow: hidden;

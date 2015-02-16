@@ -1,6 +1,5 @@
 /*--------------------------------------------------------------
-This is the BuddyBoss Media Pictures stylesheet.
-Only loads if the BuddyBoss Media Pictures component is activated.
+This is the BuddyBoss Media stylesheet.
 
 ----------------------------------------------------------------
 >>> TABLE OF CONTENTS:
@@ -15,10 +14,13 @@ Only loads if the BuddyBoss Media Pictures component is activated.
   1.7 - Toolbar
   1.8 - Toolbar Font Icons
 2.0 - Post update form and pic preview
+  2.1 - Move photos
+  2.2 - Tag Friends
 3.0 - Picture grid
 4.0 - Responsive media queries (mobile styles)
   4.1 - MAXIMUM width of 720 pixels (large phones)
   4.2 - MINIMUM width of 721 pixels (tablets+)
+  4.3 - Variable widths per photo grid row
 --------------------------------------------------------------*/
 
 /*--------------------------------------------------------------
@@ -105,6 +107,7 @@ div.ps-caption {
   color: #fff;
   font-size: 13px;
   text-align: center;
+  white-space: nowrap;
 }
 div.ps-caption *  { display: inline; }
 
@@ -115,8 +118,13 @@ div.ps-caption-bottom {
 }
 
 div.ps-caption-content {
-  padding: 13px;
+  overflow: hidden;
   display: block;
+  text-overflow: ellipsis;
+  height: 39px;
+  line-height: 39px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 div.ps-caption, div.ps-caption * {
   cursor: pointer;
@@ -147,7 +155,7 @@ div.ps-toolbar-top {
   border-top: none;
 }
 
-div.ps-toolbar-close, div.ps-toolbar-comments, div.ps-toolbar-previous, div.ps-toolbar-next, div.ps-toolbar-play {
+div.ps-toolbar-close, div.ps-toolbar-comments, div.ps-toolbar-previous, div.ps-toolbar-next, div.ps-toolbar-play, div.ps-toolbar-delete {
   cursor: pointer;
   display: table-cell;
 }
@@ -172,24 +180,30 @@ div.ps-toolbar div div.ps-toolbar-content:before {
   speak: none;
   display: inline-block;
   width: 44px;
-  line-height: 44px;
+  line-height: 42px;
   font-size: 21px;
   -webkit-font-smoothing: antialiased;
   vertical-align: middle;
   text-align: center;
   color: #fff;
 }
+div.ps-toolbar div div.ps-toolbar-content.loading:before {
+  display:none;
+}
 div.ps-toolbar-close div.ps-toolbar-content:before {
-  content: "\f057";
+  content: "\f00d";
 }
 div.ps-toolbar-comments div.ps-toolbar-content:before {
-  content: "\f14b";
+  content: "\f075";
 }
 div.ps-toolbar-previous div.ps-toolbar-content:before {
-  content: "\f0a8";
+  content: "\f060";
 }
 div.ps-toolbar-next div.ps-toolbar-content:before {
-  content: "\f0a9";
+  content: "\f061";
+}
+div.ps-toolbar-delete div.ps-toolbar-content:before { 
+  content: "\f014";
 }
 
 /* Disabled Icon state */
@@ -309,10 +323,21 @@ form#whats-new-form {
   display: block;
   height: 0;
   position: relative;
-  text-align: center;
   overflow: hidden;
-  margin-bottom: 30px;
+  margin: 10px 0;
 }
+
+#buddyboss-media-preview-inner {
+    display: table-cell;
+    vertical-align: top;
+    padding-right: 10px;
+}
+
+#buddyboss-media-preview-details {
+    display: table-cell;
+    vertical-align: top;
+}
+
 form#whats-new-form #whats-new-uploader {
   float: left;
   margin-left: 2px;
@@ -326,38 +351,125 @@ form#whats-new-form #whats-new-uploader {
 }
 
 /*--------------------------------------------------------------
+2.1 - Move photos
+--------------------------------------------------------------*/
+
+#buddypress div.buddyboss-media-form-wrapper #frm_buddyboss-media-move-media {
+  padding: 10px;
+}
+#buddypress div.buddyboss-media-form-wrapper #frm_buddyboss-media-move-media .buddyboss_media_move_media_cancel {
+  text-decoration: none;
+}
+#buddypress div.buddyboss-media-form-wrapper #frm_buddyboss-media-move-media .field {
+  margin: 0;
+}
+#buddypress div.buddyboss-media-form-wrapper #frm_buddyboss-media-move-media #message p {
+  margin-top: 10px;
+}
+
+/*--------------------------------------------------------------
+2.1 - Tag Friends
+--------------------------------------------------------------*/
+
+#buddypress div.buddyboss-media-form-wrapper div#invite-list {
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+#buddypress div.buddyboss-media-form-wrapper div#invite-list ul li {
+  border: none;
+  margin: 0;
+  padding: 5px 0;
+}
+#buddypress div.buddyboss-media-form-wrapper .preloading:after {
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-rendering: auto;
+  text-decoration: inherit;
+  speak: none;
+  display: inline-block;
+  line-height: 1;
+  content: "\f110";
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  text-decoration: none;
+  padding: 0;
+
+  -webkit-animation: spin 2s infinite linear;
+  -moz-animation: spin 2s infinite linear;
+  -o-animation: spin 2s infinite linear;
+  animation: spin 2s infinite linear;
+}
+
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(359deg);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+  }
+}
+@-o-keyframes spin {
+  0% {
+    -o-transform: rotate(0deg);
+  }
+  100% {
+    -o-transform: rotate(359deg);
+  }
+}
+@-ms-keyframes spin {
+  0% {
+    -ms-transform: rotate(0deg);
+  }
+  100% {
+    -ms-transform: rotate(359deg);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+/*--------------------------------------------------------------
 3.0 - Picture grid
 --------------------------------------------------------------*/
 
-.buddyboss-media-active.my-gallery .activity-greeting {
-  display: none;
+#buddypress #bbmedia-grid-wrapper > ul{
+  list-style-type: none;
 }
-
-#buddyboss-media-grid {
-  margin: -0.5%;
+#buddypress .activity-list .buddyboss_media_caption {
+    display: none;
 }
-#buddyboss-media-grid .gallery-item {
+#buddypress .activity-list > li.bbmedia-grid-item {
   float: left;
-  margin: 0.5%;
+  clear: none;
+  border: none;
   text-align: center;
   position: relative;
-  width: 150px;
-  height: 150px;
+  padding: 0 !important;
+  margin: 1% !important;
 }
-#buddyboss-media-grid .gallery-item .buddyboss_media_action,
-#buddyboss-media-grid .gallery-item p {
+#buddypress .activity-list > li.bbmedia-grid-item p {
   display: none;
 }
-#buddyboss-media-grid .gallery-item .gallery-icon {
-  line-height: 0;
-}
-#buddyboss-media-grid .gallery-item .gallery-icon a {
-  width: 100%;
-}
-#buddyboss-media-grid .gallery-item img {
+#buddypress .activity-list > li.bbmedia-grid-item img {
   box-shadow: none;
   padding: none;
-  max-width: 100%;
+  width: 100%;
   height: auto;
   padding: 0;
 
@@ -365,17 +477,11 @@ form#whats-new-form #whats-new-uploader {
   -moz-border-radius: 2px;
   border-radius: 2px;
 }
-#buddyboss-media-grid .gallery-caption {
-  margin-left: 0;
+#buddypress .activity-list > li.bbmedia-grid-item:first-child {
+  margin-left: 0 !important;
 }
-.photos-navigation {
+#buddypress #bbmedia-grid-wrapper li.load-more {
   clear: both;
-  overflow: hidden;
-  position: relative;
-  padding: 15px 0 0;
-}
-.buddyboss-media-pagination .page-numbers {
-  margin: 2px 2px 2px 0;
 }
 
 /*--------------------------------------------------------------
@@ -387,12 +493,6 @@ form#whats-new-form #whats-new-uploader {
 
 @media screen and (max-width: 720px) {
 
-  #buddyboss-media-grid .gallery-item {
-    width: 32.33%;
-  }
-  #buddyboss-media-grid .gallery-item:nth-child(3n+4) {
-    clear: left; /* forces rows into 3 images even when all are images not the same height */
-  }
   .buddyboss-media-progress .buddyboss-media-progress-bar {
     display: none;
   }
@@ -416,6 +516,90 @@ form#whats-new-form #whats-new-uploader {
   }
   #buddyboss-media-add-photo {
     float: right;
+  }
+
+}
+
+/*--------------------------------------------------------------
+4.3 - Variable widths per photo grid row
+--------------------------------------------------------------*/
+
+/* 2 photos per row */
+@media screen and (max-width: 450px) {
+ 
+  #buddypress .activity-list > li.bbmedia-grid-item {
+    width: 49%;
+  }
+  #buddypress .activity-list > li.bbmedia-grid-item:nth-child(2n+3) {
+    clear: left;
+    margin-left: 0 !important;
+  }
+  #buddypress .activity-list > li.bbmedia-grid-item:nth-child(2n+2) {
+    margin-right: 0 !important;
+  }
+
+}
+
+/* 3 photos per row */
+@media screen and (min-width: 451px) and (max-width: 600px) {
+
+  #buddypress .activity-list > li.bbmedia-grid-item {
+    width: 32%;
+  }
+  #buddypress .activity-list > li.bbmedia-grid-item:nth-child(3n+4) {
+    clear: left;
+    margin-left: 0 !important;
+  }
+  #buddypress .activity-list > li.bbmedia-grid-item:nth-child(3n+3) {
+    margin-right: 0 !important;
+  }
+
+}
+
+/* 4 photos per row */
+@media screen and (min-width: 601px) and (max-width: 900px) {
+
+  #buddypress .activity-list > li.bbmedia-grid-item {
+    width: 23.5%;
+  }
+  #buddypress .activity-list > li.bbmedia-grid-item:nth-child(4n+5) {
+    clear: left;
+    margin-left: 0 !important;
+  }
+  #buddypress .activity-list > li.bbmedia-grid-item:nth-child(4n+4) {
+    margin-right: 0 !important;
+  }
+
+}
+
+/* 5 photos per row */
+@media screen and (min-width: 901px) and (max-width: 1100px) {
+
+  #buddypress .activity-list > li.bbmedia-grid-item {
+    width: 18.4%;
+  }
+  #buddypress .activity-list > li.bbmedia-grid-item:nth-child(5n+6) {
+    clear: left;
+    margin-left: 0 !important;
+  }
+  #buddypress .activity-list > li.bbmedia-grid-item:nth-child(5n+5) {
+    margin-right: 0 !important;
+  }
+
+}
+
+/* 6 photos per row */
+@media screen and (min-width: 1101px) {
+
+  #buddypress .activity-list > li.bbmedia-grid-item {
+    width: 15%;
+  }
+  #buddypress .activity-list > li.bbmedia-grid-item:nth-child(6n+7) {
+    clear: left;
+    margin-left: 0 !important;
+  }
+  #buddypress .activity-list > li.bbmedia-grid-item:nth-child(6n+6) {
+    margin-right: 0 !important;
   }
 
 }

@@ -1,9 +1,9 @@
 <?php
 /*
     Plugin Name: Buddypress Xprofile Custom Fields Type
-    Plugin URI: https://github.com/donmik/buddypress-xprofile-custom-fields-type/
-    Description: Buddypress installation required!! Add more custom fields type to extended profiles in buddypress: Birthdate, Email, Web, Datepicker. If you need more fields type, you are free to add them yourself or request us at miguel@donmik.com.
-    Version: 2.0.3
+    Plugin URI: http://donmik.com/en/buddypress-xprofile-custom-fields-type/
+    Description: Buddypress installation required!! This plugin add custom field types to Buddypress Xprofile extension. Field types are: Birthdate, Email, Url, Datepicker, ...
+    Version: 2.1.5
     Author: donmik
     Author URI: http://donmik.com
 */
@@ -11,20 +11,18 @@ if (!class_exists('Bxcft_Plugin'))
 {
     class Bxcft_Plugin 
     {
+        CONST BXCFT_MAX_FILESIZE = 8;
+        
         private $version;
         private $user_id = null;
         private $images_ext_allowed;
+        private $images_max_filesize;
         private $files_ext_allowed;
+        private $files_max_filesize;
         
         public function __construct ()
         {
-            $this->version = "2.0.2";
-            $this->images_ext_allowed   = apply_filters('images_ext_allowed', array(
-                'jpg', 'jpeg', 'gif', 'png'
-            ));
-            $this->files_ext_allowed   = apply_filters('files_ext_allowed', array(
-                'doc', 'docx', 'pdf'
-            ));
+            $this->version = "2.1.5";
             
             /** Main hooks **/
             add_action( 'plugins_loaded', array($this, 'bxcft_update') );
@@ -43,10 +41,24 @@ if (!class_exists('Bxcft_Plugin'))
             add_filter( 'bp_xprofile_get_field_types', array($this, 'bxcft_get_field_types'), 10, 1 );
             add_filter( 'xprofile_get_field_data', array($this, 'bxcft_get_field_data'), 10, 2 );
             add_filter( 'bp_get_the_profile_field_value', array($this, 'bxcft_get_field_value'), 10, 3 );
+            /** BP Profile Search Filters **/
+            add_filter ('bps_field_validation_type', array($this, 'bxcft_map'), 10, 2);
+            add_filter ('bps_field_html_type', array($this, 'bxcft_map'), 10, 2);
+            add_filter ('bps_field_criteria_type', array($this, 'bxcft_map'), 10, 2);
+            add_filter ('bps_field_query_type', array($this, 'bxcft_map'), 10, 2);
         }
         
         public function init()
         {
+            $this->images_ext_allowed   = apply_filters('bxcft_images_ext_allowed', array(
+                'jpg', 'jpeg', 'gif', 'png'
+            ));
+            $this->images_max_filesize = apply_filters('bxcft_images_max_filesize', Bxcft_Plugin::BXCFT_MAX_FILESIZE);
+            $this->files_ext_allowed   = apply_filters('bxcft_files_ext_allowed', array(
+                'doc', 'docx', 'pdf'
+            ));
+            $this->files_max_filesize = apply_filters('bxcft_files_max_filesize', Bxcft_Plugin::BXCFT_MAX_FILESIZE);
+            
             $locale = apply_filters( 'bxcft_load_load_textdomain_get_locale', get_locale() );
             if ( !empty( $locale ) ) {
                 $mofile_default = sprintf( '%slang/%s.mo', plugin_dir_path(__FILE__), $locale );
@@ -134,7 +146,7 @@ if (!class_exists('Bxcft_Plugin'))
         {
             $field = new BP_XProfile_Field($field_id);
             $value_to_return = strip_tags($value);
-            if (!empty($value_to_return)) {
+            if ($value_to_return !== '') {
                 // Birthdate.
                 if ($field->type == 'birthdate') {
                     $show_age = false;
@@ -253,7 +265,7 @@ if (!class_exists('Bxcft_Plugin'))
         public function bxcft_get_field_value($value='', $type='', $id='')
         {
             $value_to_return = strip_tags($value);
-            if (!empty($value_to_return)) {
+            if ($value_to_return !== '') {
                 // Birthdate.
                 if ($type == 'birthdate') {
                     $show_age = false;
@@ -408,18 +420,25 @@ if (!class_exists('Bxcft_Plugin'))
                             // Delete required field error.
                             unset($bp->signup->errors['field_'.$field_id]);
 
-                            if ($field->is_required && $_FILES['field_'.$field_id]['size'] <= 0) {
+                            $filesize = round($_FILES['field_'.$field_id]['size'] / (1024 * 1024), 2);
+                            if ($field->is_required && $filesize <= 0) {
                                 $bp->signup->errors['field_' . $field_id] = __( 'This is a required field', 'buddypress' );
-                            } else {
+                            } elseif ($filesize > 0) {
                                 // Check extensions.
                                 $ext = strtolower(substr($_FILES['field_'.$field_id]['name'], strrpos($_FILES['field_'.$field_id]['name'],'.')+1));
                                 if ($field->type == 'image') {
                                     if (!in_array($ext, $this->images_ext_allowed)) {
                                         $bp->signup->errors['field_'.$field_id] = sprintf(__('Image type not allowed: (%s).', 'bxcft'), implode(',', $this->images_ext_allowed));
                                     }
+                                    elseif ($filesize > $this->images_max_filesize) {
+                                        $bp->signup->errors['field_'.$field_id] = sprintf(__('Max image upload size: %s MB.', 'bxcft'), $this->images_max_filesize);
+                                    }
                                 } elseif ($field->type == 'file') {
                                     if (!in_array($ext, $this->files_ext_allowed)) {
                                         $bp->signup->errors['field_'.$field_id] = sprintf(__('File type not allowed: (%s).', 'bxcft'), implode(',', $this->files_ext_allowed));
+                                    }
+                                    elseif ($filesize > $this->files_max_filesize) {
+                                        $bp->signup->errors['field_'.$field_id] = sprintf(__('Max file upload size: %s MB.', 'bxcft'), $this->files_max_filesize);
                                     }
                                 }
                             }
@@ -437,13 +456,16 @@ if (!class_exists('Bxcft_Plugin'))
         
         function bxcft_xprofile_data_before_save($data) 
         {
+            global $bp;
+            
             $field_id = $data->field_id;
             $field = new BP_XProfile_Field($field_id);
 
             if ($field->type == 'image' || $field->type == 'file') 
             {
                 $uploads = wp_upload_dir();
-                if (isset($_FILES['field_'.$field_id]) && $_FILES['field_'.$field_id]['size'] > 0) 
+                $filesize = round($_FILES['field_'.$field_id]['size'] / (1024 * 1024), 2);
+                if (isset($_FILES['field_'.$field_id]) && $filesize > 0) 
                 {
                     $ext = strtolower(substr($_FILES['field_'.$field_id]['name'], strrpos($_FILES['field_'.$field_id]['name'],'.')+1));
                     if ($field->type == 'image') 
@@ -451,8 +473,12 @@ if (!class_exists('Bxcft_Plugin'))
                         $ext_allowed = $this->images_ext_allowed;
                         if (!in_array($ext, $ext_allowed)) 
                         {
-                            bp_core_add_message( sprintf(__('Image type not allowed: (%s).', 'bxcft'), implode(',',$this->images_ext_allowed)), 'error' );
-                            $data->field_id = 0;
+                            bp_core_add_message( sprintf(__('Image type not allowed: (%s).', 'bxcft'), implode(',', $this->images_ext_allowed)), 'error' );
+                            bp_core_redirect( trailingslashit( bp_displayed_user_domain() . $bp->profile->slug . '/edit/group/' . bp_action_variable( 1 ) ) );
+                        }
+                        elseif ($filesize > $this->images_max_filesize) {
+                            bp_core_add_message( sprintf(__('Max image upload size: %s MB.', 'bxcft'), $this->images_max_filesize), 'error' );
+                            bp_core_redirect( trailingslashit( bp_displayed_user_domain() . $bp->profile->slug . '/edit/group/' . bp_action_variable( 1 ) ) );
                         } else {
                             // Delete previous image.
                             if (isset($_POST['field_'.$field_id.'_hiddenimg'])      &&
@@ -468,7 +494,11 @@ if (!class_exists('Bxcft_Plugin'))
                         $ext_allowed = $this->files_ext_allowed;
                         if (!in_array($ext, $ext_allowed)) {
                             bp_core_add_message( sprintf(__('File type not allowed: (%s).', 'bxcft'), implode(',', $this->files_ext_allowed)), 'error' );
-                            $data->field_id = 0;
+                            bp_core_redirect( trailingslashit( bp_displayed_user_domain() . $bp->profile->slug . '/edit/group/' . bp_action_variable( 1 ) ) );
+                        }
+                        elseif ($filesize > $this->files_max_filesize) {
+                            bp_core_add_message( sprintf(__('Max file upload size: %s MB.', 'bxcft'), $this->files_max_filesize), 'error' );
+                            bp_core_redirect( trailingslashit( bp_displayed_user_domain() . $bp->profile->slug . '/edit/group/' . bp_action_variable( 1 ) ) );
                         } else {
                             // Delete previous file.
                             if (isset($_POST['field_'.$field_id.'_hiddenfile'])     &&
@@ -557,6 +587,32 @@ if (!class_exists('Bxcft_Plugin'))
                     unlink($uploads['basedir'] . $_POST['field_'.$field_id.'_hiddenfile']);
                 } 
             }
+        }
+        
+        public function bxcft_map($field_type, $field)
+        {
+            switch($field_type) {
+                case 'birthdate':
+                case 'datepicker':
+                    $field_type = 'datebox';
+                    break;
+                
+                case 'email':
+                case 'web': 
+                case 'image':
+                case 'file':
+                case 'color':
+                    $field_type = 'textbox';
+                    break;
+                
+                case 'select_custom_post_type':
+                case 'multiselect_custom_post_type':
+                case 'checkbox_acceptance':
+                    $field_type = 'selectbox';
+                    break;
+            }
+            
+            return $field_type;
         }
         
         public function bxcft_update() 

@@ -1,19 +1,18 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BuddyBoss 4.0.6\n"
+"Project-Id-Version: BuddyBoss 4.0.9 v4.0.9\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-13 20:03-0600\n"
-"PO-Revision-Date: 2014-09-23 16:17-0800\n"
+"PO-Revision-Date: 2014-12-24 18:58-0600\n"
 "Last-Translator: BuddyBoss <support@buddyboss.com>\n"
 "Language-Team: BuddyBoss <support@buddyboss.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.6.9\n"
+"X-Generator: Poedit 1.7.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
-"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Textdomain-Support: yes\n"
 "Language: en_US\n"
@@ -117,8 +116,7 @@ msgstr ""
 
 # @ buddyboss
 #: buddyboss-inc/buddyboss-customizer/buddyboss-customizer-loader.php:86
-msgid ""
-"Dock a full-width Toolbar to the top of the page, or float it to the right."
+msgid "Dock a full-width Toolbar to the top of the page, or float it to the right."
 msgstr ""
 
 # @ buddyboss
@@ -133,9 +131,7 @@ msgstr ""
 
 # @ buddyboss
 #: buddyboss-inc/buddyboss-customizer/buddyboss-customizer-loader.php:116
-msgid ""
-"Select your color scheme. To preview in mobile, just collapse the width of "
-"this browser window."
+msgid "Select your color scheme. To preview in mobile, just collapse the width of this browser window."
 msgstr ""
 
 # @ buddyboss
@@ -180,9 +176,7 @@ msgstr ""
 
 # @ buddyboss
 #: buddyboss-inc/buddyboss-customizer/buddyboss-customizer-loader.php:250
-msgid ""
-"Text color options. To preview in mobile, just collapse the width of this "
-"browser window."
+msgid "Text color options. To preview in mobile, just collapse the width of this browser window."
 msgstr ""
 
 # @ buddyboss
@@ -230,9 +224,7 @@ msgstr ""
 
 # @ buddyboss
 #: buddyboss-inc/buddyboss-customizer/buddyboss-customizer-loader.php:394
-msgid ""
-"Social media links will display in the footer after you click Save &amp; "
-"Publish."
+msgid "Social media links will display in the footer after you click Save &amp; Publish."
 msgstr ""
 
 # @ buddyboss
@@ -395,84 +387,84 @@ msgid "Post in:"
 msgstr ""
 
 # @ buddyboss
-#: buddyboss-inc/theme-functions.php:471
+#: buddyboss-inc/theme-functions.php:468
 #, php-format
 msgid "Page %s"
 msgstr ""
 
 # @ buddyboss
-#: buddyboss-inc/theme-functions.php:672 single.php:20
+#: buddyboss-inc/theme-functions.php:669 single.php:20
 msgid "Post navigation"
 msgstr ""
 
 # @ buddyboss
-#: buddyboss-inc/theme-functions.php:673
+#: buddyboss-inc/theme-functions.php:670
 msgid "<span class=\"meta-nav\">&larr;</span> Older posts"
 msgstr ""
 
 # @ buddyboss
-#: buddyboss-inc/theme-functions.php:674
+#: buddyboss-inc/theme-functions.php:671
 msgid "Newer posts <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 
 # @ buddyboss
-#: buddyboss-inc/theme-functions.php:699
+#: buddyboss-inc/theme-functions.php:696
 msgid "Pingback:"
 msgstr ""
 
 # @ buddyboss
-#: buddyboss-inc/theme-functions.php:699
+#: buddyboss-inc/theme-functions.php:696
 msgid "(Edit)"
 msgstr ""
 
 # @ buddyboss
-#: buddyboss-inc/theme-functions.php:714
+#: buddyboss-inc/theme-functions.php:711
 msgid "Post author"
 msgstr ""
 
 # @ buddyboss
 #. translators: 1: date, 2: time
-#: buddyboss-inc/theme-functions.php:720
+#: buddyboss-inc/theme-functions.php:717
 #, php-format
 msgid "%1$s at %2$s"
 msgstr ""
 
 # @ buddyboss
-#: buddyboss-inc/theme-functions.php:726
+#: buddyboss-inc/theme-functions.php:723
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
 # @ buddyboss
-#: buddyboss-inc/theme-functions.php:734 content-buddypress.php:78
+#: buddyboss-inc/theme-functions.php:731 content-buddypress.php:78
 #: content-page.php:23 content.php:83 image.php:37
 msgid "Edit"
 msgstr ""
 
 # @ buddyboss
-#: buddyboss-inc/theme-functions.php:735
+#: buddyboss-inc/theme-functions.php:732
 msgid "Reply <span>&darr;</span>"
 msgstr ""
 
 # @ buddyboss
-#: buddyboss-inc/theme-functions.php:754 buddyboss-inc/theme-functions.php:757
+#: buddyboss-inc/theme-functions.php:751 buddyboss-inc/theme-functions.php:754
 msgid ", "
 msgstr ""
 
 # @ buddyboss
-#: buddyboss-inc/theme-functions.php:768
+#: buddyboss-inc/theme-functions.php:765
 #, php-format
 msgid "View all posts by %s"
 msgstr ""
 
 # @ buddyboss
-#: buddyboss-inc/theme-functions.php:774 buddyboss-inc/theme-functions.php:776
-#: buddyboss-inc/theme-functions.php:778
+#: buddyboss-inc/theme-functions.php:771 buddyboss-inc/theme-functions.php:773
+#: buddyboss-inc/theme-functions.php:775
 #, php-format
 msgid "%3$s <span class=\"by-author\"> by %4$s</span>"
 msgstr ""
 
 # @ buddyboss
-#: buddyboss-inc/theme-functions.php:1160
+#: buddyboss-inc/theme-functions.php:1157
 msgid "View Profile"
 msgstr ""
 
@@ -670,12 +662,7 @@ msgstr ""
 # @ buddyboss
 #: buddypress/forums/index.php:122
 #, php-format
-msgid ""
-"You are not a member of any groups so you don't have any group forums you "
-"can post in. To start posting, first find a group that matches the topic "
-"subject you'd like to start. If this group does not exist, why not <a "
-"href='%s'>create a new group</a>? Once you have joined or created the group "
-"you can post your topic in that group's forum."
+msgid "You are not a member of any groups so you don't have any group forums you can post in. To start posting, first find a group that matches the topic subject you'd like to start. If this group does not exist, why not <a href='%s'>create a new group</a>? Once you have joined or created the group you can post your topic in that group's forum."
 msgstr ""
 
 # @ buddyboss
@@ -749,8 +736,7 @@ msgstr ""
 
 # @ buddyboss
 #: buddypress/groups/single/admin.php:64 buddypress/groups/single/admin.php:74
-msgid ""
-"This group will be listed in the groups directory and in search results."
+msgid "This group will be listed in the groups directory and in search results."
 msgstr ""
 
 # @ buddyboss
@@ -770,8 +756,7 @@ msgstr ""
 
 # @ buddyboss
 #: buddypress/groups/single/admin.php:75 buddypress/groups/single/admin.php:85
-msgid ""
-"Group content and activity will only be visible to members of the group."
+msgid "Group content and activity will only be visible to members of the group."
 msgstr ""
 
 # @ buddyboss
@@ -786,8 +771,7 @@ msgstr ""
 
 # @ buddyboss
 #: buddypress/groups/single/admin.php:84
-msgid ""
-"This group will not be listed in the groups directory or search results."
+msgid "This group will not be listed in the groups directory or search results."
 msgstr ""
 
 # @ buddyboss
@@ -817,9 +801,7 @@ msgstr ""
 
 # @ buddyboss
 #: buddypress/groups/single/admin.php:127
-msgid ""
-"Upload an image to use as an avatar for this group. The image will be shown "
-"on the main group page, and in search results."
+msgid "Upload an image to use as an avatar for this group. The image will be shown on the main group page, and in search results."
 msgstr ""
 
 # @ buddyboss
@@ -829,9 +811,7 @@ msgstr ""
 
 # @ buddyboss
 #: buddypress/groups/single/admin.php:137
-msgid ""
-"If you'd like to remove the existing avatar but not upload a new one, please "
-"use the delete avatar button."
+msgid "If you'd like to remove the existing avatar but not upload a new one, please use the delete avatar button."
 msgstr ""
 
 # @ buddyboss
@@ -958,9 +938,7 @@ msgstr ""
 
 # @ buddyboss
 #: buddypress/groups/single/admin.php:355
-msgid ""
-"WARNING: Deleting this group will completely remove ALL content associated "
-"with it. There is no way back, please be careful with this option."
+msgid "WARNING: Deleting this group will completely remove ALL content associated with it. There is no way back, please be careful with this option."
 msgstr ""
 
 # @ buddyboss
@@ -1000,9 +978,7 @@ msgstr ""
 
 # @ buddyboss
 #: buddypress/groups/single/send-invites.php:75
-msgid ""
-"Once you have built up friend connections you will be able to invite others "
-"to your group."
+msgid "Once you have built up friend connections you will be able to invite others to your group."
 msgstr ""
 
 # @ buddyboss
@@ -1129,9 +1105,7 @@ msgstr ""
 
 # @ buddyboss
 #: content-none.php:17 index.php:80
-msgid ""
-"Apologies, but no results were found. Perhaps searching will help find a "
-"related post."
+msgid "Apologies, but no results were found. Perhaps searching will help find a related post."
 msgstr ""
 
 # @ buddyboss
@@ -1172,9 +1146,7 @@ msgstr ""
 
 # @ buddyboss
 #: footer.php:64
-msgid ""
-"&nbsp;&middot;&nbsp; Designed by <a href=\"http://www.buddyboss.com/\" "
-"target=\"_blank\" title=\"responsive BuddyPress theme\">BuddyBoss</a>"
+msgid "&nbsp;&middot;&nbsp; Designed by <a href=\"http://www.buddyboss.com/\" target=\"_blank\" title=\"responsive BuddyPress theme\">BuddyBoss</a>"
 msgstr ""
 
 # @ buddyboss
@@ -1184,9 +1156,7 @@ msgstr ""
 
 # @ buddyboss
 #: functions.php:13
-msgid ""
-"BuddyBoss cannot find the starter file, should be located at: *wp root*/wp-"
-"content/themes/buddyboss/buddyboss-inc/init.php"
+msgid "BuddyBoss cannot find the starter file, should be located at: *wp root*/wp-content/themes/buddyboss/buddyboss-inc/init.php"
 msgstr ""
 
 # @ buddyboss
@@ -1202,12 +1172,7 @@ msgstr ""
 # @ buddyboss
 #: image.php:26
 #, php-format
-msgid ""
-"<span class=\"meta-prep meta-prep-entry-date\">Published </span> <span class="
-"\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\">%2$s</time></"
-"span> at <a href=\"%3$s\" title=\"Link to full-size image\">%4$s &times; "
-"%5$s</a> in <a href=\"%6$s\" title=\"Return to %7$s\" rel=\"gallery\">%8$s</"
-"a>."
+msgid "<span class=\"meta-prep meta-prep-entry-date\">Published </span> <span class=\"entry-date\"><time class=\"entry-date\" datetime=\"%1$s\">%2$s</time></span> at <a href=\"%3$s\" title=\"Link to full-size image\">%4$s &times; %5$s</a> in <a href=\"%6$s\" title=\"Return to %7$s\" rel=\"gallery\">%8$s</a>."
 msgstr ""
 
 # @ buddyboss
@@ -1239,9 +1204,7 @@ msgstr ""
 
 # @ buddyboss
 #: search.php:38
-msgid ""
-"Sorry, but nothing matched your search criteria. Please try again with some "
-"different keywords."
+msgid "Sorry, but nothing matched your search criteria. Please try again with some different keywords."
 msgstr ""
 
 # @ buddyboss

@@ -269,7 +269,7 @@ class pg_Topics_Widget extends WP_Widget {
                 $topics_query = array(
                     'post_type' => bbp_get_topic_post_type(),
                     'post_parent' => $settings['parent_forum'],
-                    'posts_per_page' => '50',
+                    'posts_per_page' => (int) $settings['max_shown'],
                     'post_status' => array(bbp_get_public_status_id(), bbp_get_closed_status_id()),
                     'show_stickies' => false,
                     'meta_key' => '_bbp_last_active_time',
@@ -283,7 +283,7 @@ class pg_Topics_Widget extends WP_Widget {
                 $topics_query = array(
                     'post_type' => bbp_get_topic_post_type(),
                     'post_parent' => $settings['parent_forum'],
-                    'posts_per_page' => '50',
+                    'posts_per_page' => (int) $settings['max_shown'],
                     'post_status' => array(bbp_get_public_status_id(), bbp_get_closed_status_id()),
                     'show_stickies' => false,
                     'meta_key' => '_bbp_reply_count',
@@ -298,7 +298,7 @@ class pg_Topics_Widget extends WP_Widget {
                 $topics_query = array(
                     'post_type' => bbp_get_topic_post_type(),
                     'post_parent' => $settings['parent_forum'],
-                    'posts_per_page' => '50',
+                    'posts_per_page' => (int) $settings['max_shown'],
                     'post_status' => array(bbp_get_public_status_id(), bbp_get_closed_status_id()),
                     'show_stickies' => false,
                     'order' => 'DESC'
@@ -307,9 +307,11 @@ class pg_Topics_Widget extends WP_Widget {
         }
 
         //PRIVATE GROUPS Get an array of IDs which the current user has permissions to view
-        $allowed_posts = private_groups_get_permitted_post_ids(new WP_Query($topics_query));
+        //set posts per page to 200 to ensure we get a full list
+		$topics_query['posts_per_page'] =200;
+		$allowed_posts = private_groups_get_permitted_post_ids(new WP_Query($topics_query));
         // The default forum query with allowed forum ids array added
-        $topics_query['post__in'] = $allowed_posts;
+		$topics_query['post__in'] = $allowed_posts;
 		//reset the max to be shown
 		$topics_query['posts_per_page'] =(int) $settings['max_shown'] ;
 		
@@ -384,16 +386,16 @@ class pg_Topics_Widget extends WP_Widget {
         $instance = $old_instance;
         $instance['title'] = strip_tags($new_instance['title']);
         $instance['order_by'] = strip_tags($new_instance['order_by']);
+		$instance['parent_forum'] = sanitize_text_field( $new_instance['parent_forum'] );
         $instance['show_date'] = (bool) $new_instance['show_date'];
         $instance['show_user'] = (bool) $new_instance['show_user'];
         $instance['max_shown'] = (int) $new_instance['max_shown'];
 
         // Force to any
-        if (!empty($instance['parent_forum']) || !is_numeric($instance['parent_forum'])) {
-            $instance['parent_forum'] = 'any';
-        } else {
-            $instance['parent_forum'] = (int) $new_instance['parent_forum'];
-        }
+        if ( !empty( $instance['parent_forum'] ) && !is_numeric( $instance['parent_forum'] ) ) {
+			$instance['parent_forum'] = 'any';
+		}
+         
 
         return $instance;
     }

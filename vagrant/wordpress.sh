@@ -6,6 +6,8 @@ then
 	# Create database
 	mysql -uroot -pvagrant -e "CREATE DATABASE IF NOT EXISTS alphasssdev;"
 
+	cat /var/www/alphasss.dev/vagrant/dump/dump_sql_* > dump.sql
+
 	# insert data into local database
 	mysql -uroot -pvagrant alphasssdev < /var/www/alphasss.dev/vagrant/dump/dump.sql
 
@@ -29,7 +31,15 @@ then
 
 	sudo ./vendor/bin/phpcs --config-set installed_paths /var/www/alphasss.dev/vendor/wp-coding-standards/wpcs/
 
-	sudo rm /etc/hosts 
+	sudo rm /etc/hosts
+
+	export WP_LOCAL_DEV=true
+    export DB_NAME=alphasssdev
+    export DB_USER=root
+    export DB_PASSWORD=vagrant
+    export DB_HOST=localhost
+    export WP_DEBUG=true
+    export WP_HOST=alphasss.dev
 
 	sudo service apache2 restart
 	#sudo service nginx restart

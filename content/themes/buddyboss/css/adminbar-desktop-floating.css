@@ -47,6 +47,12 @@ The default admin-bar.min.css is deregistered via
 		display: block;
 	}
 
+	/* hide Swipe area on desktop */
+    #buddyboss-swipe-area {
+        display: none;
+        position: fixed;
+    }
+
 	/*--------------------------------------------------------------
 	1.1.2 - General
 	--------------------------------------------------------------*/

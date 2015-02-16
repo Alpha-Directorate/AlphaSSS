@@ -3,6 +3,8 @@
 # Create database
 mysql -uroot -e "CREATE DATABASE IF NOT EXISTS alphasssdev;"
 
+cat ./vagrant/dump/dump_sql_* > ./vagrant/dump/dump.sql
+
 # insert data into local database
 mysql -uroot alphasssdev < ./vagrant/dump/dump.sql
 

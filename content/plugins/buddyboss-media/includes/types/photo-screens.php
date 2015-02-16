@@ -128,14 +128,28 @@ function buddyboss_media_screen_photo_grid_content()
         // Let's get the permalink of this attachment to show within a lightbox
         $permalink = bp_activity_get_permalink( $pic[ 'id' ] );
 
+        // We need to remove the media plugin's photo filters so it doesn't add an image/link
+        // to the activity body
+        remove_filter( 'bp_get_activity_content_body', array( $buddyboss_media->types->photo->hooks, 'bp_get_activity_content_body' ) );
+  
+
         // Let's get the caption
-        $action = '';
+        $caption = $caption_inner = '';
+        
         if ( bp_has_activities( 'include='.$pic['id'] ) )
         {
           while ( bp_activities() )
           {
             bp_the_activity();
-            $action = '<div class="buddyboss_media_action">'. bp_get_activity_action() . '</div>';
+
+            // We need to store both the action and body so we can fall back to upload date
+            // in PhotoSwipe. PHP/WP will output this data and our JS will filter and apply
+            // the proper caption
+            $caption_inner  = '<div class="buddyboss_media_caption_action">' . bp_get_activity_action() . '</div>';
+            $caption_inner .= '<div class="buddyboss_media_caption_body">' . bp_get_activity_content_body() . '</div>';
+
+
+            $caption = '<div class="buddyboss_media_caption">' . $caption_inner . '</div>';
           }
         }
 
@@ -149,7 +163,7 @@ function buddyboss_media_screen_photo_grid_content()
         {
           $buddyboss_media->types->photo->grid_data[] = array(
             'attachment'  => $attachment_id,
-            'action'      => $action,
+            'caption'     => $caption,
             'image'       => $image,
             'tn'          => $tn,
             'permalink'   => $permalink

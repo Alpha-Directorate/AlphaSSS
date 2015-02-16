@@ -34,16 +34,27 @@ class BuddyBoss_Media_Plugin
 		'media-compat',
 		'media-pagination',
 		'media-template',
+		'media-bp-notifications',
 
 		// Types
 		'types/photo-class',
 		'types/photo-hooks',
 		'types/photo-screens',
 		'types/photo-template',
+		'types/photo-compat',
 
 		// 3rd-Party/Vendor
-		'vendor/image-rotation-fixer'
-
+		'vendor/image-rotation-fixer',
+		
+		// Albums
+		'albums/album-screens',
+		'albums/album-template',
+		'albums/album-functions',
+		
+		// Friends Tagging
+		'tagging/class.BuddyBoss_Media_Tagging',
+		'tagging/class.BuddyBoss_Media_Tagging_Hooks',
+		'tagging/class.BuddyBoss_Media_Tagging_Notifications',
 	);
 
 	/**
@@ -387,7 +398,8 @@ class BuddyBoss_Media_Plugin
 			return;
 
 		// Hook into BuddyPress init
-		add_action( 'bp_loaded', array( $this, 'bp_loaded' ) );
+		add_action( 'bp_loaded',	array( $this, 'bp_loaded' ) );
+		add_action( 'init',			array( $this, 'add_rewrite_rules' ) );
 	}
 
 	/**
@@ -405,7 +417,7 @@ class BuddyBoss_Media_Plugin
 		$domain = 'buddyboss-media';
 		$locale = apply_filters('plugin_locale', get_locale(), $domain);
 
-		//first try to load from wp-contents/languages/plugins/ directory
+		//first try to load from wp-content/languages/plugins/ directory
 		load_textdomain($domain, WP_LANG_DIR.'/plugins/'.$domain.'-'.$locale.'.mo');
 
 		//if not found, then load from buddboss-media/languages/ directory
@@ -443,7 +455,53 @@ class BuddyBoss_Media_Plugin
 			return;
 		}
 
+		//Dont load if activity component is not enabled
+		if( !bp_is_active( 'activity' ) ){
+			//show notice to admin
+			add_action( 'admin_notices', array( $this, 'admin_notice_activity_dependency' ) );
+			
+			return;
+		}
+		
+		//check if database upgrade is required
+		$prev_db_version = get_option( 'buddyboss_media_db_version' );
+		if( $prev_db_version != BUDDYBOSS_MEDIA_PLUGIN_DB_VERSION ){
+			//databse update is required 
+			$network_wide = false;
+			if ( is_multisite() ) {
+				if ( ! function_exists( 'is_plugin_active_for_network' ) )
+					require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+				
+				if( is_plugin_active_for_network( 'buddyboss-media/buddyboss-media.php' ) )
+					$network_wide = true;
+			}
+			
+			buddyboss_media_setup_db_tables( $network_wide );
+		}
+		
 		$this->load_main();
+	}
+	
+	/**
+	 * Add rewrites rules. Required only for global media page for now.
+	 * 
+	 * @since BuddyBoss Media 1.1.0
+	 */
+	function add_rewrite_rules(){
+		global $wp;
+		
+		$page_id = $this->option('all-media-page');
+		if( !$page_id )
+			return;
+		
+		$page_slug = basename( get_permalink( $page_id ) );
+		if( !$page_slug )
+			return;
+		
+		$wp->add_query_var('mediatype');
+		add_rewrite_rule( $page_slug . '/([^/]*)/page/([0-9]+)','index.php?pagename=' . $page_slug . '&mediatype=$matches[1]&paged=$matches[2]','top');
+		add_rewrite_rule( $page_slug . '/([^/]*)','index.php?pagename=' . $page_slug . '&mediatype=$matches[1]','top');
+		
 	}
 
 	/* Load
@@ -489,6 +547,11 @@ class BuddyBoss_Media_Plugin
 
 		// Types
 		$this->types->photo = new BuddyBoss_Media_Type_Photo();
+		/* slug is configurable, but we'll keep the component name same,
+		 * otherwise, all notifications(by this plugin) will be rendered inactive as soon as slug is changed.
+		 */
+		$slug = buddyboss_media_default_component_slug();
+		buddypress()->$slug = $this->types->photo;
 		// $this->types->audio = new BuddyBoss_Media_Type_Audio( $this->options );
 		// $this->types->video = new BuddyBoss_Media_Type_Video( $this->options );
 		// $this->types->archive = new BuddyBoss_Media_Type_Archive( $this->options );
@@ -686,6 +749,32 @@ class BuddyBoss_Media_Plugin
     <?php
 	}
 
+	/**
+	 * Show admin notice if activity component is disabled.
+	 * 
+	 * @since BuddyBoss Media 2.0.8
+	 */
+	public function admin_notice_activity_dependency(){
+		if ( current_user_can( 'manage_options' ) ){
+			$network_wide = false;
+			if ( is_multisite() ) {
+				if ( ! function_exists( 'is_plugin_active_for_network' ) )
+					require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+				
+				if( is_plugin_active_for_network( 'buddyboss-media/buddyboss-media.php' ) )
+					$network_wide = true;
+			}
+			
+			if( $network_wide  ){
+				$bp_settings_link = "<a href='" .	network_admin_url( 'admin.php?page=bp-components' ) . "'>" . __( 'BuddyPress Settings', 'buddyboss-media' ) . "</a>";
+			} else {
+				$bp_settings_link = "<a href='" .			admin_url( 'admin.php?page=bp-components' ) . "'>" . __( 'BuddyPress Settings', 'buddyboss-media' ) . "</a>";
+			}
+			$notice = sprintf( __( "Hey! BuddyBoss Media requires activity component be enabled. Please enable it in your %s.", 'buddyboss-media' ), $bp_settings_link );
+
+			echo "<div class='error'><p>{$notice}</p></div>";
+		}
+	}
 }
 // End class BuddyBoss_Media_Plugin
 

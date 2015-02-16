@@ -203,7 +203,7 @@ function buddyboss_slides_assets()
         if ( !is_admin() ) { // no loading in the dashboard
 
             // Adds styles for the image slider.  Load FontAwesome and GoogleFonts first.
-            wp_enqueue_style( 'buddyboss-slides-main', get_template_directory_uri() . '/buddyboss-inc/buddyboss-slides/css/buddyboss-slides.css', array( 'fontawesome', 'googlefonts' ), '4.0.6', 'all' );
+            wp_enqueue_style( 'buddyboss-slides-main', get_template_directory_uri() . '/buddyboss-inc/buddyboss-slides/css/buddyboss-slides.css', array( 'fontawesome', 'googlefonts' ), '4.1.2', 'all' );
 
             wp_enqueue_script( 'buddyboss-slides-fwslider', get_template_directory_uri() . '/buddyboss-inc/buddyboss-slides/js/fwslider.min.js', array('jquery'), '4.0.6', true );
 

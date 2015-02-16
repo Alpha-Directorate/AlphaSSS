@@ -30,6 +30,10 @@ CHANGELOG
 ----------------------------------------------------------------
 Version 4
 ----------------------------------------------------------------
+4.1.2 - February 2, 2015
+4.1.1 - January 24, 2014
+4.1.0 - December 31, 2014
+4.0.9 - December 24, 2014
 4.0.8 - November 15, 2014
 4.0.7 - October 9, 2014
 4.0.6 - September 23, 2014
@@ -109,6 +113,151 @@ Version 1
 /*--------------------------------------------------------------
 Version 4
 --------------------------------------------------------------*/
+/*--------------------------------------------------------------
+4.1.2 - February 2, 2015
+--------------------------------------------------------------*/
+
+FEATURES:
+
+	Updated FontAwesome to 4.3
+
+BUG FIXES:
+
+	Displaying Homepage Slider buttons on mobile layout
+
+CHANGED FILES:
+
+	/buddyboss-inc/buddyboss-slides/buddyboss-slides-loader.php
+	/buddyboss-inc/buddyboss-slides/css/buddyboss-slides.css
+	/buddyboss-inc/theme-functions.php
+	readme.txt
+	style.css
+
+TESTED WITH:
+
+	-- WordPress --
+	WordPress 4.0+
+	BuddyPress 2.1+
+	bbPress 2.5+
+
+	-- Mobile --
+	iOS 6, 7
+	Android 4.1+ 
+	Windows Phone
+
+	-- Browsers --
+	Chrome
+	Safari
+	Firefox
+	Internet Explorer 9+
+
+/*--------------------------------------------------------------
+4.1.1 - January 24, 2014
+--------------------------------------------------------------*/
+
+BUG FIXES:
+
+	Fixed off-centered login logo on mobile
+	Fixed whitespace when opening panel on mobile, then expanding to desktop layout
+
+CHANGED FILES:
+
+	/buddyboss-inc/theme-functions.php
+	/css/adminbar-desktop-fixed.css
+	/css/adminbar-desktop-floating.css
+	readme.txt
+	style.css
+
+TESTED WITH:
+
+	-- WordPress --
+	WordPress 4.0+
+	BuddyPress 2.1+
+	bbPress 2.5+
+
+	-- Mobile --
+	iOS 6, 7
+	Android 4.1+ 
+	Windows Phone
+
+	-- Browsers --
+	Chrome
+	Safari
+	Firefox
+	Internet Explorer 9+
+
+/*--------------------------------------------------------------
+4.1.0 - December 31, 2014
+--------------------------------------------------------------*/
+
+BUG FIXES:
+
+	CSS compatibility with Media plugin "Albums" functionality
+
+CHANGED FILES:
+
+	/buddyboss-inc/theme-functions.php
+	/css/plugins.css
+	readme.txt
+	style.css
+
+TESTED WITH:
+
+	-- WordPress --
+	WordPress 4.0+
+	BuddyPress 2.1+
+	bbPress 2.5+
+
+	-- Mobile --
+	iOS 6, 7
+	Android 4.1+ 
+	Windows Phone
+
+	-- Browsers --
+	Chrome
+	Safari
+	Firefox
+	Internet Explorer 9+
+
+/*--------------------------------------------------------------
+4.0.9 - December 24, 2014
+--------------------------------------------------------------*/
+
+BUG FIXES:
+
+	Fixed plugin conflict with BuddyPress Activity Privacy
+	Better styling on Photos template "What's New Form"
+	CSS compatibility with upcoming Media plugin updates
+
+CHANGED FILES:
+
+	/buddyboss-inc/theme-functions.php
+	/css/buddypress.css
+	/css/plugins.css
+	/css/wordpress.css
+	/languages/en_US.mo
+	/languages/en_US.po
+	readme.txt
+	style.css
+
+TESTED WITH:
+
+	-- WordPress --
+	WordPress 4.0+
+	BuddyPress 2.1+
+	bbPress 2.5+
+
+	-- Mobile --
+	iOS 6, 7
+	Android 4.1+ 
+	Windows Phone
+
+	-- Browsers --
+	Chrome
+	Safari
+	Firefox
+	Internet Explorer 9+
+
 /*--------------------------------------------------------------
 4.0.8 - November 15, 2014
 --------------------------------------------------------------*/
