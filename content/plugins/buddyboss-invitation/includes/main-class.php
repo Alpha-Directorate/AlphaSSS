@@ -32,6 +32,14 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 		);
 
 		/**
+		 * Admin includes
+		 * @var array
+		 */
+		private $admin_includes = array(
+			'admin'
+		);
+
+		/**
 		 * Main BuddyBoss Wall Instance.
 		 *
 		 * Insures that only one instance of BuddyBoss Invitation exists in memory at any
@@ -215,7 +223,9 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 		 */
 		public function load_admin()
 		{
-			//not implemented
+			$this->do_includes( $this->admin_includes );
+
+			$this->admin = BuddyBoss_Invitation_Admin::instance();
 		}
 
 		/**

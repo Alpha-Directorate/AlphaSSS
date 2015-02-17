@@ -77,6 +77,21 @@ function buddyboss_invitation()
 }
 
 /**
+ * Settings Link
+ * @since 1.1.2
+ */
+add_filter ('plugin_action_links', function($links, $file) {
+
+	if ($file == plugin_basename (__FILE__)) {
+		$settings_link = '<a href="' . add_query_arg( array( 'page' => 'buddyboss-invitation/includes/admin.php'   ), admin_url( 'options-general.php' ) ) . '">' . esc_html__( 'Settings', 'buddyboss-invitation' ) . '</a>';
+
+		array_unshift ($links, $settings_link);
+	}
+
+	return $links;	
+}, 10, 2);
+
+/**
  * This action returns generated invitation code
  */
 add_action( 'wp_ajax_get_invitation_code', function(){
