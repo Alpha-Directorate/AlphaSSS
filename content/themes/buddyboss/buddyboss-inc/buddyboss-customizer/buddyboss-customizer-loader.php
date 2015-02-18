@@ -714,6 +714,9 @@ function buddyboss_customizer_css() { ?>
 			#wpadminbar .menupop .ab-sub-wrapper {
 				background-color: <?php echo esc_attr( get_option( 'boss_adminbar_bg_color' ) ); ?>;
 			}
+			#wpadminbar #wp-admin-bar-bp-notifications > a > span {
+				color: <?php echo esc_attr( get_option( 'boss_adminbar_bg_color' ) ); ?>;
+			}
 
 			/* Navigation color */
 			.main-navigation,

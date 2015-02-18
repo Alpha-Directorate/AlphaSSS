@@ -22,6 +22,7 @@ Adds CSS compatibility for 3rd party plugins.
 	1.14 - BP Gallery (BuddyDev)
 	1.15 - BP Activity Privacy
 	1.16 - BuddyBoss Media
+	1.17 - BuddyBoss Global Search
 2.0 - Responsive media queries (mobile styles)
 	2.1 - MAXIMUM width of 720 pixels (phones landscape)
 		2.1.1 - WooCommerce
@@ -309,6 +310,18 @@ form#places-form #new-place-content input[type="time"],
 	cursor: default;
 	color: #fff;
 	background-color: #cecece;
+}
+
+/*--------------------------------------------------------------
+1.17 - BuddyBoss Global Search
+--------------------------------------------------------------*/
+
+.bboss_ajax_search_item .item .item-title,
+.bboss_ajax_search_item .item .item-desc {
+    word-break: break-word;
+}
+.bb-global-search-ac li:not(.bbls-category) .bboss_ajax_search_item {
+    padding: 9px 0 9px;
 }
 
 

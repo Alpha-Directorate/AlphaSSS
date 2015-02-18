@@ -93,7 +93,9 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 --------------------------------------------------------------*/
 
 input[type="text"],
+input[type="email"],
 input[type="password"],
+input[type="email"],
 input[type="number"],
 textarea {
 	background-color: rgba(0, 0, 0, 0.05);
@@ -110,7 +112,9 @@ textarea {
     border-radius: 3px;
 }
 input[type="text"]:focus,
+input[type="email"]:focus,
 input[type="password"]:focus,
+input[type="email"]:focus,
 input[type="number"]:focus,
 textarea:focus {
 	color: #484848;
@@ -118,12 +122,16 @@ textarea:focus {
 }
 button,
 input[type="text"],
+input[type="email"],
 input[type="password"],
+input[type="email"],
 input[type="number"] {
     line-height: normal;
 }
 input[type="text"],
+input[type="email"],
 input[type="password"],
+input[type="email"],
 input[type="number"] {
     padding: 10px 12px;
 }
@@ -1777,7 +1785,7 @@ a.comment-edit-link {
 	/*--------------------------------------------------------------
 	11.1.5 - Dropdowns
 	--------------------------------------------------------------*/
-	.buddyboss-select {
+	.buddyboss-select-inner {
 		height: 37px;
 		display: block;
 		width: 100%;
@@ -1799,7 +1807,7 @@ a.comment-edit-link {
 		-moz-box-shadow: 0 0 0 1px #ccc inset;
 		box-shadow: 0 0 0 1px #ccc inset;
 	}
-	.buddyboss-select:after {
+	.buddyboss-select-inner:after {
 		font-family: 'FontAwesome';
 		font-weight: normal;
 		font-style: normal;
@@ -1816,8 +1824,7 @@ a.comment-edit-link {
 		right: 12px;
 		top: 9px;
 	}
-
-	.buddyboss-select select {
+	.buddyboss-select-inner select {
 		cursor: pointer !important;
 		height: 37px !important;
 		width: 100% !important;
@@ -1828,13 +1835,14 @@ a.comment-edit-link {
 		left: 0;
 		top: 0;
 	}
-
-	.buddyboss-select label {
+    #buddypress div.item-list-tabs ul li .buddyboss-select-inner span,
+	.buddyboss-select-inner span {
 		float: left !important;
 		margin-left: 15px !important;
 		font-weight: 600 !important;
 		height: 37px !important;
 		line-height: 37px !important;
+        padding: 0 !important;
 	}
 
 	/*--------------------------------------------------------------

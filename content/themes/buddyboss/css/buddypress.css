@@ -399,10 +399,10 @@ div#sitewide-notice div#message.error p:before {
 #buddypress .standard-form label,
 #buddypress .standard-form span.label {
 	display: block;
-	font-weight: 400;
+	font-weight: 600;
 	font-size: 14px;
 	color: #777;
-	margin: 5px 0 0;
+	margin: 10px 0 5px;
 	clear: left;
 }
 #buddypress .standard-form div.checkbox label,
@@ -433,9 +433,17 @@ div#sitewide-notice div#message.error p:before {
 #buddypress .standard-form #basic-details-section input[type="password"],
 #buddypress .standard-form #blog-details-section input#signup_blog_url {
 	width: 35%;
-}
+} 
+select[multiple="multiple"],
+#buddypress .standard-form#signup_form input[type="email"],
 #buddypress .standard-form#signup_form input[type="text"],
-#buddypress .standard-form#signup_form textarea,
+#buddypress .standard-form#signup_form textarea {
+    width: 100%;
+    box-sizing: border-box;
+}
+#buddypress .standard-form#signup_form .buddyboss-select label {
+    margin-top: 0;
+}
 #buddypress .form-allowed-tags,
 #buddypress #commentform input[type="text"],
 #buddypress #commentform textarea {
@@ -494,6 +502,9 @@ div#sitewide-notice div#message.error p:before {
 }
 #buddypress .standard-form #blog-details-section {
 	clear: left;
+}
+#buddypress form#settings-form input[type="email"] {
+	width: 50%;
 }
 #buddypress form#send-invite-form {
 	margin-top: 20px;
@@ -1011,6 +1022,7 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 	position: relative;
 	list-style: none;
 	overflow: hidden;
+	width: 100%;
 }
 #buddypress ul.single-line li {
 	border: none;
@@ -1237,10 +1249,12 @@ body.activity-permalink .entry-header {
 #buddypress div#message-thread div.message-options {
 	text-align: right;
 }
-
 #buddypress div.message-search {
 	float: right;
 	margin: 20px 0;
+}
+#buddypress div.message-search label {
+    display: none;
 }
 
 
@@ -2730,6 +2744,7 @@ div#register-page #signup_form.standard-form div.submit input {
 		font-weight: 600;
 		height: 37px;
 		line-height: 37px;
+        display: none;
 	}
 
 	/* Activity Filter */
@@ -3439,6 +3454,14 @@ div#register-page #signup_form.standard-form div.submit input {
 		list-style:none;
 		margin:0;
 	}
+    
+    #buddypress div.item-list-tabs ul li#activity-filter-select .buddyboss-select-inner,
+	#buddypress div.item-list-tabs ul li.filter .buddyboss-select-inner,
+	#buddypress div.whats-new-select ul li#activity-filter-select .buddyboss-select-inner,
+	#buddypress div#whats-new-options .buddyboss-select-inner,
+	#buddypress div.whats-new-select ul li.filter .buddyboss-select-inner {
+        display: inline-block;
+    }
 
 	/*--------------------------------------------------------------
 	13.3.5 - Activity Listing

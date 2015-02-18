@@ -507,40 +507,55 @@ var BuddyBossMain = ( function( $, window, undefined ) {
 			// On page load we'll go through each select element and make sure
 			// we have a label element to accompany it. If not, we'll generate
 			// one and add it dynamically.
+
+			// On page load we'll go through each select element and make sure
+			// we have a label element to accompany it. If not, we'll generate
+			// one and add it dynamically.
 			function init_select() {
 				var current = 0;
 
-				$selects = $('#page select:not([multiple])');
+				$selects = $('#page select:not([multiple]):not(#activity-privacy):not(.bp-ap-selectbox)');
 
 				$selects.each( function() {
 					var $select = $(this),
-							$wrap, id, $label, dynamic = false;
+				    $wrap, id, $span, $label, dynamic = false;
 
 					if ( this.style.display === 'none' ) {
 						return;
 					}
 
-					$wrap   = $('<div class="buddyboss-select"></div>');
+                    $wrap = $('<div class="buddyboss-select"></div>');
+                    
+                    if($(this).hasClass('large')) {
+                        $wrap = $('<div class="buddyboss-select large"></div>');
+                    }
+                    
 					id      = this.getAttribute('id') || 'buddyboss-select-' + current;
+					$span  = $select.prev('span');
 					$label  = $select.prev('label');
 
 					$select.wrap( $wrap );
-
-					// If there's no label, let's append one
-					if ( ! $label.length ) {
-						$label  = $('<label></label>').hide();
+                    
+                    $label.insertBefore( $select );
+                    
+                    $inner_wrap = $('<div class="buddyboss-select-inner"></div>');
+                    
+                    $select.wrap( $inner_wrap );
+                    
+					if ( ! $span.length ) {
+						$span  = $('<span></span>').hide();
 						dynamic = true;
 					}
-
-					$label.insertBefore( $select );
+                    
+                    $span.insertBefore( $select );
 
 					// Set data on select element to use later
 					$select.data( 'buddyboss-select-info', {
 						state:     'init',
 						dynamic:   dynamic,
 						$wrap:     $wrap,
-						$label:    $label,
-						orig_text: $label.text()
+						$label:    $span,
+						orig_text: $span.text()
 					} );
 
 					// On select change, repopulate label

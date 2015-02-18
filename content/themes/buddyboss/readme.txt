@@ -30,8 +30,10 @@ CHANGELOG
 ----------------------------------------------------------------
 Version 4
 ----------------------------------------------------------------
+4.1.4 - February 17, 2015
+4.1.3 - February 11, 2015
 4.1.2 - February 2, 2015
-4.1.1 - January 24, 2014
+4.1.1 - January 24, 2015
 4.1.0 - December 31, 2014
 4.0.9 - December 24, 2014
 4.0.8 - November 15, 2014
@@ -114,6 +116,87 @@ Version 1
 Version 4
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
+4.1.4 - February 17, 2015
+--------------------------------------------------------------*/
+
+FEATURES:
+
+	Added search to adminbar, for integration with BuddyPress Global Search	
+
+BUG FIXES:
+
+	Improved form styling - email inputs, select elements
+
+CHANGED FILES:
+
+	/buddyboss-inc/buddyboss-customizer/uddyboss-customizer-loader.php
+	/buddyboss-inc/theme-functions.php
+	/css/adminbar-desktop-fixed.css
+	/css/adminbar-desktop-floating.css
+	/css/adminbar-mobile.css
+	/css/buddypress.css
+	/css/plugins.css
+	/css/wordpress.css
+	/js/buddyboss.js
+	readme.txt
+	style.css
+
+TESTED WITH:
+
+	-- WordPress --
+	WordPress 4.0+
+	BuddyPress 2.1, 2.2
+	bbPress 2.5+
+
+	-- Mobile --
+	iOS 6, 7
+	Android 4.1+ 
+	Windows Phone
+
+	-- Browsers --
+	Chrome
+	Safari
+	Firefox
+	Internet Explorer 9+
+
+/*--------------------------------------------------------------
+4.1.3 - February 11, 2015
+--------------------------------------------------------------*/
+
+FEATURES:
+
+	Compatibility with BuddyPress 2.2
+
+BUG FIXES:
+
+	Fixed double message label error
+
+CHANGED FILES:
+
+	/buddyboss-inc/theme-functions.php
+	/css/buddypress.css
+	readme.txt
+	style.css
+
+TESTED WITH:
+
+	-- WordPress --
+	WordPress 4.0+
+	BuddyPress 2.1, 2.2
+	bbPress 2.5+
+
+	-- Mobile --
+	iOS 6, 7
+	Android 4.1+ 
+	Windows Phone
+
+	-- Browsers --
+	Chrome
+	Safari
+	Firefox
+	Internet Explorer 9+
+
+/*--------------------------------------------------------------
 4.1.2 - February 2, 2015
 --------------------------------------------------------------*/
 
@@ -152,7 +235,7 @@ TESTED WITH:
 	Internet Explorer 9+
 
 /*--------------------------------------------------------------
-4.1.1 - January 24, 2014
+4.1.1 - January 24, 2015
 --------------------------------------------------------------*/
 
 BUG FIXES:

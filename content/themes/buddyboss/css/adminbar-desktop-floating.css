@@ -97,7 +97,6 @@ The default admin-bar.min.css is deregistered via
 	#wpadminbar > #wp-toolbar span.count {
 		line-height: inherit;
 		margin-left: 3px;
-		color: #fff;
 	}
 
 	#wpadminbar #wp-admin-bar-site-name a.ab-item,
@@ -211,9 +210,18 @@ The default admin-bar.min.css is deregistered via
 		outline: none;
 		display: none !important;
 	}
+    
+	#wpadminbar #wp-admin-bar-search .ab-empty-item {
+		display: block !important;
+	}
 
 	#wpadminbar .quicklinks .ab-top-secondary > li {
 		float: right;
+	}
+
+	#wpadminbar .quicklinks .ab-top-secondary > li#wp-admin-bar-search {
+		float: left;
+		padding-left: 2px;
 	}
 
 	#wpadminbar .quicklinks a,
@@ -634,9 +642,16 @@ The default admin-bar.min.css is deregistered via
 		padding: 0 11px;
 	}
 
-	#wpadminbar #wp-admin-bar-comments .count-0,
-	#wpadminbar #wp-admin-bar-bp-notifications .no-alert {
-		opacity: .5;
+	#wpadminbar #wp-admin-bar-bp-notifications > a {
+		padding: 0 2px;
+		color: #555555;
+	}
+	#wpadminbar #wp-admin-bar-bp-notifications > a > span {
+		background: #fff;
+		padding: 0 6px;
+		-webkit-border-radius: 11px;
+		-moz-border-radius: 11px;
+		border-radius: 11px;
 	}
 
 	/*--------------------------------------------------------------
@@ -698,6 +713,10 @@ The default admin-bar.min.css is deregistered via
 		border: none;
 		outline: none;
 		cursor: pointer;
+
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		border-radius: 3px;
 
 		-webkit-box-shadow: none;
 		box-shadow: none;

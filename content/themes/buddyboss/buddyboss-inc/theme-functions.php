@@ -161,7 +161,7 @@ function buddyboss_scripts_styles()
 	 * Adds custom BuddyBoss JavaScript functionality.
 	 */
 	if ( !is_admin() ) {
-		wp_enqueue_script( 'buddyboss-main', get_template_directory_uri().'/js/buddyboss.js', array( 'jquery' ), '4.0.8' );
+		wp_enqueue_script( 'buddyboss-main', get_template_directory_uri().'/js/buddyboss.js', array( 'jquery' ), '4.1.4' );
 	}
 
 	// Add BuddyBoss words that we need to use in JS to the end of the page
@@ -198,7 +198,7 @@ function buddyboss_scripts_styles()
 	// Main WordPress stylesheet
 	if ( !is_admin() ) {
 		// Activate our primary WordPress stylesheet. Load FontAwesome and GoogleFonts first.
-		wp_enqueue_style( 'buddyboss-wp-frontend', get_template_directory_uri().'/css/wordpress.css', array( 'fontawesome', 'googlefonts' ), '4.0.9', 'all' );
+		wp_enqueue_style( 'buddyboss-wp-frontend', get_template_directory_uri().'/css/wordpress.css', array( 'fontawesome', 'googlefonts' ), '4.1.4', 'all' );
 	}
 
 	/*
@@ -213,7 +213,7 @@ function buddyboss_scripts_styles()
 		wp_deregister_style( 'bp-parent-css' );
 		wp_deregister_style( 'bp-legacy-css' );
 		// Activate our own BuddyPress stylesheet. Load FontAwesome and GoogleFonts first.
-		wp_enqueue_style( 'buddyboss-bp-frontend', get_template_directory_uri().'/css/buddypress.css', array( 'fontawesome', 'googlefonts' ), '4.0.9', 'all' );
+		wp_enqueue_style( 'buddyboss-bp-frontend', get_template_directory_uri().'/css/buddypress.css', array( 'fontawesome', 'googlefonts' ), '4.1.4', 'all' );
 	}
 
 	/*
@@ -233,7 +233,7 @@ function buddyboss_scripts_styles()
 
 	// Load our CSS support for 3rd party plugins here.
 	if ( !is_admin() ) {
-		wp_enqueue_style( 'buddyboss-wp-plugins', get_template_directory_uri().'/css/plugins.css', array( 'fontawesome', 'googlefonts' ), '4.1.0', 'all' );
+		wp_enqueue_style( 'buddyboss-wp-plugins', get_template_directory_uri().'/css/plugins.css', array( 'fontawesome', 'googlefonts' ), '4.1.4', 'all' );
 	}
 
 	// Load our own adminbar (Toolbar) styles.
@@ -241,9 +241,9 @@ function buddyboss_scripts_styles()
 		// Deregister the built-in adminbar stylesheet
 		wp_deregister_style( 'admin-bar' );
 		// Activate our own mobile adminbar stylesheet. Load FontAwesome and GoogleFonts first.
-		wp_enqueue_style( 'buddyboss-wp-adminbar-mobile', get_template_directory_uri().'/css/adminbar-mobile.css', array( 'fontawesome', 'googlefonts' ), '4.0.4', 'all' );
+		wp_enqueue_style( 'buddyboss-wp-adminbar-mobile', get_template_directory_uri().'/css/adminbar-mobile.css', array( 'fontawesome', 'googlefonts' ), '4.1.4', 'all' );
 		// Activate our own Fixed or Floating (defaults to Fixed) adminbar stylesheet. Load DashIcons and GoogleFonts first.
-		wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-'.esc_attr( get_theme_mod( 'boss_adminbar_layout', 'fixed' ) ), get_template_directory_uri().'/css/adminbar-desktop-'.esc_attr( get_theme_mod( 'boss_adminbar_layout', 'fixed' ) ).'.css', array( 'dashicons', 'googlefonts' ), '4.1.1', 'all' );
+		wp_enqueue_style( 'buddyboss-wp-adminbar-desktop-'.esc_attr( get_theme_mod( 'boss_adminbar_layout', 'fixed' ) ), get_template_directory_uri().'/css/adminbar-desktop-'.esc_attr( get_theme_mod( 'boss_adminbar_layout', 'fixed' ) ).'.css', array( 'dashicons', 'googlefonts' ), '4.1.4', 'all' );
 	}
 
 }
@@ -967,7 +967,6 @@ add_filter( 'login_headertitle', 'change_wp_login_title' );
 function remove_admin_bar_links() {
 	global $wp_admin_bar;
 	$wp_admin_bar->remove_menu('wp-logo');
-	$wp_admin_bar->remove_menu('search');
 
 	if (!current_user_can('administrator')):
 		$wp_admin_bar->remove_menu('site-name');
