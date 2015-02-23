@@ -2,6 +2,8 @@
 
 <div id="buddypress">
 
+	<div id="alerts"></div>
+
 	<?php do_action( 'bp_before_directory_members' ); ?>
 
 	<?php do_action( 'bp_before_directory_members_content' ); ?>

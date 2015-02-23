@@ -36,8 +36,7 @@
 	<ul id="members-list" class="item-list" role="main">
 
 	<?php while ( bp_members() ) : bp_the_member(); ?>
-
-		<li>
+		<li id="<?php echo md5(bp_get_member_name()); ?>">
 			<div class="item-avatar">
 				<a href="<?php bp_member_permalink(); ?>"><?php bp_member_avatar('type=full&width=70&height=70'); ?></a>
 			</div>
@@ -50,7 +49,7 @@
 				<div class="item-meta">
 					<span class="activity">
 						<?php bp_member_last_active(); ?><br />
-						online/offline
+						<span class="member-online">online</span><span class="member-offline">offline</span>
 					</span>
 				</div>
 

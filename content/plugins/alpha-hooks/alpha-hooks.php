@@ -8,6 +8,9 @@ Author: Andrew Voyticky
 Author URI:
 */
 
+wp_enqueue_script( 'bootstrap-js', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js', array('jquery') );
+wp_enqueue_style( 'bootstrap-css', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' );
+
 // Gravity forms custom validation filter hook.
 add_filter( 'gform_validation_4', function($validation_result){
 
@@ -88,6 +91,9 @@ add_filter( 'gform_validation_4', function($validation_result){
 			// Invitation code validation
 			case 20:
 				if ( isset( $_POST['input_20'] ) && $invite_code = rgpost( 'input_20' ) ) {
+
+					// Remove spaces from invitation code that user added
+					$invite_code = str_replace(" ", "", $invite_code);
 
 					$invitation_validation_result  = buddyboss_invitation()->validate_invitation_code($invite_code);
 
