@@ -30,6 +30,7 @@ CHANGELOG
 ----------------------------------------------------------------
 Version 4
 ----------------------------------------------------------------
+4.1.5 - February 18, 2015
 4.1.4 - February 17, 2015
 4.1.3 - February 11, 2015
 4.1.2 - February 2, 2015
@@ -115,6 +116,39 @@ Version 1
 /*--------------------------------------------------------------
 Version 4
 --------------------------------------------------------------*/
+/*--------------------------------------------------------------
+4.1.5 - February 18, 2015
+--------------------------------------------------------------*/
+
+BUG FIXES:
+
+	Fixed text cutting off in long activity replies
+
+CHANGED FILES:
+
+	/buddyboss-inc/theme-functions.php
+	/css/buddypress.css
+	readme.txt
+	style.css
+
+TESTED WITH:
+
+	-- WordPress --
+	WordPress 4.0+
+	BuddyPress 2.1, 2.2
+	bbPress 2.5+
+
+	-- Mobile --
+	iOS 6, 7
+	Android 4.1+ 
+	Windows Phone
+
+	-- Browsers --
+	Chrome
+	Safari
+	Firefox
+	Internet Explorer 9+
+
 /*--------------------------------------------------------------
 4.1.4 - February 17, 2015
 --------------------------------------------------------------*/

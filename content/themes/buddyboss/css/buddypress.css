@@ -1022,7 +1022,6 @@ body.activity-permalink #buddypress ul.item-list li.activity-item {
 	position: relative;
 	list-style: none;
 	overflow: hidden;
-	width: 100%;
 }
 #buddypress ul.single-line li {
 	border: none;
@@ -3472,6 +3471,9 @@ div#register-page #signup_form.standard-form div.submit input {
 	}
 	#buddypress ul.item-list.activity-list li.has-comments {
 		padding-bottom: 15px;
+	}
+	#buddypress ul.item-list.activity-list > li {
+		width: 100%;
 	}
 	body.activity-permalink #buddypress ul.activity-list li.has-comments {
 		padding-bottom: 0;

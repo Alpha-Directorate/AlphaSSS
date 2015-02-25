@@ -213,7 +213,7 @@ function buddyboss_scripts_styles()
 		wp_deregister_style( 'bp-parent-css' );
 		wp_deregister_style( 'bp-legacy-css' );
 		// Activate our own BuddyPress stylesheet. Load FontAwesome and GoogleFonts first.
-		wp_enqueue_style( 'buddyboss-bp-frontend', get_template_directory_uri().'/css/buddypress.css', array( 'fontawesome', 'googlefonts' ), '4.1.4', 'all' );
+		wp_enqueue_style( 'buddyboss-bp-frontend', get_template_directory_uri().'/css/buddypress.css', array( 'fontawesome', 'googlefonts' ), '4.1.5', 'all' );
 	}
 
 	/*
