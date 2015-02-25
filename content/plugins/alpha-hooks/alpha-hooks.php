@@ -11,6 +11,17 @@ Author URI:
 wp_enqueue_script( 'bootstrap-js', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js', array('jquery') );
 wp_enqueue_style( 'bootstrap-css', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' );
 
+add_filter('gform_register_init_scripts', function($form) {
+
+	$script = "(function($){" .
+		"$('#input_4_20').bind('input', function(){
+			$(this).val($(this).val().replace(/\s+/g, ''));
+		});})(jQuery);";
+
+	GFFormDisplay::add_init_script($form['id'], 'gform_my_function', GFFormDisplay::ON_PAGE_RENDER, $script);
+	return $form;
+});
+
 // Gravity forms custom validation filter hook.
 add_filter( 'gform_validation_4', function($validation_result){
 
