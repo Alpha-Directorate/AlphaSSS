@@ -136,7 +136,7 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 					'member_id'    => get_current_user_id(),
 					'is_active'    => 'YES',
 					'created_date' => \Carbon\Carbon::now(),
-					'expired_date' => \Carbon\Carbon::now()->addDay()
+					'expired_date' => \Carbon\Carbon::now()->addSeconds( $this->option( 'time-to-expire' ) )
 				), 
 				array( 'id' => $result['id'] ) 
 			);
