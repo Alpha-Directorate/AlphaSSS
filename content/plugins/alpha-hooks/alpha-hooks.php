@@ -11,6 +11,16 @@ Author URI:
 wp_enqueue_script( 'bootstrap-js', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js', array('jquery') );
 wp_enqueue_style( 'bootstrap-css', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' );
 
+// Add login/logout to the navigation menu
+add_filter('wp_nav_menu_items', function($items, $args) {
+	ob_start();
+	wp_loginout('/');
+	$loginoutlink = str_replace('Log in', 'Login', ob_get_contents());
+	ob_end_clean();
+	$items .= '<li>'. $loginoutlink .'</li>';
+	return $items;
+}, 10, 2);
+
 // Adds custom script to gf form
 add_filter('gform_register_init_scripts', function($form) {
 
@@ -161,7 +171,7 @@ add_filter( 'gform_validation_4', function($validation_result){
 						
 					} else {
 						$_SESSION['guessing-attempts']++;
-						
+
 						$validation_result['is_valid'] = false;
 						$field['failed_validation']    = true;
 						$field['validation_message']   = $invitation_validation_result['message'];
