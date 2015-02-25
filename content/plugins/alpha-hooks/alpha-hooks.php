@@ -154,14 +154,14 @@ add_filter( 'gform_validation_4', function($validation_result){
 
 							buddyboss_invitation()->update_invitation_code($invite_code, array('activated_member_id' => $user->ID));
 						} else {
-							$_SESSION['guessing-attempts']++;
-
 							$validation_result['is_valid'] = false;
 							$field['failed_validation']    = true;
 							$field['validation_message']   = __('Please contact admin');
 						}
 						
 					} else {
+						$_SESSION['guessing-attempts']++;
+						
 						$validation_result['is_valid'] = false;
 						$field['failed_validation']    = true;
 						$field['validation_message']   = $invitation_validation_result['message'];
