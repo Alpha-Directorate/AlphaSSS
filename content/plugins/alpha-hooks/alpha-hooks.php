@@ -108,7 +108,7 @@ add_filter( 'gform_validation_4', function($validation_result){
 						//--
 						
 						// Set Pre Citizen Role to user
-						wp_update_user( array ('ID' => $user_id, 'role' => 'pre_citizen' ) ) ;
+						wp_update_user( array ('ID' => $user_id, 'role' => 'pre_member' ) ) ;
 					}
 				}
 			break;

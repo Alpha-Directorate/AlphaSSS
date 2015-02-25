@@ -2,7 +2,20 @@
 
 <div id="buddypress">
 
-	<div id="alerts"></div>
+	<div id="alerts">
+		<div role="alert" class="alert alert-dismissible alert-success fade in">
+			<button class="close" aria-label="Close" data-dismiss="alert" type="button">
+				<span aria-hidden="true">×</span>
+			</button>
+
+			<div class="alert-content">
+				<?php _e('There are two ways to get an invitation code to join to the AlphaSSS:'); ?><br /><br />
+				<p>&nbsp;&nbsp;<?php _e('1. The fastest: Request invitation from anybody who is online. You\'ll your code within seconds.'); ?></p>
+				<p>&nbsp;&nbsp;<?php _e('2. Post your invitation request in the general forum. Someone will read it and send you invitation.'); ?></p><br />
+				<?php _e('Easy Peasy!'); ?>
+			</div>
+		</div>
+	</div>
 
 	<?php do_action( 'bp_before_directory_members' ); ?>
 

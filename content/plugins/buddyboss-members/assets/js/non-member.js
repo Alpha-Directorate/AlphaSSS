@@ -30,7 +30,7 @@ jQuery(document).ready(function($) {
 
 		el.addClass('alert alert-dismissible fade in');
 
-		el.addClass(cls).append(message);
+		el.addClass(cls).append('<div class="alert-content">' + message + '</div>');
 		
 		return el;
 	}

@@ -151,3 +151,11 @@ You're the boss, so have fun editing!
 .action {
 	display: none;
 }
+
+.alert-content {
+	font-size: 16px;
+}
+
+.alert-content p{
+	margin:0px;
+}
