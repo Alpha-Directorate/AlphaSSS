@@ -110,7 +110,36 @@ add_filter( 'gform_validation_4', function($validation_result){
 					// Remove spaces from invitation code that user added
 					$invite_code = str_replace(" ", "", $invite_code);
 
-					$invitation_validation_result  = buddyboss_invitation()->validate_invitation_code($invite_code);
+					// Anti-Bruteforce protection
+					if ( ! session_id() ) {
+						session_start();
+					}
+
+					// Define guessing attempts if not exists
+					if (! isset( $_SESSION['guessing-attempts'] ) ) {
+						$_SESSION['guessing-attempts'] = 0;
+					}
+
+					if ( $_SESSION['guessing-attempts'] >= buddyboss_invitation()->option( 'guessing-attempts-limit' ) ) {
+
+						$confirmation = reset($form['confirmations']);
+
+						$confirmation['message'] = '<h3>' . __('The Late Philip J. Fry') .'</h3>';
+						$confirmation['message'] .= '<h1>' . __('Your Invitation Code') . '</h1>';
+						$confirmation['message'] .= '<p>' . __('My fellow Earthicans, as I have explained in my book "Earth in Balance", and the much more popular "Harry Potter and the Balance of Earth" we need to defend our planet against pollution. Also <a href="/browse/">request a new code</a>') . '</p>';
+						$confirmation['message'] .= '<a class="button" href="/browse/">' . __('Request Invitation Code') . '</a>';
+
+						$form['confirmations'][key($form['confirmations'])] = $confirmation;
+
+						$validation_result['is_valid'] = true;
+						$field['failed_validation']    = false;
+						$validation_result['form']     = $form;
+
+						return $validation_result;
+					}
+					//--
+
+					$invitation_validation_result = buddyboss_invitation()->validate_invitation_code($invite_code);
 
 					if ( $invitation_validation_result['is_success'] ) {
 						$validation_result['is_valid'] = true;
@@ -125,6 +154,8 @@ add_filter( 'gform_validation_4', function($validation_result){
 
 							buddyboss_invitation()->update_invitation_code($invite_code, array('activated_member_id' => $user->ID));
 						} else {
+							$_SESSION['guessing-attempts']++;
+
 							$validation_result['is_valid'] = false;
 							$field['failed_validation']    = true;
 							$field['validation_message']   = __('Please contact admin');

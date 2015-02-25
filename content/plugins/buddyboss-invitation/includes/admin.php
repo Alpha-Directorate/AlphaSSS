@@ -69,6 +69,20 @@ class BuddyBoss_Invitation_Admin
 		add_settings_section( 'general_section', __( 'General Settings', 'buddyboss-invitation' ), array( $this, 'section_general' ), __FILE__ );
 
 		add_settings_field( 'time-to-expire', __( 'Time to expire', 'buddyboss-invitation' ), array( $this, 'setting_time_to_expire' ), __FILE__, 'general_section' );
+		add_settings_field( 'guessing-attempts-limit', __( 'Guessing attempts limit', 'buddyboss-invitation' ), array( $this, 'setting_guessing_attempts' ), __FILE__, 'general_section' );
+	}
+
+	public function setting_guessing_attempts()
+	{
+		$value = $this->option( 'guessing-attempts-limit' );
+
+		if ( ! $value = (int) $this->option( 'guessing-attempts-limit' ) ) {
+			$value = 5;
+		}
+
+		printf( '<input id="guessing-attempts-limit" name="buddyboss_invitation_plugin_options[guessing-attempts-limit]" value="%d" /> ', $value);
+
+		_e('Setup limit guessing attempts to submit valid invitation code', 'buddyboss-invitation');
 	}
 
 	public function setting_time_to_expire()
@@ -137,7 +151,8 @@ class BuddyBoss_Invitation_Admin
 	 */
 	public function plugin_options_validate( $input )
 	{
-		$input['enabled'] = sanitize_text_field( $input['enabled'] );
+		$input['time-to-expire']          = (int) $input['time-to-expire'];
+		$input['guessing-attempts-limit'] = (int) $input['guessing-attempts-limit'];
 
 		return $input;
 	}
