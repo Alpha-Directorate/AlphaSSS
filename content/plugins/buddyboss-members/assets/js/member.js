@@ -28,6 +28,24 @@ jQuery(document).ready(function($) {
 			}
 		}
 
+		$('#deliver-invitation-code').click(function(){
+			alert_data = invitation_requests[0];
+
+			pubnub.publish({
+				channel: alert_data.requestor_uuid + '_invitation_codes',
+				message: alert_data,
+				callback: function(m) {
+					invitation_requests.shift();
+
+					$('#invitation-code-modal').modal('hide');
+
+					if (invitation_requests.length > 0) {
+						showInvitationRequestPopUp();
+					}
+				}
+			});
+		});
+
 		pubnub.subscribe({
 			channel: 'onlineUsers',
 			callback: function(m) {},

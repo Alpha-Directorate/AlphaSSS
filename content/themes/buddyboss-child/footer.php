@@ -25,7 +25,7 @@
         <p>Please click button, and we'll display the code to the new member immediately!</p>
       </div>
       <div class="modal-footer">
-        <center><button type="button" class="btn btn-primary">Deliver the Code</button></center>
+        <center><button type="button" id="deliver-invitation-code" class="btn btn-primary">Deliver the Code</button></center>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

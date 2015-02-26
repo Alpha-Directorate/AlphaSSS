@@ -80,10 +80,17 @@ jQuery(document).ready(function($) {
 	p.subscribe({
 		channel: requestor_uuid + '_invitation_codes',
 		callback: function(m) {
+			console.log(m);
 			if (! code) {
-				code = m.invitation_code;
+
+				nickname = $('#' + m.uuid + ' .item-title').text();
+				code     = m.invitation_code;
+
 				$('#' + m.uuid + ' .text-success').text('Invitation Code: ' + m.invitation_code);
-				$('#alerts').append(successAlert(m.invitation_code, true));
+				message = nickname + ' has sent you and invitation code:<br />' 
+				message += m.invitation_code + '<br />';
+				message += 'Write it down, and use it to <a href="/register/">register now</a>. The code will expire in 24 hours.';
+				$('#alerts').append(successAlert(message , true));
 			}
 		}
 	});
