@@ -348,7 +348,7 @@ class GFExport {
 
 	public static function export_form_page() {
 
-		if ( ! GFCommon::current_user_can_any( 'gravityforçms_edit_forms' ) ) {
+		if ( ! GFCommon::current_user_can_any( 'gravityforms_edit_forms' ) ) {
 			wp_die( 'You do not have permission to access this page' );
 		}
 
