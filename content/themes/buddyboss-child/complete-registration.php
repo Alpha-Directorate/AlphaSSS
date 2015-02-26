@@ -5,11 +5,21 @@ Template Name: Complete registration
 ?>
 
 <?php 
-	if ( ! is_user_logged_in() ) {
-		global $wp_query;
+	global $wp_query;
+
+	if ( ! is_user_logged_in()) {
 		$wp_query->set_404();
 		status_header( 404 );
 		get_template_part( 404 ); exit();
+	} else {
+		if ( isset( $user->roles ) && is_array( $user->roles ) ) {
+			// Show 404 for all no pre_member users
+			if ( ! in_array( 'pre_member', $user->roles ) ) {
+				$wp_query->set_404();
+				status_header( 404 );
+				get_template_part( 404 ); exit();
+			} 
+		}
 	}
 ?>
 
