@@ -40,6 +40,9 @@ jQuery(document).ready(function($) {
 		'subscribe_key': 'sub-c-8e1b190a-b033-11e4-83d7-0619f8945a4f'
 	});
 
+	var requestor_uuid = p.uuid();
+	var code = false;
+
 	// This event Fires when a new User has Joined.
 	p.events.bind( 'presence-user-join', function(uuid) {
 	
@@ -74,10 +77,22 @@ jQuery(document).ready(function($) {
 		}
 	});
 
+	p.subscribe({
+		channel: requestor_uuid + '_invitation_codes',
+		callback: function(m) {
+			if (! code) {
+				code = m.invitation_code;
+				$('#' + m.uuid + ' .text-success').text('Invitation Code: ' + m.invitation_code);
+				$('#alerts').append(successAlert(m.invitation_code, true));
+			}
+		}
+	});
+
 	$('.request-invitation').click(function(){
 		// Detect username
 		var nickname = $(this).parent().parent().parent().find('.item .item-title a').text();
 		var uuid     = $(this).parent().parent().parent().attr('id');
+		var el       = $(this);
 
 		var message  = "Okay! Great, we have sent your request to " + nickname + ".<br />";
 		message += "In a couple of seconds, we will display your code in this window, right here.";
@@ -91,7 +106,9 @@ jQuery(document).ready(function($) {
 
 		p.publish({
 			channel: uuid + '_invitation_request',
-			message: 'code',
+			message: {
+				'requestor_uuid': requestor_uuid
+			},
 			callback: function(m) {
 				console.log(m);
 			}

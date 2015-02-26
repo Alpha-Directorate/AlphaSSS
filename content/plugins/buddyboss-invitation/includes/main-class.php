@@ -99,21 +99,12 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 		public function __set( $key, $value ) { $this->data[$key] = $value; }
 
 		/**
-		 * Check if the plugin is active and enabled in the plugin's admin options.
-		 *
-		 * @return boolean
-		 */
-		public function is_enabled()
-		{
-			return true;//$this->option( 'enabled' ) === true || $this->option( 'enabled' ) === 'on';
-		}
-
-		/**
 		 * Method retuns unused registration code
+		 * @param integer $requestor_id
 		 * 
 		 * @return string
 		 */
-		public function get_invitation_code()
+		public function get_invitation_code($requestor_id = NULL)
 		{
 			global $wpdb;
 
@@ -130,14 +121,16 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 
 			$result = $results[ array_rand( $results ) ];
 
+			$data = array( 
+				'member_id'    => get_current_user_id(),
+				'is_active'    => 'YES',
+				'created_date' => \Carbon\Carbon::now(),
+				'expired_date' => \Carbon\Carbon::now()->addSeconds( $this->option( 'time-to-expire' ) )
+			);
+
 			$wpdb->update( 
 				sanitize_text_field(BUDDYBOSS_INVITATION_TABLENAME), 
-				array( 
-					'member_id'    => get_current_user_id(),
-					'is_active'    => 'YES',
-					'created_date' => \Carbon\Carbon::now(),
-					'expired_date' => \Carbon\Carbon::now()->addSeconds( $this->option( 'time-to-expire' ) )
-				), 
+				$data, 
 				array( 'id' => $result['id'] ) 
 			);
 			
@@ -303,9 +296,6 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 			if ( ( is_admin() || is_network_admin() ) && current_user_can( 'manage_options' ) ) {
 				$this->load_admin();
 			}
-
-			if ( ! $this->is_enabled() )
-				return;
 
 			// Hook into BuddyPress init
 			add_action( 'bp_loaded', array( $this, 'load_main' ) );

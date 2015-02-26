@@ -159,3 +159,19 @@ You're the boss, so have fun editing!
 .alert-content p{
 	margin:0px;
 }
+
+#invitation-code-modal .modal-header,
+#invitation-code-modal .modal-footer {
+	border:0px;
+}
+
+#invitation-code-modal {
+	font-family: "Verdana",sans-serif;
+	font-size: 16px;
+}
+
+#modal-code {
+	text-align: center;
+	font-size: 24px;
+	font-weight:bold;
+}
