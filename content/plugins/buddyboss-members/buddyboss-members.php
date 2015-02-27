@@ -29,6 +29,14 @@ add_action( 'plugins_loaded', function(){
 	if ( ! is_user_logged_in() || ! current_user_can('generate_invitation_code') ) {
 		wp_enqueue_script( 'buddyboss-members', BUDDYBOSS_MEMBERS_PLUGIN_URL . '/assets/js/non-member.js' );
 
+		if ( is_user_logged_in()) {
+			$user   = wp_get_current_user();
+			$params = array('nickname' => $user->display_name);
+		} else {
+			$params = array('nickname' => null);
+		}
+		wp_localize_script( 'buddyboss-members', 'current_user', $params );
+
 		add_action( 'bp_directory_members_actions', function(){
 			echo bp_get_button( array(
 				'id'                => 'request_invitation',

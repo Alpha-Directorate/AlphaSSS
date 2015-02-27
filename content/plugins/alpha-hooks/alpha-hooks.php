@@ -115,10 +115,10 @@ add_filter( 'gform_validation_9', function($validation_result){
 						$field['failed_validation']    = false;
 
 						if ( $user = get_userdatabylogin(sanitize_text_field ( rgpost( 'input_3' ) ) ) ) {
-							// Set Citizen Role to user
+							// Set Member Role to user
 							wp_update_user( array (
 								'ID'   => $user->ID, 
-								'role' => 'citizen' ) 
+								'role' => 'member' ) 
 							);
 
 							buddyboss_invitation()->update_invitation_code($invite_code, array('activated_member_id' => $user->ID));
@@ -217,7 +217,7 @@ add_filter( 'gform_validation_4', function($validation_result){
 						);
 						//--
 						
-						// Set Pre Citizen Role to user
+						// Set Pre Member Role to user
 						wp_update_user( array ('ID' => $user_id, 'role' => 'pre_member' ) ) ;
 					}
 				}
@@ -266,10 +266,10 @@ add_filter( 'gform_validation_4', function($validation_result){
 						$field['failed_validation']    = false;
 
 						if ( $user = get_userdatabylogin(sanitize_text_field ( rgpost( 'input_3' ) ) ) ) {
-							// Set Citizen Role to user
+							// Set Member Role to user
 							wp_update_user( array (
 								'ID'   => $user->ID, 
-								'role' => 'citizen' ) 
+								'role' => 'member' ) 
 							);
 
 							buddyboss_invitation()->update_invitation_code($invite_code, array('activated_member_id' => $user->ID));

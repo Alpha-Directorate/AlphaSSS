@@ -27,14 +27,32 @@ Template Name: Complete registration
 
 <div id="content" role="main">
 	<div id="alerts">
-		<div role="alert" class="alert alert-dismissible alert-success fade in">
-			<div class="alert-content">
-				<?php _e('There are two ways to get an invitation code to join to the AlphaSSS:'); ?><br /><br />
-				<p>&nbsp;&nbsp;<?php _e('1. The fastest: Request invitation from anybody who is online. You\'ll your code within seconds.'); ?></p>
-				<p>&nbsp;&nbsp;<?php _e('2. Post your invitation request in the general forum. Someone will read it and send you invitation.'); ?></p><br />
-				<?php _e('Easy Peasy!'); ?>
+
+		<?php if ( $received_codes = buddyboss_invitation()->get_user_received_codes( get_current_user_id() ) ):?>
+			<?php foreach (buddyboss_invitation()->get_user_received_codes( get_current_user_id() ) as $invitation_code): ?>
+				<div role="alert" class="alert alert-dismissible <?php echo $invitation_code['is_expired'] ? 'alert-danger': 'alert-success';?> fade in">
+					<div class="alert-content">
+						<p><?php printf(__('%s has sent you the following invitation code %s ago:'), $invitation_code['nickname'], $invitation_code['date']); ?></p>
+						<?php if ($invitation_code['is_expired']):?>
+							<h1><b><strike><?php echo $invitation_code['invitation_code']; ?></strike></b></h1>
+							<p><?php _e('Use it for register now.'); ?></p><br />
+						<?php else:?>
+							<h1><b><?php echo $invitation_code['invitation_code']; ?></b></h1>
+							<p><?php _e('Use it for register now.'); ?></p><br />
+						<?php endif;?>
+					</div>
+				</div>	
+			<?php endforeach; ?>
+		<?php else:?>
+			<div role="alert" class="alert alert-dismissible alert-success fade in">
+				<div class="alert-content">
+					<?php _e('There are two ways to get an invitation code to join to the AlphaSSS:'); ?><br /><br />
+					<p>&nbsp;&nbsp;<?php _e('1. The fastest: Request invitation from anybody who is online. You\'ll your code within seconds.'); ?></p>
+					<p>&nbsp;&nbsp;<?php _e('2. Post your invitation request in the general forum. Someone will read it and send you invitation.'); ?></p><br />
+					<?php _e('Easy Peasy!'); ?>
+				</div>
 			</div>
-		</div>
+		<?php endif;?>
 	</div>
 
 	<article>

@@ -99,12 +99,47 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 		public function __set( $key, $value ) { $this->data[$key] = $value; }
 
 		/**
+		 * Method retuns invitation codes received by user
+		 * @param integer $user_id
+		 * 
+		 * @return array
+		 */
+		public function get_user_received_codes($user_id)
+		{
+			global $wpdb;
+
+			$sort = array('ASC', 'DESC');
+			
+			$results = $wpdb->get_results( sprintf('
+				SELECT * FROM 
+					`%s` 
+				WHERE 
+					requested_member_id = %d 
+				ORDER BY 
+					created_date ASC ;', sanitize_text_field(BUDDYBOSS_INVITATION_TABLENAME), (int) $user_id), ARRAY_A );
+
+			foreach ($results as &$result) {
+				$user = get_user_by( 'id', (int) $result['member_id'] );
+
+				$result['nickname'] = ($user) 
+					? $user->display_name
+					: null;
+
+				$result['is_expired'] = \Carbon\Carbon::now()->timestamp > \Carbon\Carbon::parse($record['expired_date'])->timestamp;
+			}
+
+			die(var_dump($results));
+
+			return $results;
+		}
+
+		/**
 		 * Method retuns unused registration code
 		 * @param integer $requestor_id
 		 * 
 		 * @return string
 		 */
-		public function get_invitation_code($requestor_id = NULL)
+		public function get_invitation_code($requestor_nickname = NULL)
 		{
 			global $wpdb;
 
@@ -127,6 +162,16 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 				'created_date' => \Carbon\Carbon::now(),
 				'expired_date' => \Carbon\Carbon::now()->addSeconds( $this->option( 'time-to-expire' ) )
 			);
+
+			if ($requestor_nickname = sanitize_text_field($requestor_nickname)) {
+
+				// Is requestor exists?
+				if ( $user = $wpdb->get_row( $wpdb->prepare(
+					"SELECT `ID` FROM $wpdb->users WHERE `display_name` = %s LIMIT 1", $requestor_nickname
+				) ) ) {
+					$data['requested_member_id'] = $user->ID;
+				}
+			}
 
 			$wpdb->update( 
 				sanitize_text_field(BUDDYBOSS_INVITATION_TABLENAME), 

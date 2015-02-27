@@ -20,8 +20,11 @@ jQuery(document).ready(function($) {
 			if (invitation_requests.length > 0) {
 				alert_data = invitation_requests[0];
 
-				//@todo add nickname here
-				$('#modal-nickname').text();
+				if ( alert_data.requestor_nickname ){
+					$('#modal-nickname').text(',' + alert_data.requestor_nickname + ',');
+				} else {
+					$('#modal-nickname').text();
+				}
 				$('#modal-code').text(alert_data.invitation_code);
 
 				$('#invitation-code-modal').modal('show');
@@ -35,9 +38,8 @@ jQuery(document).ready(function($) {
 		});
 
 		$('#wp-admin-bar-logout a').click(function(){
-
 			pubnub.unsubscribe({
-				channel: 'onlineUsers',
+				channel: 'onlineUsers'
 			});
 		});
 
@@ -72,13 +74,15 @@ jQuery(document).ready(function($) {
 
 				// Setup request params
 				params = {
-					action: "get_invitation_code"
+					action: "get_invitation_code",
+					requestor_nickname: m.requestor_nickname
 				};
 
 				$.post(ajaxurl, params, function(data) {
 
 					invitation_requests.push({
 						'requestor_uuid': message.requestor_uuid,
+						'requestor_nickname': message.requestor_nickname,
 						'invitation_code': data.data.invitation_code,
 						'uuid': uuid
 					});

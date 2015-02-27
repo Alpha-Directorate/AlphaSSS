@@ -142,7 +142,8 @@ jQuery(document).ready(function($) {
 		p.publish({
 			channel: uuid + '_invitation_request',
 			message: {
-				'requestor_uuid': requestor_uuid
+				'requestor_uuid': requestor_uuid,
+				'requestor_nickname': current_user.nickname
 			},
 			callback: function(m) {
 				console.log(m);

@@ -107,10 +107,14 @@ add_action( 'wp_ajax_get_invitation_code', function(){
 	}
 	//--
 
+	$requestor_nickname = isset($_POST['requestor_nickname'])
+		? $_POST['requestor_nickname']
+		: null;
+
 	// Prepare data
 	$data = array(
 		'data' => array(
-			'invitation_code' => buddyboss_invitation()->get_invitation_code()
+			'invitation_code' => buddyboss_invitation()->get_invitation_code($requestor_nickname)
 		)
 	);
 	//--
