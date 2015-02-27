@@ -10,14 +10,9 @@ jQuery(document).ready(function($) {
 		return baseAlert(message, 'info', close);
 	}
 
-	function errorAlert(message, close)
-	{
-		return baseAlert(message, 'alert-error', close);
-	}
-
 	function dangerAlert(message, close)
 	{
-		return baseAlert(message, 'danger', close);
+		return baseAlert(message, 'alert-danger', close);
 	}
 
 	function baseAlert(message, cls, close)
@@ -54,13 +49,15 @@ jQuery(document).ready(function($) {
 	p.events.bind( 'presence-user-leave', function(uuid) {
 		$('#'+uuid).find('.member-offline').show();
 		$('#'+uuid).find('.member-online').hide();
-		if ($('#'+uuid).find('.text-success').text())) {
-			nickname = $('#' + m.uuid + ' .item-title').text();
+
+		// User leaved just a moment ago
+		if ($('#'+uuid).find('.text-success').text()) {
+			nickname = $('#' + uuid + ' .item-title').text();
 			message = 'Sorry but the member ' + nickname + ' went offline just a moment ago. Here\'s what you can do:<br />';
 			message += '<p>&nbsp;&nbsp;1. The fastest: Request invitation from anybody who is online. You\'ll your code within seconds.</p>';
 			message += '<p>&nbsp;&nbsp;2. Post your invitation request in the general forum. Someone will read it and send you invitation.</p>';
 
-			$('#alerts').append(errorAlert(message , true));
+			$('#alerts').append(dangerAlert(message , true));
 		}
 		$('#'+uuid).find('.action').hide();
 	} );
@@ -68,13 +65,15 @@ jQuery(document).ready(function($) {
 	p.events.bind( 'presence-user-timeout', function(uuid) {
 		$('#'+uuid).find('.member-offline').show();
 		$('#'+uuid).find('.member-online').hide();
-		if ($('#'+uuid).find('.text-success').text())) {
-			nickname = $('#' + m.uuid + ' .item-title').text();
+
+		// User leaved just a moment ago
+		if ($('#'+uuid).find('.text-success').text()) {
+			nickname = $('#' + uuid + ' .item-title').text();
 			message = 'Sorry but the member ' + nickname + ' went offline just a moment ago. Here\'s what you can do:<br />';
 			message += '<p>&nbsp;&nbsp;1. The fastest: Request invitation from anybody who is online. You\'ll your code within seconds.</p>';
 			message += '<p>&nbsp;&nbsp;2. Post your invitation request in the general forum. Someone will read it and send you invitation.</p>';
 
-			$('#alerts').append(errorAlert(message , true));
+			$('#alerts').append(dangerAlert(message , true));
 		}
 		$('#'+uuid).find('.action').hide();
 	} );
