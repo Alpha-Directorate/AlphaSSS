@@ -114,19 +114,12 @@ add_filter( 'gform_validation_9', function($validation_result){
 						$validation_result['is_valid'] = true;
 						$field['failed_validation']    = false;
 
-						if ( $user = get_userdatabylogin(sanitize_text_field ( rgpost( 'input_3' ) ) ) ) {
-							// Set Member Role to user
-							wp_update_user( array (
-								'ID'   => $user->ID, 
-								'role' => 'member' ) 
-							);
+						wp_update_user( array(
+							'ID'   => get_current_user_id(), 
+							'role' => 'member' ) 
+						);
 
-							buddyboss_invitation()->update_invitation_code($invite_code, array('activated_member_id' => $user->ID));
-						} else {
-							$validation_result['is_valid'] = false;
-							$field['failed_validation']    = true;
-							$field['validation_message']   = __('Please contact admin');
-						}
+						buddyboss_invitation()->update_invitation_code($invite_code, array('activated_member_id' => $user->ID));
 						
 					} else {
 						$_SESSION['guessing-attempts']++;
