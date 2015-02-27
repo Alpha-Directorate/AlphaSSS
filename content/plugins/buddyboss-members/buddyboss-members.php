@@ -24,14 +24,7 @@ if ( ! defined( 'BUDDYBOSS_MEMBERS_PLUGIN_URL' ) ) {
 
 add_action( 'plugins_loaded', function(){
 
-	// Unsubscribe user from PubNub channel
-	add_action('wp_logout', function(){
-		$user = (array)wp_get_current_user()->data;
-
-		$uuid = md5($user['display_name']);
-	});
-
-	wp_enqueue_script( 'pubnub', 'http://cdn.pubnub.com/pubnub.min.js',array('jquery') );
+	wp_enqueue_script( 'pubnub', 'http://cdn.pubnub.com/pubnub.min.js', array('jquery') );
 
 	if ( ! is_user_logged_in() || ! current_user_can('generate_invitation_code') ) {
 		wp_enqueue_script( 'buddyboss-members', BUDDYBOSS_MEMBERS_PLUGIN_URL . '/assets/js/non-member.js' );

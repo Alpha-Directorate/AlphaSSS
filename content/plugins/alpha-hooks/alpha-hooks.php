@@ -15,9 +15,15 @@ wp_enqueue_style( 'bootstrap-css', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/cs
 add_filter('wp_nav_menu_items', function($items, $args) {
 	ob_start();
 	wp_loginout('/');
-	$loginoutlink = str_replace('Log in', 'Login', ob_get_contents());
+	$loginoutlink = str_replace('Log in', __('Login'), ob_get_contents());
 	ob_end_clean();
-	$items .= '<li>'. $loginoutlink .'</li>';
+
+	if ( is_user_logged_in() ) {
+		$items .= '<li class="channel-logout">'. $loginoutlink .'</li>';
+	} else {
+		$items .= '<li>'. $loginoutlink .'</li>';
+	}
+
 	return $items;
 }, 10, 2);
 

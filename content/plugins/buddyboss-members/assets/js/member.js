@@ -28,6 +28,19 @@ jQuery(document).ready(function($) {
 			}
 		}
 
+		$('.channel-logout').click(function(){
+			pubnub.unsubscribe({
+				channel: 'onlineUsers' 
+			});
+		});
+
+		$('#wp-admin-bar-logout a').click(function(){
+
+			pubnub.unsubscribe({
+				channel: 'onlineUsers',
+			});
+		});
+
 		$('#deliver-invitation-code').click(function(){
 			alert_data = invitation_requests[0];
 
