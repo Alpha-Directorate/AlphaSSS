@@ -125,10 +125,10 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 					? $user->display_name
 					: null;
 
-				$result['is_expired'] = \Carbon\Carbon::now()->timestamp > \Carbon\Carbon::parse($record['expired_date'])->timestamp;
+				$result['is_expired'] = \Carbon\Carbon::now()->timestamp > \Carbon\Carbon::parse($result['expired_date'])->timestamp;
+				
+				$result['date'] = str_replace('after', '', \Carbon\Carbon::now()->diffForHumans(\Carbon\Carbon::parse($result['created_date'])));
 			}
-
-			die(var_dump($results));
 
 			return $results;
 		}

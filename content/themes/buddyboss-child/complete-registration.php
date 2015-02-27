@@ -35,10 +35,10 @@ Template Name: Complete registration
 						<p><?php printf(__('%s has sent you the following invitation code %s ago:'), $invitation_code['nickname'], $invitation_code['date']); ?></p>
 						<?php if ($invitation_code['is_expired']):?>
 							<h1><b><strike><?php echo $invitation_code['invitation_code']; ?></strike></b></h1>
-							<p><?php _e('Use it for register now.'); ?></p><br />
+							<p><?php _e('This code older than 24 hrs, therefore, it is no longer valid.'); ?></p><br />
 						<?php else:?>
 							<h1><b><?php echo $invitation_code['invitation_code']; ?></b></h1>
-							<p><?php _e('Use it for register now.'); ?></p><br />
+							<p><?php _e('Use it for register now. This code is valid only 24 hours'); ?></p><br />
 						<?php endif;?>
 					</div>
 				</div>	
