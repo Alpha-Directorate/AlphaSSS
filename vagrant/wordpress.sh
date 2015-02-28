@@ -6,7 +6,9 @@ then
 	# Create database
 	mysql -uroot -pvagrant -e "CREATE DATABASE IF NOT EXISTS alphasssdev;"
 
-	cat /var/www/alphasss.dev/vagrant/dump/dump_sql_* > dump.sql
+	cat /var/www/alphasss.dev/vagrant/dump/dump_sql_* > /var/www/alphasss.dev/vagrant/dump/dump.sql
+
+	mysql -uroot -pvagrant alphasssdev < /var/www/alphasss.dev/vagrant/dump/dump.sql
 
 	# insert data into local database
 	mysql -uroot -pvagrant alphasssdev < /var/www/alphasss.dev/vagrant/dump/dump.sql
