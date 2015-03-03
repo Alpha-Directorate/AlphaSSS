@@ -56,7 +56,8 @@ add_filter( 'login_redirect', function($redirect_to, $request, $user){
 				// Return activation process
 				return site_url( '/activate/' );
 			} else {
-				return home_url();
+
+				return '/browse/' . $user->user_login . '/activity/';
 			}
 		}
 	}
