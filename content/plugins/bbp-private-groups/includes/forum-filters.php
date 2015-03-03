@@ -182,97 +182,106 @@ function bbp_list_private_groups_subforums( $args ) {
 	}
 	
 //This function adds descriptions to the sub forums, and sends non-logged in or users who can't view to a sign-up page
+
 function custom_list_forums( $args = '' ) {
 
-	// Define used variables
-	global $rpg_settingsg ;
-	global $rpg_settingsf ;
-	$output = $sub_forums = $topic_count = $reply_count = $counts = '';
-	$i = 0;
-	$count = array();
+    // Define used variables
+    global $rpg_settingsg ;
+    global $rpg_settingsf ;
+    $output = $sub_forums = $topic_count = $reply_count = $counts = '';
+    $i = 0;
+    $count = array();
 
-	// Parse arguments against default values
-	$r = bbp_parse_args( $args, array(
-		'before'            => '<ul class="bbp-forums-list">',
-		'after'             => '</ul>',
-		'link_before'       => '<li class="bbp-forum">',
-		'link_after'        => '</li>',
-		'count_before'      => ' (',
-		'count_after'       => ')',
-		'count_sep'         => ', ',
-		'separator'         => '<br> ',
-		'forum_id'          => '',
-		'show_topic_count'  => true,
-		'show_reply_count'  => true,
-	), 'listb_forums' );
-	
-						
-	
-	// Loop through forums and create a list
-	$sub_forums = bbp_forum_get_subforums( $r['forum_id'] );
-	if ( !empty( $sub_forums ) ) {
+    // Parse arguments against default values
+    $r = bbp_parse_args( $args, array(
+        'before'            => '<ul class="bbp-forums-list">',
+        'after'             => '</ul>',
+        'link_before'       => '<li class="bbp-forum">',
+        'link_after'        => '</li>',
+        'count_before'      => ' (',
+        'count_after'       => ')',
+        'count_sep'         => ', ',
+        'separator'         => ', ',
+        'forum_id'          => '',
+        'show_topic_count'  => true,
+        'show_reply_count'  => true,
+    ), 'listb_forums' );
+    
+	if($rpg_settingsg['list_sub_forums_as_column'] == true || $rpg_settingsg['activate_descriptions'] == true ) $r['separator'] = '<br>' ;
+  
+    // Loop through forums and create a list
+    $sub_forums = bbp_forum_get_subforums( $r['forum_id'] );
+    if ( !empty( $sub_forums ) ) {
 
-		// Total count (for separator)
-		$total_subs = count( $sub_forums );
-		foreach ( $sub_forums as $sub_forum ) {
-			$i++; // Separator count
+        // Total count (for separator)
+        $total_subs = count( $sub_forums );
+        foreach ( $sub_forums as $sub_forum ) {
+            $i++; // Separator count
 
-			// Get forum details
-			$count     = array();
-			$show_sep  = $total_subs > $i ? $r['separator'] : '';
-			$permalink = bbp_get_forum_permalink( $sub_forum->ID );
-			$title     = bbp_get_forum_title( $sub_forum->ID );
-			$content = bbp_get_forum_content($sub_forum->ID) ;
-			if($rpg_settingsg['activate_descriptions'] == true) {
-			$content = bbp_get_forum_content($sub_forum->ID) ;
-					}
-					else {
-					$content='';
-					}
-			
+            // Get forum details
+            $count     = array();
+            $show_sep  = $total_subs > $i ? $r['separator'] : '';
+            $permalink = bbp_get_forum_permalink( $sub_forum->ID );
+            $title     = bbp_get_forum_title( $sub_forum->ID );
+            $content = bbp_get_forum_content($sub_forum->ID) ;
+            
+			//get content if activate descriptions
+            if($rpg_settingsg['activate_descriptions'] == true) {
+                $content = bbp_get_forum_content($sub_forum->ID) ;
+            }
+            else {
+                $content='';
+            }
+            
 
-			// Show topic count
-			if ( !empty( $r['show_topic_count'] ) && !bbp_is_forum_category( $sub_forum->ID ) ) {
-				$count['topic'] = bbp_get_forum_topic_count( $sub_forum->ID );
-			}
+            // Show topic count
+            if ( !empty( $r['show_topic_count'] ) && !bbp_is_forum_category( $sub_forum->ID ) ) {
+                $count['topic'] = bbp_get_forum_topic_count( $sub_forum->ID );
+            }
 
-			// Show reply count
-			if ( !empty( $r['show_reply_count'] ) && !bbp_is_forum_category( $sub_forum->ID ) ) {
-				$count['reply'] = bbp_get_forum_reply_count( $sub_forum->ID );
-			}
+            // Show reply count
+            if ( !empty( $r['show_reply_count'] ) && !bbp_is_forum_category( $sub_forum->ID ) ) {
+                $count['reply'] = bbp_get_forum_reply_count( $sub_forum->ID );
+            }
 
-			// Counts to show
-			if ( !empty( $count ) ) {
-				$counts = $r['count_before'] . implode( $r['count_sep'], $count ) . $r['count_after'];
-			}
-			
-			if($rpg_settingsg['hide_counts'] == true) {
-				$counts='';
-			}
-			//Build this sub forums link
+            // Counts to show
+            if ( !empty( $count ) ) {
+                $counts = $r['count_before'] . implode( $r['count_sep'], $count ) . $r['count_after'];
+            }
+            
+            if($rpg_settingsg['hide_counts'] == true) {
+                $counts='';
+            }
+            //Build this sub forums link
 			if (bbp_is_forum_private($sub_forum->ID)) {
 				if (!current_user_can( 'read_private_forums' ) ) {
 					if(!$rpg_settingsf['redirect_page']) {
-					$link='/home' ;
+						$link='/home' ;
 					}
 					else {
-					$link=$rpg_settingsf['redirect_page'] ;
+						$link=$rpg_settingsf['redirect_page'] ;
 					}
-					$output .= $r['before'].$r['link_before'] . '<a href="' .$link . '" class="bbp-forum-link">' . $title . $counts . '</a>' . $show_sep . $r['link_after'].'<div class="bbp-forum-content">'.$content.'</div>'.$r['after'];
+                $output .= $r['link_before'] . '<a href="' .$link . '" class="bbp-forum-link">' . $title . $counts . '</a>' . $show_sep . $r['link_after'];
 				}
 				else {
-				$output .= $r['before'].$r['link_before'] . '<a href="' . esc_url( $permalink ) . '" class="bbp-forum-link">' . $title . $counts . '</a>' . $show_sep . $r['link_after'].'<div class="bbp-forum-content">'.$content.'</div>'.$r['after'];
+				$output .= $r['link_before'] . '<a href="' . esc_url( $permalink ) . '" class="bbp-forum-link">' . $title . $counts . '</a>' . $show_sep . $r['link_after'];
 				}
 			}
-			else {
-			$output .= $r['before'].$r['link_before'] . '<a href="' . esc_url( $permalink ) . '" class="bbp-forum-link">' . $title . $counts . '</a>' . $show_sep . $r['link_after'].'<div class="bbp-forum-content">'.$content.'</div>'.$r['after'];
+            else {
+                $output .= $r['link_before'] . '<a href="' . esc_url( $permalink ) . '" class="bbp-forum-link">' . $title . $counts . '</a>' . $show_sep . $r['link_after'];
 			}
-	}
-	 //Output the list
-		return $output ;
-	
+            
+                                                
+            if ( !empty($content) )
+				$output .= '<div class="bbp-forum-content">'.$content.'</div>';
+		} //end foreach subforum
+     //Output the list
+    echo $r['before'] . $output . $r['after'];
+    
 }
 }
+
+
 
 
 
@@ -321,7 +330,5 @@ function private_groups_get_dropdown_forums($forum_list) {
 		return (array) $filtered_forums;
 	
 }
-
-
 
 

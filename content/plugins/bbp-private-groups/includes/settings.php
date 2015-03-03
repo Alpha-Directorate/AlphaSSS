@@ -41,7 +41,9 @@ global $rpg_settingsf ;
 	<a href="?page=bbp-private-group-settings&tab=help" class="nav-tab <?php echo $active_tab == 'help' ? 'nav-tab-active' : ''; ?>"><?php _e('Help' , 'bbp-private-groups' ) ; ?></a>
 	<a href="?page=bbp-private-group-settings&tab=management_information"  class="nav-tab <?php echo $active_tab == 'Management_information' ? 'nav-tab-active' : ''; ?>"><?php _e('Management Information' , 'bbp-private-groups' ) ; ?></a>
 	<a href="?page=bbp-private-group-settings&tab=user_management"  class="nav-tab <?php echo $active_tab == 'user_management' ? 'nav-tab-active' : ''; ?>"><?php _e('User Management' , 'bbp-private-groups' ) ; ?></a>	
-	<a href="?page=bbp-private-group-settings&tab=role_assignment"  class="nav-tab <?php echo $active_tab == 'role_assignment' ? 'nav-tab-active' : ''; ?>"><?php _e('Assign groups to roles' , 'bbp-private-groups' ) ; ?></a></h2>	
+	<a href="?page=bbp-private-group-settings&tab=role_assignment"  class="nav-tab <?php echo $active_tab == 'role_assignment' ? 'nav-tab-active' : ''; ?>"><?php _e('Assign groups to roles' , 'bbp-private-groups' ) ; ?></a>
+	<a href="?page=bbp-private-group-settings&tab=widget_warning"  class="nav-tab <?php echo $active_tab == 'widget_warning' ? 'nav-tab-active' : ''; ?>"><?php _e('Widget Warning !' , 'bbp-private-groups' ) ; ?></a></h2>	
+	
 	<table class="form-table">
 			<tr>
 			
@@ -153,16 +155,29 @@ global $rpg_settingsf ;
 			<?php settings_fields( 'rpg_general_settings' ); ?>
 			
 			<table class="form-table">
-					<!------------------------------- Hide topic/reply counts ------------------------------------------>
+			
+			
+			<!------------------------------- Hide topic/reply counts ------------------------------------------>
 					<tr valign="top">
 						<th colspan="2"><h3><?php _e('Hide topic and reply counts', 'bbp-private-groups'); ?></h3></th>
+					</tr>
+			<!-- checkbox to activate -->
+					<tr valign="top">  
+					<th><?php _e('Activate', 'bbp-private-groups'); ?></th>
+					<td>
+					<?php activate_hide_counts_checkbox() ;?>
+					</td>
+					</tr>
+			<!------------------------------- List Sub-forums as columns ------------------------------------------>
+					<tr valign="top">
+						<th colspan="2"><h3><?php _e('List Sub-forums in Columns', 'bbp-private-groups'); ?></h3></th>
 					</tr>
 			
 			<!-- checkbox to activate -->
 					<tr valign="top">  
 					<th><?php _e('Activate', 'bbp-private-groups'); ?></th>
 					<td>
-					<?php activate_hide_counts_checkbox() ;?>
+					<?php activate_sub_forums_checkbox() ;?>
 					</td>
 					</tr>
 					
@@ -368,10 +383,15 @@ pg_help();
 if ($active_tab == 'role_assignment' ) {
 pg_role_assignment() ;
 }
+
+?>
+<?php
+//****  role assignment
+if ($active_tab == 'widget_warning' ) {
+pg_widget_warning() ;
+}
 //end of tab function
 }
-
-
 
 
 
@@ -409,6 +429,12 @@ function activate_forum_visibility_checkbox() {
 	_e ('Click to activate a freshness message', 'bbp-private-groups' );
   }
   
+  function activate_sub_forums_checkbox() {
+ 	global $rpg_settingsg ;
+	$item1 =  $rpg_settingsg['list_sub_forums_as_column'] ;
+	echo '<input name="rpg_settingsg[list_sub_forums_as_column]" id="rpg_settingsg[list_sub_forums_as_column]" type="checkbox" value="1" class="code" ' . checked( 1,$item1, false ) . ' />' ;
+	_e ('List Sub-forums in column', 'bbp-private-groups' );
+  }
 function activate_hide_counts_checkbox() {
  	global $rpg_settingsg ;
 	$item1 =  $rpg_settingsg['hide_counts'] ;
@@ -419,7 +445,7 @@ function activate_hide_counts_checkbox() {
  	global $rpg_settingsg ;
 	$item2 =  $rpg_settingsg['activate_descriptions'] ;
 	echo '<input name="rpg_settingsg[activate_descriptions]" id="rpg_settingsg[activate_descriptions]" type="checkbox" value="1" class="code" ' . checked( 1,$item2, false ) . ' />' ;
-	_e ('Show forum content (Descriptions) on main index' , 'bbp-private-groups' );
+	_e ('Show sub-forum content (Descriptions) on main index - sub-forums will display in columns' , 'bbp-private-groups' );
   }
   function activate_private_prefix_checkbox() {
  	global $rpg_settingsg ;
@@ -433,4 +459,7 @@ function activate_new_group() {
 	echo '<input name="rpg_groups[activate_new_group]" id="rpg_groups[activate_new_group]" type="checkbox" value="1" class="code"  />' ;
 	_e ('Click and then press "save groups" to add a new group' , 'bbp-private-groups' ) ;
   }
+  
+  
+  
   
