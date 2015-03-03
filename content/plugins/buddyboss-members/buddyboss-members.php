@@ -24,18 +24,10 @@ if ( ! defined( 'BUDDYBOSS_MEMBERS_PLUGIN_URL' ) ) {
 
 add_action( 'plugins_loaded', function(){
 
-	wp_enqueue_script( 'pubnub', 'http://cdn.pubnub.com/pubnub.min.js', array('jquery') );
+	wp_enqueue_script( 'pubnub', '//cdn.pubnub.com/pubnub.min.js', array('jquery') );
 
 	if ( ! is_user_logged_in() || ! current_user_can('generate_invitation_code') ) {
 		wp_enqueue_script( 'buddyboss-members', BUDDYBOSS_MEMBERS_PLUGIN_URL . '/assets/js/non-member.js' );
-
-		if ( is_user_logged_in()) {
-			$user   = wp_get_current_user();
-			$params = array('nickname' => $user->display_name);
-		} else {
-			$params = array('nickname' => null);
-		}
-		wp_localize_script( 'buddyboss-members', 'current_user', $params );
 
 		add_action( 'bp_directory_members_actions', function(){
 			echo bp_get_button( array(
@@ -75,4 +67,20 @@ add_action( 'plugins_loaded', function(){
 			wp_die();
 		});
 	}
+
+	if ( is_user_logged_in()) {
+		$user   = wp_get_current_user();
+		$params = array('nickname' => $user->display_name);
+	} else {
+		$params = array('nickname' => null);
+	}
+
+	// Setup PubNub connection params
+	$params['pubnub'] = array(
+		'ssl'           => is_ssl(),
+		'publish_key'   => 'pub-c-bd645d1e-f4aa-4719-9008-d14e29514bab',
+		'subscribe_key' => 'sub-c-8e1b190a-b033-11e4-83d7-0619f8945a4f'
+	);
+
+	wp_localize_script( 'buddyboss-members', 'php_vars', $params );
 });

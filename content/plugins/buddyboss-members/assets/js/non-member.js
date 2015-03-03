@@ -30,11 +30,7 @@ jQuery(document).ready(function($) {
 		return el;
 	}
 
-	var p = PUBNUB.init({
-		'publish_key': 'pub-c-bd645d1e-f4aa-4719-9008-d14e29514bab',
-		'subscribe_key': 'sub-c-8e1b190a-b033-11e4-83d7-0619f8945a4f'
-	});
-
+	var p = PUBNUB.init(php_vars.pubnub);
 	var requestor_uuid = p.uuid();
 	var code = false;
 
@@ -143,7 +139,7 @@ jQuery(document).ready(function($) {
 			channel: uuid + '_invitation_request',
 			message: {
 				'requestor_uuid': requestor_uuid,
-				'requestor_nickname': current_user.nickname
+				'requestor_nickname': php_vars.nickname
 			},
 			callback: function(m) {
 				console.log(m);

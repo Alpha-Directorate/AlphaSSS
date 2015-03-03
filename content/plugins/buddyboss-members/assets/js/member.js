@@ -7,11 +7,7 @@ jQuery(document).ready(function($) {
 	$.post(ajaxurl, data, function(data){
 
 		var uuid = data.data.user.username;
-		var pubnub = PUBNUB.init({
-			'publish_key': 'pub-c-bd645d1e-f4aa-4719-9008-d14e29514bab',
-			'subscribe_key': 'sub-c-8e1b190a-b033-11e4-83d7-0619f8945a4f',
-			'uuid': uuid
-		});
+		var pubnub = PUBNUB.init(php_vars.pubnub);
 
 		var invitation_requests = [];
 

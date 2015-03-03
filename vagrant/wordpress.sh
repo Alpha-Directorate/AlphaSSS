@@ -14,14 +14,15 @@ then
 	mysql -uroot -pvagrant alphasssdev < /var/www/alphasss.dev/vagrant/dump/dump.sql
 
 	# set correct host name
-	mysql -uroot -pvagrant -e "use alphasssdev; update wp_options set option_value = 'http://alphasss.dev/wp' where option_id = 3;"
-	mysql -uroot -pvagrant -e "use alphasssdev; update wp_options set option_value = 'http://alphasss.dev' where option_id = 4;"
+	mysql -uroot -pvagrant -e "use alphasssdev; update wp_options set option_value = 'https://alphasss.dev/wp' where option_id = 3;"
+	mysql -uroot -pvagrant -e "use alphasssdev; update wp_options set option_value = 'https://alphasss.dev' where option_id = 4;"
 
-	#sudo cp /vagrant/vagrant/etc/nginx/sites-available/default /etc/nginx/sites-available/default
-
+	sudo rm /etc/apache2/sites-available/default-ssl.conf
+	sudo cp /var/www/alphasss.dev/vagrant/etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available
 	sudo cp /var/www/alphasss.dev/vagrant/etc/apache2/sites-available/alphasss.dev.conf /etc/apache2/sites-available
 
 	sudo a2ensite alphasss.dev
+	sudo a2ensite default-ssl
 
 	# Install composer
 	curl -sS https://getcomposer.org/installer | php
