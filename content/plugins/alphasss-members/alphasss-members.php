@@ -110,7 +110,8 @@ add_action( 'plugins_loaded', function(){
 
 	$params['i18n'] = array(
 		'RequestSent'      => sprintf(__('Okay! Great, we have sent your request to %s.<br />In a couple of seconds, we will display your code in this window, right here.', 'alphasss-members'), $params['nickname']),
-		'RequestSentShort' => __('Request sent', 'alphasss-members')
+		'RequestSentShort' => __('Request sent', 'alphasss-members'),
+		'UserLeaveAlphass' => __('Sorry but the member %s went offline just a moment ago. Here\'s what you can do:<br /><p>&nbsp;&nbsp;1. The fastest: Request invitation from anybody who is online. You\'ll your code within seconds.</p><p>&nbsp;&nbsp;2. Post your invitation request in the general forum. Someone will read it and send you invitation.</p>', 'alphasss-members')
 	);
 
 	wp_localize_script( 'alphasss-members', 'php_vars', $params );

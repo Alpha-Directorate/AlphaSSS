@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Alphasss Invintation\n"
-"POT-Creation-Date: 2015-03-04 15:44+0300\n"
-"PO-Revision-Date: 2015-03-04 15:45+0300\n"
+"POT-Creation-Date: 2015-03-04 17:02+0300\n"
+"PO-Revision-Date: 2015-03-04 17:04+0300\n"
 "Last-Translator: Fractal Overflow <fractal-overflow@alphadirectorate.com>\n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -45,6 +45,10 @@ msgstr ""
 msgid "Setup time to live of invitation code"
 msgstr ""
 
+#: ../includes/admin.php:106 ../includes/admin.php:125
+msgid "Alphasss Invitation"
+msgstr ""
+
 #: ../includes/admin.php:144
 msgid "Some dummy text here"
 msgstr ""
@@ -64,19 +68,19 @@ msgstr ""
 msgid "Invitation"
 msgstr ""
 
-#: ../includes/invitation-class.php:72 ../includes/invitation-class.php:82
+#: ../includes/invitation-class.php:58 ../includes/invitation-class.php:68
 msgid "Invitations"
 msgstr ""
 
-#: ../templates/members/single/buddyboss-invitation-index.php:8
+#: ../templates/members/single/alphasss-invitation-index.php:8
 msgid "Invite Someone"
 msgstr ""
 
-#: ../templates/members/single/buddyboss-invitation-index.php:12
+#: ../templates/members/single/alphasss-invitation-index.php:12
 msgid "Space Pilot 3000"
 msgstr ""
 
-#: ../templates/members/single/buddyboss-invitation-index.php:14
+#: ../templates/members/single/alphasss-invitation-index.php:14
 msgid ""
 "I've got to find a way to escape the horrible ravages of youth. Suddenly, "
 "I'm going to the bathroom like clockwork, every three hours. And those jerks "
@@ -84,14 +88,14 @@ msgid ""
 "Please, Don-Bot... look into your hard drive, and open your mercy file!"
 msgstr ""
 
-#: ../templates/members/single/buddyboss-invitation-index.php:17
+#: ../templates/members/single/alphasss-invitation-index.php:17
 msgid "Here's the invitation code that you can use:"
 msgstr ""
 
-#: ../templates/members/single/buddyboss-invitation-index.php:21
+#: ../templates/members/single/alphasss-invitation-index.php:21
 msgid "The code is valid for 24 hours since the time it was generated."
 msgstr ""
 
-#: ../templates/members/single/buddyboss-invitation-index.php:25
+#: ../templates/members/single/alphasss-invitation-index.php:25
 msgid "Generate Invitation Code"
 msgstr ""

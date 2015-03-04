@@ -49,9 +49,8 @@ jQuery(document).ready(function($) {
 		// User leaved just a moment ago
 		if ($('#'+uuid).find('.text-success').text()) {
 			nickname = $('#' + uuid + ' .item-title').text();
-			message = 'Sorry but the member ' + nickname + ' went offline just a moment ago. Here\'s what you can do:<br />';
-			message += '<p>&nbsp;&nbsp;1. The fastest: Request invitation from anybody who is online. You\'ll your code within seconds.</p>';
-			message += '<p>&nbsp;&nbsp;2. Post your invitation request in the general forum. Someone will read it and send you invitation.</p>';
+			
+			message = php_vars.i18n.UserLeaveAlphass.replace('%s', nickname);
 
 			$('#alerts').append(dangerAlert(message , true));
 		}
@@ -65,9 +64,8 @@ jQuery(document).ready(function($) {
 		// User leaved just a moment ago
 		if ($('#'+uuid).find('.text-success').text()) {
 			nickname = $('#' + uuid + ' .item-title').text();
-			message = 'Sorry but the member ' + nickname + ' went offline just a moment ago. Here\'s what you can do:<br />';
-			message += '<p>&nbsp;&nbsp;1. The fastest: Request invitation from anybody who is online. You\'ll your code within seconds.</p>';
-			message += '<p>&nbsp;&nbsp;2. Post your invitation request in the general forum. Someone will read it and send you invitation.</p>';
+		
+			message = php_vars.i18n.UserLeaveAlphass.replace('%s', nickname);
 
 			$('#alerts').append(dangerAlert(message , true));
 		}
