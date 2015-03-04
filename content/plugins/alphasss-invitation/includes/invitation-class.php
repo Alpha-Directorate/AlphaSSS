@@ -29,10 +29,7 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 		{
 			if (true ) {
 				
-				//add_action( 'wp_before_admin_bar_render', array($this, 'update_wp_menus'), 99 );
 				add_action( 'bp_setup_nav', array($this, 'update_bp_menus'), 100 );
-				//add_action( 'bp_setup_nav', array($this, 'bbg_remove_activity_friends_subnav'), 99 );
-				//add_filter( 'bp_get_displayed_user_nav_activity', array($this, 'bbg_replace_activity_link') );
 			}
 
 			parent::setup_globals();

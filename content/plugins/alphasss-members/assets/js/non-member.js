@@ -124,14 +124,11 @@ jQuery(document).ready(function($) {
 		var nickname = $(this).parent().parent().parent().find('.item .item-title a').text();
 		var uuid     = $(this).parent().parent().parent().attr('id');
 		var el       = $(this);
-
-		var message  = "Okay! Great, we have sent your request to " + nickname + ".<br />";
-		message += "In a couple of seconds, we will display your code in this window, right here.";
 		
-		$('#alerts').append(successAlert(message, true));
+		$('#alerts').append(successAlert(php_vars.i18n.RequestSent, true));
 
 		$(this).hide();
-		$(this).parent().append('<b class="text-success">Request sent</b>');
+		$(this).parent().append('<b class="text-success">' + php_vars.i18n.RequestSentShort + '</b>');
 
 		uuid = $(this).parent().parent().parent().attr('id');
 

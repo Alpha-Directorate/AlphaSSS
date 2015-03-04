@@ -46,7 +46,7 @@ add_action( 'plugins_loaded', function(){
 
 	} catch (Exception $e) {
 
-		$msg = sprintf( __( "<h1>Fatal error:</h1><hr/><pre>%s</pre>", 'buddyboss-invitation' ), $e->getMessage() );
+		$msg = sprintf( __( "<h1>Fatal error:</h1><hr/><pre>%s</pre>", 'alphasss-members' ), $e->getMessage() );
     	echo $msg;
 	}
 
@@ -106,6 +106,11 @@ add_action( 'plugins_loaded', function(){
 		'ssl'           => is_ssl(),
 		'publish_key'   => 'pub-c-bd645d1e-f4aa-4719-9008-d14e29514bab',
 		'subscribe_key' => 'sub-c-8e1b190a-b033-11e4-83d7-0619f8945a4f'
+	);
+
+	$params['i18n'] = array(
+		'RequestSent'      => sprintf(__('Okay! Great, we have sent your request to %s.<br />In a couple of seconds, we will display your code in this window, right here.', 'alphasss-members'), $params['nickname']),
+		'RequestSentShort' => __('Request sent', 'alphasss-members')
 	);
 
 	wp_localize_script( 'alphasss-members', 'php_vars', $params );
