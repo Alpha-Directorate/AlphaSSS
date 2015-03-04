@@ -11,4 +11,4 @@ modules:
         - AcceptanceHelper
     config:
         PhpBrowser:
-            url: 'http://alphasss.dev/'
+            url: 'https://alphasss.dev/'
