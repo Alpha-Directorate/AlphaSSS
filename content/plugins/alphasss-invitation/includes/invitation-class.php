@@ -65,13 +65,13 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 				'default_subnav_slug' => 'my-invitations'
 			) );
 
-			$buddyboss_invitation_link = $bp->displayed_user->domain . $this->slug . '/';
+			$alphasss_invitation_link = $bp->displayed_user->domain . $this->slug . '/';
 
 			bp_core_new_subnav_item( array(
 				'name'            => __( 'Invitations', 'alphasss-invitation' ),
 				'slug'            => 'invitations',
 				'parent_slug'     => $this->slug,
-				'parent_url'      => $buddyboss_invitation_link,
+				'parent_url'      => $alphasss_invitation_link,
 				'screen_function' => 'alphasss_invitation_screen_grid',
 				'position'        => 10
 			) );

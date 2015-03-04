@@ -13,7 +13,7 @@
 	
 	<p><?php _e('I\'ve got to find a way to escape the horrible ravages of youth. Suddenly, I\'m going to the bathroom like clockwork, every three hours. And those jerks at Social Security stopped sending me checks. Now I have to pay them! Please, Don-Bot... look into your hard drive, and open your mercy file!', 'alphasss-invitation');?></p>
 
-	<div id="invitation_code_message" class="buddyboss-invitation-hidden in-place-message">
+	<div id="invitation_code_message" class="alphasss-invitation-hidden in-place-message">
 		<p><?php _e('Here\'s the invitation code that you can use:', 'alphasss-invitation'); ?><br />
 
 		<span id="invitation-code"></span> <br />
