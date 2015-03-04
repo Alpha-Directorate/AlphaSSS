@@ -1,0 +1,70 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Alpha Hooks\n"
+"POT-Creation-Date: 2015-03-04 15:19+0300\n"
+"PO-Revision-Date: 2015-03-04 15:25+0300\n"
+"Last-Translator: Fractal Overflow <fractal-overflow@alphadirectorate.com>\n"
+"Language-Team: Alphasss <fractal-overflow@alphadirectorate.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../alpha-hooks.php:21
+msgid "Login"
+msgstr "Login"
+
+#: ../alpha-hooks.php:100 ../alpha-hooks.php:244
+msgid "The Late Philip J. Fry"
+msgstr "The Late Philip J. Fry"
+
+#: ../alpha-hooks.php:101 ../alpha-hooks.php:245
+msgid "Your Invitation Code"
+msgstr "Your Invitation Code"
+
+#: ../alpha-hooks.php:102 ../alpha-hooks.php:246
+msgid ""
+"My fellow Earthicans, as I have explained in my book \"Earth in Balance\", "
+"and the much more popular \"Harry Potter and the Balance of Earth\" we need "
+"to defend our planet against pollution. Also <a href=\"/browse/\">request a "
+"new code</a>"
+msgstr ""
+"My fellow Earthicans, as I have explained in my book \"Earth in Balance\", "
+"and the much more popular \"Harry Potter and the Balance of Earth\" we need "
+"to defend our planet against pollution. Also <a href=\"/browse/\">request a "
+"new code</a>"
+
+#: ../alpha-hooks.php:103 ../alpha-hooks.php:247
+msgid "Request Invitation Code"
+msgstr "Request Invitation Code"
+
+#: ../alpha-hooks.php:164
+msgid ""
+"You may use only the following characters: letters (a-z), numbers (0-9), "
+"dashes (-), underscores (_), apostrophes ('), and periods (.). Try again "
+"please."
+msgstr ""
+"You may use only the following characters: letters (a-z), numbers (0-9), "
+"dashes (-), underscores (_), apostrophes ('), and periods (.). Try again "
+"please."
+
+#: ../alpha-hooks.php:171
+msgid "This nickname is already taken. Please choose another one."
+msgstr "This nickname is already taken. Please choose another one."
+
+#: ../alpha-hooks.php:188
+msgid "The 2 passwords do not match. Please try again."
+msgstr "The 2 passwords do not match. Please try again."
+
+#: ../alpha-hooks.php:194
+msgid "Your password must be strong. It's for your own protection."
+msgstr "Your password must be strong. It's for your own protection."
+
+#: ../alpha-hooks.php:276
+msgid "Please contact admin"
+msgstr "Please contact admin"

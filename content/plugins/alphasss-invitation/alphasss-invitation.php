@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: BuddyBoss Invitation
+ * Plugin Name: Alphasss Invitation
  * Plugin URI:  http://alphasss.com/
- * Description: BuddyBoss Invitation
+ * Description: Alphasss Invitation
  * Author:      AlphaSSS
  * Author URI:  http://alphasss.com
  * Version:     0.0.1
@@ -12,54 +12,54 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Directory
-if ( ! defined( 'BUDDYBOSS_INVITATION_PLUGIN_DIR' ) ) {
-	define( 'BUDDYBOSS_INVITATION_PLUGIN_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
+if ( ! defined( 'ALPHASSS_INVITATION_PLUGIN_DIR' ) ) {
+	define( 'ALPHASSS_INVITATION_PLUGIN_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
 }
 
-if ( ! defined( 'BUDDYBOSS_INVITATION_TABLENAME' ) ) {
+// Define invitation codes table name
+if ( ! defined( 'ALPHASSS_INVITATION_TABLENAME' ) ) {
 	global $wpdb;
 
-	$table_name = $wpdb->prefix . 'buddyboss_invitation_codes';
-
-	define( 'BUDDYBOSS_INVITATION_TABLENAME', $wpdb->prefix . 'buddyboss_invitation_codes' );
+	define( 'ALPHASSS_INVITATION_TABLENAME', $wpdb->prefix . 'buddyboss_invitation_codes' );
 }
+//--
 
 // Url
-if ( ! defined( 'BUDDYBOSS_INVITATION_PLUGIN_URL' ) ) {
+if ( ! defined( 'ALPHASSS_INVITATION_PLUGIN_URL' ) ) {
   $plugin_url = plugin_dir_url( __FILE__ );
 
   // If we're using https, update the protocol. Workaround for WP13941, WP15928, WP19037.
   if ( is_ssl() )
     $plugin_url = str_replace( 'http://', 'https://', $plugin_url );
 
-  define( 'BUDDYBOSS_INVITATION_PLUGIN_URL', $plugin_url );
+  define( 'ALPHASSS_INVITATION_PLUGIN_URL', $plugin_url );
 }
 
 // File
-if ( ! defined( 'BUDDYBOSS_INVITATION_PLUGIN_FILE' ) ) {
-  define( 'BUDDYBOSS_INVITATION_PLUGIN_FILE', __FILE__ );
+if ( ! defined( 'ALPHASSS_INVITATION_PLUGIN_FILE' ) ) {
+  define( 'ALPHASSS_INVITATION_PLUGIN_FILE', __FILE__ );
 }
 
 add_action( 'plugins_loaded', function(){
 
 	try {
 
-		$main_include = BUDDYBOSS_INVITATION_PLUGIN_DIR  . 'includes/main-class.php';
+		$main_include = ALPHASSS_INVITATION_PLUGIN_DIR  . 'includes/main-class.php';
 
 		if ( ! file_exists( $main_include ) ) {
-			$msg = sprintf( __( "Couldn't load main class at:<br/>%s", 'buddyboss-invitation' ), $main_include );
+			$msg = sprintf( __( "Couldn't load main class at:<br/>%s", 'alphasss-invitation' ), $main_include );
 			throw new Exception( $msg, 404 );
 		}
 
 		require( $main_include );
 
-		// Declare global access scope to the to BuddyBoss_Invitation_Plugin instance
-		global $buddyboss_invitation;
-		$buddyboss_invitation = BuddyBoss_Invitation_Plugin::instance();
+		// Declare global access scope to the to Alphasss_Invitation_Plugin instance
+		global $alphasss;
+		$alphasss = Alphasss_Invitation_Plugin::instance();
 
 	} catch (Exception $e) {
 
-		$msg = sprintf( __( "<h1>Fatal error:</h1><hr/><pre>%s</pre>", 'buddyboss-invitation' ), $e->getMessage() );
+		$msg = sprintf( __( "<h1>Fatal error:</h1><hr/><pre>%s</pre>", 'alphasss-invitation' ), $e->getMessage() );
     	echo $msg;
 	}
 
@@ -67,13 +67,13 @@ add_action( 'plugins_loaded', function(){
 
 /**
  * Must be called after hook 'plugins_loaded'
- * @return BuddyBoss_Invitation_Plugin
+ * @return Alphasss_Invitation_Plugin
  */
-function buddyboss_invitation()
+function alphasss_invitation()
 {
-  global $buddyboss_invitation;
+  global $alphasss_invitation;
 
-  return $buddyboss_invitation;
+  return $alphasss_invitation;
 }
 
 /**
@@ -83,7 +83,7 @@ function buddyboss_invitation()
 add_filter ('plugin_action_links', function($links, $file) {
 
 	if ($file == plugin_basename (__FILE__)) {
-		$settings_link = '<a href="' . add_query_arg( array( 'page' => 'buddyboss-invitation/includes/admin.php'   ), admin_url( 'options-general.php' ) ) . '">' . esc_html__( 'Settings', 'buddyboss-invitation' ) . '</a>';
+		$settings_link = '<a href="' . add_query_arg( array( 'page' => 'alphasss-invitation/includes/admin.php'   ), admin_url( 'options-general.php' ) ) . '">' . esc_html__( 'Settings', 'alphasss-invitation' ) . '</a>';
 
 		array_unshift ($links, $settings_link);
 	}
@@ -125,15 +125,15 @@ add_action( 'wp_ajax_get_invitation_code', function(){
 });
 
 // Setup database
-register_activation_hook( __FILE__, 'buddyboss_invitation_setup_db_tables' );
+register_activation_hook( __FILE__, 'alphasss_invitation_setup_db_tables' );
 
 /**
 * Setup database table for invitation codes.
 * Runs on plugin activation.
 */
-function buddyboss_invitation_setup_db_tables( ){
+function alphasss_invitation_setup_db_tables( ){
 
-	$sql = "CREATE TABLE " . $table_name . " (
+	$sql = "CREATE TABLE " . ALPHASSS_INVITATION_TABLENAME . " (
 			`id` int(32) unsigned NOT NULL AUTO_INCREMENT,
 			`invitation_code` varchar(10) CHARACTER SET utf8 NOT NULL,
 			`member_id` int(20) unsigned DEFAULT NULL,

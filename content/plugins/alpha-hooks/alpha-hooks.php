@@ -6,7 +6,10 @@ Description: All filter and action hooks used on the site, gathered together as 
 Version: 1.0.0
 Author: Andrew Voyticky
 Author URI:
+Text Domain: alpha-hooks
 */
+
+load_plugin_textdomain('alpha-hooks', false, basename(dirname( __FILE__ )) . '/languages');
 
 wp_enqueue_script( 'bootstrap-js', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js', array('jquery') );
 wp_enqueue_style( 'bootstrap-css', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' );
@@ -15,7 +18,7 @@ wp_enqueue_style( 'bootstrap-css', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/cs
 add_filter('wp_nav_menu_items', function($items, $args) {
 	ob_start();
 	wp_loginout('/');
-	$loginoutlink = str_replace('Log in', __('Login'), ob_get_contents());
+	$loginoutlink = str_replace('Log in', __('Login', 'alpha-hooks'), ob_get_contents());
 	ob_end_clean();
 
 	if ( is_user_logged_in() ) {
@@ -94,10 +97,10 @@ add_filter( 'gform_validation_9', function($validation_result){
 
 						$confirmation = reset($form['confirmations']);
 
-						$confirmation['message'] = '<h3>' . __('The Late Philip J. Fry') .'</h3>';
-						$confirmation['message'] .= '<h1>' . __('Your Invitation Code') . '</h1>';
-						$confirmation['message'] .= '<p>' . __('My fellow Earthicans, as I have explained in my book "Earth in Balance", and the much more popular "Harry Potter and the Balance of Earth" we need to defend our planet against pollution. Also <a href="/browse/">request a new code</a>') . '</p>';
-						$confirmation['message'] .= '<a class="button" href="/browse/">' . __('Request Invitation Code') . '</a>';
+						$confirmation['message'] = '<h3>' . __('The Late Philip J. Fry', 'alpha-hooks') .'</h3>';
+						$confirmation['message'] .= '<h1>' . __('Your Invitation Code', 'alpha-hooks') . '</h1>';
+						$confirmation['message'] .= '<p>' . __('My fellow Earthicans, as I have explained in my book "Earth in Balance", and the much more popular "Harry Potter and the Balance of Earth" we need to defend our planet against pollution. Also <a href="/browse/">request a new code</a>', 'alpha-hooks') . '</p>';
+						$confirmation['message'] .= '<a class="button" href="/browse/">' . __('Request Invitation Code', 'alpha-hooks') . '</a>';
 
 						$form['confirmations'][key($form['confirmations'])] = $confirmation;
 
@@ -158,14 +161,14 @@ add_filter( 'gform_validation_4', function($validation_result){
 					if ( ! preg_match( '/^[a-z0-9\'_.-]+$/i', $username ) ) {
 
 						$is_username_validation_error = true;
-						$field['validation_message']  = "You may use only the following characters: letters (a-z), numbers (0-9), dashes (-), underscores (_), apostrophes ('), and periods (.). Try again please.";
+						$field['validation_message']  = __("You may use only the following characters: letters (a-z), numbers (0-9), dashes (-), underscores (_), apostrophes ('), and periods (.). Try again please.", 'alpha-hooks');
 					}
 
 					// User exists? Show validation error
 					if ( username_exists( $username ) ) {
 
 						$is_username_validation_error = true;
-						$field['validation_message']  = 'This nickname is already taken. Please choose another one.';
+						$field['validation_message']  = __('This nickname is already taken. Please choose another one.', 'alpha-hooks');
 					}
 				}
 
@@ -182,13 +185,13 @@ add_filter( 'gform_validation_4', function($validation_result){
 				$password_strength = rgpost( 'input_4_strength' );
 
 				if ( $password != $confirm_password ) {
-					$field['validation_message']   = 'The 2 passwords do not match. Please try again.';
+					$field['validation_message']   = __('The 2 passwords do not match. Please try again.', 'alpha-hooks');
 					$validation_result['is_valid'] = false;
 					$field['failed_validation']    = true;
 				}
 
 				if ( isset( $field['validation_message'] ) && ! $field['validation_message'] && 'strong' != $password_strength ) {
-					$field['validation_message']   = 'Your password must be strong. It\'s for your own protection.';
+					$field['validation_message']   = __('Your password must be strong. It\'s for your own protection.', 'alpha-hooks');
 					$validation_result['is_valid'] = false;
 					$field['failed_validation']    = true;
 				}
@@ -238,10 +241,10 @@ add_filter( 'gform_validation_4', function($validation_result){
 
 						$confirmation = reset($form['confirmations']);
 
-						$confirmation['message'] = '<h3>' . __('The Late Philip J. Fry') .'</h3>';
-						$confirmation['message'] .= '<h1>' . __('Your Invitation Code') . '</h1>';
-						$confirmation['message'] .= '<p>' . __('My fellow Earthicans, as I have explained in my book "Earth in Balance", and the much more popular "Harry Potter and the Balance of Earth" we need to defend our planet against pollution. Also <a href="/browse/">request a new code</a>') . '</p>';
-						$confirmation['message'] .= '<a class="button" href="/browse/">' . __('Request Invitation Code') . '</a>';
+						$confirmation['message'] = '<h3>' . __('The Late Philip J. Fry', 'alpha-hooks') .'</h3>';
+						$confirmation['message'] .= '<h1>' . __('Your Invitation Code', 'alpha-hooks') . '</h1>';
+						$confirmation['message'] .= '<p>' . __('My fellow Earthicans, as I have explained in my book "Earth in Balance", and the much more popular "Harry Potter and the Balance of Earth" we need to defend our planet against pollution. Also <a href="/browse/">request a new code</a>', 'alpha-hooks') . '</p>';
+						$confirmation['message'] .= '<a class="button" href="/browse/">' . __('Request Invitation Code', 'alpha-hooks') . '</a>';
 
 						$form['confirmations'][key($form['confirmations'])] = $confirmation;
 
@@ -270,7 +273,7 @@ add_filter( 'gform_validation_4', function($validation_result){
 						} else {
 							$validation_result['is_valid'] = false;
 							$field['failed_validation']    = true;
-							$field['validation_message']   = __('Please contact admin');
+							$field['validation_message']   = __('Please contact admin', 'alpha-hooks');
 						}
 						
 					} else {

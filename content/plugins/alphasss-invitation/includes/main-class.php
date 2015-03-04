@@ -1,28 +1,28 @@
 <?php
 /**
  * @package WordPress
- * @subpackage BuddyBoss Wall
+ * @subpackage Alphasss Invitation
  */
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
+if ( ! class_exists( 'Alphasss_Invitation_Plugin' ) ):
 
 	require_once(BASEPATH . 'vendor/nesbot/carbon/src/Carbon/Carbon.php');
 
-	class BuddyBoss_Invitation_Plugin
+	class Alphasss_Invitation_Plugin
 	{
 
 		/**
-		 * BuddyBoss Invitation uses many variables, most of which can be filtered to
+		 * Alphasss Invitation uses many variables, most of which can be filtered to
 		 * customize the way that it works. To prevent unauthorized access,
 		 * these variables are stored in a private array that is magically
 		 * updated using PHP 5.2+ methods. This is to prevent third party
 		 * plugins from tampering with essential information indirectly, which
 		 * would cause issues later.
 		 *
-		 * @see BuddyBoss_Invitation_Plugin::setup_globals()
+		 * @see Alphasss_Invitation_Plugin::setup_globals()
 		 * @var array
 		 */
 		private $data = array();
@@ -40,25 +40,25 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 		);
 
 		/**
-		 * Main BuddyBoss Wall Instance.
+		 * Main Alphasss Invintation Instance.
 		 *
-		 * Insures that only one instance of BuddyBoss Invitation exists in memory at any
+		 * Insures that only one instance of Alphasss Invitation exists in memory at any
 		 * one time. Also prevents needing to define globals all over the place.
 		 *
 		 * @static object $instance
-		 * @uses BuddyBoss_Invitation_Plugin::setup_globals() Setup the globals needed.
-		 * @uses BuddyBoss_Invitation_Plugin::setup_actions() Setup the hooks and actions.
-		 * @uses BuddyBoss_Invitation_Plugin::setup_textdomain() Setup the plugin's language file.
-		 * @see buddyboss_invitation()
+		 * @uses Alphasss_Invitation_Plugin::setup_globals() Setup the globals needed.
+		 * @uses Alphasss_Invitation_Plugin::setup_actions() Setup the hooks and actions.
+		 * @uses Alphasss_Invitation_Plugin::setup_textdomain() Setup the plugin's language file.
+		 * @see alphasss_invitation()
 		 *
-		 * @return BuddyBoss_Invitation_Plugin
+		 * @return Alphasss_Invitation_Plugin
 		 */
 		public static function instance()
 		{
 			static $instance = null;
 
 			if ( null === $instance ) {
-				$instance = new BuddyBoss_Invitation_Plugin();
+				$instance = new Alphasss_Invitation_Plugin();
 				$instance->setup_globals();
 				$instance->setup_actions();
 				$instance->setup_textdomain();
@@ -83,7 +83,7 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 		public function __unset( $key ) { if ( isset( $this->data[$key] ) ) unset( $this->data[$key] ); }
 
 		/**
-		 * Magic method for getting BuddyBoss Invitation data varibles.
+		 * Magic method for getting Alphasss Invitation data varibles.
 		 *
 		 * @param string $key Data key
 		 * @return mixed
@@ -91,7 +91,7 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 		public function __get( $key ) { return isset( $this->data[$key] ) ? $this->data[$key] : null; }
 
 		/**
-		 * Magic method for setting BuddyBoss Invitation data varibles.
+		 * Magic method for setting Alphasss Invitation data varibles.
 		 *
 		 * @param string $key Data key
 		 * @param mixed $value Data value
@@ -116,7 +116,7 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 				WHERE 
 					requested_member_id = %d 
 				ORDER BY 
-					created_date ASC ;', sanitize_text_field(BUDDYBOSS_INVITATION_TABLENAME), (int) $user_id), ARRAY_A );
+					created_date ASC ;', sanitize_text_field(ALPHASSS_INVITATION_TABLENAME), (int) $user_id), ARRAY_A );
 
 			foreach ($results as &$result) {
 				$user = get_user_by( 'id', (int) $result['member_id'] );
@@ -152,7 +152,7 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 					member_id IS NULL AND is_active="NO" 
 				ORDER BY 
 					id %s 
-				LIMIT 50;', sanitize_text_field(BUDDYBOSS_INVITATION_TABLENAME), $sort[ array_rand( $sort )] ), ARRAY_A );
+				LIMIT 50;', sanitize_text_field(ALPHASSS_INVITATION_TABLENAME), $sort[ array_rand( $sort )] ), ARRAY_A );
 
 			$result = $results[ array_rand( $results ) ];
 
@@ -174,7 +174,7 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 			}
 
 			$wpdb->update( 
-				sanitize_text_field(BUDDYBOSS_INVITATION_TABLENAME), 
+				sanitize_text_field(ALPHASSS_INVITATION_TABLENAME), 
 				$data, 
 				array( 'id' => $result['id'] ) 
 			);
@@ -200,7 +200,7 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 					`%s`
 				WHERE 
 					member_id IS NOT NULL AND is_active="YES" AND invitation_code = "%s" AND activated_member_id IS NULL'
-				, sanitize_text_field(BUDDYBOSS_INVITATION_TABLENAME), $invitation_code ), ARRAY_A );
+				, sanitize_text_field(ALPHASSS_INVITATION_TABLENAME), $invitation_code ), ARRAY_A );
 
 			if ( $record ) {
 				$record = $record[0];
@@ -223,7 +223,7 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 			global $wpdb;
 
 			$wpdb->update( 
-				sanitize_text_field(BUDDYBOSS_INVITATION_TABLENAME), 
+				sanitize_text_field(ALPHASSS_INVITATION_TABLENAME), 
 				$data,
 				array( 'invitation_code' => $invitation_code ) 
 			);
@@ -247,10 +247,10 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 			$option = isset( $this->options[$key] ) ? $this->options[$key] : null;
 
 			// This filter is run for every option
-			$option = apply_filters( 'buddyboss_invitation_option', $option );
+			$option = apply_filters( 'alphasss_invitation_option', $option );
 
 			// Option specific filter name is converted to lowercase
-			$filter_name = sprintf( 'buddyboss_invitation_option_%s', strtolower( $key ) );
+			$filter_name = sprintf( 'alphasss_invitation_option_%s', strtolower( $key ) );
 			$option      = apply_filters( $filter_name,  $option );
 
 			return $option;
@@ -263,7 +263,7 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 		{
 			$this->do_includes( $this->admin_includes );
 
-			$this->admin = BuddyBoss_Invitation_Admin::instance();
+			$this->admin = Alphasss_Invitation_Admin::instance();
 		}
 
 		/**
@@ -286,15 +286,15 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 		{
 			$this->do_includes( $this->main_includes );
 
-			$this->component = new BuddyBoss_Invitation_BP_Component();
+			$this->component = new Alphasss_Invitation_BP_Component();
 		}
 
 		/**
-		 * Setup BuddyBoss Invitation plugin global variables
+		 * Setup Alphasss Invitation plugin global variables
 		 */
 		private function setup_globals( $args = array() )
 		{
-			$saved_options = get_option( 'buddyboss_invitation_plugin_options' );
+			$saved_options = get_option( 'alphasss_invitation_plugin_options' );
 			$saved_options = maybe_unserialize( $saved_options );
 
 			$this->options = wp_parse_args( $saved_options, $this->default_options );
@@ -333,7 +333,7 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 		}
 
 		/**
-		 * Setup BuddyBoss Invitation main actions
+		 * Setup Alphasss Invitation main actions
 		 */
 		private function setup_actions()
 		{
@@ -342,7 +342,7 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 				$this->load_admin();
 			}
 
-			// Hook into BuddyPress init
+			// Hook into Alphasss init
 			add_action( 'bp_loaded', array( $this, 'load_main' ) );
 		}
 
@@ -351,14 +351,14 @@ if ( ! class_exists( 'BuddyBoss_Invitation_Plugin' ) ):
 		 */
 		private function setup_textdomain() {
 
-			$domain = 'buddyboss-invitation';
+			$domain = 'alphasss-invitation';
 			$locale = apply_filters('plugin_locale', get_locale(), $domain);
 
 			//first try to load from wp-content/languages/plugins/ directory
 			load_textdomain($domain, WP_LANG_DIR.'/plugins/'.$domain.'-'.$locale.'.mo');
 			
-			//if not found, then load from buddboss-wall/languages/ directory
-			load_plugin_textdomain( 'buddyboss-invitation', false, $this->lang_dir );
+			//if not found, then load from alphasss-invitation/languages/ directory
+			load_plugin_textdomain( 'alphasss-invitation', false, $this->lang_dir );
 		}
 
 		private function __construct() {}

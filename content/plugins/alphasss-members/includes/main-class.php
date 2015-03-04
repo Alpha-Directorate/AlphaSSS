@@ -7,11 +7,9 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-if ( ! class_exists( 'ALPHASSS_MEMBERS_Plugin' ) ):
+if ( ! class_exists( 'Alphasss_Members_Plugin' ) ):
 
-	require_once(BASEPATH . 'vendor/nesbot/carbon/src/Carbon/Carbon.php');
-
-	class ALPHASSS_MEMBERS_Plugin
+	class Alphasss_Members_Plugin
 	{
 
 		/**
@@ -22,7 +20,7 @@ if ( ! class_exists( 'ALPHASSS_MEMBERS_Plugin' ) ):
 		 * plugins from tampering with essential information indirectly, which
 		 * would cause issues later.
 		 *
-		 * @see ALPHASSS_MEMBERS_Plugin::setup_globals()
+		 * @see Alphasss_Members_Plugin::setup_globals()
 		 * @var array
 		 */
 		private $data = array();
@@ -46,19 +44,19 @@ if ( ! class_exists( 'ALPHASSS_MEMBERS_Plugin' ) ):
 		 * one time. Also prevents needing to define globals all over the place.
 		 *
 		 * @static object $instance
-		 * @uses ALPHASSS_MEMBERS_Plugin::setup_globals() Setup the globals needed.
-		 * @uses ALPHASSS_MEMBERS_Plugin::setup_actions() Setup the hooks and actions.
-		 * @uses ALPHASSS_MEMBERS_Plugin::setup_textdomain() Setup the plugin's language file.
+		 * @uses Alphasss_Members_Plugin::setup_globals() Setup the globals needed.
+		 * @uses Alphasss_Members_Plugin::setup_actions() Setup the hooks and actions.
+		 * @uses Alphasss_Members_Plugin::setup_textdomain() Setup the plugin's language file.
 		 * @see alphasss_members()
 		 *
-		 * @return ALPHASSS_MEMBERS_Plugin
+		 * @return Alphasss_Members_Plugin
 		 */
 		public static function instance()
 		{
 			static $instance = null;
 
 			if ( null === $instance ) {
-				$instance = new ALPHASSS_MEMBERS_Plugin();
+				$instance = new Alphasss_Members_Plugin();
 				$instance->setup_globals();
 				$instance->setup_actions();
 				$instance->setup_textdomain();
@@ -164,7 +162,7 @@ if ( ! class_exists( 'ALPHASSS_MEMBERS_Plugin' ) ):
 		 */
 		private function setup_globals( $args = array() )
 		{
-			$saved_options = get_option( 'ALPHASSS_MEMBERS_Plugin_options' );
+			$saved_options = get_option( 'alphasss_members_plugin_options' );
 			$saved_options = maybe_unserialize( $saved_options );
 
 			$this->options = wp_parse_args( $saved_options, $this->default_options );
@@ -178,7 +176,7 @@ if ( ! class_exists( 'ALPHASSS_MEMBERS_Plugin' ) ):
 				$this->options[ strtolower( $key) ] = $option;
 			}
 
-			$this->file       = ALPHASSS_MEMBERS_PLUGIN_FILE;
+			$this->file       = Alphasss_Members_Plugin_FILE;
 			$this->basename   = plugin_basename( $this->file );
 			$this->plugin_dir = ALPHASSS_MEMBERS_PLUGIN_DIR;
 			$this->plugin_url = ALPHASSS_MEMBERS_PLUGIN_URL;

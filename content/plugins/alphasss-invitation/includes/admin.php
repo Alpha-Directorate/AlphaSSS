@@ -1,15 +1,15 @@
 <?php
 /**
  * @package WordPress
- * @subpackage BuddyBoss Invitation
+ * @subpackage Alphasss Invitation
  */
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-if ( ! class_exists( 'BuddyBoss_Invitation_Admin' ) ):
+if ( ! class_exists( 'Alphasss_Invitation_Admin' ) ):
 
-class BuddyBoss_Invitation_Admin
+class Alphasss_Invitation_Admin
 {
 	/**
 	 * Plugin options
@@ -25,7 +25,7 @@ class BuddyBoss_Invitation_Admin
 		static $instance = null;
 
 		if ( null === $instance ) {
-			$instance = new BuddyBoss_Invitation_Admin;
+			$instance = new Alphasss_Invitation_Admin;
 			$instance->setup();
 		}
 
@@ -41,7 +41,7 @@ class BuddyBoss_Invitation_Admin
 	 */
 	public function option( $key )
 	{
-		return buddyboss_invitation()->option( $key );
+		return alphasss_invitation()->option( $key );
 	}
 
 	/**
@@ -65,11 +65,11 @@ class BuddyBoss_Invitation_Admin
 	 */
 	public function admin_init()
 	{
-		register_setting( 'buddyboss_invitation_plugin_options', 'buddyboss_invitation_plugin_options', array( $this, 'plugin_options_validate' ) );
-		add_settings_section( 'general_section', __( 'General Settings', 'buddyboss-invitation' ), array( $this, 'section_general' ), __FILE__ );
+		register_setting( 'alphasss_invitation_plugin_options', 'alphasss_invitation_plugin_options', array( $this, 'plugin_options_validate' ) );
+		add_settings_section( 'general_section', __( 'General Settings', 'alphasss-invitation' ), array( $this, 'section_general' ), __FILE__ );
 
-		add_settings_field( 'time-to-expire', __( 'Time to expire', 'buddyboss-invitation' ), array( $this, 'setting_time_to_expire' ), __FILE__, 'general_section' );
-		add_settings_field( 'guessing-attempts-limit', __( 'Guessing attempts limit', 'buddyboss-invitation' ), array( $this, 'setting_guessing_attempts' ), __FILE__, 'general_section' );
+		add_settings_field( 'time-to-expire', __( 'Time to expire', 'alphasss-invitation' ), array( $this, 'setting_time_to_expire' ), __FILE__, 'general_section' );
+		add_settings_field( 'guessing-attempts-limit', __( 'Guessing attempts limit', 'alphasss-invitation' ), array( $this, 'setting_guessing_attempts' ), __FILE__, 'general_section' );
 	}
 
 	public function setting_guessing_attempts()
@@ -80,9 +80,9 @@ class BuddyBoss_Invitation_Admin
 			$value = 5;
 		}
 
-		printf( '<input id="guessing-attempts-limit" name="buddyboss_invitation_plugin_options[guessing-attempts-limit]" value="%d" /> ', $value);
+		printf( '<input id="guessing-attempts-limit" name="alphasss_invitation_plugin_options[guessing-attempts-limit]" value="%d" /> ', $value);
 
-		_e('Setup limit guessing attempts to submit valid invitation code', 'buddyboss-invitation');
+		_e('Setup limit guessing attempts to submit valid invitation code', 'alphasss-invitation');
 	}
 
 	public function setting_time_to_expire()
@@ -93,9 +93,9 @@ class BuddyBoss_Invitation_Admin
 			$value = 86400;
 		}
 
-		printf( '<input id="time-to-expire" name="buddyboss_invitation_plugin_options[time-to-expire]" value="%d" /> ', $value);
+		printf( '<input id="time-to-expire" name="alphasss_invitation_plugin_options[time-to-expire]" value="%d" /> ', $value);
 
-		_e('Setup time to live of invitation code', 'buddyboss-invitation');
+		_e('Setup time to live of invitation code', 'alphasss-invitation');
 	}
 
 	/**
@@ -103,7 +103,7 @@ class BuddyBoss_Invitation_Admin
 	 */
 	public function admin_menu()
 	{
-		add_options_page( 'BuddyBoss Invitation', 'BuddyBoss Invitation', 'manage_options', __FILE__, array( $this, 'options_page' ) );
+		add_options_page( __('Alphasss Invitation', 'alphasss-invitation'), __('Alphasss Invitation', 'alphasss-invitation'), 'manage_options', __FILE__, array( $this, 'options_page' ) );
 	}
 
 	/**
@@ -122,13 +122,13 @@ class BuddyBoss_Invitation_Admin
 	?>
 		<div class="wrap">
 			<div class="icon32" id="icon-options-general"><br></div>
-			<h2>BuddyBoss Invitation</h2>
+			<h2><?php _e('Alphasss Invitation', 'alphasss-invitation');?></h2>
 			<form action="options.php" method="post">
-			<?php settings_fields('buddyboss_invitation_plugin_options'); ?>
+			<?php settings_fields('alphasss_invitation_plugin_options'); ?>
 			<?php do_settings_sections(__FILE__); ?>
 
 			<p class="submit">
-				<input name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e('Save Changes'); ?>" />
+				<input name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e('Save Changes', 'alphasss-invitation'); ?>" />
 			</p>
 			</form>
 		</div>
@@ -141,7 +141,7 @@ class BuddyBoss_Invitation_Admin
 	 */
 	public function section_general()
 	{
-		_e( 'Some dummy text here', 'buddyboss-invitation' );
+		_e( 'Some dummy text here', 'alphasss-invitation' );
 	}
 
 	/**
@@ -157,7 +157,7 @@ class BuddyBoss_Invitation_Admin
 		return $input;
 	}
 }
-// End class BuddyBoss_Invitation_Admin
+// End class Alphasss_Invitation_Admin
 
 endif;
 

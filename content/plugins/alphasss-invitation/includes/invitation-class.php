@@ -1,28 +1,28 @@
 <?php
 /**
  * @package WordPress
- * @subpackage BuddyBoss Invitation
+ * @subpackage Alphasss Invitation
  */
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-if ( ! class_exists( 'BuddyBoss_Invitation_BP_Component' ) ):
+if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 
-	class BuddyBoss_Invitation_BP_Component extends BP_Component
+	class Alphasss_Invitation_BP_Component extends BP_Component
 	{
 		public function __construct()
 		{
 			parent::start(
 				'invitation',
-				__( 'Invitation' , 'buddyboss-invitation' ),
+				__( 'Invitation' , 'alphasss-invitation' ),
 				dirname( __FILE__ )
 			);
 		}
 
 		public function option( $key )
 		{
-			return buddyboss_invitation()->option( $key );
+			return alphasss_invitation()->option( $key );
 		}
 
 		public function setup_globals( $args = array() )
@@ -40,16 +40,7 @@ if ( ! class_exists( 'BuddyBoss_Invitation_BP_Component' ) ):
 
 		public function setup_actions()
 		{
-			// Add body class
-			//add_filter( 'body_class', array( $this, 'body_class' ) );
-
 			parent::setup_actions();
-		}
-
-		public function body_class()
-		{
-			//$classes[] = apply_filters( 'buddyboss_invitation_body_class', 'buddyboss-invitation' );
-			//return $classes;
 		}
 
 		/**
@@ -64,42 +55,40 @@ if ( ! class_exists( 'BuddyBoss_Invitation_BP_Component' ) ):
 				! current_user_can('generate_invitation_code') || 
 				( $bp->displayed_user->domain != $bp->loggedin_user->domain ) ) return;
 
-			buddyboss_wall_log('Updating Menus');
-
 			$profile_link = $bp->loggedin_user->domain . $bp->activity->slug . '/';
 
 			bp_core_new_nav_item( array(
-				'name'                => __( 'Invitations', 'buddyboss-invitation' ),
+				'name'                => __( 'Invitations', 'alphasss-invitation' ),
 				'slug'                => 'invitations',
 				'position'            => 100,
-				'screen_function'     => 'buddyboss_invitation_screen_grid',
+				'screen_function'     => 'alphasss_invitation_screen_grid',
 				'default_subnav_slug' => 'my-invitations'
 			) );
 
 			$buddyboss_invitation_link = $bp->displayed_user->domain . $this->slug . '/';
 
 			bp_core_new_subnav_item( array(
-				'name'            => __( 'Invitations', 'buddyboss-invitation' ),
+				'name'            => __( 'Invitations', 'alphasss-invitation' ),
 				'slug'            => 'invitations',
 				'parent_slug'     => $this->slug,
 				'parent_url'      => $buddyboss_invitation_link,
-				'screen_function' => 'buddyboss_invitation_screen_grid',
+				'screen_function' => 'alphasss_invitation_screen_grid',
 				'position'        => 10
 			) );
 		}
 	}
 
-	function buddyboss_invitation_screen_grid() {
+	function alphasss_invitation_screen_grid() {
 		add_action( 'bp_template_content', function() {
-			buddyboss_invitation_load_template( 'members/single/buddyboss-invitation-index' );
+			alphasss_invitation_load_template( 'members/single/alphasss-invitation-index' );
 		} );
-		bp_core_load_template( apply_filters( 'buddyboss_invitation_screen_grid', 'members/single/plugins' ) );
+		bp_core_load_template( apply_filters( 'alphasss_invitation_screen_grid', 'members/single/plugins' ) );
 	}
 
-	function buddyboss_invitation_load_template($template) {
+	function alphasss_invitation_load_template($template) {
 		$template .= '.php';
 
-		include_once buddyboss_invitation()->templates_dir.'/'.$template;
+		include_once alphasss_invitation()->templates_dir.'/'.$template;
 	}
 endif;
 ?>
