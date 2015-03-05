@@ -41,7 +41,7 @@ class Alphasss_Members_Admin
 	 */
 	public function option( $key )
 	{
-		return Alphasss_Members()->option( $key );
+		return alphasss_members()->option( $key );
 	}
 
 	/**
@@ -68,36 +68,46 @@ class Alphasss_Members_Admin
 		register_setting( 'alpahsss_members_plugin_options', 'alpahsss_members_plugin_options', array( $this, 'plugin_options_validate' ) );
 		add_settings_section( 'general_section', __( 'General Settings', 'alpahsss-members' ), array( $this, 'section_general' ), __FILE__ );
 
-		add_settings_field( 'time-to-expire', __( 'Time to expire', 'alpahsss-members' ), array( $this, 'setting_time_to_expire' ), __FILE__, 'general_section' );
-		add_settings_field( 'guessing-attempts-limit', __( 'Guessing attempts limit', 'alpahsss-members' ), array( $this, 'setting_guessing_attempts' ), __FILE__, 'general_section' );
+		add_settings_field( 'publish-key', __( 'Publish key', 'alpahsss-members' ), array( $this, 'setting_publish_key' ), __FILE__, 'general_section' );
+		add_settings_field( 'subscribe-key', __( 'Subscribe key', 'alpahsss-members' ), array( $this, 'setting_subscribe_key' ), __FILE__, 'general_section' );
+		add_settings_field( 'channel-prefix', __( 'Channel prefix', 'alpahsss-members' ), array( $this, 'setting_channel_prefix' ), __FILE__, 'general_section' );
 	}
 
-	public function setting_guessing_attempts()
+	public function setting_publish_key()
 	{
-		$value = $this->option( 'guessing-attempts-limit' );
-
-		if ( ! $value = (int) $this->option( 'guessing-attempts-limit' ) ) {
-			$value = 5;
+		if ( ! $value = $this->option( 'publish-key' ) ) {
+			$value = '';
 		}
 
-		printf( '<input id="guessing-attempts-limit" name="alpahsss_members_plugin_options[guessing-attempts-limit]" value="%d" /> ', $value);
+		printf( '<input id="publish-key" name="alpahsss_members_plugin_options[publish-key]" value="%s" /> ', $value);
 
-		_e('Setup limit guessing attempts to submit valid Members code', 'alpahsss-members');
+		_e('Add publish key', 'alpahsss-members');
 	}
 
-	public function setting_time_to_expire()
-	{
-		$value = $this->option( 'time-to-expire' );
 
-		if ( ! $value = (int) $this->option( 'time-to-expire' ) ) {
-			$value = 86400;
+	public function setting_subscribe_key()
+	{
+		if ( ! $value = $this->option( 'subscribe-key' ) ) {
+			$value = '';
 		}
 
-		printf( '<input id="time-to-expire" name="alpahsss_members_plugin_options[time-to-expire]" value="%d" /> ', $value);
+		printf( '<input id="subscribe-key" name="alpahsss_members_plugin_options[subscribe-key]" value="%s" /> ', $value);
 
-		_e('Setup time to live of Members code', 'alpahsss-members');
+		_e('Add subscribe key', 'alpahsss-members');
 	}
 
+	public function setting_channel_prefix()
+	{
+		if ( ! $value = $this->option( 'channel-prefix' ) ) {
+			$value = '';
+		}
+
+		printf( '<input id="channel-prefix" name="alpahsss_members_plugin_options[channel-prefix]" value="%s" /> ', $value);
+
+		_e('Add channel prefix', 'alpahsss-members');
+	}
+
+	
 	/**
 	 * Add plugin settings page
 	 */
@@ -151,8 +161,9 @@ class Alphasss_Members_Admin
 	 */
 	public function plugin_options_validate( $input )
 	{
-		$input['time-to-expire']          = (int) $input['time-to-expire'];
-		$input['guessing-attempts-limit'] = (int) $input['guessing-attempts-limit'];
+		$input['publish-key']   = esc_html ( $input['publish-key'] );
+		$input['subscribe-key'] = esc_html ( $input['subscribe-key'] );
+		$input['channel-prefix'] = esc_html ( $input['channel-prefix'] );
 
 		return $input;
 	}
