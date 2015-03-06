@@ -2023,14 +2023,18 @@ class GFCommon {
 		update_option( 'rg_gforms_message', $message );
 	}
 
-	public static function post_to_manager( $file, $query, $options ) {
+	public static function post_to_manager( $file, $query, $options ){
 
-		$request_url  = GRAVITY_MANAGER_URL . '/' . $file . '?' . $query;
+		$request_url = GRAVITY_MANAGER_URL . '/' . $file . '?' . $query;
+		self::log_debug( 'Posting to manager: ' . $request_url );
 		$raw_response = wp_remote_post( $request_url, $options );
+		self::log_debug( print_r( $raw_response, true ) );
 
-		if ( is_wp_error( $raw_response ) || 200 != $raw_response['response']['code'] ) {
-			$request_url  = GRAVITY_MANAGER_PROXY_URL . '/proxy.php?f=' . $file . '&' . $query;
+		if ( is_wp_error( $raw_response ) || 200 != $raw_response['response']['code'] ){
+			self::log_error( 'Error from manager. Sending to proxy...' );
+			$request_url = GRAVITY_MANAGER_PROXY_URL . '/proxy.php?f=' . $file . '&' . $query;
 			$raw_response = wp_remote_post( $request_url, $options );
+			self::log_debug( print_r( $raw_response, true ) );
 		}
 
 		return $raw_response;
