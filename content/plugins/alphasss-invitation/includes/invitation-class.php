@@ -27,7 +27,7 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 
 		public function setup_globals( $args = array() )
 		{
-			if (true ) {
+			if (true) {
 				
 				add_action( 'bp_setup_nav', array($this, 'update_bp_menus'), 100 );
 			}
@@ -82,7 +82,7 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 					'parent'   => buddypress()->my_account_menu_id,
 					'id'       => 'my-account-invitations',
 					'title'    => __( 'Invitations', 'alphasss-invitation' ),
-					'href'     =>  $bp->loggedin_user->domain . $this->slug . '/',
+					'href'     =>  $bp->loggedin_user->domain . $this->slug . 's/',
 					'position' => 100
 				);
 			}

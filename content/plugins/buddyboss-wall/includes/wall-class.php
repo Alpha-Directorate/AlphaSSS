@@ -454,38 +454,39 @@ class BuddyBoss_Wall_BP_Component extends BP_Component
 			$my_acct->href = trailingslashit( $activity_link );
 			$wp_admin_bar->add_node( $my_acct );
 
+			if (current_user_can('generate_invitation_code')) {
+				// Change 'Activity' to 'Wall'
+				$wp_admin_bar->add_menu( array(
+					'parent' => 'my-account-buddypress',
+					'id'     => 'my-account-' . $bp->activity->id,
+					'title'  => __( 'Wall', 'buddyboss-wall' ),
+					'href'   => trailingslashit( $activity_link )
+				) );
 
-			// Change 'Activity' to 'Wall'
-			$wp_admin_bar->add_menu( array(
-				'parent' => 'my-account-buddypress',
-				'id'     => 'my-account-' . $bp->activity->id,
-				'title'  => __( 'Wall', 'buddyboss-wall' ),
-				'href'   => trailingslashit( $activity_link )
-			) );
+				// Personal/Wall
+				$wp_admin_bar->add_menu( array(
+					'parent' => 'my-account-' . $bp->activity->id,
+					'id'     => 'my-account-' . $bp->activity->id . '-wall',
+					'title'  => __( 'Wall', 'buddyboss-wall' ),
+					'href'   => trailingslashit( $activity_link )
+				) );
 
-			// Personal/Wall
-			$wp_admin_bar->add_menu( array(
-				'parent' => 'my-account-' . $bp->activity->id,
-				'id'     => 'my-account-' . $bp->activity->id . '-wall',
-				'title'  => __( 'Wall', 'buddyboss-wall' ),
-				'href'   => trailingslashit( $activity_link )
-			) );
+				// News Feed
+				$wp_admin_bar->add_menu( array(
+					'parent' => 'my-account-' . $bp->activity->id,
+					'id'     => 'my-account-' . $bp->activity->id . '-feed',
+					'title'  => __( 'News Feed', 'buddyboss-wall' ),
+					'href'   => trailingslashit( $activity_link . 'news-feed' )
+				) );
 
-			// News Feed
-			$wp_admin_bar->add_menu( array(
-				'parent' => 'my-account-' . $bp->activity->id,
-				'id'     => 'my-account-' . $bp->activity->id . '-feed',
-				'title'  => __( 'News Feed', 'buddyboss-wall' ),
-				'href'   => trailingslashit( $activity_link . 'news-feed' )
-			) );
-
-			// Favorites
-			$wp_admin_bar->add_menu( array(
-				'parent' => 'my-account-' . $bp->activity->id,
-				'id'     => 'my-account-' . $bp->activity->id . '-favorites',
-				'title'  => __( 'My Likes', 'buddyboss-wall' ),
-				'href'   => trailingslashit( $activity_link . 'favorites' )
-			) );
+				// Favorites
+				$wp_admin_bar->add_menu( array(
+					'parent' => 'my-account-' . $bp->activity->id,
+					'id'     => 'my-account-' . $bp->activity->id . '-favorites',
+					'title'  => __( 'My Likes', 'buddyboss-wall' ),
+					'href'   => trailingslashit( $activity_link . 'favorites' )
+				) );
+			}
 		}
 	}
 
