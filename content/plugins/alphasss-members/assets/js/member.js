@@ -6,7 +6,8 @@ jQuery(document).ready(function($) {
 
 	$.post(ajaxurl, data, function(data){
 
-		var uuid = data.data.user.username;
+		var uuid = php_vars.pubnub.uuid;
+
 		var pubnub = PUBNUB.init(php_vars.pubnub);
 
 		var invitation_requests = [];

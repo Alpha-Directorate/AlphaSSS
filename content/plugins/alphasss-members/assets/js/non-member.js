@@ -36,10 +36,10 @@ jQuery(document).ready(function($) {
 
 	// This event Fires when a new User has Joined.
 	p.events.bind( 'presence-user-join', function(uuid) {
-	
-		$('#'+uuid).find('.member-offline').hide();
-		$('#'+uuid).find('.member-online').show();
-		$('#'+uuid).find('.action').show();
+	console.log(('#'+uuid));
+		$('#'+uuid +' .member-offline').hide();
+		$('#'+uuid +' .member-online').show();
+		$('#'+uuid + ' .action').show();
 	} );
 	// This event Fires when a new User has Left.
 	p.events.bind( 'presence-user-leave', function(uuid) {

@@ -105,7 +105,8 @@ add_action( 'plugins_loaded', function(){
 	$params['pubnub'] = array(
 		'ssl'           => is_ssl(),
 		'publish_key'   => 'pub-c-bd645d1e-f4aa-4719-9008-d14e29514bab',
-		'subscribe_key' => 'sub-c-8e1b190a-b033-11e4-83d7-0619f8945a4f'
+		'subscribe_key' => 'sub-c-8e1b190a-b033-11e4-83d7-0619f8945a4f',
+		'uuid'          => md5($params['nickname'])
 	);
 
 	$params['i18n'] = array(
