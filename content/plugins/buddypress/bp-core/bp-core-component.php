@@ -437,36 +437,38 @@ class BP_Component {
 	 */
 	public function setup_admin_bar( $wp_admin_nav = array() ) {
 
-		// Bail if this is an ajax request
-		if ( defined( 'DOING_AJAX' ) ) {
-			return;
-		}
-
-		// Do not proceed if BP_USE_WP_ADMIN_BAR constant is not set or is false
-		if ( ! bp_use_wp_admin_bar() ) {
-			return;
-		}
-
-		// Filter the passed admin nav
-		$wp_admin_nav = apply_filters( 'bp_' . $this->id . '_admin_nav', $wp_admin_nav );
-
-		// Do we have Toolbar menus to add?
-		if ( !empty( $wp_admin_nav ) ) {
-
-			// Set this objects menus
-			$this->admin_menu = $wp_admin_nav;
-
-			// Define the WordPress global
-			global $wp_admin_bar;
-
-			// Add each admin menu
-			foreach( $this->admin_menu as $admin_menu ) {
-				$wp_admin_bar->add_menu( $admin_menu );
+		if (current_user_can('generate_invitation_code')) {
+			// Bail if this is an ajax request
+			if ( defined( 'DOING_AJAX' ) ) {
+				return;
 			}
-		}
 
-		// Call action
-		do_action( 'bp_' . $this->id . '_setup_admin_bar' );
+			// Do not proceed if BP_USE_WP_ADMIN_BAR constant is not set or is false
+			if ( ! bp_use_wp_admin_bar() ) {
+				return;
+			}
+
+			// Filter the passed admin nav
+			$wp_admin_nav = apply_filters( 'bp_' . $this->id . '_admin_nav', $wp_admin_nav );
+
+			// Do we have Toolbar menus to add?
+			if ( !empty( $wp_admin_nav ) ) {
+
+				// Set this objects menus
+				$this->admin_menu = $wp_admin_nav;
+
+				// Define the WordPress global
+				global $wp_admin_bar;
+
+				// Add each admin menu
+				foreach( $this->admin_menu as $admin_menu ) {
+					$wp_admin_bar->add_menu( $admin_menu );
+				}
+			}
+
+			// Call action
+			do_action( 'bp_' . $this->id . '_setup_admin_bar' );
+		}
 	}
 
 	/**

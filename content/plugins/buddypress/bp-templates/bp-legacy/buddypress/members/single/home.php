@@ -8,6 +8,7 @@
 
 	</div><!-- #item-header -->
 
+	<?php if (current_user_can('generate_invitation_code')):?>
 	<div id="item-nav">
 		<div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
 			<ul>
@@ -19,6 +20,7 @@
 			</ul>
 		</div>
 	</div><!-- #item-nav -->
+	<?php endif;?>
 
 	<div id="item-body" role="main">
 

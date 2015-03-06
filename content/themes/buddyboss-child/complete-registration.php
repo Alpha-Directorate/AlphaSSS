@@ -28,8 +28,8 @@ Template Name: Complete registration
 <div id="content" role="main">
 	<div id="alerts">
 
-		<?php if ( $received_codes = buddyboss_invitation()->get_user_received_codes( get_current_user_id() ) ):?>
-			<?php foreach (buddyboss_invitation()->get_user_received_codes( get_current_user_id() ) as $invitation_code): ?>
+		<?php if ( $received_codes = alphasss_invitation()->get_user_received_codes( get_current_user_id() ) ):?>
+			<?php foreach (alphasss_invitation()->get_user_received_codes( get_current_user_id() ) as $invitation_code): ?>
 				<div role="alert" class="alert alert-dismissible <?php echo $invitation_code['is_expired'] ? 'alert-danger': 'alert-success';?> fade in">
 					<div class="alert-content">
 						<p><?php printf(__('%s has sent you the following invitation code %s ago:'), $invitation_code['nickname'], $invitation_code['date']); ?></p>
