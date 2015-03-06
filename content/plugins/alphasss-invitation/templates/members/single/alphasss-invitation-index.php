@@ -1,6 +1,6 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;?>
 
-<link rel="stylesheet" type="text/css" href="<?php echo buddyboss_invitation()->css_path(); ?>alphasss-invitation.css">
+<link rel="stylesheet" type="text/css" href="<?php echo alphasss_invitation()->css_path(); ?>alphasss-invitation.css">
 
 <div id="buddypress">
 	<div class="item-list-tabs no-ajax" id="subnav" role="navigation">

@@ -54,8 +54,8 @@ add_action( 'plugins_loaded', function(){
 		require( $main_include );
 
 		// Declare global access scope to the to Alphasss_Invitation_Plugin instance
-		global $alphasss;
-		$alphasss = Alphasss_Invitation_Plugin::instance();
+		global $alphasss_invitation;
+		$alphasss_invitation = Alphasss_Invitation_Plugin::instance();
 
 	} catch (Exception $e) {
 
@@ -63,7 +63,7 @@ add_action( 'plugins_loaded', function(){
     	echo $msg;
 	}
 
-} );
+} ,50);
 
 /**
  * Must be called after hook 'plugins_loaded'
@@ -114,7 +114,7 @@ add_action( 'wp_ajax_get_invitation_code', function(){
 	// Prepare data
 	$data = array(
 		'data' => array(
-			'invitation_code' => buddyboss_invitation()->get_invitation_code($requestor_nickname)
+			'invitation_code' => alphasss_invitation()->get_invitation_code($requestor_nickname)
 		)
 	);
 	//--

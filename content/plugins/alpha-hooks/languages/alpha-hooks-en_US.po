@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Alpha Hooks\n"
-"POT-Creation-Date: 2015-03-04 17:03+0300\n"
-"PO-Revision-Date: 2015-03-04 17:04+0300\n"
+"POT-Creation-Date: 2015-03-06 12:47+0300\n"
+"PO-Revision-Date: 2015-03-06 12:48+0300\n"
 "Last-Translator: Fractal Overflow <fractal-overflow@alphadirectorate.com>\n"
 "Language-Team: Alphasss <fractal-overflow@alphadirectorate.com>\n"
 "Language: en_US\n"
@@ -19,15 +19,15 @@ msgstr ""
 msgid "Login"
 msgstr "Login"
 
-#: ../alpha-hooks.php:100 ../alpha-hooks.php:244
+#: ../alpha-hooks.php:100 ../alpha-hooks.php:265
 msgid "The Late Philip J. Fry"
 msgstr "The Late Philip J. Fry"
 
-#: ../alpha-hooks.php:101 ../alpha-hooks.php:245
+#: ../alpha-hooks.php:101 ../alpha-hooks.php:266 ../alpha-hooks.php:395
 msgid "Your Invitation Code"
 msgstr "Your Invitation Code"
 
-#: ../alpha-hooks.php:102 ../alpha-hooks.php:246
+#: ../alpha-hooks.php:102 ../alpha-hooks.php:267
 msgid ""
 "My fellow Earthicans, as I have explained in my book \"Earth in Balance\", "
 "and the much more popular \"Harry Potter and the Balance of Earth\" we need "
@@ -39,7 +39,7 @@ msgstr ""
 "to defend our planet against pollution. Also <a href=\"/browse/\">request a "
 "new code</a>"
 
-#: ../alpha-hooks.php:103 ../alpha-hooks.php:247
+#: ../alpha-hooks.php:103 ../alpha-hooks.php:268
 msgid "Request Invitation Code"
 msgstr "Request Invitation Code"
 
@@ -57,14 +57,117 @@ msgstr ""
 msgid "This nickname is already taken. Please choose another one."
 msgstr "This nickname is already taken. Please choose another one."
 
-#: ../alpha-hooks.php:188
+#: ../alpha-hooks.php:175
+msgid "Please choose your nickname."
+msgstr ""
+
+#: ../alpha-hooks.php:191
 msgid "The 2 passwords do not match. Please try again."
 msgstr "The 2 passwords do not match. Please try again."
 
-#: ../alpha-hooks.php:194
+#: ../alpha-hooks.php:197
 msgid "Your password must be strong. It's for your own protection."
 msgstr "Your password must be strong. It's for your own protection."
 
-#: ../alpha-hooks.php:276
+#: ../alpha-hooks.php:202
+msgid "Please choose your password."
+msgstr ""
+
+#: ../alpha-hooks.php:211
+msgid "Please confirm if you are at least 21-years of age?"
+msgstr ""
+
+#: ../alpha-hooks.php:238
+msgid ""
+"Please confirm you have written down or memorized your nickname/password? "
+"You are anonymous, and we cannot recover your lost login info."
+msgstr ""
+
+#: ../alpha-hooks.php:297
 msgid "Please contact admin"
 msgstr "Please contact admin"
+
+#: ../alpha-hooks.php:327
+msgid "The Usual First Step"
+msgstr ""
+
+#: ../alpha-hooks.php:332 ../alpha-hooks.php:363
+msgid ""
+"I daresay that Fry has discovered the smelliest object is the known "
+"universe! Throw her in brig. Also Zoidberg. Oh God, what I have done! Just "
+"once I'd like to eat dinner with a celebrity whi isn't bound and gagged. "
+"Daylight and everything."
+msgstr ""
+
+#: ../alpha-hooks.php:337
+msgid "Your Nickname:"
+msgstr ""
+
+#: ../alpha-hooks.php:338
+msgid ""
+"The key to victory is discipline, and that means a well made bad. You will "
+"practice until you can make your bed in your sleep."
+msgstr ""
+
+#: ../alpha-hooks.php:343
+msgid "Password:"
+msgstr ""
+
+#: ../alpha-hooks.php:348
+msgid ""
+"Isn't it true that you have been paid for your testimony? Soothe us with "
+"sweet lies. Why would I want to know that?"
+msgstr ""
+
+#: ../alpha-hooks.php:354
+msgid ""
+"Hey, quess that you're accessories to. File not found. Oh Sure! Blame the "
+"wizards! We'll need to have a look inside you with this camera."
+msgstr ""
+
+#: ../alpha-hooks.php:359
+msgid "Confirmation &amp; Dire Warning!"
+msgstr ""
+
+#: ../alpha-hooks.php:368
+msgid ""
+"You guys go on without me! I'm going to go... look for more stuff to steal! "
+"No! The kind with looting and maybe starting a few fires!"
+msgstr ""
+
+#: ../alpha-hooks.php:383
+msgid "Your Nickname is:"
+msgstr ""
+
+#: ../alpha-hooks.php:386
+msgid ""
+"I've been there. My folks were always on me to groom myself and wear "
+"underpants. What am I, the pope?"
+msgstr ""
+
+#: ../alpha-hooks.php:387
+msgid "Your Password is:"
+msgstr ""
+
+#: ../alpha-hooks.php:388
+msgid ""
+"I barely knew Philip, bus as a clergyman I have no problem telling his most "
+"intimate friends all about him"
+msgstr ""
+
+#: ../alpha-hooks.php:399
+#, fuzzy
+msgid "Invitation Code:"
+msgstr "Your Invitation Code"
+
+#: ../alpha-hooks.php:409
+msgid "Don't have any invitation code?"
+msgstr ""
+
+#: ../alpha-hooks.php:410
+msgid "Who said that? SURE you can die! You want to die?!"
+msgstr ""
+
+#: ../alpha-hooks.php:418
+msgid "Finish"
+msgstr ""

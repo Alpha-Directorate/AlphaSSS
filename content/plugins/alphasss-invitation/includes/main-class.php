@@ -121,13 +121,9 @@ if ( ! class_exists( 'Alphasss_Invitation_Plugin' ) ):
 			foreach ($results as &$result) {
 				$user = get_user_by( 'id', (int) $result['member_id'] );
 
-				$result['nickname'] = ($user) 
-					? $user->display_name
-					: null;
-
+				$result['nickname']   = ($user) ? $user->display_name : null;
 				$result['is_expired'] = \Carbon\Carbon::now()->timestamp > \Carbon\Carbon::parse($result['expired_date'])->timestamp;
-				
-				$result['date'] = str_replace('after', '', \Carbon\Carbon::now()->diffForHumans(\Carbon\Carbon::parse($result['created_date'])));
+				$result['date']       = str_replace('after', '', \Carbon\Carbon::now()->diffForHumans(\Carbon\Carbon::parse($result['created_date'])));
 			}
 
 			return $results;
@@ -207,12 +203,12 @@ if ( ! class_exists( 'Alphasss_Invitation_Plugin' ) ):
 
 				if ( \Carbon\Carbon::now()->timestamp > \Carbon\Carbon::parse($record['expired_date'])->timestamp ){
 					$result['is_success'] = false;
-					$result['message']    = __('This code is older than 24 hours, and is no longer valid. Simply request a new invitation code.');
+					$result['message']    = __('This code is older than 24 hours, and is no longer valid. Simply request a new invitation code.', 'alphasss-invitation');
 				}
 
 			} else {
 				$result['is_success'] = false;
-				$result['message']    = __('This is not a valid invitation code. If you don\'t have one, just ask for it.');
+				$result['message']    = __('This is not a valid invitation code. If you don\'t have one, just ask for it.', 'alphasss-invitation');
 			}
 
 			return $result;
@@ -308,10 +304,10 @@ if ( ! class_exists( 'Alphasss_Invitation_Plugin' ) ):
 				$this->options[ strtolower( $key) ] = $option;
 			}
 
-			$this->file       = BUDDYBOSS_INVITATION_PLUGIN_FILE;
+			$this->file       = ALPHASSS_INVITATION_PLUGIN_FILE;
 			$this->basename   = plugin_basename( $this->file );
-			$this->plugin_dir = BUDDYBOSS_INVITATION_PLUGIN_DIR;
-			$this->plugin_url = BUDDYBOSS_INVITATION_PLUGIN_URL;
+			$this->plugin_dir = ALPHASSS_INVITATION_PLUGIN_DIR;
+			$this->plugin_url = ALPHASSS_INVITATION_PLUGIN_URL;
 
 			// Languages
 			$this->lang_dir = dirname( $this->basename ) . '/languages/';
