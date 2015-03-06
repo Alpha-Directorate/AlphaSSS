@@ -1,0 +1,36 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Alphasss Top Level Menu\n"
+"POT-Creation-Date: 2015-03-06 18:38+0300\n"
+"PO-Revision-Date: 2015-03-06 18:46+0300\n"
+"Last-Translator: Fractal Overflow <fractal-overflow@alphadirectorate.com>\n"
+"Language-Team: Alphasss\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../alphasss-top-navigation.php:16
+msgid "Blog"
+msgstr ""
+
+#: ../alphasss-top-navigation.php:17
+msgid "Register"
+msgstr ""
+
+#: ../alphasss-top-navigation.php:18
+msgid "Home"
+msgstr "Головна"
+
+#: ../alphasss-top-navigation.php:19
+msgid "Browse"
+msgstr ""
+
+#: ../alphasss-top-navigation.php:20
+msgid "Forum"
+msgstr ""
