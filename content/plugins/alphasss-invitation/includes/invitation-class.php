@@ -85,6 +85,14 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 					'href'     =>  $bp->loggedin_user->domain . $this->slug . 's/',
 					'position' => 100
 				);
+
+				// Personal/Wall
+				$wp_admin_nav[] = array(
+					'parent' => 'my-account-invitations',
+					'id'     => 'my-account-invitation-list',
+					'title'  => __( 'List', 'alphasss-invitation' ),
+					'href'   => $bp->loggedin_user->domain . $this->slug . 's/',
+				);
 			}
 
 			parent::setup_admin_bar($wp_admin_nav);
