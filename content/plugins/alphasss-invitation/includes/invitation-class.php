@@ -73,6 +73,22 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 				'position'        => 10
 			) );
 		}
+
+		public function setup_admin_bar( $wp_admin_nav = array() ) {
+			if (is_user_logged_in()) {
+				global $bp;
+
+				$wp_admin_nav[] = array(
+					'parent'   => buddypress()->my_account_menu_id,
+					'id'       => 'my-account-invitations',
+					'title'    => __( 'Invitations', 'alphasss-invitation' ),
+					'href'     =>  $bp->loggedin_user->domain . $this->slug . '/',
+					'position' => 100
+				);
+			}
+
+			parent::setup_admin_bar($wp_admin_nav);
+		}
 	}
 
 	function alphasss_invitation_screen_grid() {

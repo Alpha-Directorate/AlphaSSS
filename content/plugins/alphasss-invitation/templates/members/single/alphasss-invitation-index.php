@@ -9,7 +9,7 @@
 		</ul>
 	</div>
 
-	<h2><?php _e('Space Pilot 3000', );?></h2>
+	<h2><?php _e('Space Pilot 3000', 'alphasss-invitation');?></h2>
 	
 	<p><?php _e('I\'ve got to find a way to escape the horrible ravages of youth. Suddenly, I\'m going to the bathroom like clockwork, every three hours. And those jerks at Social Security stopped sending me checks. Now I have to pay them! Please, Don-Bot... look into your hard drive, and open your mercy file!', 'alphasss-invitation');?></p>
 

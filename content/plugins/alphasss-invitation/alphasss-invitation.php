@@ -63,7 +63,7 @@ add_action( 'plugins_loaded', function(){
     	echo $msg;
 	}
 
-} ,50);
+});
 
 /**
  * Must be called after hook 'plugins_loaded'

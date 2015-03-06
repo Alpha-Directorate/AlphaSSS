@@ -269,8 +269,7 @@ if ( ! class_exists( 'Alphasss_Invitation_Plugin' ) ):
 		 */
 		public function do_includes( $includes = array() )
 		{
-			foreach( (array)$includes as $include )
-			{
+			foreach( (array)$includes as $include ) {
 				require_once( $this->includes_dir . '/' . $include . '.php' );
 			}
 		}
