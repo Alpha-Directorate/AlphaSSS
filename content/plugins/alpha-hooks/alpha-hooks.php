@@ -21,9 +21,8 @@ add_filter('wp_nav_menu_items', function($items, $args) {
 	$loginoutlink = str_replace('Log in', __('Login', 'alpha-hooks'), ob_get_contents());
 	ob_end_clean();
 
-	if ( is_user_logged_in() ) {
-		$items .= '<li class="channel-logout">'. $loginoutlink .'</li>';
-	} else {
+	// Add login element to navigation menu
+	if ( ! is_user_logged_in() ) {
 		$items .= '<li>'. $loginoutlink .'</li>';
 	}
 
