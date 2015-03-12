@@ -3,15 +3,35 @@
 add_action ('bp_before_directory_members_tabs', 'bps_add_form');
 function bps_add_form ()
 {
+	global $post;
+
+	$page = $post->ID;
+	if ($page == 0)
+	{
+		$bp_pages = bp_core_get_directory_page_ids ();
+		$page = $bp_pages['members'];
+	}
+	$len = strlen ((string)$page);
+
 	$args = array (
 		'post_type' => 'bps_form',
 		'orderby' => 'ID',
 		'order' => 'ASC',
 		'nopaging' => true,
 		'meta_query' => array (
-			array ('key' => 'bps_options', 'compare' => 'LIKE', 'value' => 's:9:"directory";s:3:"Yes";')
+			array (
+				'key' => 'bps_options',
+				'value' => 's:9:"directory";s:3:"Yes";',
+				'compare' => 'LIKE',
+			),
+			array (
+				'key' => 'bps_options',
+				'value' => "s:6:\"action\";s:$len:\"$page\";",
+				'compare' => 'LIKE',
+			),
 		)
 	);
+
 	$posts = get_posts ($args);
 
 	foreach ($posts as $post)  bps_display_form ($post->ID, 'bps_auto');
@@ -35,7 +55,7 @@ function bps_display_form ($form, $mode='bps_action')
 		return false;
 	}
 
-	$action = bp_get_root_domain (). '/'. bp_get_members_root_slug (). '/';
+	$action = get_page_link ($bps_options['action']);
 
 echo "\n<!-- BP Profile Search ". BPS_VERSION. " - start -->\n";
 if ($mode != 'bps_auto')  echo "<div id='buddypress'>";
@@ -223,11 +243,41 @@ echo "\n<!-- BP Profile Search ". BPS_VERSION. " - end -->\n";
 	return true;
 }
 
-add_shortcode ('bps_display', 'bps_shortcode');
-function bps_shortcode ($attr, $content)
+add_shortcode ('bps_display', 'bps_show_form');
+function bps_show_form ($attr, $content)
 {
 	ob_start ();
-	bps_display_form ($attr['form'], 'bps_shortcode');
+
+	if (isset ($attr['form']))
+		bps_display_form ($attr['form'], 'bps_shortcode');
+
+	return ob_get_clean ();
+}
+
+add_shortcode ('bps_directory', 'bps_show_directory');
+function bps_show_directory ($attr, $content)
+{
+	ob_start ();
+
+	if (!function_exists ('bp_has_profile'))
+	{
+		printf ('<p class="bps_error">'. __('%s: The BuddyPress Extended Profiles component is not active.', 'bps'). '</p>',
+			'<strong>BP Profile Search '. BPS_VERSION. '</strong>');
+	}
+	else if (current_theme_supports ('buddypress'))
+	{
+		printf ('<p class="bps_error">'. __('%s: Multiple directories are not supported for this theme.', 'bps'). '</p>',
+			'<strong>BP Profile Search '. BPS_VERSION. '</strong>');
+	}
+	else
+	{
+		$template = isset ($attr['template'])? $attr['template']: 'members/index';
+
+		$found = bp_get_template_part ($template);
+		if (!$found)  printf ('<p class="bps_error">'. __('%s: The template "%s" was not found.', 'bps'). '</p>',
+			'<strong>BP Profile Search '. BPS_VERSION. '</strong>', $template);
+	}
+
 	return ob_get_clean ();
 }
 
@@ -302,4 +352,3 @@ function bps_widget_init ()
 {
 	register_widget ('bps_widget');
 }
-?>

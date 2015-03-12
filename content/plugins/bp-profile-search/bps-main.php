@@ -3,14 +3,14 @@
 Plugin Name: BP Profile Search
 Plugin URI: http://www.dontdream.it/bp-profile-search/
 Description: Search your BuddyPress Members Directory.
-Version: 4.0.3
+Version: 4.1
 Author: Andrea Tarantini
 Author URI: http://www.dontdream.it/
 Text Domain: bps
 Domain Path: /languages
 */
 
-define ('BPS_VERSION', '4.0.3');
+define ('BPS_VERSION', '4.1');
 include 'bps-functions.php';
 
 $addons = array ('bps-custom.php');
@@ -24,6 +24,27 @@ add_action ('plugins_loaded', 'bps_translate');
 function bps_translate ()
 {
 	load_plugin_textdomain ('bps', false, basename (dirname (__FILE__)). '/languages');
+}
+
+register_activation_hook (__FILE__, 'bps_activate');
+function bps_activate ()
+{
+	bps_upgrade41 ();
+}
+
+function bps_upgrade41 ()
+{
+	$posts = get_posts (array ('post_type' => 'bps_form', 'nopaging' => true));
+	foreach ($posts as $post)
+	{
+		$id = $post->ID;
+		$options = bps_options ($id);
+		if (!isset ($options['action']))
+		{
+			$options['action'] = 0;
+			update_post_meta ($id, 'bps_options', $options);
+		}
+	}
 }
 
 add_filter ('plugin_action_links', 'bps_row_meta', 10, 2);
@@ -52,11 +73,12 @@ function bps_options ($form)
 	$default['toggle'] = 'Enabled';
 	$default['button'] = __('Toggle Form', 'bps');
 	$default['method'] = 'POST';
+	$default['action'] = 0;
 	$default['searchmode'] = 'LIKE';
 
 	if (get_post_status ($form) == 'publish')  $meta = get_post_meta ($form);
-
 	$options[$form] = isset ($meta['bps_options'])? unserialize ($meta['bps_options'][0]): $default;
+
 	return $options[$form];
 }
 
@@ -97,6 +119,7 @@ function bps_add_columns ($columns)
 		'cb' => '<input type="checkbox" />',
 		'title' => __('Form', 'bps'),
 		'fields' => __('Fields', 'bps'),
+		'action' => __('Directory', 'bps'),
 		'directory' => __('Add to Directory', 'bps'),
 		'widget' => __('Widget', 'bps'),
 		'shortcode' => __('Shortcode', 'bps'),
@@ -111,6 +134,7 @@ function bps_columns ($column, $post_id)
 
 	$options = bps_options ($post_id);
 	if ($column == 'fields')  echo count ($options['field_name']);
+	else if ($column == 'action')  echo $options['action']? get_the_title ($options['action']): '<strong style="color:red;">'. __('undefined', 'bps'). '</strong>';
 	else if ($column == 'directory')  _e($options['directory'], 'bps');
 	else if ($column == 'widget')  echo bps_get_widget ($post_id);
 	else if ($column == 'shortcode')  echo "[bps_display form=$post_id]";
@@ -162,8 +186,8 @@ add_action ('add_meta_boxes', 'bps_add_meta_boxes');
 function bps_add_meta_boxes ()
 {
 	add_meta_box ('bps_form_fields', __('Form Fields', 'bps'), 'bps_form_fields', 'bps_form', 'normal');
+	add_meta_box ('bps_attributes', __('Form Attributes', 'bps'), 'bps_attributes', 'bps_form', 'side');
 	add_meta_box ('bps_directory', __('Add to Directory', 'bps'), 'bps_directory', 'bps_form', 'side');
-	add_meta_box ('bps_method', __('Form Method', 'bps'), 'bps_method', 'bps_form', 'side');
 	add_meta_box ('bps_searchmode', __('Text Search Mode', 'bps'), 'bps_searchmode', 'bps_form', 'side');
 }
 
@@ -171,34 +195,57 @@ function bps_directory ($post)
 {
 	$options = bps_options ($post->ID);
 ?>
-	<label for="directory"><?php _e('Add to Directory', 'bps'); ?></label><br/>
+	<p><strong><?php _e('Add to Directory', 'bps'); ?></strong></p>
+	<label class="screen-reader-text" for="directory"><?php _e('Add to Directory', 'bps'); ?></label>
 	<select name="options[directory]" id="directory">
 		<option value='Yes' <?php selected ($options['directory'], 'Yes'); ?>><?php _e('Yes', 'bps'); ?></option>
 		<option value='No' <?php selected ($options['directory'], 'No'); ?>><?php _e('No', 'bps'); ?></option>
 	</select>
-	<br/>
-	<label for="header"><?php _e('Form Header', 'bps'); ?></label><br/>
+
+	<p><strong><?php _e('Form Header', 'bps'); ?></strong></p>
+	<label class="screen-reader-text" for="header"><?php _e('Form Header', 'bps'); ?></label>
 	<textarea name="options[header]" id="header" class="large-text code" rows="4"><?php echo $options['header']; ?></textarea>
-	<br/>
-	<label for="toggle"><?php _e('Toggle Form', 'bps'); ?></label><br/>
+
+	<p><strong><?php _e('Toggle Form', 'bps'); ?></strong></p>
+	<label class="screen-reader-text" for="toggle"><?php _e('Toggle Form', 'bps'); ?></label>
 	<select name="options[toggle]" id="toggle">
 		<option value='Enabled' <?php selected ($options['toggle'], 'Enabled'); ?>><?php _e('Enabled', 'bps'); ?></option>
 		<option value='Disabled' <?php selected ($options['toggle'], 'Disabled'); ?>><?php _e('Disabled', 'bps'); ?></option>
 	</select>
-	<br/>
-	<label for="button"><?php _e('Toggle Form Button', 'bps'); ?></label><br/>
+
+	<p><strong><?php _e('Toggle Form Button', 'bps'); ?></strong></p>
+	<label class="screen-reader-text" for="button"><?php _e('Toggle Form Button', 'bps'); ?></label>
 	<input type="text" name="options[button]" id="button" value="<?php echo $options['button']; ?>" />
 <?php
 }
 
-function bps_method ($post)
+function bps_attributes ($post)
 {
 	$options = bps_options ($post->ID);
 ?>
+	<p><strong><?php _e('Form Method', 'bps'); ?></strong></p>
+	<label class="screen-reader-text" for="method"><?php _e('Form Method', 'bps'); ?></label>
 	<select name="options[method]" id="method">
 		<option value='POST' <?php selected ($options['method'], 'POST'); ?>><?php _e('POST', 'bps'); ?></option>
 		<option value='GET' <?php selected ($options['method'], 'GET'); ?>><?php _e('GET', 'bps'); ?></option>
 	</select>
+
+	<p><strong><?php _e('Form Action (Results Directory)', 'bps'); ?></strong></p>
+	<label class="screen-reader-text" for="action"><?php _e('Form Action (Results Directory)', 'bps'); ?></label>
+<?php
+	$bp_pages = array ();
+	$default = 0;
+	if (function_exists ('bp_core_get_directory_page_ids'))
+	{
+		$bp_pages = bp_core_get_directory_page_ids ();
+		$default = $bp_pages['members'];
+		unset ($bp_pages['members']);
+	}
+	$selected = $options['action']? $options['action']: $default;
+	$args = array ('name' => 'options[action]', 'id' => 'action', 'selected' => $selected, 'exclude' => $bp_pages);
+	wp_dropdown_pages ($args);
+?>
+	<p><?php _e('Need help? Use the Help tab in the upper right of your screen.'); ?></p>
 <?php
 }
 
@@ -221,7 +268,7 @@ function bps_save_post ($post_id, $post)
 	if (empty ($_POST['options']) && empty ($_POST['bps_options']))  return false;
 
 	$options = bps_update_fields ();
-	foreach (array ('directory', 'header', 'toggle', 'button', 'method', 'searchmode') as $key)
+	foreach (array ('directory', 'header', 'toggle', 'button', 'method', 'action', 'searchmode') as $key)
 		$options[$key] = stripslashes ($_POST['options'][$key]);
 
 	update_post_meta ($post_id, 'bps_options', $options);
@@ -283,11 +330,11 @@ function bps_css ()
 		.search-box, .actions, .view-switch {display: none;}
 		.bulkactions {display: block;}
 		#minor-publishing {display: none;}
-		.fixed .column-fields {width: 10%;}
+		.fixed .column-fields {width: 8%;}
+		.fixed .column-action {width: 14%;}
 		.fixed .column-directory {width: 16%;}
-		.fixed .column-widget {width: 16%;}
-		.fixed .column-shortcode {width: 20%;}
+		.fixed .column-widget {width: 14%;}
+		.fixed .column-shortcode {width: 18%;}
 	</style>
 <?php
 }
-?>

@@ -1,44 +1,62 @@
+# Copyright (C) 2015 BP Profile Search
+# This file is distributed under the same license as the BP Profile Search package.
 msgid ""
 msgstr ""
-"Project-Id-Version: BP Profile Search\n"
-"POT-Creation-Date: 2014-05-29 23:37:35+00:00\n"
+"Project-Id-Version: BP Profile Search 4.1\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/bp-profile-search\n"
+"POT-Creation-Date: 2015-03-04 12:08:24+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 
-#: bps-form.php:27
+#: bps-form.php:45 bps-form.php:264 bps-functions.php:238
+msgid "%s: The BuddyPress Extended Profiles component is not active."
+msgstr ""
+
+#: bps-form.php:53
 msgid "%s: Form %d was not found, or has no fields."
 msgstr ""
 
-#: bps-form.php:181 bps-search.php:123
+#: bps-form.php:207 bps-search.php:114
 msgid "Clear"
 msgstr ""
 
-#: bps-form.php:208
+#: bps-form.php:234
 msgid "Search"
 msgstr ""
 
-#: bps-form.php:232
+#: bps-form.php:269
+msgid "%s: Multiple directories are not supported for this theme."
+msgstr ""
+
+#: bps-form.php:277
+msgid "%s: The template \"%s\" was not found."
+msgstr ""
+
+#: bps-form.php:288
 msgid "A Profile Search form."
 msgstr ""
 
-#: bps-form.php:233 bps-functions.php:15 bps-main.php:72
+#: bps-form.php:289 bps-functions.php:15 bps-main.php:94
 msgid "Profile Search"
 msgstr ""
 
-#: bps-form.php:263
+#: bps-form.php:319
 msgid "Title:"
 msgstr ""
 
-#: bps-form.php:267
+#: bps-form.php:323
 msgid "Form:"
 msgstr ""
 
-#: bps-form.php:276 bps-functions.php:256
+#: bps-form.php:332 bps-functions.php:278
 msgid "(no title)"
 msgstr ""
 
-#: bps-form.php:286
+#: bps-form.php:342
 msgid "You have not created any form yet."
 msgstr ""
 
@@ -51,11 +69,11 @@ msgid "Configure your profile search form, then display it:"
 msgstr ""
 
 #: bps-functions.php:14
-msgid "In your Members Directory page, selecting the option %s"
+msgid "In its Members Directory page, selecting the option %s"
 msgstr ""
 
-#: bps-functions.php:14 bps-functions.php:41 bps-main.php:100 bps-main.php:165
-#: bps-main.php:174
+#: bps-functions.php:14 bps-functions.php:41 bps-main.php:123 bps-main.php:190
+#: bps-main.php:198 bps-main.php:199
 msgid "Add to Directory"
 msgstr ""
 
@@ -75,7 +93,7 @@ msgstr ""
 msgid "(*) Replace ID with your actual form ID."
 msgstr ""
 
-#: bps-functions.php:22 bps-main.php:164
+#: bps-functions.php:22 bps-main.php:188
 msgid "Form Fields"
 msgstr ""
 
@@ -129,7 +147,7 @@ msgid ""
 msgstr ""
 
 #: bps-functions.php:44
-msgid "Insert your search form in your Members Directory page."
+msgid "Insert your search form in its Members Directory page."
 msgstr ""
 
 #: bps-functions.php:46
@@ -149,226 +167,304 @@ msgid ""
 "If you select <em>Add to Directory: No</em>, the above options are ignored."
 msgstr ""
 
-#: bps-functions.php:53 bps-main.php:166
-msgid "Form Method"
+#: bps-functions.php:53 bps-main.php:189
+msgid "Form Attributes"
 msgstr ""
 
 #: bps-functions.php:56
-msgid "Select your form <em>method</em> attribute, POST or GET."
+msgid "Select your form’s <em>method</em> attribute."
 msgstr ""
 
-#: bps-functions.php:59 bps-main.php:167
-msgid "Text Search Mode"
+#: bps-functions.php:58
+msgid ""
+"POST: the form data are not visible in the URL and it’s not possible to "
+"bookmark the results page"
 msgstr ""
 
-#: bps-functions.php:62
-msgid "Select your text search mode."
+#: bps-functions.php:59
+msgid ""
+"GET: the form data are sent as URL variables and it’s possible to bookmark "
+"the results page"
+msgstr ""
+
+#: bps-functions.php:61
+msgid ""
+"Select your form’s <em>action</em> attribute. The <em>action</em> attribute "
+"points to your form’s results page, that could be:"
+msgstr ""
+
+#: bps-functions.php:63
+msgid "The BuddyPress Members Directory page"
 msgstr ""
 
 #: bps-functions.php:64
+msgid "A custom Members Directory page"
+msgstr ""
+
+#: bps-functions.php:66
+msgid ""
+"You can create a custom Members Directory page using the shortcode %s, and "
+"you can even use a custom directory template."
+msgstr ""
+
+#: bps-functions.php:67
+msgid ""
+"To learn more, read the <a href=\"http://dontdream.it/bp-profile-search/"
+"custom-directories/\" target=\"_blank\">Custom Directories</a> tutorial."
+msgstr ""
+
+#: bps-functions.php:70 bps-main.php:191
+msgid "Text Search Mode"
+msgstr ""
+
+#: bps-functions.php:73
+msgid "Select your text search mode."
+msgstr ""
+
+#: bps-functions.php:75
 msgid ""
 "LIKE: a search for <em>John</em> finds <em>John</em>, <em>Johnson</em>, "
 "<em>Long John Silver</em>, and so on"
 msgstr ""
 
-#: bps-functions.php:65
+#: bps-functions.php:76
 msgid "SAME: a search for <em>John</em> finds <em>John</em> only"
 msgstr ""
 
-#: bps-functions.php:67
+#: bps-functions.php:78
 msgid "In both modes, two wildcard characters are available:"
 msgstr ""
 
-#: bps-functions.php:69
+#: bps-functions.php:80
 msgid "Percent sign (%): matches any text, or no text at all"
 msgstr ""
 
-#: bps-functions.php:70
+#: bps-functions.php:81
 msgid "Underscore (_): matches any single character"
 msgstr ""
 
-#: bps-functions.php:75
+#: bps-functions.php:86
 msgid "For more information:"
 msgstr ""
 
-#: bps-functions.php:76
+#: bps-functions.php:87
 msgid "Documentation"
 msgstr ""
 
-#: bps-functions.php:77
+#: bps-functions.php:88
 msgid "Questions and Answers"
 msgstr ""
 
-#: bps-functions.php:78
+#: bps-functions.php:89
 msgid "Incompatible plugins"
 msgstr ""
 
-#: bps-functions.php:79
+#: bps-functions.php:90
 msgid "Support Forum"
 msgstr ""
 
-#: bps-functions.php:96
+#: bps-functions.php:107
 msgid "field"
 msgstr ""
 
-#: bps-functions.php:97
+#: bps-functions.php:108
 msgid "label"
 msgstr ""
 
-#: bps-functions.php:98
+#: bps-functions.php:109
 msgid "description"
 msgstr ""
 
-#: bps-functions.php:99 bps-functions.php:183
+#: bps-functions.php:110 bps-functions.php:194
 msgid "Range"
 msgstr ""
 
-#: bps-functions.php:191
+#: bps-functions.php:202
 msgid "Add Field"
 msgstr ""
 
-#: bps-functions.php:252 bps-functions.php:258
+#: bps-functions.php:274 bps-functions.php:280
 msgid "unused"
 msgstr ""
 
-#: bps-main.php:34
+#: bps-main.php:55
 msgid "Settings"
 msgstr ""
 
-#: bps-main.php:51
+#: bps-main.php:72
 msgid "<h4>Advanced Search</h4>"
 msgstr ""
 
-#: bps-main.php:53 bps-main.php:183
+#: bps-main.php:74 bps-main.php:209 bps-main.php:210
 msgid "Toggle Form"
 msgstr ""
 
-#: bps-main.php:70
+#: bps-main.php:92
 msgid "Profile Search Forms"
 msgstr ""
 
-#: bps-main.php:71
+#: bps-main.php:93
 msgid "Profile Search Form"
 msgstr ""
 
-#: bps-main.php:73
+#: bps-main.php:95
 msgid "Add New"
 msgstr ""
 
-#: bps-main.php:74
+#: bps-main.php:96
 msgid "Add New Form"
 msgstr ""
 
-#: bps-main.php:75
+#: bps-main.php:97
 msgid "Edit Form"
 msgstr ""
 
-#: bps-main.php:76
+#: bps-main.php:98
 msgid "No forms found."
 msgstr ""
 
-#: bps-main.php:77
+#: bps-main.php:99
 msgid "No forms found in Trash."
 msgstr ""
 
-#: bps-main.php:98
+#: bps-main.php:120
 msgid "Form"
 msgstr ""
 
-#: bps-main.php:99
+#: bps-main.php:121
 msgid "Fields"
 msgstr ""
 
-#: bps-main.php:101
-msgid "Widget"
-msgstr ""
-
-#: bps-main.php:102
-msgid "Shortcode"
+#: bps-main.php:122
+msgid "Directory"
 msgstr ""
 
 #: bps-main.php:124
-msgid "Move to Trash"
+msgid "Widget"
 msgstr ""
 
 #: bps-main.php:125
+msgid "Shortcode"
+msgstr ""
+
+#: bps-main.php:137
+msgid "undefined"
+msgstr ""
+
+#: bps-main.php:148
+msgid "Move to Trash"
+msgstr ""
+
+#: bps-main.php:149
 msgid "Restore"
 msgstr ""
 
-#: bps-main.php:126
+#: bps-main.php:150
 msgid "Delete Permanently"
 msgstr ""
 
-#: bps-main.php:176
+#: bps-main.php:201
 msgid "Yes"
 msgstr ""
 
-#: bps-main.php:177
+#: bps-main.php:202
 msgid "No"
 msgstr ""
 
-#: bps-main.php:180
+#: bps-main.php:205 bps-main.php:206
 msgid "Form Header"
 msgstr ""
 
-#: bps-main.php:185
+#: bps-main.php:212
 msgid "Enabled"
 msgstr ""
 
-#: bps-main.php:186
+#: bps-main.php:213
 msgid "Disabled"
 msgstr ""
 
-#: bps-main.php:189
+#: bps-main.php:216 bps-main.php:217
 msgid "Toggle Form Button"
 msgstr ""
 
-#: bps-main.php:199
+#: bps-main.php:226 bps-main.php:227
+msgid "Form Method"
+msgstr ""
+
+#: bps-main.php:229
 msgid "POST"
 msgstr ""
 
-#: bps-main.php:200
+#: bps-main.php:230
 msgid "GET"
 msgstr ""
 
-#: bps-main.php:210
+#: bps-main.php:233 bps-main.php:234
+msgid "Form Action (Results Directory)"
+msgstr ""
+
+#: bps-main.php:248
+msgid "Need help? Use the Help tab in the upper right of your screen."
+msgstr ""
+
+#: bps-main.php:257
 msgid "LIKE"
 msgstr ""
 
-#: bps-main.php:211
+#: bps-main.php:258
 msgid "SAME"
 msgstr ""
 
-#: bps-main.php:237
+#: bps-main.php:284
 msgid "Form updated."
 msgstr ""
 
-#: bps-main.php:242
+#: bps-main.php:289
 msgid "Form created."
 msgstr ""
 
-#: bps-main.php:258
+#: bps-main.php:305
 msgid "%s form permanently deleted."
 msgid_plural "%s forms permanently deleted."
 msgstr[0] ""
 msgstr[1] ""
 
-#: bps-main.php:259
+#: bps-main.php:306
 msgid "%s form moved to the Trash."
 msgid_plural "%s forms moved to the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: bps-main.php:260
+#: bps-main.php:307
 msgid "%s form restored from the Trash."
 msgid_plural "%s forms restored from the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
-#: bps-search.php:88
+#: bps-search.php:79
 msgid "min"
 msgstr ""
 
-#: bps-search.php:90
+#: bps-search.php:81
 msgid "max"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "BP Profile Search"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://www.dontdream.it/bp-profile-search/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Search your BuddyPress Members Directory."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Andrea Tarantini"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://www.dontdream.it/"
 msgstr ""

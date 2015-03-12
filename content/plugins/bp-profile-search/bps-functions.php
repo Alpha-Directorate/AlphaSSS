@@ -11,7 +11,7 @@ function bps_help ()
 <p>'.
 __('Configure your profile search form, then display it:', 'bps'). '
 <ul>
-<li>'. sprintf (__('In your Members Directory page, selecting the option %s', 'bps'), '<em>'. __('Add to Directory', 'bps'). '</em>'). '</li>
+<li>'. sprintf (__('In its Members Directory page, selecting the option %s', 'bps'), '<em>'. __('Add to Directory', 'bps'). '</em>'). '</li>
 <li>'. sprintf (__('In a sidebar or widget area, using the widget %s', 'bps'), '<em>'. __('Profile Search', 'bps'). '</em>'). '</li>
 <li>'. sprintf (__('In a post or page, using the shortcode %s (*)', 'bps'), '<strong>[bps_display form=ID]</strong>'). '</li>
 <li>'. sprintf (__('Anywhere in your theme, using the PHP code %s (*)', 'bps'), "<strong>&lt;?php do_action ('bps_display_form', ID); ?&gt;</strong>"). '</li>
@@ -41,7 +41,7 @@ __('Please note:', 'bps'). '
 	$title_02 = __('Add to Directory', 'bps');
 	$content_02 = '
 <p>'.
-__('Insert your search form in your Members Directory page.', 'bps'). '
+__('Insert your search form in its Members Directory page.', 'bps'). '
 <ul>
 <li>'. __('Specify the optional form header', 'bps'). '</li>
 <li>'. __('Enable the <em>Toggle Form</em> feature', 'bps'). '</li>
@@ -50,10 +50,21 @@ __('Insert your search form in your Members Directory page.', 'bps'). '
 __('If you select <em>Add to Directory: No</em>, the above options are ignored.', 'bps'). '
 </p>';
 
-	$title_03 = __('Form Method', 'bps');
+	$title_03 = __('Form Attributes', 'bps');
 	$content_03 = '
 <p>'.
-__('Select your form <em>method</em> attribute, POST or GET.', 'bps'). '
+__('Select your form’s <em>method</em> attribute.', 'bps'). '
+<ul>
+<li>'. __('POST: the form data are not visible in the URL and it’s not possible to bookmark the results page', 'bps'). '</li>
+<li>'. __('GET: the form data are sent as URL variables and it’s possible to bookmark the results page', 'bps'). '</li>
+</ul>'.
+__('Select your form’s <em>action</em> attribute. The <em>action</em> attribute points to your form’s results page, that could be:', 'bps'). '
+<ul>
+<li>'. __('The BuddyPress Members Directory page', 'bps'). '</li>
+<li>'. __('A custom Members Directory page', 'bps'). '</li>
+</ul>'.
+sprintf (__('You can create a custom Members Directory page using the shortcode %s, and you can even use a custom directory template.', 'bps'), '<strong>[bps_directory]</strong>'). ' '.
+__('To learn more, read the <a href="http://dontdream.it/bp-profile-search/custom-directories/" target="_blank">Custom Directories</a> tutorial.', 'bps'). '
 </p>';
 
 	$title_04 = __('Text Search Mode', 'bps');
@@ -76,13 +87,13 @@ __('In both modes, two wildcard characters are available:', 'bps'). '
 <p><a href="http://dontdream.it/bp-profile-search/" target="_blank">'. __('Documentation', 'bps'). '</a></p>
 <p><a href="http://dontdream.it/bp-profile-search/questions-and-answers/" target="_blank">'. __('Questions and Answers', 'bps'). '</a></p>
 <p><a href="http://dontdream.it/bp-profile-search/incompatible-plugins/" target="_blank">'. __('Incompatible plugins', 'bps'). '</a></p>
-<p><a href="http://dontdream.it/forums/support/bp-profile-search-forum/" target="_blank">'. __('Support Forum', 'bps'). '</a></p>
+<p><a href="http://dontdream.it/support/forum/bp-profile-search-forum/" target="_blank">'. __('Support Forum', 'bps'). '</a></p>
 <br><br>';
 
 	$screen->add_help_tab (array ('id' => 'bps_00', 'title' => $title_00, 'content' => $content_00));
 	$screen->add_help_tab (array ('id' => 'bps_01', 'title' => $title_01, 'content' => $content_01));
-	$screen->add_help_tab (array ('id' => 'bps_02', 'title' => $title_02, 'content' => $content_02));
 	$screen->add_help_tab (array ('id' => 'bps_03', 'title' => $title_03, 'content' => $content_03));
+	$screen->add_help_tab (array ('id' => 'bps_02', 'title' => $title_02, 'content' => $content_02));
 	$screen->add_help_tab (array ('id' => 'bps_04', 'title' => $title_04, 'content' => $content_04));
 
 	$screen->set_help_sidebar ($sidebar);
@@ -165,11 +176,11 @@ function bps_form_fields ($post)
 		if (empty ($fields[$id]))  continue;
 
 		$field = $fields[$id];
-		$label = $bps_options['field_label'][$k];
-		$default = $field->name;
+		$label = esc_attr ($bps_options['field_label'][$k]);
+		$default = esc_attr ($field->name);
 		$showlabel = empty ($label)? "placeholder=\"$default\"": "value=\"$label\"";
-		$desc = $bps_options['field_desc'][$k];
-		$default = $field->description;
+		$desc = esc_attr ($bps_options['field_desc'][$k]);
+		$default = esc_attr ($field->description);
 		$showdesc = empty ($desc)? "placeholder=\"$default\"": "value=\"$desc\"";
 ?>
 
@@ -199,6 +210,7 @@ function bps_profile_fields ($name, $id, $value)
 	echo "<select name='$name' id='$id'>\n";
 	foreach ($groups as $group => $fields)
 	{
+		$group = esc_attr ($group);
 		echo "<optgroup label='$group'>\n";
 		foreach ($fields as $field)
 		{
@@ -233,11 +245,14 @@ function bps_get_fields ()
 		while (bp_profile_groups ())
 		{
 			bp_the_profile_group (); 
+			$group->name = str_replace ('&amp;', '&', stripslashes ($group->name));
 			$groups[$group->name] = array ();
 
 			while (bp_profile_fields ())
 			{
 				bp_the_profile_field ();
+				$field->name = str_replace ('&amp;', '&', stripslashes ($field->name));
+				$field->description = str_replace ('&amp;', '&', stripslashes ($field->description));
 				$groups[$group->name][] = array ('id' => $field->id, 'name' => $field->name);
 				$fields[$field->id] = $field;
 			}
@@ -282,4 +297,3 @@ function bps_get_options ($id)
 
 	return $options[$id];
 }
-?>

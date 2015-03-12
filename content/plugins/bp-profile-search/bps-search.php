@@ -1,40 +1,30 @@
 <?php
 
-add_action ('wp_loaded', 'bps_set_cookie');
+add_action ('wp', 'bps_set_cookie');
 function bps_set_cookie ()
 {
-	global $bps_args;
-
 	if (isset ($_REQUEST['bp_profile_search']))
-	{
-		$bps_args = apply_filters ('bps_request_data', $_REQUEST);
-
-		add_action ('bp_before_directory_members_content', 'bps_filters');
-		setcookie ('bp-profile-search', serialize ($bps_args), 0, COOKIEPATH);
-	}
-	else if (isset ($_COOKIE['bp-profile-search']))
-	{
-		if (defined ('DOING_AJAX'))
-			$bps_args = unserialize (stripslashes ($_COOKIE['bp-profile-search']));
-	}
+		setcookie ('bps_request', serialize ($_REQUEST), 0, COOKIEPATH);
+	else if (isset ($_COOKIE['bps_request']))
+		setcookie ('bps_request', '', 0, COOKIEPATH);
 }
 
-add_action ('wp', 'bps_del_cookie');
-function bps_del_cookie ()
+function bps_get_request ()
 {
-	if (isset ($_REQUEST['bp_profile_search']))  return false;
+	if (isset ($_REQUEST['bp_profile_search']))
+		$request = $_REQUEST;
+	else if (isset ($_COOKIE['bps_request']) && defined ('DOING_AJAX'))
+		$request = unserialize (stripslashes ($_COOKIE['bps_request']));
+	else
+		$request = array ();
 
-	if (isset ($_COOKIE['bp-profile-search']))
-	{
-		if (is_page (bp_get_members_root_slug ()))
-			setcookie ('bp-profile-search', '', 0, COOKIEPATH);
-	}
+	return apply_filters ('bps_request', $request);
 }
 
-function bps_minmax ($posted, $id, $type)
+function bps_minmax ($request, $id, $type)
 {
-	$min = (isset ($posted["field_{$id}_min"]) && is_numeric (trim ($posted["field_{$id}_min"])))? trim ($posted["field_{$id}_min"]): '';
-	$max = (isset ($posted["field_{$id}_max"]) && is_numeric (trim ($posted["field_{$id}_max"])))? trim ($posted["field_{$id}_max"]): '';
+	$min = (isset ($request["field_{$id}_min"]) && is_numeric (trim ($request["field_{$id}_min"])))? trim ($request["field_{$id}_min"]): '';
+	$max = (isset ($request["field_{$id}_max"]) && is_numeric (trim ($request["field_{$id}_max"])))? trim ($request["field_{$id}_max"]): '';
 
 	if ($type == 'datebox')
 	{
@@ -45,17 +35,18 @@ function bps_minmax ($posted, $id, $type)
 	return array ($min, $max);
 }
 
+add_action ('bp_before_directory_members_content', 'bps_filters');
 function bps_filters ()
 {
-	global $bps_args;
+	$request = bps_get_request ();
+	if (empty ($request))  return false;
 
-	$posted = $bps_args;
 	$done = array ();
 	$filters = '';
-	$action = bp_get_root_domain (). '/'. bp_get_members_root_slug (). '/';
+	$action = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 	list ($x, $fields) = bps_get_fields ();
-	foreach ($posted as $key => $value)
+	foreach ($request as $key => $value)
 	{
 		if ($value === '')  continue;
 
@@ -68,7 +59,7 @@ function bps_filters ()
 	
 		$field = $fields[$id];
 		$field_type = apply_filters ('bps_field_criteria_type', $field->type, $field);
-		$field_label = isset ($posted['label_'. $id])? $posted['label_'. $id]: $field->name;
+		$field_label = isset ($request['label_'. $id])? $request['label_'. $id]: $field->name;
 
 		if (bps_custom_field ($field_type))
 		{
@@ -80,7 +71,7 @@ function bps_filters ()
 		{
 			if ($field_type == 'multiselectbox' || $field_type == 'checkbox')  continue;
 
-			list ($min, $max) = bps_minmax ($posted, $id, $field_type);
+			list ($min, $max) = bps_minmax ($request, $id, $field_type);
 			if ($min === '' && $max === '')  continue;
 
 			$filters .= "<strong>$field_label:</strong>";
@@ -126,7 +117,7 @@ function bps_filters ()
 	return true;
 }
 
-function bps_search ($posted)
+function bps_search ($request)
 {
 	global $bp, $wpdb;
 
@@ -134,7 +125,7 @@ function bps_search ($posted)
 	$results = array ('users' => array (0), 'validated' => true);
 
 	list ($x, $fields) = bps_get_fields ();
-	foreach ($posted as $key => $value)
+	foreach ($request as $key => $value)
 	{
 		if ($value === '')  continue;
 
@@ -161,7 +152,7 @@ function bps_search ($posted)
 			{
 				if ($field_type == 'multiselectbox' || $field_type == 'checkbox')  continue;
 
-				list ($min, $max) = bps_minmax ($posted, $id, $field_type);
+				list ($min, $max) = bps_minmax ($request, $id, $field_type);
 				if ($min === '' && $max === '')  continue;
 
 				switch ($field_type)
@@ -198,10 +189,10 @@ function bps_search ($posted)
 				case 'textarea':
 					$value = str_replace ('&', '&amp;', $value);
 					$escaped = '%'. bps_esc_like ($value). '%';
-					if (isset ($posted['options']) && in_array ('like', $posted['options']))
+					if (isset ($request['options']) && in_array ('like', $request['options']))
 						$sql .= $wpdb->prepare ("AND value LIKE %s", $escaped);
-					else					
-						$sql .= $wpdb->prepare ("AND value = %s", $value);
+					else
+						$sql .= $wpdb->prepare ("AND value LIKE %s", $value);
 					break;
 
 				case 'number':
@@ -249,47 +240,35 @@ function bps_search ($posted)
 	return $results;
 }
 
-add_action ('bp_before_members_loop', 'bps_add_filter');
-add_action ('bp_after_members_loop', 'bps_remove_filter');
-function bps_add_filter ()
+add_action ('bp_ajax_querystring', 'bps_filter_members', 30, 2);
+function bps_filter_members ($qs=false, $object=false)
 {
-	add_filter ('bp_pre_user_query_construct', 'bps_user_query');
-}
-function bps_remove_filter ()
-{
-	remove_filter ('bp_pre_user_query_construct', 'bps_user_query');
-}
+	if ($object != 'members')  return $qs;
 
-function bps_user_query ($query)
-{
-	global $bps_args;
+	$request = bps_get_request ();
+	if (empty ($request))  return $qs;
 
-	if (!isset ($bps_args))  return $query;
-
-	$bps_results = bps_search ($bps_args);
+	$bps_results = bps_search ($request);
 	if ($bps_results['validated'])
 	{
+		$args = wp_parse_args ($qs);
 		$users = $bps_results['users'];
 
-		if ($query->query_vars['include'] !== false)
+		if (isset ($args['include']))
 		{
-			$included = $query->query_vars['include'];
-			if (!is_array ($included))
-				$included = explode (',', $included);
-
+			$included = explode (',', $args['include']);
 			$users = array_intersect ($users, $included);
 			if (count ($users) == 0)  $users = array (0);
 		}
 
-		$users = apply_filters ('bps_results', $users);
-		$query->query_vars['include'] = $users;
+		$args['include'] = implode (',', $users);
+		$qs = build_query ($args);
 	}
 
-	return $query;
+	return $qs;
 }
 
 function bps_esc_like ($text)
 {
     return addcslashes ($text, '_%\\');
 }
-?>

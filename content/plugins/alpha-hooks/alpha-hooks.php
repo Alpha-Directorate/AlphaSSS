@@ -379,6 +379,41 @@ add_action( 'plugins_loaded', function(){
 	}
 }, 1000);
 
+add_filter( 'gform_pre_render_9', function($form){
+
+	foreach ( $form['fields'] as &$field ) {
+
+		switch ( $field['id'] ) {
+
+			case 18:
+				$field['content'] = str_replace( '%%RegisterInvintationTitle%%', __('Your Invitation Code', 'alpha-hooks'), $field['content'] );
+			break;
+
+			case 20:
+				$field['label'] = __('Invitation Code:', 'alpha-hooks');
+			break;
+
+			case 21:
+				$field['content'] = str_replace( 
+					[
+						'%%RegisterInvintationTitleUnder%%',
+						'%%RegisterInvintationTextUnder%%'
+					], 
+					[
+						__('Don\'t have any invitation code?', 'alpha-hooks'),
+						__('Who said that? SURE you can die! You want to die?!', 'alpha-hooks')
+					],
+					$field['content']
+				);
+			break;
+		}
+	}
+
+	$form['button']['text'] = __('Finish', 'alpha-hooks');
+
+	return $form;
+});
+
 add_filter( 'gform_pre_render_4', function($form){
 
 	foreach ( $form['fields'] as &$field ) {
