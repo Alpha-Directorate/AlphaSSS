@@ -50,6 +50,15 @@ add_action( 'plugins_loaded', function(){
     	echo $msg;
 	}
 
+	add_action( 'bp_init', function(){
+		bp_register_member_type( 'member', array(
+			'labels' => array(
+				'name'          => 'Members',
+				'singular_name' => 'Member',
+			)
+		));
+	});
+
 	wp_enqueue_script( 'pubnub', '//cdn.pubnub.com/pubnub.min.js', array('jquery') );
 
 	if ( ! is_user_logged_in() || ! current_user_can('generate_invitation_code') ) {

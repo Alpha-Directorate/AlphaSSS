@@ -124,6 +124,8 @@ add_action( 'plugins_loaded', function(){
 								'role' => 'member' ) 
 							);
 
+							bp_set_member_type(get_current_user_id(), 'member');
+
 							alphasss_invitation()->update_invitation_code($invite_code, array('activated_member_id' => $user->ID));
 							
 						} else {
@@ -290,6 +292,8 @@ add_action( 'plugins_loaded', function(){
 									'ID'   => $user->ID, 
 									'role' => 'member' ) 
 								);
+
+								bp_set_member_type($user->ID, 'member');
 
 								alphasss_invitation()->update_invitation_code($invite_code, array('activated_member_id' => $user->ID));
 							} else {

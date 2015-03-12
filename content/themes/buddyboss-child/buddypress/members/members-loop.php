@@ -13,7 +13,7 @@
 
 <?php do_action( 'bp_before_members_loop' ); ?>
 
-<?php if ( bp_has_members( bp_ajax_querystring( 'members' ) ) ) : ?>
+<?php if ( bp_has_members( 'member_type=member&exclude=' . get_current_user_id() ) ) : ?>
 
 	<div id="pag-top" class="pagination">
 
