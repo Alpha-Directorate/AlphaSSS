@@ -7,14 +7,17 @@ Template Name: Complete registration
 <?php 
 	global $wp_query;
 
+	// Only logged in users can see this page
 	if ( ! is_user_logged_in()) {
 		$wp_query->set_404();
 		status_header( 404 );
 		get_template_part( 404 ); exit();
 	} else {
+		$user = wp_get_current_user();
+
 		if ( isset( $user->roles ) && is_array( $user->roles ) ) {
-			// Show 404 for all no pre_member users
-			if ( ! in_array( 'pre_member', $user->roles ) ) {
+			// Show 404 for all no member users
+			if ( in_array( 'member', $user->roles ) ) {
 				$wp_query->set_404();
 				status_header( 404 );
 				get_template_part( 404 ); exit();
