@@ -22,7 +22,8 @@
     "fancyguy/webroot-installer": "1.1.0",
     "wp-cli/wp-cli": "*",
     "nesbot/carbon": "~1.14",
-    "pubnub/pubnub": "3.7.*"
+    "pubnub/pubnub": "3.7.*",
+    "robmorgan/phinx": "*"
   },
   "require-dev":{
      "codeception/codeception": "2.0.*",
