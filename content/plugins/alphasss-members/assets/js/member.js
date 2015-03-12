@@ -14,18 +14,22 @@ jQuery(document).ready(function($) {
 
 		function showInvitationRequestPopUp()
 		{
-			if (invitation_requests.length > 0) {
-				alert_data = invitation_requests[0];
+			$('#invitation-code-modal').modal('hide');
 
-				if ( alert_data.requestor_nickname ){
-					$('#modal-nickname').text(',' + alert_data.requestor_nickname + ',');
-				} else {
-					$('#modal-nickname').text();
+			setTimeout(function(){ 
+				if (invitation_requests.length > 0) {
+					alert_data = invitation_requests[0];
+
+					if ( alert_data.requestor_nickname ){
+						$('#modal-nickname').text(',' + alert_data.requestor_nickname + ',');
+					} else {
+						$('#modal-nickname').text();
+					}
+					$('#modal-code').text(alert_data.invitation_code);
+
+					$('#invitation-code-modal').modal('show');
 				}
-				$('#modal-code').text(alert_data.invitation_code);
-
-				$('#invitation-code-modal').modal('show');
-			}
+			}, 600);
 		}
 
 		$('.channel-logout').click(function(){
@@ -49,13 +53,15 @@ jQuery(document).ready(function($) {
 				callback: function(m) {
 					invitation_requests.shift();
 
-					$('#invitation-code-modal').modal('hide');
-
 					if (invitation_requests.length > 0) {
 						showInvitationRequestPopUp();
+					} else {
+					   $('#invitation-code-modal').modal('hide');
 					}
 				}
 			});
+
+			return false;
 		});
 
 		pubnub.subscribe({
