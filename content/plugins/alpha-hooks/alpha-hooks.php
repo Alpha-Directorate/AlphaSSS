@@ -385,8 +385,9 @@ add_filter( 'gform_pre_render_9', function($form){
 
 		switch ( $field['id'] ) {
 
-			case 18:
+			case 22:
 				$field['content'] = str_replace( '%%RegisterInvintationTitle%%', __('Your Invitation Code', 'alpha-hooks'), $field['content'] );
+				$field['content'] = str_replace( '%%RegisterPageTextUnderTitle%%', __('I meant \'physically\'. Look, perhaps you could let me work for a little food? I could clean the floors or paint a fence, or service you sexually? Hello, little man. I will destroy you! But existing is basically all I do! So, how \'bout them Knicks?', 'alpha-hooks'), $field['content'] );
 			break;
 
 			case 20:
@@ -400,8 +401,8 @@ add_filter( 'gform_pre_render_9', function($form){
 						'%%RegisterInvintationTextUnder%%'
 					], 
 					[
-						__('Don\'t have any invitation code?', 'alpha-hooks'),
-						__('Who said that? SURE you can die! You want to die?!', 'alpha-hooks')
+						__('Don\'t have any invitation code? Then ask the members.', 'alpha-hooks'),
+						__('Get the code from one of the members currently online. Who said that? Sure you <a href="/browse/">members online</a>! Ummm...to eBay? Stop! Don\'t shoot fire stick in space canoe! Cause explosive decompression!', 'alpha-hooks')
 					],
 					$field['content']
 				);
@@ -541,3 +542,16 @@ function is_the_code_correct( $field_value, $invitation_code ) {
 
 	return $code_confirmed;
 }
+
+add_filter('buddyboss_after_header', function(){
+
+	echo '<div id="top-alerts">';
+
+	if ( is_user_logged_in() ) {
+
+	} else {
+		// HERE code for unregistered alrets
+	}
+
+	echo '</div>';
+});
