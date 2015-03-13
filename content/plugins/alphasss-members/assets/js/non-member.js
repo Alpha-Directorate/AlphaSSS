@@ -114,6 +114,10 @@ jQuery(document).ready(function($) {
 				code     = m.invitation_code;
 
 				$('#' + m.uuid + ' .text-success').text('Invitation Code: ' + m.invitation_code);
+
+				// Pass invintation code to cookies
+				$.cookie("invintation_code", m.invitation_code, { path: '/activate'});
+
 				message = nickname + ' has sent you and invitation code:<br />' 
 				message += m.invitation_code + '<br />';
 				message += 'Write it down, and use it to <a href="/register/">register now</a>. The code will expire in 24 hours.';

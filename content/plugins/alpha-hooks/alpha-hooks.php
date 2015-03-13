@@ -37,6 +37,7 @@ add_filter('gform_register_init_scripts', function($form) {
 		"$('#input_9_20').bind('input', function(){
 			$(this).val($(this).val().replace(/\s+/g, ''));
 		});" .
+		"$('#input_9_20').val($.cookie('invintation_code'));" .
 		"$('#input_4_20').bind('input', function(){
 			$(this).val($(this).val().replace(/\s+/g, ''));
 		});})(jQuery);";
