@@ -41,7 +41,7 @@ You're the boss, so have fun editing!
 --------------------------------------------------------------*/
 @media screen and (max-width: 720px) {
 
-
+	.modal-backdrop{display:none; visibility:hidden;}
 	/*
 	.just_an_example {
 		color: black;

@@ -44,6 +44,18 @@ jQuery(document).ready(function($) {
 			});
 		});
 
+		$('#invitation-code-modal .close').click(function(){
+			alert_data = invitation_requests[0];
+
+			invitation_requests.shift();
+
+			if (invitation_requests.length > 0) {
+				showInvitationRequestPopUp();
+			} else {
+			   $('#invitation-code-modal').modal('hide');
+			}
+		});
+
 		$('#deliver-invitation-code').click(function(){
 			alert_data = invitation_requests[0];
 
