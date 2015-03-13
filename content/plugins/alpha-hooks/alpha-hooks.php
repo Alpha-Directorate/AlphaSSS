@@ -543,15 +543,8 @@ function is_the_code_correct( $field_value, $invitation_code ) {
 	return $code_confirmed;
 }
 
-add_filter('buddyboss_after_header', function(){
+add_filter('alphasss_top_alerts', function(){
 
-	echo '<div id="top-alerts">';
+	echo '<div id="top-alerts"></div>';
 
-	if ( is_user_logged_in() ) {
-
-	} else {
-		// HERE code for unregistered alrets
-	}
-
-	echo '</div>';
 });

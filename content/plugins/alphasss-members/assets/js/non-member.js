@@ -30,6 +30,11 @@ jQuery(document).ready(function($) {
 		return el;
 	}
 
+	// If pre-member is logged in
+	if (php_vars.show_top_alert === '1') {
+		$("#top-alerts").append(successAlert('<div class="alert-content">' + php_vars.i18n.TopAlert + '</div>', true));
+	}
+
 	var p = PUBNUB.init(php_vars.pubnub);
 	var requestor_uuid = p.uuid();
 	var code = false;

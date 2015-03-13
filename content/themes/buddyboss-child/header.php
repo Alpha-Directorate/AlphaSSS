@@ -98,4 +98,5 @@
     	<?php do_action( 'buddyboss_inside_wrapper' ); ?>
         <div id="page" class="hfeed site">
             <div id="main" class="wrapper">
+            <?php do_action( 'alphasss_top_alerts' ); ?>
 

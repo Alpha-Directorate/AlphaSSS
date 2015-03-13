@@ -103,12 +103,16 @@ add_action( 'plugins_loaded', function(){
 		});
 	}
 
-	if ( is_user_logged_in()) {
+	// Pre-member is logged in
+	if ( is_user_logged_in() && trim($_SERVER['REQUEST_URI'], '/') != 'activate') {
 		$user   = wp_get_current_user();
 		$params = array('nickname' => $user->display_name);
 	} else {
 		$params = array('nickname' => null);
 	}
+
+	// Show top alert
+	$params['show_top_alert'] = (trim($_SERVER['REQUEST_URI'], '/') != 'activate');
 
 	// Setup PubNub connection params
 	$params['pubnub'] = array(
@@ -121,7 +125,8 @@ add_action( 'plugins_loaded', function(){
 	$params['i18n'] = array(
 		'RequestSent'      => sprintf(__('Okay! Great, we have sent your request to %s.<br />In a couple of seconds, we will display your code in this window, right here.', 'alphasss-members'), $params['nickname']),
 		'RequestSentShort' => __('Request sent', 'alphasss-members'),
-		'UserLeaveAlphass' => __('Sorry but the member %s went offline just a moment ago. Here\'s what you can do:<br /><p>&nbsp;&nbsp;1. The fastest: Request invitation from anybody who is online. You\'ll your code within seconds.</p><p>&nbsp;&nbsp;2. Post your invitation request in the general forum. Someone will read it and send you invitation.</p>', 'alphasss-members')
+		'UserLeaveAlphass' => __('Sorry but the member %s went offline just a moment ago. Here\'s what you can do:<br /><p>&nbsp;&nbsp;1. The fastest: Request invitation from anybody who is online. You\'ll your code within seconds.</p><p>&nbsp;&nbsp;2. Post your invitation request in the general forum. Someone will read it and send you invitation.</p>', 'alphasss-members'),
+		'TopAlert'         => __('Your registration is not quite finished yet. To complete it, go to <a href="/activate/">registration</a> page. Morbo will now introduce tonight\'s candidates... PUNY HUMAN NUMBER ONE, PUNY HUMAN NUMBER TWO, and Morbo\'s good friend, Richard Nixon. <a href="/browse/">Browse</a>. Would you censor the Venus de Venus just because you can see her spewers? Yeah, lots of people did. Soon enough.', 'alphasss-members')
 	);
 
 	wp_localize_script( 'alphasss-members', 'php_vars', $params );
