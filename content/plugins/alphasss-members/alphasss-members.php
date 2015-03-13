@@ -107,12 +107,12 @@ add_action( 'plugins_loaded', function(){
 	if ( is_user_logged_in() && trim($_SERVER['REQUEST_URI'], '/') != 'activate') {
 		$user   = wp_get_current_user();
 		$params = array('nickname' => $user->display_name);
+		
+		// Show top alert on all pages except activate(top navigation element Register)
+		$params['show_top_alert'] = (trim($_SERVER['REQUEST_URI'], '/') != 'activate');
 	} else {
 		$params = array('nickname' => null);
 	}
-
-	// Show top alert
-	$params['show_top_alert'] = (trim($_SERVER['REQUEST_URI'], '/') != 'activate');
 
 	// Setup PubNub connection params
 	$params['pubnub'] = array(
