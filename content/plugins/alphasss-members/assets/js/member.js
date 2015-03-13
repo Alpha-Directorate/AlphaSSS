@@ -58,6 +58,9 @@ jQuery(document).ready(function($) {
 					} else {
 					   $('#invitation-code-modal').modal('hide');
 					}
+				},
+				error: function(error) {
+					pubNubErrorAlert();
 				}
 			});
 
@@ -67,7 +70,10 @@ jQuery(document).ready(function($) {
 		pubnub.subscribe({
 			channel: 'onlineUsers',
 			callback: function(m) {},
-			heartbeat: 10
+			error: function(error) {
+				pubNubErrorAlert();
+			},
+			heartbeat: 30
 		});
 
 		pubnub.subscribe({
@@ -94,6 +100,9 @@ jQuery(document).ready(function($) {
 						showInvitationRequestPopUp();
 					}
 				}, "json");
+			},
+			error: function(error) {
+				pubNubErrorAlert();
 			}
 		});
 	},"json");

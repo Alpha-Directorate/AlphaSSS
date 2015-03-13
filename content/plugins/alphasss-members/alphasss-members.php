@@ -60,6 +60,7 @@ add_action( 'plugins_loaded', function(){
 	});
 
 	wp_enqueue_script( 'pubnub', '//cdn.pubnub.com/pubnub.min.js', array('jquery') );
+	wp_enqueue_script( 'alphasss-alerts', ALPHASSS_MEMBERS_PLUGIN_URL . '/assets/js/alerts.js' );
 
 	if ( ! is_user_logged_in() || ! current_user_can('generate_invitation_code') ) {
 		wp_enqueue_script( 'alphasss-members', ALPHASSS_MEMBERS_PLUGIN_URL . '/assets/js/non-member.js' );
@@ -126,10 +127,12 @@ add_action( 'plugins_loaded', function(){
 		'RequestSent'      => sprintf(__('Okay! Great, we have sent your request to %s.<br />In a couple of seconds, we will display your code in this window, right here.', 'alphasss-members'), $params['nickname']),
 		'RequestSentShort' => __('Request sent', 'alphasss-members'),
 		'UserLeaveAlphass' => __('Sorry but the member %s went offline just a moment ago. Here\'s what you can do:<br /><p>&nbsp;&nbsp;1. The fastest: Request invitation from anybody who is online. You\'ll your code within seconds.</p><p>&nbsp;&nbsp;2. Post your invitation request in the general forum. Someone will read it and send you invitation.</p>', 'alphasss-members'),
-		'TopAlert'         => __('Your registration is not quite finished yet. To complete it, go to <a href="/activate/">registration</a> page. Morbo will now introduce tonight\'s candidates... PUNY HUMAN NUMBER ONE, PUNY HUMAN NUMBER TWO, and Morbo\'s good friend, Richard Nixon. <a href="/browse/">Browse</a>. Would you censor the Venus de Venus just because you can see her spewers? Yeah, lots of people did. Soon enough.', 'alphasss-members')
+		'TopAlert'         => __('Your registration is not quite finished yet. To complete it, go to <a href="/activate/">registration</a> page. Morbo will now introduce tonight\'s candidates... PUNY HUMAN NUMBER ONE, PUNY HUMAN NUMBER TWO, and Morbo\'s good friend, Richard Nixon. <a href="/browse/">Browse</a>. Would you censor the Venus de Venus just because you can see her spewers? Yeah, lots of people did. Soon enough.', 'alphasss-members'),
+		'ConnectionError'  => __('Bendless Love<br /> Bender, we\'re trying our best. You wouldn\'t. Ask anyway! I saw you with those two \'\'ladies of the evening\'\' at Elzars. Explain that.','alphasss-members')
 	);
 
 	wp_localize_script( 'alphasss-members', 'php_vars', $params );
+	wp_localize_script( 'alphasss-alerts', 'php_vars', $params );
 });
 
 /**

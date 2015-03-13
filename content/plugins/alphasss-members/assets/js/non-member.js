@@ -1,35 +1,5 @@
 jQuery(document).ready(function($) {
 
-	function successAlert(message, close)
-	{
-		return baseAlert(message, 'alert-success', close);
-	}
-
-	function infoAlert(message, close)
-	{
-		return baseAlert(message, 'info', close);
-	}
-
-	function dangerAlert(message, close)
-	{
-		return baseAlert(message, 'alert-danger', close);
-	}
-
-	function baseAlert(message, cls, close)
-	{
-		el = $('<div role="alert">');
-
-		if (close === true) {
-			el.append('<button class="close" aria-label="Close" data-dismiss="alert" type="button"><span aria-hidden="true">×</span></button>');
-		}
-
-		el.addClass('alert alert-dismissible fade in');
-
-		el.addClass(cls).append('<div class="alert-content">' + message + '</div>');
-		
-		return el;
-	}
-
 	// If pre-member is logged in
 	if (php_vars.show_top_alert === '1') {
 		$("#top-alerts").append(successAlert('<div class="alert-content">' + php_vars.i18n.TopAlert + '</div>', true));
@@ -41,7 +11,6 @@ jQuery(document).ready(function($) {
 
 	// This event Fires when a new User has Joined.
 	p.events.bind( 'presence-user-join', function(uuid) {
-	console.log(('#'+uuid));
 		$('#'+uuid +' .member-offline').hide();
 		$('#'+uuid +' .member-online').show();
 		$('#'+uuid + ' .action').show();
@@ -88,6 +57,9 @@ jQuery(document).ready(function($) {
 			if ('action' in details && uuid) p.events.fire(
 				'presence-user-' + details.action, uuid
 			);
+		},
+		error: function(error) {
+			pubNubErrorAlert();
 		}
 	});
 
@@ -98,7 +70,6 @@ jQuery(document).ready(function($) {
 	});
 
 	$('#wp-admin-bar-logout a').click(function(){
-
 		p.unsubscribe({
 			p: 'onlineUsers' 
 		});
@@ -123,6 +94,9 @@ jQuery(document).ready(function($) {
 				message += 'Write it down, and use it to <a href="/register/">register now</a>. The code will expire in 24 hours.';
 				$('#alerts').append(successAlert(message , true));
 			}
+		},
+		error: function(error) {
+			pubNubErrorAlert();
 		}
 	});
 
@@ -147,6 +121,9 @@ jQuery(document).ready(function($) {
 			},
 			callback: function(m) {
 				console.log(m);
+			},
+			error: function(error) {
+				pubNubErrorAlert();
 			}
 		});
 
