@@ -23,8 +23,23 @@ __('Forum', 'alphasss-top-navigation');
 add_action( 'plugins_loaded', function(){
 	// Top navigation localization
 	add_filter('wp_get_nav_menu_items', function($items, $menu){
+
 		foreach ( $items as $key => $item ) {
-	        $items[$key]->title = __($items[$key]->title, 'alphasss-top-navigation');
+			$items[$key]->title = __($items[$key]->title, 'alphasss-top-navigation');
+
+			if ($items[$key]->title == 'Register') {
+				if (is_user_logged_in()) {
+					// Remove register for member
+					if (current_user_can('generate_invitation_code')) {
+						unset($items[$key]);
+					} else {
+						$items[$key]->url       = str_replace('register', 'activate', $items[$key]->url);
+
+						// Set active class in menu
+						$items[$key]->classes[] = 'current-menu-item page_item';
+					}
+				}
+			}
 	    }
 
 	    return $items;
