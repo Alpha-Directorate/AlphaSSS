@@ -175,3 +175,9 @@ You're the boss, so have fun editing!
 	font-size: 24px;
 	font-weight:bold;
 }
+
+.profile-fields .label {
+    color: #555;
+    display: table-cell;
+    text-align: left;
+}
