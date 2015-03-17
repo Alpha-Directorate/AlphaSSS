@@ -55,6 +55,10 @@ add_action( 'plugins_loaded', function(){
 			'labels' => array(
 				'name'          => 'Members',
 				'singular_name' => 'Member',
+			),
+			'labels' => array(
+				'name'          => 'Pre Members',
+				'singular_name' => 'Pre Member',
 			)
 		));
 	});
@@ -62,46 +66,49 @@ add_action( 'plugins_loaded', function(){
 	wp_enqueue_script( 'pubnub', '//cdn.pubnub.com/pubnub.min.js', array('jquery') );
 	wp_enqueue_script( 'alphasss-alerts', ALPHASSS_MEMBERS_PLUGIN_URL . '/assets/js/alerts.js' );
 
-	if ( ! is_user_logged_in() || ! current_user_can('generate_invitation_code') ) {
-		wp_enqueue_script( 'alphasss-members', ALPHASSS_MEMBERS_PLUGIN_URL . '/assets/js/non-member.js' );
+	if ( is_user_logged_in() ) {
 
-		add_action( 'bp_directory_members_actions', function(){
-			echo bp_get_button( array(
-				'id'                => 'request_invitation',
-				'component'         => 'members',
-				'must_be_logged_in' => false,
-				'block_self'        => false,
-				'link_href'         => wp_nonce_url( bp_get_group_permalink( $group ) . 'request-invitation', 'groups_request_membership' ),
-				'link_text'         => __( 'Request Invitation', 'buddypress' ),
-				'link_title'        => __( 'Request Invitation', 'buddypress' ),
-				'link_class'        => 'group-button request-invitation',
-			) );
-		} );
-	} else {
-		wp_enqueue_script( 'alphasss-members', ALPHASSS_MEMBERS_PLUGIN_URL . 'assets/js/member.js',array('jquery') );
+		if ( current_user_can('generate_invitation_code') ) {
+			wp_enqueue_script( 'alphasss-members', ALPHASSS_MEMBERS_PLUGIN_URL . 'assets/js/member.js',array('jquery') );
 
-		/**
-		 * This action returns uuid
-		 */
-		add_action( 'wp_ajax_get_uuid', function(){
-			header('Content-Type: application/json');
+			/**
+			 * This action returns uuid
+			 */
+			add_action( 'wp_ajax_get_uuid', function(){
+				header('Content-Type: application/json');
 
-			$user = (array)wp_get_current_user()->data;
+				$user = (array)wp_get_current_user()->data;
 
-			// Prepare data
-			$data = array(
-				'data' => array(
-					'user' => array(
-						'username' => md5($user['display_name'])
+				// Prepare data
+				$data = array(
+					'data' => array(
+						'user' => array(
+							'username' => md5($user['display_name'])
+						)
 					)
-				)
-			);
-			//--
+				);
+				//--
 
-			echo json_encode($data);
+				echo json_encode($data);
 
-			wp_die();
-		});
+				wp_die();
+			});
+		} else {
+			wp_enqueue_script( 'alphasss-members', ALPHASSS_MEMBERS_PLUGIN_URL . '/assets/js/non-member.js' );
+
+			add_action( 'bp_directory_members_actions', function(){
+				echo bp_get_button( array(
+					'id'                => 'request_invitation',
+					'component'         => 'members',
+					'must_be_logged_in' => false,
+					'block_self'        => false,
+					'link_href'         => wp_nonce_url( bp_get_group_permalink( $group ) . 'request-invitation', 'groups_request_membership' ),
+					'link_text'         => __( 'Request Invitation', 'buddypress' ),
+					'link_title'        => __( 'Request Invitation', 'buddypress' ),
+					'link_class'        => 'group-button request-invitation',
+				) );
+			} );
+		}
 	}
 
 	// Pre-member is logged in
