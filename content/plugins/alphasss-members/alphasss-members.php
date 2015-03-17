@@ -65,6 +65,7 @@ add_action( 'plugins_loaded', function(){
 
 	wp_enqueue_script( 'pubnub', '//cdn.pubnub.com/pubnub.min.js', array('jquery') );
 	wp_enqueue_script( 'alphasss-alerts', ALPHASSS_MEMBERS_PLUGIN_URL . '/assets/js/alerts.js' );
+	wp_enqueue_script( 'alphasss-members-base', ALPHASSS_MEMBERS_PLUGIN_URL . 'assets/js/base-member.js',array('jquery') );
 
 	if ( is_user_logged_in() ) {
 
@@ -94,7 +95,7 @@ add_action( 'plugins_loaded', function(){
 				wp_die();
 			});
 		} else {
-			wp_enqueue_script( 'alphasss-members', ALPHASSS_MEMBERS_PLUGIN_URL . '/assets/js/non-member.js' );
+			wp_enqueue_script( 'alphasss-members', ALPHASSS_MEMBERS_PLUGIN_URL . '/assets/js/pre-member.js' );
 
 			add_action( 'bp_directory_members_actions', function(){
 				echo bp_get_button( array(
@@ -109,17 +110,17 @@ add_action( 'plugins_loaded', function(){
 				) );
 			} );
 		}
+	} else {
+		wp_enqueue_script( 'alphasss-members', ALPHASSS_MEMBERS_PLUGIN_URL . '/assets/js/non-member.js' );
 	}
 
 	// Pre-member is logged in
-	if ( is_user_logged_in() && trim($_SERVER['REQUEST_URI'], '/') != 'activate') {
+	if ( is_user_logged_in()) {
 		$user   = wp_get_current_user();
 		$params = array('nickname' => $user->display_name);
 		
 		// Show top alert on all pages except activate(top navigation element Register)
-		$params['show_top_alert'] = (trim($_SERVER['REQUEST_URI'], '/') != 'activate');
-	} else {
-		$params = array('nickname' => null);
+		$params['show_top_alert'] = ( $_SERVER['REQUEST_URI'] != get_pre_member_register_uri() );
 	}
 
 	// Setup PubNub connection params
@@ -139,6 +140,7 @@ add_action( 'plugins_loaded', function(){
 		'InvitationCodeGetAlert' => sprintf(__('%s has sent you and invitation code:<br />%s<br />Write it down, and use it to <a href="%s">register now</a>. The code will expire in 24 hours.', 'alphasss-members'), '%s','%s', get_pre_member_register_url())
 	);
 
+	wp_localize_script( 'alphasss-members-base', 'php_vars', $params );
 	wp_localize_script( 'alphasss-members', 'php_vars', $params );
 	wp_localize_script( 'alphasss-alerts', 'php_vars', $params );
 });

@@ -148,6 +148,22 @@ You're the boss, so have fun editing!
 	display: none;
 }
 
+.member-online .icon {
+	background-image: url('../images/icons/user_online.png');
+	background-repeat: no-repeat;
+	width:30px;
+	height:30px;
+	float:left;
+}
+
+.member-offline .icon {
+	background-image: url('../images/icons/user_offline.png');
+	background-repeat: no-repeat;
+	width:30px;
+	height:30px;
+	float:left;
+}
+
 .action {
 	display: none;
 }

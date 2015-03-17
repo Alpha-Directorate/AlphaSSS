@@ -49,7 +49,14 @@
 				<div class="item-meta">
 					<span class="activity">
 						<?php bp_member_last_active(); ?><br />
-						<span class="member-online">online</span><span class="member-offline">offline</span>
+						<div class="member-online">
+							<div class="icon"></div>
+							online
+						</div>
+						<div class="member-offline">
+							<div class="icon"></div>
+							offline
+						</div>
 					</span>
 				</div>
 
