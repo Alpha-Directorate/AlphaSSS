@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Complete registration
+Template Name: Register pre member
 */
 ?>
 

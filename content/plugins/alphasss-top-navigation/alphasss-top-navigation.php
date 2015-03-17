@@ -33,10 +33,10 @@ add_action( 'plugins_loaded', function(){
 					if (current_user_can('generate_invitation_code')) {
 						unset($items[$key]);
 					} else {
-						$items[$key]->url = str_replace('register', 'activate', $items[$key]->url);
+						$items[$key]->url = get_register_url();
 
 						// Set active class in menu
-						if (trim($_SERVER['REQUEST_URI'], '/') == 'activate') {
+						if ( $_SERVER['REQUEST_URI'] == get_pre_member_register_uri() ) {
 							$items[$key]->classes[] = 'current-menu-item page_item';
 						}
 					}
