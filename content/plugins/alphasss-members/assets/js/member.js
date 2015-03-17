@@ -63,6 +63,25 @@ jQuery(document).ready(function($) {
 		return false;
 	});
 
+	// This event Fires when a new User has Joined.
+	pubnub.events.bind( 'presence-user-join', function(uuid) {
+		$('#'+uuid +' .member-offline').hide();
+		$('#'+uuid +' .member-online').show();
+		$('#'+uuid + ' .action').show();
+	} );
+	// This event Fires when a new User has Left.
+	pubnub.events.bind( 'presence-user-leave', function(uuid) {
+		$('#'+uuid).find('.member-offline').show();
+		$('#'+uuid).find('.member-online').hide();
+		$('#'+uuid).find('.action').hide();
+	} );
+
+	pubnub.events.bind( 'presence-user-timeout', function(uuid) {
+		$('#'+uuid).find('.member-offline').show();
+		$('#'+uuid).find('.member-online').hide();
+		$('#'+uuid).find('.action').hide();
+	} );
+
 	pubnub.subscribe({
 		channel: 'onlineUsers',
 		callback: function(m) {},
