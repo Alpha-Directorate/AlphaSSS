@@ -13,14 +13,14 @@
 	</div><!-- #main .wrapper -->
 </div><!-- #page -->
 
-<div class="modal fade" id="invitation-code-modal">
+<div class="modal fade" id="invitation-code-modal" data-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-         <p>A new user <span id="modal-nickname"></span> is requesting an invitation code from you. Here's the code we generated:</p><br />
+         <p>A new user<span id="modal-nickname"></span> is requesting an invitation code from you. Here's the code we generated:</p><br />
         <center><span id="modal-code"></span></center><br />
         <p>Please click button, and we'll display the code to the new member immediately!</p>
       </div>
