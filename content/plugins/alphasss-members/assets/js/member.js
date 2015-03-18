@@ -2,6 +2,11 @@ jQuery(document).ready(function($) {
 
 	var invitation_requests = [];
 
+	// Show all members list actions
+	$('#members-list li .action').each(function(){
+		$(this).show();
+	});
+
 	function showInvitationRequestPopUp()
 	{
 		$('#invitation-code-modal').modal('hide');
@@ -54,41 +59,10 @@ jQuery(document).ready(function($) {
 				} else {
 				   $('#invitation-code-modal').modal('hide');
 				}
-			},
-			error: function(error) {
-				pubNubErrorAlert();
 			}
 		});
 
 		return false;
-	});
-
-	// This event Fires when a new User has Joined.
-	pubnub.events.bind( 'presence-user-join', function(uuid) {
-		$('#'+uuid +' .member-offline').hide();
-		$('#'+uuid +' .member-online').show();
-		$('#'+uuid + ' .action').show();
-	} );
-	// This event Fires when a new User has Left.
-	pubnub.events.bind( 'presence-user-leave', function(uuid) {
-		$('#'+uuid).find('.member-offline').show();
-		$('#'+uuid).find('.member-online').hide();
-		$('#'+uuid).find('.action').hide();
-	} );
-
-	pubnub.events.bind( 'presence-user-timeout', function(uuid) {
-		$('#'+uuid).find('.member-offline').show();
-		$('#'+uuid).find('.member-online').hide();
-		$('#'+uuid).find('.action').hide();
-	} );
-
-	pubnub.subscribe({
-		channel: 'onlineUsers',
-		callback: function(m) {},
-		error: function(error) {
-			pubNubErrorAlert();
-		},
-		heartbeat: 30
 	});
 
 	pubnub.subscribe({
@@ -115,9 +89,6 @@ jQuery(document).ready(function($) {
 					showInvitationRequestPopUp();
 				}
 			}, "json");
-		},
-		error: function(error) {
-			pubNubErrorAlert();
 		}
 	});
 });

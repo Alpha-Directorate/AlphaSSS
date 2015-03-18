@@ -15,9 +15,16 @@ function dangerAlert(message, close)
 
 function pubNubErrorAlert()
 {
-	$('#top-alerts').append(dangerAlert(php_vars.i18n.ConnectionError, true));
+	if ($('#top-alerts .connection-error').length == 0){
+		$('#top-alerts').append(baseAlert(php_vars.i18n.ConnectionError,'alert-danger connection-error' ,true));
+	}
 }
 
+/**
+* @param string Alert message
+* @param string Alert state class
+* @param boolean Display close alert button
+*/
 function baseAlert(message, cls, close)
 {
 	el = $('<div role="alert">');

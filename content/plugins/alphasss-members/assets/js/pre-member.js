@@ -5,18 +5,17 @@ jQuery(document).ready(function($) {
 		$("#top-alerts").append(successAlert('<div class="alert-content">' + php_vars.i18n.TopAlert + '</div>', true));
 	}
 
-	var p = pubnub;
 	var requestor_uuid = uuid;
 	var code = false;
 
 	// This event Fires when a new User has Joined.
-	p.events.bind( 'presence-user-join', function(uuid) {
+	pubnub.events.bind( 'presence-user-join', function(uuid) {
 		$('#'+uuid +' .member-offline').hide();
 		$('#'+uuid +' .member-online').show();
 		$('#'+uuid + ' .action').show();
 	} );
 	// This event Fires when a new User has Left.
-	p.events.bind( 'presence-user-leave', function(uuid) {
+	pubnub.events.bind( 'presence-user-leave', function(uuid) {
 		$('#'+uuid).find('.member-offline').show();
 		$('#'+uuid).find('.member-online').hide();
 
@@ -31,7 +30,7 @@ jQuery(document).ready(function($) {
 		$('#'+uuid).find('.action').hide();
 	} );
 
-	p.events.bind( 'presence-user-timeout', function(uuid) {
+	pubnub.events.bind( 'presence-user-timeout', function(uuid) {
 		$('#'+uuid).find('.member-offline').show();
 		$('#'+uuid).find('.member-online').hide();
 
@@ -46,36 +45,7 @@ jQuery(document).ready(function($) {
 		$('#'+uuid).find('.action').hide();
 	} );
 
-	p.subscribe({
-		channel: 'onlineUsers',
-		callback: function(m) {
-			console.log(m);
-		},
-		presence: function(details){
-			var uuid = 'uuid' in details && (''+details.uuid).toLowerCase();
-
-			if ('action' in details && uuid) p.events.fire(
-				'presence-user-' + details.action, uuid
-			);
-		},
-		error: function(error) {
-			pubNubErrorAlert();
-		}
-	});
-
-	$('.channel-logout').click(function(){
-		p.unsubscribe({
-			channel: 'onlineUsers' 
-		});
-	});
-
-	$('#wp-admin-bar-logout a').click(function(){
-		p.unsubscribe({
-			p: 'onlineUsers' 
-		});
-	});
-
-	p.subscribe({
+	pubnub.subscribe({
 		channel: requestor_uuid + '_invitation_codes',
 		callback: function(m) {
 			if (! code) {
@@ -110,7 +80,7 @@ jQuery(document).ready(function($) {
 
 		uuid = $(this).parent().parent().parent().attr('id');
 
-		p.publish({
+		pubnub.publish({
 			channel: uuid + '_invitation_request',
 			message: {
 				'requestor_uuid': requestor_uuid,

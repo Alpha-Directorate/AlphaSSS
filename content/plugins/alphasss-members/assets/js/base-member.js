@@ -204,32 +204,43 @@ if (! uuid) {
 	uuid = pubnub.uuid();
 }
 
-jQuery(document).ready(function($) {
-	// This event Fires when a new User has Joined.
-	pubnub.events.bind( 'presence-user-join', function(uuid) {
-		$('#'+uuid +' .member-offline').hide();
-		$('#'+uuid +' .member-online').show();
-	} );
-	// This event Fires when a new User has Left.
-	pubnub.events.bind( 'presence-user-leave', function(uuid) {
-		$('#'+uuid).find('.member-offline').show();
-		$('#'+uuid).find('.member-online').hide();
-	} );
+var is_pubnub_connected = true;
 
-	pubnub.events.bind( 'presence-user-timeout', function(uuid) {
-		$('#'+uuid).find('.member-offline').show();
-		$('#'+uuid).find('.member-online').hide();
-	} );
+// This event Fires when a new User has Joined.
+pubnub.events.bind( 'presence-user-join', function(uuid) {
+	$('#'+uuid +' .member-offline').hide();
+	$('#'+uuid +' .member-online').show();
+} );
+// This event Fires when a new User has Left.
+pubnub.events.bind( 'presence-user-leave', function(uuid) {
+	$('#'+uuid).find('.member-offline').show();
+	$('#'+uuid).find('.member-online').hide();
+} );
 
-	pubnub.subscribe({
-		channel: 'onlineUsers',
-		callback: function(m) {},
-		presence: function(details){
-			var uuid = 'uuid' in details && (''+details.uuid).toLowerCase();
+pubnub.events.bind( 'presence-user-timeout', function(uuid) {
+	$('#'+uuid).find('.member-offline').show();
+	$('#'+uuid).find('.member-online').hide();
+} );
 
-			if ('action' in details && uuid) pubnub.events.fire(
-				'presence-user-' + details.action, uuid
-			);
+pubnub.subscribe({
+	channel: 'onlineUsers',
+	callback: function(m) {},
+	presence: function(details){
+		var uuid = 'uuid' in details && (''+details.uuid).toLowerCase();
+
+		if ('action' in details && uuid) pubnub.events.fire(
+			'presence-user-' + details.action, uuid
+		);
+	},
+	disconnect : function() {
+		is_pubnub_connected = false;
+
+		while (is_pubnub_connected === false){
+			setTimeout(pubNubErrorAlert(), 1000);
 		}
-	});
+	},
+	reconnect  : function() {
+		alert('x');
+		is_pubnub_connected = true;
+	},
 });
