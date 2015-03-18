@@ -11,7 +11,7 @@ jQuery(document).ready(function($) {
 				alert_data = invitation_requests[0];
 
 				if ( alert_data.requestor_nickname ){
-					$('#modal-nickname').text(',' + alert_data.requestor_nickname + ',');
+					$('#modal-nickname').text(', ' + alert_data.requestor_nickname + ',');
 				} else {
 					$('#modal-nickname').text();
 				}
