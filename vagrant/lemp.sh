@@ -7,7 +7,7 @@ then
 
 	sudo apt-get install -y mysql-server mysql-client php5-mysql libapache2-mod-auth-mysql
 
-	sudo apt-get install -y php5 libapache2-mod-php5 php5-mcrypt
+	sudo apt-get install -y php5 libapache2-mod-php5 php5-mcrypt php5-gd
 
 	sudo apt-get install -y apache2
 
