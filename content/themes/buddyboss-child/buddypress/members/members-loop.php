@@ -83,7 +83,11 @@
 
 			<div class="action">
 
-				<?php do_action( 'bp_directory_members_actions' ); ?>
+				<?php if (current_user_can('generate_invitation_code')):?>
+					<?php do_action( 'bp_directory_members_actions' ); ?>
+				<?php else:?>
+					<?php do_action( 'bp_directory_pre_members_actions' ); ?>
+				<?php endif;?>
 
 			</div>
 

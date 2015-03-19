@@ -55,10 +55,6 @@ add_action( 'plugins_loaded', function(){
 			'labels' => array(
 				'name'          => 'Members',
 				'singular_name' => 'Member',
-			),
-			'labels' => array(
-				'name'          => 'Pre Members',
-				'singular_name' => 'Pre Member',
 			)
 		));
 	});
@@ -97,7 +93,7 @@ add_action( 'plugins_loaded', function(){
 		} else {
 			wp_enqueue_script( 'alphasss-members', ALPHASSS_MEMBERS_PLUGIN_URL . '/assets/js/pre-member.js' );
 
-			add_action( 'bp_directory_members_actions', function(){
+			add_action( 'bp_directory_pre_members_actions', function(){
 				echo bp_get_button( array(
 					'id'                => 'request_invitation',
 					'component'         => 'members',
