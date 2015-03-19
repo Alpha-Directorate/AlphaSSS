@@ -44,6 +44,12 @@ then
     export WP_DEBUG=true
     export WP_HOST=alphasss.dev
 
+    #Phinx database settings
+    export PHINX_DBHOST=localhost
+    export PHINX_DBNAME=alphasssdev
+    export PHINX_DBUSER=root
+    export PHINX_DBPASS=vagrant
+
 	sudo service apache2 restart
 	#sudo service nginx restart
 	#sudo service php5-fpm restart
