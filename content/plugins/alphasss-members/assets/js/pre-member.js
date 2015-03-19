@@ -62,8 +62,8 @@ jQuery(document).ready(function($) {
 				$('#alerts').append(successAlert(message , true));
 			}
 		},
-		disconnect : function() {
-			pubNubErrorAlert()
+		error: function(error) {
+			pubNubErrorAlert();
 		}
 	});
 
@@ -86,9 +86,11 @@ jQuery(document).ready(function($) {
 				'requestor_uuid': requestor_uuid,
 				'requestor_nickname': php_vars.nickname
 			},
-			callback: function(m) {},
-			disconnect : function() {
-				pubNubErrorAlert()
+			callback: function(m) {
+				console.log(m);
+			},
+			error: function(error) {
+				pubNubErrorAlert();
 			}
 		});
 
