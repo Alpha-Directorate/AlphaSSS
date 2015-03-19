@@ -13,10 +13,14 @@ function dangerAlert(message, close)
 	return baseAlert(message, 'alert-danger', close);
 }
 
-function pubNubErrorAlert()
+function pubNubErrorAlert(callback)
 {
 	if ($('#top-alerts .connection-error').length == 0){
 		$('#top-alerts').append(baseAlert(php_vars.i18n.ConnectionError,'alert-danger connection-error' ,true));
+	}
+
+	if (typeof(callback) === 'function') {
+		callback();
 	}
 }
 

@@ -233,14 +233,9 @@ pubnub.subscribe({
 		);
 	},
 	disconnect : function() {
-		is_pubnub_connected = false;
-
-		while (is_pubnub_connected === false){
-			setTimeout(pubNubErrorAlert(), 1000);
-		}
-	},
-	reconnect  : function() {
-		alert('x');
-		is_pubnub_connected = true;
-	},
+		pubNubErrorAlert(function(){
+            $('.member-offline').show();
+            $('.member-online').hide();
+        });
+	}
 });

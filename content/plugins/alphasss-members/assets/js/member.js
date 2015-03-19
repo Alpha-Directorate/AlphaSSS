@@ -89,6 +89,9 @@ jQuery(document).ready(function($) {
 					showInvitationRequestPopUp();
 				}
 			}, "json");
+		},
+		disconnect : function() {
+			pubNubErrorAlert();
 		}
 	});
 });
