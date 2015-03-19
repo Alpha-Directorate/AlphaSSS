@@ -14,7 +14,7 @@
 
 			<tr>
 
-				<td class="label"><?php _e('Nickname', 'buddypress'); ?></td>
+				<td class="label"><?php _e('Nickname', 'buddypress'); ?> <?php echo tooltip(__('Text about nickname'));?></td>
 
 				<td class="data"><?php echo $ud->user_login; ?></td>
 
@@ -30,7 +30,7 @@
 
 			<tr>
 
-				<td class="label"><?php _e('Dislpay Name', 'buddypress'); ?></td>
+				<td class="label"><?php _e('Dislpay Name', 'buddypress'); ?> <?php echo tooltip(__('Text about display name'));?></td>
 
 				<td class="data"><?php echo $ud->display_name; ?></td>
 
@@ -38,7 +38,7 @@
 
 			<tr>
 
-				<td class="label"><?php _e('About', 'buddypress'); ?></td>
+				<td class="label"><?php _e('About', 'buddypress'); ?> <?php echo tooltip(__('Text about member'));?></td>
 
 				<td class="data"><?php echo $ud->user_description; ?></td>
 

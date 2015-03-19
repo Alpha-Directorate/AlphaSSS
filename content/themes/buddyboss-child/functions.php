@@ -57,7 +57,10 @@ add_action( 'wp_enqueue_scripts', 'buddyboss_child_scripts_styles', 9999 );
 // Add your own custom functions here
 
 
-
+function tooltip($translation, $position = 'top')
+{
+ 	return sprintf('<div class="alphasss-tooltip" data-toggle="tooltip" data-placement="top" title="%s"></div>', $translation);
+}
 
 
 ?>

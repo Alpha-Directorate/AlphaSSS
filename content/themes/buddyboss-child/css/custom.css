@@ -198,3 +198,11 @@ You're the boss, so have fun editing!
 	text-align: left;
 }
 
+.alphasss-tooltip {
+	background-image: url('../images/icons/question.png');
+	background-repeat: no-repeat;
+	width: 28px;
+	height: 28px;
+	float:right;
+}
+
