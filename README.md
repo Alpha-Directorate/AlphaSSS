@@ -4,3 +4,5 @@
 # AlphaSSS (Self-governing Social Space)
 
 ### See [**Wiki →**](https://github.com/Alpha-Directorate/AlphaSSS/wiki)
+
+# Licensed under [MIT license](LICENSE.txt)
