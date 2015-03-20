@@ -65,7 +65,12 @@ add_action( 'xprofile_data_before_save', function($field){
 				'field'   => 45
 			] );
 
-			if ( $display_name != $field->value ) {
+			$nickname = bp_get_profile_field_data( [
+				'user_id' => bp_loggedin_user_id(),
+				'field'   => 1
+			] );
+
+			if ( $display_name != $field->value OR $nickname != $field->value) {
 				// User exists? Show validation error
 				if ( username_exists( $field->value ) ) {
 

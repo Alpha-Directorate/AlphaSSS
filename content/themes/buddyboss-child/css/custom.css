@@ -206,3 +206,54 @@ You're the boss, so have fun editing!
 	float:right;
 }
 
+#profile-view .profile-fields {
+ border: none;
+}
+
+#profile-view .profile-fields td {
+ border: none;
+}
+
+#profile-view .profile-fields td.label {
+ border: none;
+}
+
+#profile-view .alphasss-tooltip,
+#profile-edit-form .alphasss-tooltip {
+    float: left;
+    cursor: pointer;
+}
+
+#profile-view .profile-fields td ul,
+#profile-edit-form label ul,
+.profile-edit-list {
+ margin: 0;
+}
+
+#profile-view .profile-fields td ul li,
+#profile-edit-form label ul li,
+.profile-edit-list li {
+ display: inline-block;
+ margin: 0;
+ vertical-align: middle;
+}
+
+.profile-edit-list>li:first-child {
+ width: 25%;
+}
+
+#profile-edit-form hr,
+#profile-view hr {
+ width: 75%;
+}
+
+#profile-edit-form ul li {
+ font-size: 12px;
+ padding: 6px 0 6px 6px !important;
+ color: #555;
+}
+
+#profile-edit-form label ul li:last-child {
+ padding: 0 !important;
+}
+

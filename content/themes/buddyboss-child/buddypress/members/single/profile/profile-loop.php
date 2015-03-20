@@ -14,7 +14,12 @@
 
 			<tr>
 
-				<td class="label"><?php _e('Nickname', 'buddypress'); ?> <?php echo tooltip(__('Text about nickname'));?></td>
+				<td class="label">
+					<ul>
+						<li><?php _e('Nickname', 'buddypress'); ?></li>
+						<li><?php echo tooltip(__('Text about nickname'));?></li>
+					</ul>
+				</td>
 
 				<td class="data"><?php echo $ud->user_login; ?></td>
 
@@ -22,7 +27,7 @@
 
 		</table>
 
-		<ht />
+		<hr />
 
 		<h4><?php _e('Optional, Editable Info', 'buddypress'); ?></h4>
 
@@ -30,7 +35,12 @@
 
 			<tr>
 
-				<td class="label"><?php _e('Dislpay Name', 'buddypress'); ?> <?php echo tooltip(__('Text about display name'));?></td>
+				<td class="label">
+					<ul>
+						<li><?php _e('Dislpay Name', 'buddypress'); ?></li>
+						<li><?php echo tooltip(__('Text about display name'));?></li>
+					</ul>
+				</td>
 
 				<td class="data"><?php echo $ud->display_name; ?></td>
 
@@ -38,7 +48,12 @@
 
 			<tr>
 
-				<td class="label"><?php _e('About', 'buddypress'); ?> <?php echo tooltip(__('Text about member'));?></td>
+				<td class="label">
+					<ul>
+						<li><?php _e('About', 'buddypress'); ?></li>
+						<li><?php echo tooltip(__('Text about member'));?></li>
+					</ul>
+				</td>
 
 				<td class="data"><?php echo $ud->user_description; ?></td>
 
