@@ -58,8 +58,9 @@ function xprofile_screen_edit_profile() {
 	$bp = buddypress();
 
 	// Make sure a group is set.
-	if ( !bp_action_variable( 1 ) )
+	if ( !bp_action_variable( 1 ) ){
 		bp_core_redirect( trailingslashit( bp_displayed_user_domain() . $bp->profile->slug . '/edit/group/1' ) );
+	}
 
 	// Check the field group exists
 	if ( !bp_is_action_variable( 'group' ) || !xprofile_get_field_group( bp_action_variable( 1 ) ) ) {
