@@ -194,48 +194,48 @@
     }
 })(typeof window === "undefined" ? this : window);
 
-
-
 var uuid   = php_vars.pubnub.uuid;
 var pubnub = PUBNUB.init(php_vars.pubnub);
 
+jQuery(document).ready(function($) {
 
-if (! uuid) {
-	uuid = pubnub.uuid();
-}
+    if (! uuid) {
+    	uuid = pubnub.uuid();
+    }
 
-var is_pubnub_connected = true;
+    var is_pubnub_connected = true;
 
-// This event Fires when a new User has Joined.
-pubnub.events.bind( 'presence-user-join', function(uuid) {
-	$('#'+uuid +' .member-offline').hide();
-	$('#'+uuid +' .member-online').show();
-} );
-// This event Fires when a new User has Left.
-pubnub.events.bind( 'presence-user-leave', function(uuid) {
-	$('#'+uuid).find('.member-offline').show();
-	$('#'+uuid).find('.member-online').hide();
-} );
+    // This event Fires when a new User has Joined.
+    pubnub.events.bind( 'presence-user-join', function(uuid) {
+    	$('#'+uuid +' .member-offline').hide();
+    	$('#'+uuid +' .member-online').show();
+    } );
+    // This event Fires when a new User has Left.
+    pubnub.events.bind( 'presence-user-leave', function(uuid) {
+    	$('#'+uuid).find('.member-offline').show();
+    	$('#'+uuid).find('.member-online').hide();
+    } );
 
-pubnub.events.bind( 'presence-user-timeout', function(uuid) {
-	$('#'+uuid).find('.member-offline').show();
-	$('#'+uuid).find('.member-online').hide();
-} );
+    pubnub.events.bind( 'presence-user-timeout', function(uuid) {
+    	$('#'+uuid).find('.member-offline').show();
+    	$('#'+uuid).find('.member-online').hide();
+    } );
 
-pubnub.subscribe({
-	channel: 'onlineUsers',
-	callback: function(m) {},
-	presence: function(details){
-		var uuid = 'uuid' in details && (''+details.uuid).toLowerCase();
+    pubnub.subscribe({
+    	channel: 'onlineUsers',
+    	callback: function(m) {},
+    	presence: function(details){
+    		var uuid = 'uuid' in details && (''+details.uuid).toLowerCase();
 
-		if ('action' in details && uuid) pubnub.events.fire(
-			'presence-user-' + details.action, uuid
-		);
-	},
-	disconnect : function() {
-		pubNubErrorAlert(function(){
-            $('.member-offline').show();
-            $('.member-online').hide();
-        });
-	}
+    		if ('action' in details && uuid) pubnub.events.fire(
+    			'presence-user-' + details.action, uuid
+    		);
+    	},
+    	disconnect : function() {
+    		pubNubErrorAlert(function(){
+                $('.member-offline').show();
+                $('.member-online').hide();
+            });
+    	}
+    });
 });
