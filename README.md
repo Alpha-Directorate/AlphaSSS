@@ -3,6 +3,6 @@
 
 # AlphaSSS (Self-governing Social Space)
 
-### See [**Wiki →**](https://github.com/Alpha-Directorate/AlphaSSS/wiki)
+### See [**Wiki →**](https://alphasss.atlassian.net/wiki/)
 
 # Licensed under [MIT license](LICENSE.txt)
