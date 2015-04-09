@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the bbPress package.
 msgid ""
 msgstr ""
-"Project-Id-Version: bbPress 2.5.5\n"
+"Project-Id-Version: bbPress 2.5.6\n"
 "Report-Msgid-Bugs-To: https://bbpress.trac.wordpress.org\n"
 "POT-Creation-Date: 2015-03-06 17:13:54+00:00\n"
 "MIME-Version: 1.0\n"
@@ -2670,7 +2670,7 @@ msgstr ""
 msgid "<strong>ERROR</strong>: Invalid email address submitted!"
 msgstr ""
 
-#: includes/common/functions.php:1068
+#: includes/common/functions.php:1099
 msgid ""
 "%1$s wrote:\n"
 "\n"
@@ -2685,7 +2685,7 @@ msgid ""
 "Login and visit the topic to unsubscribe from these emails."
 msgstr ""
 
-#: includes/common/functions.php:1208
+#: includes/common/functions.php:1256
 msgid ""
 "%1$s wrote:\n"
 "\n"
@@ -2700,7 +2700,7 @@ msgid ""
 "Login and visit the topic to unsubscribe from these emails."
 msgstr ""
 
-#: includes/common/functions.php:1949
+#: includes/common/functions.php:2024
 msgid ""
 "Conditional query tags do not work before the query is run. Before then, "
 "they always return false."
@@ -4939,9 +4939,9 @@ msgstr ""
 msgid "bbPress"
 msgstr ""
 
-#. #-#-#-#-#  plugin.pot (bbPress 2.5.5)  #-#-#-#-#
+#. #-#-#-#-#  plugin.pot (bbPress 2.5.6)  #-#-#-#-#
 #. Plugin URI of the plugin/theme
-#. #-#-#-#-#  plugin.pot (bbPress 2.5.5)  #-#-#-#-#
+#. #-#-#-#-#  plugin.pot (bbPress 2.5.6)  #-#-#-#-#
 #. Author URI of the plugin/theme
 msgid "http://bbpress.org"
 msgstr ""

@@ -28,6 +28,65 @@ Release Notes: http://www.buddyboss.com/release-notes/
 CHANGELOG
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
+1.1.4 - April 9, 2015
+--------------------------------------------------------------*/
+
+BUG FIXES:
+
+	Added "Group Members" privacy filter for old posts in Groups
+
+CHANGED FILES:
+
+	/assets/js/buddyboss-wall-privacy.js
+	/assets/js/buddyboss-wall-privacy.min.js
+	buddyboss-wall.php
+	/includes/wall-class.php
+	/includes/wall-privacy.php
+	readme.txt
+
+TESTED WITH:
+
+	WordPress 4.0+
+	BuddyPress 2.1, 2.2+
+
+/*--------------------------------------------------------------
+1.1.3 - April 9, 2015
+--------------------------------------------------------------*/
+
+FEATURES:
+
+	Added Privacy filters for activity posts
+	Added Italian language files, credits to Massimiliano Napoli
+
+BUG FIXES:
+
+	Fixed "Load More" duplicate post display issue
+	Fixed translation issue for "wrote on" and "mentioned"
+
+CHANGED FILES:
+	
+	/assets/css/buddyboss-wall.css
+	/assets/css/buddyboss-wall.min.css
+	/assets/js/buddyboss-wall-privacy.js (added)
+	/assets/js/buddyboss-wall-privacy.min.js (added)
+	buddyboss-wall.php
+	/includes/admin.php
+	/includes/main-class.php
+	/includes/wall-class.php
+	/includes/wall-hooks.php
+	/includes/wall-privacy.php (added)
+	/languages/buddyboss-wall-en_US.po
+	/languages/buddyboss-wall-en_US.mo
+	/languages/buddyboss-wall-it_IT.po (added)
+	/languages/buddyboss-wall-it_IT.mo (added)
+	readme.txt
+
+TESTED WITH:
+
+	WordPress 4.0+
+	BuddyPress 2.1, 2.2+
+
+/*--------------------------------------------------------------
 1.1.2 - December 24, 2014
 --------------------------------------------------------------*/
 

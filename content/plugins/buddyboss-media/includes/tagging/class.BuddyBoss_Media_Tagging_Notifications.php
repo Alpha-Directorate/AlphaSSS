@@ -22,7 +22,7 @@ class BuddyBoss_Media_Tagging_Notifications {
 	}
 
 	private function __construct() {
-		if( function_exists( 'bp_is_active' ) && bp_is_active( 'friends' ) ){
+		if( function_exists( 'bp_is_active' ) && bp_is_active( 'friends' ) && bp_is_active( 'notifications' ) ){
 			if( buddyboss_media()->option( 'enable_tagging' )=='yes' ){
 				$this->load();
 			}
@@ -30,7 +30,7 @@ class BuddyBoss_Media_Tagging_Notifications {
 	}
 	
 	protected function load(){
-		//@todo: delete tagging notifications when activities are deleted.
+		add_action( 'bp_activity_deleted_activities', array( $this, 'deleted_activities_remove_notifications' ) );
 	}
 	
 	public function register_notification( $component_names = array() ){
@@ -89,6 +89,33 @@ class BuddyBoss_Media_Tagging_Notifications {
 				);
 			}
 		}
+	}
+	
+	/**
+	 * Delete tagging notifications when corresponding photos(activities) are deleted.
+	 * 
+	 * @since BuddyBoss Media 2.0.9 
+	 * 
+	 * @global type $wpdb
+	 * @param mixed $activity_ids_deleted
+	 * @return void
+	 */
+	public function deleted_activities_remove_notifications( $activity_ids_deleted ){
+		$actvity_ids_csv = $activity_ids_deleted;
+		if( is_array( $activity_ids_deleted ) )
+			$actvity_ids_csv = implode ( ',', $activity_ids_deleted );
+		
+		if( empty( $actvity_ids_csv ) )
+			return;
+		
+		$sql = "DELETE FROM " . buddypress()->notifications->table_name . 
+				" WHERE "
+				. " component_name=%s "
+				. " AND component_action=%s "
+				. " AND item_id IN ( " . $actvity_ids_csv . " )";
+		
+		global $wpdb;
+		$wpdb->query( $wpdb->prepare( $sql, buddyboss_media_default_component_slug(), $this->component_action ) );
 	}
 	
 }// end BuddyBoss_Media_Tagging_Notifications
