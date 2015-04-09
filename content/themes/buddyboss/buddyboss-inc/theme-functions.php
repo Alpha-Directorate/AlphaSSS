@@ -158,10 +158,17 @@ function buddyboss_scripts_styles()
 	}
 
 	/*
+	 * Adds fitVids script
+	 */
+	if ( !is_admin() ) {
+		wp_enqueue_script( 'fitvids', get_template_directory_uri().'/js/fitvids.js', array( 'jquery' ), '1.1.0' );
+	}
+    
+	/*
 	 * Adds custom BuddyBoss JavaScript functionality.
 	 */
 	if ( !is_admin() ) {
-		wp_enqueue_script( 'buddyboss-main', get_template_directory_uri().'/js/buddyboss.js', array( 'jquery' ), '4.1.4' );
+		wp_enqueue_script( 'buddyboss-main', get_template_directory_uri().'/js/buddyboss.js', array( 'jquery' ), '4.1.9' );
 	}
 
 	// Add BuddyBoss words that we need to use in JS to the end of the page
@@ -213,7 +220,7 @@ function buddyboss_scripts_styles()
 		wp_deregister_style( 'bp-parent-css' );
 		wp_deregister_style( 'bp-legacy-css' );
 		// Activate our own BuddyPress stylesheet. Load FontAwesome and GoogleFonts first.
-		wp_enqueue_style( 'buddyboss-bp-frontend', get_template_directory_uri().'/css/buddypress.css', array( 'fontawesome', 'googlefonts' ), '4.1.5', 'all' );
+		wp_enqueue_style( 'buddyboss-bp-frontend', get_template_directory_uri().'/css/buddypress.css', array( 'fontawesome', 'googlefonts' ), '4.1.6', 'all' );
 	}
 
 	/*
@@ -233,7 +240,7 @@ function buddyboss_scripts_styles()
 
 	// Load our CSS support for 3rd party plugins here.
 	if ( !is_admin() ) {
-		wp_enqueue_style( 'buddyboss-wp-plugins', get_template_directory_uri().'/css/plugins.css', array( 'fontawesome', 'googlefonts' ), '4.1.4', 'all' );
+		wp_enqueue_style( 'buddyboss-wp-plugins', get_template_directory_uri().'/css/plugins.css', array( 'fontawesome', 'googlefonts' ), '4.1.6', 'all' );
 	}
 
 	// Load our own adminbar (Toolbar) styles.
@@ -1006,7 +1013,7 @@ add_filter( 'admin_bar_menu', 'replace_howdy',25 );
  */
 if ( !function_exists('buddyboss_addgravatar') ) {
 	function buddyboss_addgravatar( $avatar_defaults ) {
-		$myavatar = get_template_directory_uri() . '/images/avatar-member.jpg';
+		$myavatar = get_stylesheet_directory_uri() . '/images/avatar-member.jpg';
 		$avatar_defaults[$myavatar] = 'BuddyBoss Man';
 		return $avatar_defaults;
 	}
