@@ -93,7 +93,7 @@
 					'user_id' => bp_loggedin_user_id(),
 					'field'   => 'About'
 				] )); ?></textarea><br />
-			<span id="about-count" style="width:45%;float:right"></span>
+			<span id="about-count" style="float:right"></span>
 
 		</div>
 

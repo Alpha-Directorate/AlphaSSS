@@ -242,11 +242,6 @@ You're the boss, so have fun editing!
  width: 25%;
 }
 
-#profile-edit-form hr,
-#profile-view hr {
- width: 75%;
-}
-
 #profile-edit-form ul li {
  font-size: 12px;
  padding: 6px 0 6px 6px !important;
@@ -262,5 +257,13 @@ You're the boss, so have fun editing!
     border-bottom: 1px solid #c89797;
     border-top: 1px solid #c89797;
     margin-bottom: 6px !important;
-    padding: 6px 6px 4px !important;width:75%
+    padding: 6px 6px 4px !important;
+}
+
+#profile-edit-form {
+	width:75%;
+}
+
+#profile-edit-form input[type='text'],textarea {
+	width: 100% !important;
 }
