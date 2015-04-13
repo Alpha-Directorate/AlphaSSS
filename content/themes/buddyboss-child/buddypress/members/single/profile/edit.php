@@ -89,7 +89,7 @@
 					<li><?php echo tooltip(__('Text about member'));?></li>
 				<ul>
 			</label>
-			<textarea rows="5" cols="40" name="field_46" id="field_46" aria-required="true" placeholder="<?php _e('Write a little blurb about yourself. (140 characters or less)'); ?>"><?php echo htmlentities(bp_get_profile_field_data( [
+			<textarea rows="5" cols="40" name="field_46" id="field_46" aria-required="true" maxlength="140" placeholder="<?php _e('Write a little blurb about yourself. (140 characters or less)'); ?>"><?php echo htmlentities(bp_get_profile_field_data( [
 					'user_id' => bp_loggedin_user_id(),
 					'field'   => 'About'
 				] )); ?></textarea><br />
