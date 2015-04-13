@@ -15,6 +15,10 @@ class Sprint8 extends AbstractMigration
 	{
 		// Update Home page URI
 		$this->execute("UPDATE `wp_postmeta` SET `meta_value`='/' WHERE post_id=32 AND `meta_key` = '_menu_item_url'");
+	
+		if ( $plugin = (new \WP_CLI\Fetchers\Plugin)->get( 'alphasss-profile' ) ) {
+			activate_plugin( $plugin->file, '' );
+		}
 	}
 
 	/**
@@ -24,5 +28,9 @@ class Sprint8 extends AbstractMigration
 	{
 		// Rollback Home page URI
 		$this->execute("UPDATE `wp_postmeta` SET `meta_value`='///alphasss.com' WHERE post_id=32 AND `meta_key` = '_menu_item_url'");
+	
+		if ( $plugin = (new \WP_CLI\Fetchers\Plugin)->get( 'alphasss-profile' ) ) {
+			deactivate_plugins( $plugin->file );
+		}
 	}
 }
