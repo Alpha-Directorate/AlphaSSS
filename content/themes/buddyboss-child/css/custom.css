@@ -257,3 +257,10 @@ You're the boss, so have fun editing!
  padding: 0 !important;
 }
 
+.profile-error {
+	background-color: #ffdfe0;
+    border-bottom: 1px solid #c89797;
+    border-top: 1px solid #c89797;
+    margin-bottom: 6px !important;
+    padding: 6px 6px 4px !important;width:75%
+}

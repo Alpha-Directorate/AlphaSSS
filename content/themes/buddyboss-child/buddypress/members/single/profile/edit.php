@@ -1,14 +1,43 @@
 <?php do_action( 'bp_before_profile_edit_content' );?>
 
+<link rel='stylesheet' id='gforms_reset_css-css'  href='https://development.alphasss.com/content/plugins/gravityforms/css/formreset.css?ver=1.9.3' type='text/css' media='all' />
+<link rel='stylesheet' id='gforms_formsmain_css-css'  href='https://development.alphasss.com/content/plugins/gravityforms/css/formsmain.css?ver=1.9.3' type='text/css' media='all' />
+<link rel='stylesheet' id='gforms_ready_class_css-css'  href='https://development.alphasss.com/content/plugins/gravityforms/css/readyclass.css?ver=1.9.3' type='text/css' media='all' />
+<link rel='stylesheet' id='gforms_browsers_css-css'  href='https://development.alphasss.com/content/plugins/gravityforms/css/browsers.css?ver=1.9.3' type='text/css' media='all' />
+
 <?php $ud = get_userdata( bp_displayed_user_id() ); ?>
 
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
-		$('#field_45').change(function(){
-			dislay_name = $.trim( $('#field_45').val() );
-			if (! dislay_name.length ){
-				$(this).val($('#field_1').val());
-			} 
+		$("#about-count").text((140 - $('#field_46').val().length) + " characters left" )
+
+		$("#field_46").keyup(function(){
+		  $("#about-count").text((140 - $(this).val().length) + " characters left" );
+		});
+
+		$('#profile-edit-form').submit(function(event){
+
+			var el    = $(this);
+			var event = event;
+
+			data = {
+				action: "validate_user_profile",
+				display_name: $('#field_45').val()
+			};
+
+			$.post(ajaxurl, data, function(data){
+				
+				if (data.error) {
+					$('#display-name-error').text(data.error);
+					$('#field_45').parent().addClass('profile-error');
+				} else {
+					$('#field_45').parent().removeClass('profile-error');
+					$('#display-name-error').text('');
+					document.forms['profile-edit-form'].submit();
+				}
+			},"json");
+
+			return false;
 		});
 	});
 </script>
@@ -39,16 +68,20 @@
 
 		<div<?php bp_field_css_class( 'editfield' ); ?>>
 
-			<label for="field_45">
-				<ul>
-					<li><?php _e('Dislpay Name', 'buddypress'); ?></li>
-					<li><?php echo tooltip(__('Text about display name'));?></li>
-				</ul>
-			</label>
-			<input type="text" name="field_45" id="field_45" value="<?php echo htmlentities(bp_get_profile_field_data( [
-					'user_id' => bp_loggedin_user_id(),
-					'field'   => 45
-				] )); ?>" aria-required="true" />
+			<div>
+				<label for="field_45">
+					<ul>
+						<li><?php _e('Dislpay Name', 'buddypress'); ?></li>
+						<li><?php echo tooltip(__('Text about display name'));?></li>
+					</ul>
+				</label>
+				<input type="text" name="field_45" id="field_45" value="<?php echo htmlentities(bp_get_profile_field_data( [
+						'user_id' => bp_loggedin_user_id(),
+						'field'   => 45
+					] )); ?>" aria-required="true" />
+
+				<div id="display-name-error" style="color: #790000;font-weight: bold;letter-spacing: normal;"></div>
+			</div>
 
 			<label for="field_46">
 				<ul>
@@ -59,7 +92,8 @@
 			<textarea rows="5" cols="40" name="field_46" id="field_46" aria-required="true" placeholder="<?php _e('Write a little blurb about yourself. (140 characters or less)'); ?>"><?php echo htmlentities(bp_get_profile_field_data( [
 					'user_id' => bp_loggedin_user_id(),
 					'field'   => 'About'
-				] )); ?></textarea>
+				] )); ?></textarea><br />
+			<span id="about-count" style="width:45%;float:right"></span>
 
 		</div>
 
