@@ -50,39 +50,6 @@ add_filter( 'login_redirect', function($redirect_to, $request, $user){
 }, 10, 3);
 //--
 
-add_action( 'xprofile_data_before_save', function($field){
-
-	switch ($field->field_id) {
-		case 45:
-			if ( ! preg_match( '/^[a-z0-9\'_.-]+$/i', $field->value ) ) {
-
-				$field->field_id = 0;
-				bp_core_add_message(__("You may use only the following characters: letters (a-z), numbers (0-9), dashes (-), underscores (_), apostrophes ('), and periods (.). Try again please.", 'alpha-hooks'), 'error');
-			}
-
-			$display_name = bp_get_profile_field_data( [
-				'user_id' => bp_loggedin_user_id(),
-				'field'   => 45
-			] );
-
-			$nickname = bp_get_profile_field_data( [
-				'user_id' => bp_loggedin_user_id(),
-				'field'   => 1
-			] );
-
-			if ( $display_name != $field->value OR $nickname != $field->value) {
-				// User exists? Show validation error
-				if ( username_exists( $field->value ) ) {
-
-					$field->field_id = 0;
-					bp_core_add_message(__('This nickname is already taken. Please choose another one.', 'alpha-hooks'), 'error');
-				}
-			}
-		break;
-	}
-
-}, 1, 1 );
-
 add_filter('alphasss_top_alerts', function(){
 
 	echo '<div id="top-alerts"></div>';

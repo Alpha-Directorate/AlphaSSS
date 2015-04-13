@@ -267,7 +267,7 @@ class BuddyBoss_Media_Albums {
 				global $wpdb;
 				$meta_keys = buddyboss_media_compat( 'activity.item_keys' );
 				$meta_keys_csv = "'" . implode( "','", $meta_keys ) . "'";
-				$sql = "SELECT DISTINCT( am1.meta_value ) as 'album_id', am2.meta_value as attachment_id "
+				$sql = "SELECT DISTINCT( am1.meta_value ) as 'album_id', am2.meta_value as attachment_ids "
 						. " FROM {$wpdb->prefix}bp_activity_meta am1 JOIN {$wpdb->prefix}bp_activity_meta am2 ON am1.activity_id=am2.activity_id "
 						. " WHERE am1.meta_key='buddyboss_media_album_id' AND am2.meta_key IN ( $meta_keys_csv ) "
 						. " AND am1.meta_value IN( " . implode( ',', $album_ids ) . ") " 
@@ -275,7 +275,9 @@ class BuddyBoss_Media_Albums {
 				$results = $wpdb->get_results( $sql );
 				if( !empty($results) ){
 					foreach( $results as $result ){
-						$this->album_photos[$result->album_id] = $result->attachment_id;
+						$result->attachment_ids = maybe_unserialize( $result->attachment_ids );
+						$first_attachment_id = is_array( $result->attachment_ids ) ? reset( $result->attachment_ids ) : $result->attachment_ids;
+						$this->album_photos[$result->album_id] = $first_attachment_id;
 					}
 				}
 			}
@@ -460,7 +462,7 @@ function buddyboss_media_album_privacy(){
 		global $buddyboss_media_albums_template;
 		return $buddyboss_media_albums_template->album->privacy;
 	}
-	
+		
 	
 function buddyboss_media_btn_move_media(){
 	//presence of this activity meta ensures that current acrivity is indeed a buddyboss media photo upload

@@ -782,17 +782,107 @@ var BuddyBossMain = ( function( $, window, undefined ) {
 		3.6 - Make Video Embeds Responsive - Fitvids.js
 		--------------------------------------------------------------------------------------------------------*/
 
-		$('.wp-video').find('object').addClass('fitvidsignore');
-		$('#content').fitVids();
+        if(typeof $.fn.fitVids !== 'undefined' && $.isFunction($.fn.fitVids)){
+            $('.wp-video').find('object').addClass('fitvidsignore');
+            $('#content').fitVids();
 
-		// This ensures that after and Ajax call we check again for
-		// videos to resize.
-		var fitVidsAjaxSuccess = function() {
-			$('.wp-video').find('object').addClass('fitvidsignore');
-			$('#content').fitVids();
-		}
-		$(document).ajaxSuccess( fitVidsAjaxSuccess );
+            // This ensures that after and Ajax call we check again for
+            // videos to resize.
+            var fitVidsAjaxSuccess = function() {
+                $('.wp-video').find('object').addClass('fitvidsignore');
+                $('#content').fitVids();
+            }
+            $(document).ajaxSuccess( fitVidsAjaxSuccess );
+        }
+                
+        /*--------------------------------------------------------------------------------------------------------
+        3.7 - Infinite Scroll
+		--------------------------------------------------------------------------------------------------------*/
 
+        if($('#masthead').data('infinite') == 'on') {
+            var is_activity_loading=false;//We'll use this variable to make sure we don't send the request again and again.
+
+            jq(document).on('scroll', function (){
+               //Find the visible "load more" button.
+               //since BP does not remove the "load more" button, we need to find the last one that is visible.
+                var load_more_btn=jq(".load-more:visible");
+                //If there is no visible "load more" button, we've reached the last page of the activity stream.
+                if(!load_more_btn.get(0))
+                    return;
+
+                //Find the offset of the button.
+                 var pos=load_more_btn.offset();
+
+               //If the window height+scrollTop is greater than the top offset of the "load more" button, we have scrolled to the button's position. Let us load more activity.
+    //            console.log(jq(window).scrollTop() + '  '+ jq(window).height() + ' '+ pos.top);
+
+               if(jq(window).scrollTop() + jq(window).height() > pos.top ) {
+
+                    load_more_activity();
+               }
+
+            });
+
+            /**
+             * This routine loads more activity.
+             * We call it whenever we reach the bottom of the activity listing.
+             * 
+             */
+            function load_more_activity(){
+
+                //Check if activity is loading, which means another request is already doing this.
+                //If yes, just return and let the other request handle it.
+                if(is_activity_loading)
+                        return false;				
+
+               //So, it is a new request, let us set the var to true.        
+                is_activity_loading=true;
+
+                //Add loading class to "load more" button.
+                //Theme authors may need to change the selector if their theme uses a different id for the content container.
+                //This is designed to work with the structure of bp-default/derivative themes.
+                //Change #content to whatever you have named the content container in your theme.
+                jq("#content li.load-more").addClass('loading');
+
+
+                if ( null == jq.cookie('bp-activity-oldestpage') )
+                        jq.cookie('bp-activity-oldestpage', 1, {
+                                path: '/'
+                        } );
+
+                var oldest_page = ( jq.cookie('bp-activity-oldestpage') * 1 ) + 1;
+
+                //Send the ajax request.
+                jq.post( ajaxurl, {
+                        action: 'activity_get_older_updates',
+                        'cookie': encodeURIComponent(document.cookie),
+                        'page': oldest_page
+                },
+                function(response)
+                {
+                        jq(".load-more").hide();//Hide any "load more" button.
+                        jq("#content li.load-more").removeClass('loading');//Theme authors, you may need to change #content to the id of your container here, too.
+
+                        //Update cookie...
+                        jq.cookie( 'bp-activity-oldestpage', oldest_page, {
+                                path: '/'
+                        } );
+
+                        //and append the response.
+                        jq("#content ul.activity-list").append(response.contents);
+
+                        //Since the request is complete, let us reset is_activity_loading to false, so we'll be ready to run the routine again.
+
+                        is_activity_loading=false;
+                }, 'json' );
+
+                return false;
+
+            }
+
+
+
+        }
 	}
 
 
@@ -920,14 +1010,3 @@ Inline Plugins
  *
  */
 ;(function(e){var t=e([]),n=800,r=30,i=10,s=[],o={};var u=function(e){var t,n;for(t=0,n=s.length;t<n;t++){if(Math.abs(e.pageX-s[t].x)<r&&Math.abs(e.pageY-s[t].y)<r){e.stopImmediatePropagation();e.stopPropagation();e.preventDefault()}}};var a=true;if(Modernizr&&Modernizr.hasOwnProperty("touch")){a=Modernizr.touch}var f=function(){s.splice(0,1)};e.event.special.fastclick={touchstart:function(t){o.startX=t.originalEvent.touches[0].pageX;o.startY=t.originalEvent.touches[0].pageY;o.hasMoved=false;e(this).on("touchmove",e.event.special.fastclick.touchmove)},touchmove:function(t){if(Math.abs(t.originalEvent.touches[0].pageX-o.startX)>i||Math.abs(t.originalEvent.touches[0].pageX-o.startY)>i){o.hasMoved=true;e(this).off("touchmove",e.event.special.fastclick.touchmove)}},add:function(t){if(!a){return}var r=e(this);r.data("objHandlers")[t.guid]=t;var i=t.handler;t.handler=function(t){r.off("touchmove",e.event.special.fastclick.touchmove);if(!o.hasMoved){s.push({x:o.startX,y:o.startY});window.setTimeout(f,n);var u=this;var a=e([]);var l=arguments;e.each(r.data("objHandlers"),function(){if(!this.selector){if(r[0]==t.target||r.has(t.target).length>0)i.apply(r,l)}else{e(this.selector,r).each(function(){if(this==t.target||e(this).has(t.target).length>0)i.apply(this,l)})}})}}},setup:function(n,r,i){var s=e(this);if(!a){s.on("click",e.event.special.fastclick.handler);return}t=t.add(s);if(!s.data("objHandlers")){s.data("objHandlers",{});s.on("touchstart",e.event.special.fastclick.touchstart);s.on("touchend touchcancel",e.event.special.fastclick.handler)}if(!o.ghostbuster){e(document).on("click vclick",u);o.ghostbuster=true}},teardown:function(n){var r=e(this);if(!a){r.off("click",e.event.special.fastclick.handler);return}t=t.not(r);r.off("touchstart",e.event.special.fastclick.touchstart);r.off("touchmove",e.event.special.fastclick.touchmove);r.off("touchend touchcancel",e.event.special.fastclick.handler);if(t.length==0){e(document).off("click vclick",u);o.ghostbuster=false}},remove:function(t){if(!a){return}var n=e(this);delete n.data("objHandlers")[t.guid]},handler:function(t){var n=t.type;t.type="fastclick";e.event.trigger.call(this,t,{},this,true);t.type=n}}})(jQuery)
-
-
-/*
-* FitVids 1.1
-*
-* Copyright 2013, Chris Coyier - http://css-tricks.com + Dave Rupert - http://daverupert.com
-* Credit to Thierry Koblentz - http://www.alistapart.com/articles/creating-intrinsic-ratios-for-video/
-* Released under the WTFPL license - http://sam.zoy.org/wtfpl/
-*
-*/
-;(function(a){a.fn.fitVids=function(b){var e={customSelector:null,ignore:null};if(!document.getElementById("fit-vids-style")){var d=document.head||document.getElementsByTagName("head")[0];var c=".fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}";var f=document.createElement("div");f.innerHTML='<p>x</p><style id="fit-vids-style">'+c+"</style>";d.appendChild(f.childNodes[1])}if(b){a.extend(e,b)}return this.each(function(){var g=['iframe[src*="player.vimeo.com"]','iframe[src*="youtube.com"]','iframe[src*="youtube-nocookie.com"]','iframe[src*="kickstarter.com"][src*="video.html"]',"object","embed"];if(e.customSelector){g.push(e.customSelector)}var h=".fitvidsignore";if(e.ignore){h=h+", "+e.ignore}var i=a(this).find(g.join(","));i=i.not("object object");i=i.not(h);i.each(function(){var n=a(this);if(n.parents(h).length>0){return}if(this.tagName.toLowerCase()==="embed"&&n.parent("object").length||n.parent(".fluid-width-video-wrapper").length){return}if((!n.css("height")&&!n.css("width"))&&(isNaN(n.attr("height"))||isNaN(n.attr("width")))){n.attr("height",9);n.attr("width",16)}var j=(this.tagName.toLowerCase()==="object"||(n.attr("height")&&!isNaN(parseInt(n.attr("height"),10))))?parseInt(n.attr("height"),10):n.height(),k=!isNaN(parseInt(n.attr("width"),10))?parseInt(n.attr("width"),10):n.width(),l=j/k;if(!n.attr("id")){var m="fitvid"+Math.floor(Math.random()*999999);n.attr("id",m)}n.wrap('<div class="fluid-width-video-wrapper"></div>').parent(".fluid-width-video-wrapper").css("padding-top",(l*100)+"%");n.removeAttr("height").removeAttr("width")})})}})(window.jQuery||window.Zepto);

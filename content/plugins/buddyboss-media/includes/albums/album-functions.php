@@ -177,7 +177,7 @@ function buddyboss_media_activity_filter_album( $query_string = '', $object = ''
  * @param type $attachment_id
  * @param type $action
  */
-function buddyboss_media_activity_add_album_id( $activity, $attachment_id, $action ){
+function buddyboss_media_activity_add_album_id( $activity, $attachment_ids, $action ){
 	if( buddyboss_media_is_single_album() ){
 		$album_id = buddyboss_media_single_album_id();
 		bp_activity_update_meta( $activity->id, 'buddyboss_media_album_id', $album_id );
@@ -188,7 +188,10 @@ function buddyboss_media_activity_add_album_id( $activity, $attachment_id, $acti
 			$existing_count = 0;
 		}
 		
-		$existing_count++;
+		//now that bulk upload is enabled, one can upload more than one photo at once.
+		//increase existing count by number of photos uploaded
+		$existing_count += count( $attachment_ids );
+		
 		$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->prefix}buddyboss_media_albums SET total_items=%d WHERE id=%d", $existing_count, $album_id ) );
 	}
 }
@@ -215,8 +218,15 @@ function buddyboss_media_adjust_album_photos_count( $args ){
 		$album_id = (int)bp_activity_get_meta( $activity_id, 'buddyboss_media_album_id' );
 		if( $album_id ){
 			$count = isset( $albums_count_decrease[$album_id] ) ? (int) $albums_count_decrease[$album_id] : 0;
-			$count++;
-			$albums_count_decrease[$album_id] = $count;
+			
+			//how many photos were there in activity?
+			$attachment_ids = bp_activity_get_meta( $activity_id, 'buddyboss_media_aid' );
+			$attachment_ids = maybe_unserialize( $attachment_ids );
+			
+			if( !empty( $attachment_ids ) ){
+				$count += count( $attachment_ids );
+				$albums_count_decrease[$album_id] = $count;
+			}
 		}
 	}
 	

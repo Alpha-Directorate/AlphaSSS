@@ -142,15 +142,8 @@ class BuddyBoss_Wall_Admin
 
 		//general options
 		add_settings_field( 'enabled', __( 'Enable Wall Component', 'buddyboss-wall' ), array( $this, 'setting_enabled' ), __FILE__, 'general_section' );
-		add_settings_field( 'all-members', __( 'Available to all members', 'buddyboss-wall' ), array( $this, 'setting_available_to_allmembers' ), __FILE__, 'general_section' );
-		// add_settings_field('touch-icon', 'Homescreen Icon', array( $this, 'setting_touch_icon' ), __FILE__, 'general_section');
-		// add_settings_field('ipad-theme', 'Mobile iPad Theme', array( $this, 'setting_ipad_theme' ), __FILE__, 'general_section');
-
-		//style options
-		// add_settings_field('theme', 'Mobile Theme', array( $this, 'setting_theme' ), __FILE__, 'style_section');
-		//add_settings_field('theme-style', 'Theme Style', array( $this, 'setting_theme_style' ), __FILE__, 'style_section');
-		// add_settings_field('toolbar-color', 'Toolbar Color', array( $this, 'setting_toolbar_color' ), __FILE__, 'style_section');
-		// add_settings_field('background-color', 'Background Color', array( $this, 'setting_background_color' ), __FILE__, 'style_section');
+        add_settings_field( 'all-members', __( 'Available to all members', 'buddyboss-wall' ), array( $this, 'setting_available_to_allmembers' ), __FILE__, 'general_section' );
+        add_settings_field( 'enabled-wall-privacy', __( 'Enable Wall Privacy', 'buddyboss-wall' ), array( $this, 'setting_enabled_wall_privacy' ), __FILE__, 'general_section' );
 	}
 
 	/**
@@ -209,7 +202,6 @@ class BuddyBoss_Wall_Admin
 	{
 	?>
 		<div class="wrap">
-			<div class="icon32" id="icon-options-general"><br></div>
 			<h2>BuddyBoss Wall</h2>
 			<form action="options.php" method="post">
 			<?php settings_fields('buddyboss_wall_plugin_options'); ?>
@@ -283,28 +275,51 @@ class BuddyBoss_Wall_Admin
 		_e( 'Enable Wall Component.', 'buddyboss-wall' );
 	}
 
-	/**
-	 * Setting > all members
-	 *
-	 * @since BuddyBoss Wall (1.0.0)
-	 *
-	 * @uses BuddyBoss_Wall_Admin::option() Get plugin option
-	 */
-	public function setting_available_to_allmembers()
-	{
-		$value = $this->option( 'all-members' );
+    /**
+     * Setting > all members
+     *
+     * @since BuddyBoss Wall (1.0.0)
+     *
+     * @uses BuddyBoss_Wall_Admin::option() Get plugin option
+     */
+    public function setting_available_to_allmembers()
+    {
+        $value = $this->option( 'all-members' );
 
-		$checked = '';
+        $checked = '';
 
-		if ( $value )
-		{
-			$checked = ' checked="checked" ';
-		}
+        if ( $value )
+        {
+            $checked = ' checked="checked" ';
+        }
 
-		echo "<input ".$checked." id='all-members' name='buddyboss_wall_plugin_options[all-members]' type='checkbox' />  ";
+        echo "<input ".$checked." id='all-members' name='buddyboss_wall_plugin_options[all-members]' type='checkbox' />  ";
 
-		_e('Allow Wall posting for all members (not just friends).', 'buddyboss-wall');
-	}
+        _e('Allow Wall posting for all members (not just friends).', 'buddyboss-wall');
+    }
+
+    /**
+     * Setting > enabled wall privacy
+     *
+     * @since BuddyBoss Wall (1.0.0)
+     *
+     * @uses BuddyBoss_Wall_Admin::option() Get plugin option
+     */
+    public function setting_enabled_wall_privacy()
+    {
+        $value = $this->option( 'enabled-wall-privacy' );
+
+        $checked = '';
+
+        if ( $value )
+        {
+            $checked = ' checked="checked" ';
+        }
+
+        echo "<input ".$checked." id='enabled-wall-privacy' name='buddyboss_wall_plugin_options[enabled-wall-privacy]' type='checkbox' />  ";
+
+        _e('Allow members to set privacy options when they post.', 'buddyboss-wall');
+    }
 	
 	/**
 	 * Setting > iPad Theme

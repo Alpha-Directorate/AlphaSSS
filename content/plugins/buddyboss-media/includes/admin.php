@@ -149,10 +149,9 @@ class BuddyBoss_Media_Admin
 		add_settings_field( 'activity-photo-size', __( 'Activity Photo Size', 'buddyboss-media' ), array( $this, 'setting_activity_photo_size' ), __FILE__, 'general_section');
 		add_settings_field( 'activity-custom-template', __( 'Photo Layout', 'buddyboss-media' ), array( $this, 'setting_activity_custom_template' ), __FILE__, 'general_section');
 		
-		//tagging feature, only if friends component is enabled
-		if( bp_is_active( 'friends' ) ){
-			add_settings_field( 'enable-tagging', __( 'Friend Tagging', 'buddyboss-media' ), array( $this, 'setting_enable_tagging' ), __FILE__, 'general_section');
-		}
+		add_settings_field( 'enable-tagging', __( 'Friend Tagging', 'buddyboss-media' ), array( $this, 'setting_enable_tagging' ), __FILE__, 'general_section');
+		
+		add_settings_field( 'files-per-batch', __( 'Max. Files per Batch', 'buddyboss-media' ), array( $this, 'setting_files_per_batch' ), __FILE__, 'general_section');
 	}
 
 	/**
@@ -380,7 +379,7 @@ class BuddyBoss_Media_Admin
 		
 		$options = array(
 			'medium'						=> __( 'Medium', 'buddyboss-media' ),
-			'buddyboss_media_photo_wide'	=> __( 'Full Size', 'buddyboss-media' ),
+			'buddyboss_media_photo_wide'	=> __( 'Large', 'buddyboss-media' ),
 		);
 		foreach( $options as $option=>$label ){
 			$selected = $option==$activity_photo_size ? ' selected' : '';
@@ -436,6 +435,24 @@ class BuddyBoss_Media_Admin
 
 		echo "<label><input ".$checked." id='enabled' name='buddyboss_media_plugin_options[enable_tagging]' type='checkbox' value='yes' />" . __( 'Enable Tagging.', 'buddyboss-media' ) . "</label>";
 		echo '<p class="description">' . __( 'Allow members to tag friends in media uploads.', 'buddyboss-media' ) . '</p>';
+	}
+	
+	/**
+	 * Setting > Files Per Batch
+	 *
+	 * @since BuddyBoss Media (2.1)
+	 *
+	 * @uses BuddyBoss_Media_Admin::option() Get plugin option
+	 */
+	public function setting_files_per_batch()
+	{
+		$files_per_batch = $this->option( 'files-per-batch' );
+		if( !$files_per_batch ){
+			$files_per_batch = 4;
+		}
+
+		echo "<input id='files-per-batch' name='buddyboss_media_plugin_options[files-per-batch]' type='number' value='" . esc_attr( $files_per_batch ) . "' />";
+		echo '<p class="description">' . __( 'Maximum number of images that can be uploaded in one batch.', 'buddyboss-media' ) . '</p>';
 	}
 	
 	/**

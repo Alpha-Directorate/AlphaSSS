@@ -781,6 +781,9 @@ select[multiple="multiple"],
 	text-align: left;
 	border: none;
 }
+#buddypress table.notifications {
+	clear: both;
+}
 #buddypress table.notifications tr th.title {
 	width: 50%;
 }
@@ -3461,6 +3464,20 @@ div#register-page #signup_form.standard-form div.submit input {
 	#buddypress div.whats-new-select ul li.filter .buddyboss-select-inner {
         display: inline-block;
     }
+
+    #buddypress .notifications-options-nav .bp-screen-reader-text,
+    #buddypress .messages-options-nav .bp-screen-reader-text {
+		display: none;
+	}
+	#buddypress .notifications-options-nav .buddyboss-select,
+	#buddypress .messages-options-nav .buddyboss-select {
+		float: left;
+	}
+	#buddypress .notifications-options-nav #notification-bulk-manage {
+		float: left;
+		margin-left: 10px;
+		padding: 3px 10px;
+	}
 
 	/*--------------------------------------------------------------
 	13.3.5 - Activity Listing

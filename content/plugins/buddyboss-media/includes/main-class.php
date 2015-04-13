@@ -94,7 +94,9 @@ class BuddyBoss_Media_Plugin
 		'USE_WP_CACHE'        => true,
 
 		'TYPES'               => array( 'photo', 'video' ),
-		'ACTIVE_TYPES'        => array( 'photo' )
+		'ACTIVE_TYPES'        => array( 'photo' ),
+		
+		'files-per-batch'		=> 4,
 	);
 
 	/**

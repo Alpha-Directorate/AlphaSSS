@@ -8,9 +8,9 @@ add_filter('bbp_before_has_forums_parse_args', 'private_groups_forums', 10, 2);
 add_filter('bbp_forum_get_subforums', 'private_groups_get_permitted_subforums', 10, 1);
 add_filter( 'bbp_before_forum_get_subforums_parse_args', 'bbp_list_private_groups_subforums' );
 //adds descriptions to the sub forums, and sends non-logged in or users who can't view to a sign-up page
-add_filter('bbp_list_forums', 'custom_list_forums' );
+add_filter('bbp_list_forums', 'custom_list_forums', 10, 2 );
 //restrict the forum display on topic-form to allowed forums
-add_filter ('bbp_before_get_dropdown_parse_args', 'pg_forum_dropdown') ;
+add_filter ('bbp_before_get_dropdown_parse_args', 'pg_forum_dropdown') ; 	
 
 /**
  * This function filters the list of forums based on the the users group
@@ -18,10 +18,10 @@ add_filter ('bbp_before_get_dropdown_parse_args', 'pg_forum_dropdown') ;
  */
 
  
- function private_groups_forums ($args) {
+ function private_groups_forums ($args='') {
  global $rpg_settingsf ;
 		//check if being called by subscriptions and if so skip filtering
-		if($args['post__in'] ) {
+		if(isset($args['post__in'] )) {
 		return $args ;
 		}
 		//if forums are visible to everyone, then skip filtering
@@ -65,7 +65,7 @@ function private_groups_check_permitted_forums($forum_ids) {
 /**
  * This function filters the list of sub-forums based on the the users group
  */
-function private_groups_get_permitted_subforums($sub_forums = '') {
+function private_groups_get_permitted_subforums($args = '') {
 
 //this code is from includes/forums/template bbp_forum_get_subforums and sets up which forums to look in based on user capabilities
 // Use passed integer as post_parent
@@ -103,7 +103,7 @@ function private_groups_get_permitted_subforums($sub_forums = '') {
 		'order'               => 'ASC',
 		'ignore_sticky_posts' => true,
 		'no_found_rows'       => true
-	), 'forum_get_subforums' );
+	), 'pg_forum_get_subforums' );
 	$r['post_parent'] = bbp_get_forum_id( $r['post_parent'] );
 
 	// Create a new query for the subforums
@@ -183,7 +183,7 @@ function bbp_list_private_groups_subforums( $args ) {
 	
 //This function adds descriptions to the sub forums, and sends non-logged in or users who can't view to a sign-up page
 
-function custom_list_forums( $args = '' ) {
+function custom_list_forums( $output, $args = ''  ) {
 
     // Define used variables
     global $rpg_settingsg ;

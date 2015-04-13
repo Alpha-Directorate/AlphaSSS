@@ -503,6 +503,10 @@ form#places-form #new-place-content input[type="time"],
 	#buddypress div.buddyboss-media-form-wrapper form #message {
 		margin-left: 0;
 	}
+	#buddypress #bbmedia-grid-wrapper > ul {
+		width: auto;
+		margin: 0;
+	}
 
 }
 

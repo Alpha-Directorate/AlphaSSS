@@ -35,7 +35,7 @@
 
 <?php do_action( 'buddyboss_before_header' ); ?>
 
-<header id="masthead" class="site-header" role="banner">
+<header id="masthead" class="site-header" role="banner" data-infinite="<?php echo (esc_attr(get_option('buddyboss_activity_infinite')) !== 'off')?'on':'off'; ?>">
 
 	<div class="header-inner">
 

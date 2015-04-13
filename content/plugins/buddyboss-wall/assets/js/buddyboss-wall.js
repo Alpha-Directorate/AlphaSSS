@@ -13,7 +13,7 @@
  *
  * 1. jQuery + Globals
  * 2. Main Wall Functionality
- * 2. Wall Tooltips
+ * 3. Wall Tooltips
  */
 
 

@@ -270,12 +270,14 @@ class BuddyBoss_Media_Tagging {
 		if( !$activity_id )
 			die();
 		
-		$notification_handler = BuddyBoss_Media_Tagging_Notifications::get_instance();
-		//add buddypress notification
-		$notification_handler->notifications_bp( $activity_id );
-		
-		//email notifications?
-		//$this->notifications_email( $activity_id );
+		if( bp_is_active( 'notifications' ) ){
+			$notification_handler = BuddyBoss_Media_Tagging_Notifications::get_instance();
+			//add buddypress notification
+			$notification_handler->notifications_bp( $activity_id );
+
+			//email notifications?
+			//$this->notifications_email( $activity_id );
+		}
 		
 		$retval = array(
 			'status'	=> true,

@@ -129,7 +129,7 @@ function buddyboss_slides_image() {
 function buddyboss_save_slides_meta($post_id, $post) {
     // verify this came from the our screen and with proper authorization,
     // because save_post can be triggered at other times
-    if ( !wp_verify_nonce( $_POST['meta_box_nonce'], 'buddyboss_meta_box_nonce') ) {
+    if ( isset($_POST['meta_box_nonce']) && !wp_verify_nonce( $_POST['meta_box_nonce'], 'buddyboss_meta_box_nonce') ) {
     return $post->ID;
     }
     // Is the user allowed to edit the post or page?
@@ -137,9 +137,18 @@ function buddyboss_save_slides_meta($post_id, $post) {
         return $post->ID;
     // OK, we're authenticated: we need to find and save the data
     // We'll put it into an array to make it easier to loop though.
-    $slides_meta['_subtitle'] = sanitize_text_field( $_POST['_subtitle'] );
-    $slides_meta['_text'] = sanitize_text_field( $_POST['_text'] );
-    $slides_meta['_url'] = esc_url( $_POST['_url'] );
+    $slides_meta['_subtitle'] = '';
+    $slides_meta['_text'] = '';
+    $slides_meta['_url'] = '';
+    if ( isset( $_POST['_subtitle'] ) ) {
+        $slides_meta['_subtitle'] = sanitize_text_field( $_POST['_subtitle'] );
+    }
+    if ( isset( $_POST['_text'] ) ) {
+        $slides_meta['_text'] = sanitize_text_field( $_POST['_text'] );
+    }
+    if ( isset( $_POST['_url'] ) ) {
+        $slides_meta['_url'] = esc_url( $_POST['_url'] );
+    }
     // Save the checkbox data
     $check = isset( $_POST['_target'] ) ? 'checked' : 'unchecked';
     update_post_meta( $post_id, '_target', $check );

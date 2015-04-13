@@ -9,6 +9,7 @@ Credits: http://iamceege.github.io/tooltipster/
 1.0 - BuddyBoss themed defaults
 2.0 - Tooltipster v3.0.5
 3.0 - BuddyBoss Wall tooltip links
+4.0 - Privacy
 --------------------------------------------------------------*/
 
 
@@ -304,3 +305,56 @@ Credits: http://iamceege.github.io/tooltipster/
 .buddyboss-wall-tt-others {
   cursor: pointer;
 }
+
+/*--------------------------------------------------------------
+4.0 - Privacy
+--------------------------------------------------------------*/
+
+#activity-visibility {
+  color: inherit;
+}
+#bbwall-activity-privacy,
+#bbwall-privacy-selectbox {
+  cursor: pointer;
+}
+span.customStyleSelectBox1 {
+  margin-left: 0px;
+  margin-top: 3px;
+  font-size: inherit;
+  padding: 5px;
+  line-height: 11px;
+  font-size: 12px;
+  cursor: pointer;
+}
+.customStyleSelectBoxInner1 {
+  padding-right: 5px;
+}
+.customStyleSelectBoxInner1:after {
+    content: "\f0dd";
+    display: inline-block;
+    margin-left: 5px;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    vertical-align: bottom;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Privacy loader */
+.fa.buddyboss-wall-ajax-loader {
+    display: none;
+    margin-left: 10px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-animation: fa-spin 2s infinite linear;
+    animation: fa-spin 2s infinite linear;
+}
+
+#buddypress form#whats-new-form #whats-new-options #bbwall-activity-privacy { margin-top: 0; }
+#buddypress form#whats-new-form #whats-new-submit { margin-top: 5px; }
+
+#buddypress div.buddyboss-wall-form-wrapper #form_buddyboss-wall-privacy { padding: 10px; }
+#buddypress div.buddyboss-wall-form-wrapper #form_buddyboss-wall-privacy .buddyboss-wall-privacy-cancel { text-decoration: none; }
+#buddypress div.buddyboss-wall-form-wrapper #form_buddyboss-wall-privacy .field { margin: 0; }
+#buddypress div.buddyboss-wall-form-wrapper #form_buddyboss-wall-privacy #message p { margin-top: 10px; }

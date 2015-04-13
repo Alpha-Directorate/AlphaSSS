@@ -5,7 +5,7 @@
  * Description: BuddyBoss Wall
  * Author:      BuddyBoss
  * Author URI:  http://buddyboss.com
- * Version:     1.1.2
+ * Version:     1.1.4
  */
 
 // Exit if accessed directly
@@ -19,7 +19,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 // Codebase version
 if ( ! defined( 'BUDDYBOSS_WALL_PLUGIN_VERSION' ) ) {
-  define( 'BUDDYBOSS_WALL_PLUGIN_VERSION', '1.1.2' );
+  define( 'BUDDYBOSS_WALL_PLUGIN_VERSION', '1.1.4' );
 }
 
 // Database version
@@ -106,7 +106,7 @@ function buddyboss_wall_meta ($links, $file)
 {
   if ($file == plugin_basename (__FILE__))
   {
-    $settings_link = '<a href="' . add_query_arg( array( 'page' => 'buddyboss-wall/includes/admin.php'   ), admin_url( 'options-general.php' ) ) . '">' . esc_html__( 'Settings', 'buddyboss-wall' ) . '</a>';
+    $settings_link = '<a href="' . add_query_arg( array( 'page' => 'bb-buddyboss-wall/includes/admin.php'   ), admin_url( 'options-general.php' ) ) . '">' . esc_html__( 'Settings', 'buddyboss-wall' ) . '</a>';
     
     array_unshift ($links, $settings_link);
   }

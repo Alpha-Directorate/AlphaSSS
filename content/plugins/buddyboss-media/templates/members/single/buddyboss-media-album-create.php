@@ -37,7 +37,7 @@
 			$options = array(
 				'public'	=> __('Everyone', 'buddyboss-media'),
 				'private'	=> __('Only Me', 'buddyboss-media'),
-				'members'	=> __('All Members', 'buddyboss-media'),
+				'members'	=> __('Logged In Users', 'buddyboss-media'),
 			);
 			if( bp_is_active( 'friends' ) ){
 				$options['friends'] = __('My Friends', 'buddyboss-media');
