@@ -1,5 +1,8 @@
 jQuery(document).ready(function($) {
 
+	// Hide all premember actions
+	$('#members-list li .action').hide();
+
 	// If pre-member is logged in
 	if (php_vars.show_top_alert === '1') {
 		$("#top-alerts").append(successAlert('<div class="alert-content">' + php_vars.i18n.TopAlert + '</div>', true));
