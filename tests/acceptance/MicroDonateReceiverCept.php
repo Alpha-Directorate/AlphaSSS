@@ -10,4 +10,8 @@ $I->fillField('pwd','funkadelicbro87');
 $I->click('Log In');
 $I->seeCurrentUrlEquals('/browse/saybb/');
 $I->click('Neighborhood', '#user-groups');
+$I->seeCurrentUrlEquals('/browse/saybb/groups/');
 $I->see('The Neighborhood','#groups-my-groups');
+$I->click('Sex Lovers United');
+$I->seeCurrentUrlEquals('/groups/sex-lovers-united/');
+$I->see('Homies','#members');
