@@ -29,10 +29,6 @@ class Sprint7 extends AbstractMigration
 		if ( $plugin = (new \WP_CLI\Fetchers\Plugin)->get( 'alphasss-top-bar' ) ) {
 			activate_plugin( $plugin->file, '' );
 		}
-
-		if ( $plugin = (new \WP_CLI\Fetchers\Plugin)->get( 'alphasss-forgot-password' ) ) {
-			activate_plugin( $plugin->file, '' );
-		}
     }
 
     /**
@@ -41,10 +37,6 @@ class Sprint7 extends AbstractMigration
     public function down()
     {
     	if ( $plugin = (new \WP_CLI\Fetchers\Plugin)->get( 'alphasss-top-bar' ) ) {
-			deactivate_plugins( $plugin->file );
-		}
-
-		if ( $plugin = (new \WP_CLI\Fetchers\Plugin)->get( 'alphasss-forgot-password' ) ) {
 			deactivate_plugins( $plugin->file );
 		}
     }
