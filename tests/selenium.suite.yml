@@ -1,0 +1,3 @@
+class_name: SeleniumGuyTester
+modules:
+    enabled: [SeleniumGuyHelper]
