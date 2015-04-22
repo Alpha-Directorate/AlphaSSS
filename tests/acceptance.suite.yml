@@ -14,7 +14,7 @@ modules:
         PhpBrowser:
             url: 'https://alphasss.dev/'
 env:
-	tests:
-		config:
-			PhpBrowser:
-            	url: 'https://tests.alphasss.com/'
+    tests:
+        config:
+            PhpBrowser:
+                url: 'https://tests.alphasss.com/'
