@@ -172,11 +172,13 @@ add_action( 'plugins_loaded', function(){
 						// Data confirmed?
 						if ( 'Yes' == $is_register_data_approved ) {
 
+							$email = (new \AlphaSSS\Helpers\Encryption)->encode(time() . '@alphasss.com');
+
 							// Create a new user
 							$user_id = wp_create_user(
 								sanitize_text_field ( rgpost( 'input_3' ) ), 
 								sanitize_text_field ( rgpost( 'input_4' ) ),
-								md5( time() ) . '@alphasss.com'
+								$email
 							);
 							//--
 							
