@@ -8,7 +8,7 @@
 
 PHPCS_BIN=
 PHPCS_CODING_STANDARD=WordPress
-PHPCS_IGNORE=*/vagrant/*,*/test/*,*/travis/*,*/hooks/*,*.json,*/Documentation/*,*.md
+PHPCS_IGNORE==*/vagrant/*,*/tests/*,*/hooks/*,*.json,*.md,*.po,*.mo,*.pot,*/migrations/*,*/content/themes/*
 TMP_STAGING=".tmp_staging"
 
 # simple check if code sniffer is set up correctly
