@@ -9,12 +9,6 @@ modules:
     enabled:
         - PhpBrowser
         - AcceptanceHelper
-        - Db
     config:
         PhpBrowser:
-            url: 'https://alphasss.dev/'
-env:
-    tests:
-        config:
-            PhpBrowser:
-                url: 'https://tests.alphasss.com/'
+            url: 'https://tests.alphasss.com/'
