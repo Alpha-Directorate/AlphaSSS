@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-04-22 18:22+0300\n"
+"PO-Revision-Date: 2015-04-22 21:57+0300\n"
 "Last-Translator: Fractal Overflow <fractal-overflow@alphadirectorate.com>\n"
 "Language-Team: ENGLISH <jjj@buddypress.org>\n"
 "X-Generator: Poedit 1.5.4\n"
@@ -7067,7 +7067,7 @@ msgstr ""
 #: bp-groups/bp-groups-loader.php:472
 msgctxt "My Group screen nav"
 msgid "Members <span>%s</span>"
-msgstr ""
+msgstr "Homies <span>%s</span>"
 
 #: bp-groups/bp-groups-loader.php:485
 msgctxt "My Group screen nav"
