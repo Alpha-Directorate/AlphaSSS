@@ -101,7 +101,7 @@ class Encryption {
 	*/
 	public function decode($text)
 	{
-        $td = mcrypt_module_open($this->cypher, '', $this->mode, $this->iv);
+		$td = mcrypt_module_open($this->cypher, '', $this->mode, $this->iv);
 
 		mcrypt_generic_init($td, $this->key, $this->iv);
 
@@ -123,12 +123,12 @@ class Encryption {
 	public function encode($text)
 	{
 		$td = mcrypt_module_open($this->cypher, '', $this->mode, $this->iv);
-    	mcrypt_generic_init($td, $this->key, $this->iv);
-    	$encrypted = mcrypt_generic($td, $text);
-    	mcrypt_generic_deinit($td);
-      	mcrypt_module_close($td);
-  		
-  		return bin2hex($encrypted);
+		mcrypt_generic_init($td, $this->key, $this->iv);
+		$encrypted = mcrypt_generic($td, $text);
+		mcrypt_generic_deinit($td);
+		mcrypt_module_close($td);
+			
+		return bin2hex($encrypted);
 	}
 
 	/**
