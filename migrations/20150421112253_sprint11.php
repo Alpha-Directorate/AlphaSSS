@@ -51,6 +51,9 @@ class Sprint11 extends AbstractMigration
 
         // Delete 1-on-1 Video Chat
         $this->execute( 'DELETE FROM `wp_posts` WHERE `ID`=43' );
+
+        // Add Founder_Counselor in to group "Sex Lovers United"
+        $this->execute( 'INSERT INTO `wp_bp_groups_members` VALUES(2,1,3,0,0,0,"WebGuy","2014-11-03 20:27:25","",1,0,0)' );
     }
 
     /**
@@ -76,5 +79,8 @@ class Sprint11 extends AbstractMigration
 
         // Insert 
         $this->execute( "INSERT INTO `wp_posts` VALUES (43,3,'2014-10-25 15:16:47','2014-10-25 22:16:47','','1-on-1 Video Chat!','','publish','open','open','','1-on-1-video-chat','','','2014-10-25 15:16:47','2014-10-25 22:16:47','',0,'http://www.alphasocialclub.com/?p=43',1,'nav_menu_item','',0)" );
+    
+        // Remove Founder_Counselor in to group "Sex Lovers United"
+        $this->execute( 'DELETE FROM  `wp_bp_groups_members` WHERE `user_id`=3 AND `group_id`=1 LIMIT 1' );
     }
 }

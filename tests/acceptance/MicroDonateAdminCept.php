@@ -1,6 +1,6 @@
 <?php 
 $I = new AcceptanceTester($scenario);
-$I->wantTo('perform actions and see result');
+$I->wantTo('Check micro donations for group admin');
 $I->amOnPage('/');
 $I->see('Login','.button');
 $I->click('Login','.button');

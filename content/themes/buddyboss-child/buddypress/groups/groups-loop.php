@@ -56,11 +56,7 @@
 
 				<?php do_action( 'bp_directory_groups_actions' ); ?>
 
-				<div class="meta">
-
-					<?php bp_group_type(); ?> / <?php bp_group_member_count(); ?>
-
-				</div>
+				<div class="meta"></div>
 
 			</div>
 
