@@ -37,22 +37,22 @@ then
 	sudo rm /etc/hosts
 
 	export WP_LOCAL_DEV=true
-    export DB_NAME=alphasssdev
-    export DB_USER=root
-    export DB_PASSWORD=vagrant
-    export DB_HOST=localhost
-    export WP_DEBUG=true
-    export WP_HOST=alphasss.dev
+	export DB_NAME=alphasssdev
+	export DB_USER=root
+	export DB_PASSWORD=vagrant
+	export DB_HOST=localhost
+	export WP_DEBUG=true
+	export WP_HOST=alphasss.dev
 
-    #Phinx database settings
-    export PHINX_DBHOST=localhost
-    export PHINX_DBNAME=alphasssdev
-    export PHINX_DBUSER=root
-    export PHINX_DBPASS=vagrant
+	#Phinx database settings
+	export PHINX_DBHOST=localhost
+	export PHINX_DBNAME=alphasssdev
+	export PHINX_DBUSER=root
+	export PHINX_DBPASS=vagrant
 
 	sudo service apache2 restart
 
-	./vendor/bin phinx migrate
+	./vendor/bin/phinx migrate
 	#sudo service nginx restart
 	#sudo service php5-fpm restart
 fi

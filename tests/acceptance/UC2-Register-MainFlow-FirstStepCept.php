@@ -8,4 +8,8 @@ $I->seeCurrentUrlEquals('/register/');
 $I->see('The Usual First Step');
 $I->see("I daresay that Fry has discovered the smelliest object is the known universe! Throw her in brig. Also Zoidberg. Oh God, what I have done! Just once I'd like to eat dinner with a celebrity whi isn't bound and gagged. Daylight and everything.");
 $I->see('Your Nickname', 'label');
+$I->seeElement('input', ['id' => 'input_4_3']);
+$I->see('Your Email Address', 'label');
+$I->seeElement('input', ['id' => 'input_4_22']);
+$I->seeElement('input', ['id' => 'choice_4_8_1']);
 $I->seeElement('input', ['value' => 'Next']);
