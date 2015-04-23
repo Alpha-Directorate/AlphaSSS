@@ -57,7 +57,7 @@ class Sprint11 extends AbstractMigration
         $this->execute( 'DELETE FROM `wp_posts` WHERE `ID`=43' );
 
         // Add nadya in to group "Sex Lovers United"
-        $this->execute( 'INSERT INTO `wp_bp_groups_members` VALUES(2,1,79,0,0,0,"WebGuy","2014-11-03 20:27:25","",1,0,0)' );
+        $this->execute( 'INSERT INTO `wp_bp_groups_members` VALUES(NULL,1,79,0,0,0,"WebGuy","2014-11-03 20:27:25","",1,0,0)' );
     }
 
     /**
