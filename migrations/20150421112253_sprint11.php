@@ -30,6 +30,10 @@ class Sprint11 extends AbstractMigration
             activate_plugin( $plugin->file, '' );
         }
 
+        if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'alphasss-smtp' ) ) {
+            activate_plugin( $plugin->file, '' );
+        }
+
         if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'wprtc-real-time-video-for-wp' ) ) {
             deactivate_plugins( $plugin->file, '' );
         }
@@ -74,6 +78,10 @@ class Sprint11 extends AbstractMigration
     {
         if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'alphasss-login' ) ) {
             deactivate_plugins( $plugin->file );
+        }
+
+        if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'alphasss-smtp' ) ) {
+            deactivate_plugins( $plugin->file, '' );
         }
 
         if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'wprtc-real-time-video-for-wp' ) ) {

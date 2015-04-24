@@ -8,14 +8,14 @@ Author URI:
 Text Domain: alphasss-register
 */
 
-load_plugin_textdomain('alphasss-register', false, basename(dirname( __FILE__ )) . '/languages');
+load_plugin_textdomain( 'alphasss-register', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 // Require helper functions
-require_once('includes/alphasss-register-functions.php');
+require_once( 'includes/alphasss-register-functions.php' );
 
 add_action( 'plugins_loaded', function(){
 	// Gravity forms custom validation filter hook.
-	add_filter( 'gform_validation_9', function($validation_result){
+	add_filter( 'gform_validation_9', function( $validation_result ){
 
 		$form = $validation_result['form'];
 
@@ -28,7 +28,7 @@ add_action( 'plugins_loaded', function(){
 					if ( isset( $_POST['input_20'] ) && $invite_code = rgpost( 'input_20' ) ) {
 
 						// Remove spaces from invitation code that user added
-						$invite_code = str_replace(" ", "", $invite_code);
+						$invite_code = str_replace( ' ', '', $invite_code );
 
 						// Anti-Bruteforce protection
 						if ( ! session_id() ) {
@@ -36,7 +36,7 @@ add_action( 'plugins_loaded', function(){
 						}
 
 						// Define guessing attempts if not exists
-						if (! isset( $_SESSION['guessing-attempts'] ) ) {
+						if ( ! isset( $_SESSION['guessing-attempts'] ) ) {
 							$_SESSION['guessing-attempts'] = 0;
 						}
 
@@ -49,7 +49,7 @@ add_action( 'plugins_loaded', function(){
 							$confirmation['message'] .= '<p>' . __('My fellow Earthicans, as I have explained in my book "Earth in Balance", and the much more popular "Harry Potter and the Balance of Earth" we need to defend our planet against pollution. Also <a href="/browse/">request a new code</a>', 'alphasss-register') . '</p>';
 							$confirmation['message'] .= '<a class="button" href="/browse/">' . __('Request Invitation Code', 'alphasss-register') . '</a>';
 
-							$form['confirmations'][key($form['confirmations'])] = $confirmation;
+							$form['confirmations'][key( $form['confirmations'] )] = $confirmation;
 
 							$validation_result['is_valid'] = true;
 							$field['failed_validation']    = false;
@@ -59,7 +59,7 @@ add_action( 'plugins_loaded', function(){
 						}
 						//--
 
-						$invitation_validation_result = alphasss_invitation()->validate_invitation_code($invite_code);
+						$invitation_validation_result = alphasss_invitation()->validate_invitation_code( $invite_code );
 
 						if ( $invitation_validation_result['is_success'] ) {
 							$validation_result['is_valid'] = true;
@@ -72,7 +72,7 @@ add_action( 'plugins_loaded', function(){
 
 							bp_set_member_type(get_current_user_id(), 'member');
 
-							alphasss_invitation()->update_invitation_code($invite_code, array('activated_member_id' => $user->ID));
+							alphasss_invitation()->update_invitation_code( $invite_code, array('activated_member_id' => $user->ID) );
 							
 						} else {
 							$_SESSION['guessing-attempts']++;
@@ -172,7 +172,7 @@ add_action( 'plugins_loaded', function(){
 						// Data confirmed?
 						if ( 'Yes' == $is_register_data_approved ) {
 
-							$email = (new \AlphaSSS\Helpers\Encryption)->encode(time() . '@alphasss.com');
+							$email = md5( time() ) . '@alphasss.com';
 
 							// Create a new user
 							$user_id = wp_create_user(
@@ -181,6 +181,8 @@ add_action( 'plugins_loaded', function(){
 								$email
 							);
 							//--
+
+							wp_new_user_notification( $user_id, rgpost( 'input_4' ) );
 							
 							// Set Pre Member Role to user
 							wp_update_user( array ('ID' => $user_id, 'role' => 'pre_member' ) ) ;
