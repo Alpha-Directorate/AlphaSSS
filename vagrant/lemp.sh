@@ -21,6 +21,8 @@ then
 	sudo cp /var/www/alphasss.dev/vagrant/etc/apache2/ssl/apache.key /etc/apache2/ssl
 	sudo cp /var/www/alphasss.dev/vagrant/etc/apache2/ssl/apache.crt /etc/apache2/ssl
 
+	sudo php5enmod mcrypt
+
 	sudo service apache2 restart
 
 #	echo "deb http://ppa.launchpad.net/nginx/stable/ubuntu $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/nginx-stable.list
