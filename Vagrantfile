@@ -65,6 +65,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision "shell", path: "vagrant/ubuntu-packages-update.sh"
   config.vm.provision "shell", path: "vagrant/lemp.sh"
+  config.vm.provision "shell", path: "vagrant/phantomjs.sh"
   config.vm.provision "shell", path: "vagrant/wordpress.sh"
 
   # Enable provisioning with CFEngine. CFEngine Community packages are
