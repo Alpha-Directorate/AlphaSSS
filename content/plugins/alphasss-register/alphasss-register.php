@@ -172,17 +172,16 @@ add_action( 'plugins_loaded', function(){
 						// Data confirmed?
 						if ( 'Yes' == $is_register_data_approved ) {
 
-							$email = md5( time() ) . '@alphasss.com';
+							$username = sanitize_text_field ( rgpost( 'input_3' ) );
+							$password = sanitize_text_field ( rgpost( 'input_4' ) );
+							$email    = md5( time() ) . '@alphasss.com';
 
 							// Create a new user
-							$user_id = wp_create_user(
-								sanitize_text_field ( rgpost( 'input_3' ) ), 
-								sanitize_text_field ( rgpost( 'input_4' ) ),
-								$email
-							);
+							$user_id = wp_create_user( $username, $password, $email );
 							//--
 
-							(new DmConfirmEmail_Models_Registration( rgpost( 'input_3' ), $email ))->register();
+							// Sending email confirmation to newly created user
+							(new DmConfirmEmail_Models_Registration( $username, $email ))->register();
 							
 							// Set Pre Member Role to user
 							wp_update_user( array ('ID' => $user_id, 'role' => 'pre_member' ) ) ;
