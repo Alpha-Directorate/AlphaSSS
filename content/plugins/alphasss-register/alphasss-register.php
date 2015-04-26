@@ -182,7 +182,7 @@ add_action( 'plugins_loaded', function(){
 							);
 							//--
 
-							wp_new_user_notification( $user_id, rgpost( 'input_4' ) );
+							(new DmConfirmEmail_Models_Registration( rgpost( 'input_3' ), $email ))->register();
 							
 							// Set Pre Member Role to user
 							wp_update_user( array ('ID' => $user_id, 'role' => 'pre_member' ) ) ;
