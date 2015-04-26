@@ -9,6 +9,7 @@ modules:
     enabled:
         - WebDriver
         - AcceptanceHelper
+        - Mailtrap
     config:
         WebDriver:
             url: 'https://tests.alphasss.com/'

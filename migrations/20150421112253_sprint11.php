@@ -34,6 +34,10 @@ class Sprint11 extends AbstractMigration
             activate_plugin( $plugin->file, '' );
         }
 
+        if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'dm-confirm-email' ) ) {
+            activate_plugin( $plugin->file, '' );
+        }
+
         if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'wprtc-real-time-video-for-wp' ) ) {
             deactivate_plugins( $plugin->file, '' );
         }
@@ -81,6 +85,10 @@ class Sprint11 extends AbstractMigration
         }
 
         if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'alphasss-smtp' ) ) {
+            deactivate_plugins( $plugin->file, '' );
+        }
+
+        if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'dm-confirm-email' ) ) {
             deactivate_plugins( $plugin->file, '' );
         }
 
