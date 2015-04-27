@@ -25,7 +25,7 @@ $I->checkOption('#choice_4_8_1');
 $I->click("//input[@id='gform_next_button_4_9']");
 $I->see('Confirmation & Dire Warning!');
 $I->see($username, '.red-data');
-$I->see(md5('password'), '.red-data');
+$I->see($password, '.red-data');
 $I->checkOption('#choice_4_15_1');
 $I->click("//input[@id='gform_next_button_4_11']");
 $I->see('Your Invitation Code','h1');
