@@ -30,6 +30,10 @@ CHANGELOG
 ----------------------------------------------------------------
 Version 4
 ----------------------------------------------------------------
+4.1.9 - March 25, 2015
+4.1.8 - March 14, 2015
+4.1.7 - March 9, 2015
+4.1.6 - March 1, 2015
 4.1.5 - February 18, 2015
 4.1.4 - February 17, 2015
 4.1.3 - February 11, 2015
@@ -117,6 +121,151 @@ Version 1
 Version 4
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
+4.1.9 - March 25, 2015
+--------------------------------------------------------------*/
+
+BUG FIXES:
+
+	Fixed issues with video embed sizing
+
+CHANGED FILES:
+
+	/buddyboss-inc/theme-functions.php
+	/js/buddyboss.js
+	/js/fitvids.js (added)
+	readme.txt
+	style.css	
+
+TESTED WITH:
+
+	-- WordPress --
+	WordPress 4.0+
+	BuddyPress 2.1, 2.2
+	bbPress 2.5+
+
+	-- Mobile --
+	iOS 6, 7
+	Android 4.1+ 
+	Windows Phone
+
+	-- Browsers --
+	Chrome
+	Safari
+	Firefox
+	Internet Explorer 9+
+
+/*--------------------------------------------------------------
+4.1.8 - March 14, 2015
+--------------------------------------------------------------*/
+
+FEATURES:
+
+	Admin option to enable/disable Activity infinite scrolling
+
+BUG FIXES:
+
+	Fixed custom member avatar loading from child themes
+	Fixed slides getting Undefined Index when used with ACF Field Groups plugin
+
+CHANGED FILES:
+
+	/buddyboss-inc/buddyboss-customizer/buddyboss-customizer-loader.php
+	/buddyboss-inc/buddyboss-slides/buddyboss-slides-loader.php
+	/buddyboss-inc/theme-functions.php
+	/css/plugins.css
+	header.php
+	/js/buddyboss.js
+	readme.txt
+	style.css		
+
+TESTED WITH:
+
+	-- WordPress --
+	WordPress 4.0+
+	BuddyPress 2.1, 2.2
+	bbPress 2.5+
+
+	-- Mobile --
+	iOS 6, 7
+	Android 4.1+ 
+	Windows Phone
+
+	-- Browsers --
+	Chrome
+	Safari
+	Firefox
+	Internet Explorer 9+
+
+/*--------------------------------------------------------------
+4.1.7 - March 9, 2015
+--------------------------------------------------------------*/
+
+FEATURES:
+
+	Added Infinite Scroll for activity
+
+CHANGED FILES:
+
+	/buddyboss-inc/theme-functions.php
+	/js/buddyboss.js
+	readme.txt
+	style.css
+
+TESTED WITH:
+
+	-- WordPress --
+	WordPress 4.0+
+	BuddyPress 2.1, 2.2
+	bbPress 2.5+
+
+	-- Mobile --
+	iOS 6, 7
+	Android 4.1+ 
+	Windows Phone
+
+	-- Browsers --
+	Chrome
+	Safari
+	Firefox
+	Internet Explorer 9+
+
+/*--------------------------------------------------------------
+4.1.6 - March 1, 2015
+--------------------------------------------------------------*/
+
+BUG FIXES:
+
+	CSS fixes for Bulk Notifications
+	CSS fixes for Message filters
+	Mobile CSS fix for BuddyBoss Media plugin
+
+CHANGED FILES:
+
+	/buddyboss-inc/theme-functions.php
+	/css/buddypress.css
+	/css/plugins.css
+	readme.txt
+	style.css
+
+TESTED WITH:
+
+	-- WordPress --
+	WordPress 4.0+
+	BuddyPress 2.1, 2.2
+	bbPress 2.5+
+
+	-- Mobile --
+	iOS 6, 7
+	Android 4.1+ 
+	Windows Phone
+
+	-- Browsers --
+	Chrome
+	Safari
+	Firefox
+	Internet Explorer 9+
+
+/*--------------------------------------------------------------
 4.1.5 - February 18, 2015
 --------------------------------------------------------------*/
 
@@ -163,7 +312,7 @@ BUG FIXES:
 
 CHANGED FILES:
 
-	/buddyboss-inc/buddyboss-customizer/uddyboss-customizer-loader.php
+	/buddyboss-inc/buddyboss-customizer/buddyboss-customizer-loader.php
 	/buddyboss-inc/theme-functions.php
 	/css/adminbar-desktop-fixed.css
 	/css/adminbar-desktop-floating.css

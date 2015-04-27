@@ -5,17 +5,19 @@ Plugin URI:
 Description: All filter and action hooks used for members register
 Author: Fractal Overflow
 Author URI:
-Text Domain: alpha-register
+Text Domain: alphasss-register
 */
 
-load_plugin_textdomain('alpha-register', false, basename(dirname( __FILE__ )) . '/languages');
+use AlphaSSS\Repositories\User as UserRepository;
+
+load_plugin_textdomain( 'alphasss-register', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 // Require helper functions
-require_once('includes/alphasss-register-functions.php');
+require_once( 'includes/alphasss-register-functions.php' );
 
 add_action( 'plugins_loaded', function(){
 	// Gravity forms custom validation filter hook.
-	add_filter( 'gform_validation_9', function($validation_result){
+	add_filter( 'gform_validation_9', function( $validation_result ){
 
 		$form = $validation_result['form'];
 
@@ -28,7 +30,7 @@ add_action( 'plugins_loaded', function(){
 					if ( isset( $_POST['input_20'] ) && $invite_code = rgpost( 'input_20' ) ) {
 
 						// Remove spaces from invitation code that user added
-						$invite_code = str_replace(" ", "", $invite_code);
+						$invite_code = str_replace( ' ', '', $invite_code );
 
 						// Anti-Bruteforce protection
 						if ( ! session_id() ) {
@@ -36,7 +38,7 @@ add_action( 'plugins_loaded', function(){
 						}
 
 						// Define guessing attempts if not exists
-						if (! isset( $_SESSION['guessing-attempts'] ) ) {
+						if ( ! isset( $_SESSION['guessing-attempts'] ) ) {
 							$_SESSION['guessing-attempts'] = 0;
 						}
 
@@ -44,12 +46,12 @@ add_action( 'plugins_loaded', function(){
 
 							$confirmation = reset($form['confirmations']);
 
-							$confirmation['message'] = '<h3>' . __('The Late Philip J. Fry', 'alpha-hooks') .'</h3>';
-							$confirmation['message'] .= '<h1>' . __('Your Invitation Code', 'alpha-hooks') . '</h1>';
-							$confirmation['message'] .= '<p>' . __('My fellow Earthicans, as I have explained in my book "Earth in Balance", and the much more popular "Harry Potter and the Balance of Earth" we need to defend our planet against pollution. Also <a href="/browse/">request a new code</a>', 'alpha-hooks') . '</p>';
-							$confirmation['message'] .= '<a class="button" href="/browse/">' . __('Request Invitation Code', 'alpha-hooks') . '</a>';
+							$confirmation['message'] = '<h3>' . __('The Late Philip J. Fry', 'alphasss-register') .'</h3>';
+							$confirmation['message'] .= '<h1>' . __('Your Invitation Code', 'alphasss-register') . '</h1>';
+							$confirmation['message'] .= '<p>' . __('My fellow Earthicans, as I have explained in my book "Earth in Balance", and the much more popular "Harry Potter and the Balance of Earth" we need to defend our planet against pollution. Also <a href="/browse/">request a new code</a>', 'alphasss-register') . '</p>';
+							$confirmation['message'] .= '<a class="button" href="/browse/">' . __('Request Invitation Code', 'alphasss-register') . '</a>';
 
-							$form['confirmations'][key($form['confirmations'])] = $confirmation;
+							$form['confirmations'][key( $form['confirmations'] )] = $confirmation;
 
 							$validation_result['is_valid'] = true;
 							$field['failed_validation']    = false;
@@ -59,7 +61,7 @@ add_action( 'plugins_loaded', function(){
 						}
 						//--
 
-						$invitation_validation_result = alphasss_invitation()->validate_invitation_code($invite_code);
+						$invitation_validation_result = alphasss_invitation()->validate_invitation_code( $invite_code );
 
 						if ( $invitation_validation_result['is_success'] ) {
 							$validation_result['is_valid'] = true;
@@ -72,7 +74,7 @@ add_action( 'plugins_loaded', function(){
 
 							bp_set_member_type(get_current_user_id(), 'member');
 
-							alphasss_invitation()->update_invitation_code($invite_code, array('activated_member_id' => $user->ID));
+							alphasss_invitation()->update_invitation_code( $invite_code, array('activated_member_id' => $user->ID) );
 							
 						} else {
 							$_SESSION['guessing-attempts']++;
@@ -110,18 +112,18 @@ add_action( 'plugins_loaded', function(){
 						if ( ! preg_match( '/^[a-z0-9\'_.-]+$/i', $username ) ) {
 
 							$is_username_validation_error = true;
-							$field['validation_message']  = __("You may use only the following characters: letters (a-z), numbers (0-9), dashes (-), underscores (_), apostrophes ('), and periods (.). Try again please.", 'alpha-hooks');
+							$field['validation_message']  = __("You may use only the following characters: letters (a-z), numbers (0-9), dashes (-), underscores (_), apostrophes ('), and periods (.). Try again please.", 'alphasss-register');
 						}
 
 						// User exists? Show validation error
 						if ( username_exists( $username ) ) {
 
 							$is_username_validation_error = true;
-							$field['validation_message']  = __('This nickname is already taken. Please choose another one.', 'alpha-hooks');
+							$field['validation_message']  = __('This nickname is already taken. Please choose another one.', 'alphasss-register');
 						}
 					} else {
 						$is_username_validation_error = true;
-						$field['validation_message']  = __('Please choose your nickname.', 'alpha-hooks');
+						$field['validation_message']  = __('Please choose your nickname.', 'alphasss-register');
 					}
 
 					// Mark form validation as failed
@@ -131,24 +133,56 @@ add_action( 'plugins_loaded', function(){
 					}
 				break;
 
+				case 22:
+					if ( $email = trim( rgpost( 'input_22' ) ) ) {
+
+						// Email format validation
+						if ( filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
+
+							// Check is email already in use
+							if ( UserRepository::isEmailExists($email) ) {
+								$is_username_validation_error = true;
+								$field['validation_message']  = __('This email already in use. Please pick up another one.', 'alphasss-register');
+							}
+
+						} else {
+							// Incorrect email format
+							$is_username_validation_error = true;
+							$field['validation_message']  = __('Please enter the valid email address.', 'alphasss-register');
+						}
+
+					} else {
+						// If email was passes as empty string
+						$is_username_validation_error = true;
+						$field['validation_message']  = __('Please enter your email.', 'alphasss-register');
+					}
+
+					// Mark form validation as failed
+					if ( $is_username_validation_error ) {
+						$validation_result['is_valid'] = false;
+						$field['failed_validation']    = true;
+					}
+				break;
+
+				// Password validation
 				case 4:
 					if ($password = rgpost( 'input_4' )) {
 						$confirm_password  = rgpost( 'input_4_2' );
 						$password_strength = rgpost( 'input_4_strength' );
 
 						if ( $password != $confirm_password ) {
-							$field['validation_message']   = __('The 2 passwords do not match. Please try again.', 'alpha-hooks');
+							$field['validation_message']   = __('The 2 passwords do not match. Please try again.', 'alphasss-register');
 							$validation_result['is_valid'] = false;
 							$field['failed_validation']    = true;
 						}
 
 						if ( isset( $field['validation_message'] ) && ! $field['validation_message'] && 'strong' != $password_strength ) {
-							$field['validation_message']   = __('Your password must be strong. It\'s for your own protection.', 'alpha-hooks');
+							$field['validation_message']   = __('Your password must be strong. It\'s for your own protection.', 'alphasss-register');
 							$validation_result['is_valid'] = false;
 							$field['failed_validation']    = true;
 						}
 					} else {
-							$field['validation_message']   = __('Please choose your password.', 'alpha-hooks');
+							$field['validation_message']   = __('Please choose your password.', 'alphasss-register');
 							$validation_result['is_valid'] = false;
 							$field['failed_validation']    = true;
 					}
@@ -157,7 +191,7 @@ add_action( 'plugins_loaded', function(){
 
 				case 8:
 					if (! rgpost( 'input_8_1' )) {
-						$field['validation_message']   = __('Please confirm if you are at least 21-years of age?', 'alpha-hooks');
+						$field['validation_message']   = __('Please confirm if you are at least 21-years of age?', 'alphasss-register');
 						$validation_result['is_valid'] = false;
 						$field['failed_validation']    = true;
 					}
@@ -172,19 +206,25 @@ add_action( 'plugins_loaded', function(){
 						// Data confirmed?
 						if ( 'Yes' == $is_register_data_approved ) {
 
+							$username        = sanitize_text_field ( rgpost( 'input_3' ) );
+							$password        = sanitize_text_field ( rgpost( 'input_4' ) );
+							$email           = sanitize_text_field ( rgpost( 'input_22' ) );
+							$encrypted_email = ( new AlphaSSS\Helpers\Encryption )->encode( $email );
+							$hashed_email    = hash('sha512', $email);
+
 							// Create a new user
-							$user_id = wp_create_user(
-								sanitize_text_field ( rgpost( 'input_3' ) ), 
-								sanitize_text_field ( rgpost( 'input_4' ) ),
-								md5( time() ) . '@alphasss.com'
-							);
-							//--
+							$user_id = wp_create_user( $username, $password, $encrypted_email );
+
+							// Sending email confirmation to newly created user
+							( new DmConfirmEmail_Models_Registration( $username, $email ) )->register();
 							
 							// Set Pre Member Role to user
-							wp_update_user( array ('ID' => $user_id, 'role' => 'pre_member' ) ) ;
+							wp_update_user( array('ID' => $user_id, 'role' => 'pre_member' ) ) ;
+
+							update_user_meta($user_id, 'hashed_email', $hashed_email);
 						}
 					} else if (isset( $_POST['input_15_1'] ) && !$_POST['input_15_1'] ){
-						$field['validation_message']   = __('Please confirm you have written down or memorized your nickname/password? You are anonymous, and we cannot recover your lost login info.', 'alpha-hooks');
+						$field['validation_message']   = __('Please confirm you have written down or memorized your nickname/password? You are anonymous, and we cannot recover your lost login info.', 'alphasss-register');
 						$validation_result['is_valid'] = false;
 						$field['failed_validation']    = true;
 					}
@@ -211,10 +251,10 @@ add_action( 'plugins_loaded', function(){
 
 							$confirmation = reset($form['confirmations']);
 
-							$confirmation['message'] = '<h3>' . __('The Late Philip J. Fry', 'alpha-hooks') .'</h3>';
-							$confirmation['message'] .= '<h1>' . __('Your Invitation Code', 'alpha-hooks') . '</h1>';
-							$confirmation['message'] .= '<p>' . __('My fellow Earthicans, as I have explained in my book "Earth in Balance", and the much more popular "Harry Potter and the Balance of Earth" we need to defend our planet against pollution. Also <a href="/browse/">request a new code</a>', 'alpha-hooks') . '</p>';
-							$confirmation['message'] .= '<a class="button" href="/browse/">' . __('Request Invitation Code', 'alpha-hooks') . '</a>';
+							$confirmation['message'] = '<h3>' . __('The Late Philip J. Fry', 'alphasss-register') .'</h3>';
+							$confirmation['message'] .= '<h1>' . __('Your Invitation Code', 'alphasss-register') . '</h1>';
+							$confirmation['message'] .= '<p>' . __('My fellow Earthicans, as I have explained in my book "Earth in Balance", and the much more popular "Harry Potter and the Balance of Earth" we need to defend our planet against pollution. Also <a href="/browse/">request a new code</a>', 'alphasss-register') . '</p>';
+							$confirmation['message'] .= '<a class="button" href="/browse/">' . __('Request Invitation Code', 'alphasss-register') . '</a>';
 
 							$form['confirmations'][key($form['confirmations'])] = $confirmation;
 
@@ -245,7 +285,7 @@ add_action( 'plugins_loaded', function(){
 							} else {
 								$validation_result['is_valid'] = false;
 								$field['failed_validation']    = true;
-								$field['validation_message']   = __('Please contact admin', 'alpha-hooks');
+								$field['validation_message']   = __('Please contact admin', 'alphasss-register');
 							}
 							
 						} else {
@@ -293,12 +333,12 @@ add_action( 'plugins_loaded', function(){
 			switch ( $field['id'] ) {
 
 				case 22:
-					$field['content'] = str_replace( '%%RegisterInvintationTitle%%', __('Your Invitation Code', 'alpha-hooks'), $field['content'] );
-					$field['content'] = str_replace( '%%RegisterPageTextUnderTitle%%', __('I meant \'physically\'. Look, perhaps you could let me work for a little food? I could clean the floors or paint a fence, or service you sexually? Hello, little man. I will destroy you! But existing is basically all I do! So, how \'bout them Knicks?', 'alpha-hooks'), $field['content'] );
+					$field['content'] = str_replace( '%%RegisterInvintationTitle%%', __('Your Invitation Code', 'alphasss-register'), $field['content'] );
+					$field['content'] = str_replace( '%%RegisterPageTextUnderTitle%%', __('I meant \'physically\'. Look, perhaps you could let me work for a little food? I could clean the floors or paint a fence, or service you sexually? Hello, little man. I will destroy you! But existing is basically all I do! So, how \'bout them Knicks?', 'alphasss-register'), $field['content'] );
 				break;
 
 				case 20:
-					$field['label'] = __('Invitation Code:', 'alpha-hooks');
+					$field['label'] = __('Invitation Code:', 'alphasss-register');
 				break;
 
 				case 21:
@@ -308,8 +348,8 @@ add_action( 'plugins_loaded', function(){
 							'%%RegisterInvintationTextUnder%%'
 						], 
 						[
-							__('Don\'t have any invitation code? Then ask the members.', 'alpha-hooks'),
-							__('Get the code from one of the members currently online. Who said that? Sure you <a href="/browse/">members online</a>! Ummm...to eBay? Stop! Don\'t shoot fire stick in space canoe! Cause explosive decompression!', 'alpha-hooks')
+							__('Don\'t have any invitation code? Then ask the members.', 'alphasss-register'),
+							__('Get the code from one of the members currently online. Who said that? Sure you <a href="/browse/">members online</a>! Ummm...to eBay? Stop! Don\'t shoot fire stick in space canoe! Cause explosive decompression!', 'alphasss-register')
 						],
 						$field['content']
 					);
@@ -317,7 +357,7 @@ add_action( 'plugins_loaded', function(){
 			}
 		}
 
-		$form['button']['text'] = __('Finish', 'alpha-hooks');
+		$form['button']['text'] = __('Finish', 'alphasss-register');
 
 		return $form;
 	});
@@ -331,48 +371,48 @@ add_action( 'plugins_loaded', function(){
 
 				// Localize /register/ first step title
 				case 1:
-					$field['content'] = str_replace( '%%RegisterPageTitle%%', __('The Usual First Step', 'alpha-hooks'), $field['content'] );
+					$field['content'] = str_replace( '%%RegisterPageTitle%%', __('The Usual First Step', 'alphasss-register'), $field['content'] );
 				break;
 
 				// Localize /register/ first step, text under title
 				case 2:
-					$field['content'] = str_replace( '%%RegisterPageTextUnderTitle%%', __('I daresay that Fry has discovered the smelliest object is the known universe! Throw her in brig. Also Zoidberg. Oh God, what I have done! Just once I\'d like to eat dinner with a celebrity whi isn\'t bound and gagged. Daylight and everything.', 'alpha-hooks'), $field['content'] );
+					$field['content'] = str_replace( '%%RegisterPageTextUnderTitle%%', __('I daresay that Fry has discovered the smelliest object is the known universe! Throw her in brig. Also Zoidberg. Oh God, what I have done! Just once I\'d like to eat dinner with a celebrity whi isn\'t bound and gagged. Daylight and everything.', 'alphasss-register'), $field['content'] );
 				break;
 
 				// Localize /register/ first step, nickname block
 				case 3:
-					$field['label']       = str_replace( '%%RegisterNicknameLabel%%', __('Your Nickname:', 'alpha-hooks'), $field['label'] );
-					$field['description'] = str_replace( '%%RegisterNicknameDescription%%', __('The key to victory is discipline, and that means a well made bad. You will practice until you can make your bed in your sleep.', 'alpha-hooks'), $field['description'] );
+					$field['label']       = str_replace( '%%RegisterNicknameLabel%%', __('Your Nickname:', 'alphasss-register'), $field['label'] );
+					$field['description'] = str_replace( '%%RegisterNicknameDescription%%', __('The key to victory is discipline, and that means a well made bad. You will practice until you can make your bed in your sleep.', 'alphasss-register'), $field['description'] );
 				break;
 
 				// Localize /register/ first step, password block
 				case 4:
-					$field['label'] = str_replace( '%%RegisterPasswordLabel%%', __('Password:', 'alpha-hooks'), $field['label'] );
+					$field['label'] = str_replace( '%%RegisterPasswordLabel%%', __('Password:', 'alphasss-register'), $field['label'] );
 				break;
 
 				// Localize /register/ first step, text under password block 
 				case 7:
-					$field['content'] = str_replace( '%%RegisterPasswordDescription%%', __('Isn\'t it true that you have been paid for your testimony? Soothe us with sweet lies. Why would I want to know that?', 'alpha-hooks'), $field['content'] );
+					$field['content'] = str_replace( '%%RegisterPasswordDescription%%', __('Isn\'t it true that you have been paid for your testimony? Soothe us with sweet lies. Why would I want to know that?', 'alphasss-register'), $field['content'] );
 				break;
 
 				// Localize /register/ first step, age confirmation
 				case 8:
 					foreach ($field->choices as & $choice){
-						$choice['text'] = str_replace('%%RegisterAgeConfirmation%%',__('Hey, quess that you\'re accessories to. File not found. Oh Sure! Blame the wizards! We\'ll need to have a look inside you with this camera.', 'alpha-hooks'), $field['choices'][0]['text']);
+						$choice['text'] = str_replace('%%RegisterAgeConfirmation%%',__('Hey, quess that you\'re accessories to. File not found. Oh Sure! Blame the wizards! We\'ll need to have a look inside you with this camera.', 'alphasss-register'), $field['choices'][0]['text']);
 					}
 				break;
 
 				case 12:
-					$field['content'] = str_replace( '%%RegisterConfirmationTitle%%', __('Confirmation &amp; Dire Warning!', 'alpha-hooks'), $field['content'] );
+					$field['content'] = str_replace( '%%RegisterConfirmationTitle%%', __('Confirmation &amp; Dire Warning!', 'alphasss-register'), $field['content'] );
 				break;
 
 				case 13:
-					$field['content'] = str_replace( '%%RegisterConfirmationTextUnderTitle%%', __('I daresay that Fry has discovered the smelliest object is the known universe! Throw her in brig. Also Zoidberg. Oh God, what I have done! Just once I\'d like to eat dinner with a celebrity whi isn\'t bound and gagged. Daylight and everything.', 'alpha-hooks'), $field['content'] );
+					$field['content'] = str_replace( '%%RegisterConfirmationTextUnderTitle%%', __('I daresay that Fry has discovered the smelliest object is the known universe! Throw her in brig. Also Zoidberg. Oh God, what I have done! Just once I\'d like to eat dinner with a celebrity whi isn\'t bound and gagged. Daylight and everything.', 'alphasss-register'), $field['content'] );
 				break;
 
 				case 15:
 					foreach ($field->choices as & $choice){
-						$choice['text'] = str_replace('%%RegisterDataConfirmation%%',__('You guys go on without me! I\'m going to go... look for more stuff to steal! No! The kind with looting and maybe starting a few fires!', 'alpha-hooks'), $field['choices'][0]['text']);
+						$choice['text'] = str_replace('%%RegisterDataConfirmation%%',__('You guys go on without me! I\'m going to go... look for more stuff to steal! No! The kind with looting and maybe starting a few fires!', 'alphasss-register'), $field['choices'][0]['text']);
 					}
 				break;
 
@@ -387,23 +427,23 @@ add_action( 'plugins_loaded', function(){
 							'%%RegisterConfirmationTextUnderPassword%%',
 						], 
 						[
-							__('Your Nickname is:', 'alpha-hooks'),
+							__('Your Nickname is:', 'alphasss-register'),
 							rgpost( 'input_3' ), 
 							rgpost( 'input_4' ),
-							__('I\'ve been there. My folks were always on me to groom myself and wear underpants. What am I, the pope?', 'alpha-hooks'),
-							__('Your Password is:','alpha-hooks'),
-							__('I barely knew Philip, bus as a clergyman I have no problem telling his most intimate friends all about him','alpha-hooks'),
+							__('I\'ve been there. My folks were always on me to groom myself and wear underpants. What am I, the pope?', 'alphasss-register'),
+							__('Your Password is:','alphasss-register'),
+							__('I barely knew Philip, bus as a clergyman I have no problem telling his most intimate friends all about him','alphasss-register'),
 						], 
 						$field['content'] 
 					);
 				break;
 
 				case 18:
-					$field['content'] = str_replace( '%%RegisterInvintationTitle%%', __('Your Invitation Code', 'alpha-hooks'), $field['content'] );
+					$field['content'] = str_replace( '%%RegisterInvintationTitle%%', __('Your Invitation Code', 'alphasss-register'), $field['content'] );
 				break;
 
 				case 20:
-					$field['label'] = __('Invitation Code:', 'alpha-hooks');
+					$field['label'] = __('Invitation Code:', 'alphasss-register');
 				break;
 
 				case 21:
@@ -413,16 +453,21 @@ add_action( 'plugins_loaded', function(){
 							'%%RegisterInvintationTextUnder%%'
 						], 
 						[
-							__('Don\'t have any invitation code?', 'alpha-hooks'),
-							__('Who said that? SURE you can die! You want to die?!', 'alpha-hooks')
+							__('Don\'t have any invitation code?', 'alphasss-register'),
+							__('Who said that? SURE you can die! You want to die?!', 'alphasss-register')
 						],
 						$field['content']
 					);
 				break;
+
+				case 22:
+					$field['label']       = str_replace( '%%RegisterEmailLabel%%', __('Your Email Address:', 'alphasss-register'), $field['label'] );
+					$field['description'] = str_replace( '%%RegisterEmailDescription%%', __('The key to victory is discipline, and that means a well made bad. You will practice until you can make your bed in your sleep.', 'alphasss-register'), $field['description'] );
+				break;
 			}
 		}
 
-		$form['button']['text'] = __('Finish', 'alpha-hooks');
+		$form['button']['text'] = __('Finish', 'alphasss-register');
 
 		return $form;
 	});

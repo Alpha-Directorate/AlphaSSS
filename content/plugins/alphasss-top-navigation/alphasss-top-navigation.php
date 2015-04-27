@@ -21,6 +21,23 @@ __('Browse', 'alphasss-top-navigation');
 __('Forum', 'alphasss-top-navigation');
 
 add_action( 'plugins_loaded', function(){
+
+	// Add login/logout to the navigation menu
+	add_filter('wp_nav_menu_items', function($items, $args) {
+		ob_start();
+		wp_loginout('/');
+		$loginoutlink = str_replace('Log in', __('Login', 'alphasss-top-navigation'), ob_get_contents());
+		ob_end_clean();
+
+		// Add login element to navigation menu
+		if ( ! is_user_logged_in() ) {
+			$items .= '<li>'. $loginoutlink .'</li>';
+		}
+
+		return $items;
+	}, 10, 2);
+
+
 	// Top navigation localization
 	add_filter('wp_get_nav_menu_items', function($items, $menu){
 

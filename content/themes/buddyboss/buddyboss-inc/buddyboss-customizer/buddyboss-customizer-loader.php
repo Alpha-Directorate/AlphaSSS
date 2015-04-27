@@ -489,6 +489,37 @@ function buddyboss_customize_register( $wp_customize ) {
 		        'type'    			=> 'text',
 		        'priority'    		=> 8
 		    ) );
+    
+    
+	/****************************** Activity ******************************/
+
+	/**
+	 * Add Activitys Section
+	 * @since BuddyBoss 3.1
+	 */
+
+	$wp_customize->add_section( 'buddyboss_activity_section' , array(
+	    'title'       => __( 'Activity', 'buddyboss' ),
+	    'priority'    => 90
+	) );
+    
+     
+		// Disable Activity Infinite Scroll
+		$wp_customize->add_setting( 'buddyboss_activity_infinite', array(
+		        'default'   		=> 'on',
+		        'transport' 		=> 'postMessage',
+		        'capability'        => 'edit_theme_options',
+		        'type'           	=> 'option',
+		    ) );
+		$wp_customize->add_control( 'buddyboss_activity_infinite', array(
+            'label'  	    	=> __( 'Allow Infinite Scrolling', 'boss' ),
+            'section'    		=> 'buddyboss_activity_section',
+            'settings'  	 	=> 'buddyboss_activity_infinite',
+            'type'              => 'radio',
+            'choices'           => array('on'=>'Enabled', 'off'=>'Disabled'),
+            'priority'  	  	=> 1
+        ) ); 
+
 
 
 } // End Of BuddyBoss Customizer Function

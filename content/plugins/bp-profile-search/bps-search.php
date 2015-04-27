@@ -59,7 +59,7 @@ function bps_filters ()
 	
 		$field = $fields[$id];
 		$field_type = apply_filters ('bps_field_criteria_type', $field->type, $field);
-		$field_label = isset ($request['label_'. $id])? $request['label_'. $id]: $field->name;
+		$field_label = isset ($request['label_'. $id])? esc_html (stripslashes ($request['label_'. $id])): $field->name;
 
 		if (bps_custom_field ($field_type))
 		{

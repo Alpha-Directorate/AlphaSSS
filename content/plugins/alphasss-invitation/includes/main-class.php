@@ -7,9 +7,9 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-if ( ! class_exists( 'Alphasss_Invitation_Plugin' ) ):
+use \Carbon\Carbon;
 
-	require_once(BASEPATH . 'vendor/nesbot/carbon/src/Carbon/Carbon.php');
+if ( ! class_exists( 'Alphasss_Invitation_Plugin' ) ):
 
 	class Alphasss_Invitation_Plugin
 	{
@@ -122,8 +122,8 @@ if ( ! class_exists( 'Alphasss_Invitation_Plugin' ) ):
 				$user = get_user_by( 'id', (int) $result['member_id'] );
 
 				$result['nickname']   = ($user) ? $user->display_name : null;
-				$result['is_expired'] = \Carbon\Carbon::now()->timestamp > \Carbon\Carbon::parse($result['expired_date'])->timestamp;
-				$result['date']       = str_replace('after', '', \Carbon\Carbon::now()->diffForHumans(\Carbon\Carbon::parse($result['created_date'])));
+				$result['is_expired'] = Carbon::now()->timestamp > Carbon::parse( $result['expired_date'] )->timestamp;
+				$result['date']       = str_replace('after', '', Carbon::now()->diffForHumans( Carbon::parse( $result['created_date'] ) ) );
 			}
 
 			return $results;
@@ -155,8 +155,8 @@ if ( ! class_exists( 'Alphasss_Invitation_Plugin' ) ):
 			$data = array( 
 				'member_id'    => get_current_user_id(),
 				'is_active'    => 'YES',
-				'created_date' => \Carbon\Carbon::now(),
-				'expired_date' => \Carbon\Carbon::now()->addSeconds( $this->option( 'time-to-expire' ) )
+				'created_date' => Carbon::now(),
+				'expired_date' => Carbon::now()->addSeconds( $this->option( 'time-to-expire' ) )
 			);
 
 			if ($requestor_nickname = sanitize_text_field($requestor_nickname)) {
@@ -201,7 +201,7 @@ if ( ! class_exists( 'Alphasss_Invitation_Plugin' ) ):
 			if ( $record ) {
 				$record = $record[0];
 
-				if ( \Carbon\Carbon::now()->timestamp > \Carbon\Carbon::parse($record['expired_date'])->timestamp ){
+				if ( Carbon::now()->timestamp > Carbon::parse($record['expired_date'])->timestamp ){
 					$result['is_success'] = false;
 					$result['message']    = __('This code is older than 24 hours, and is no longer valid. Simply request a new invitation code.', 'alphasss-invitation');
 				}

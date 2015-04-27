@@ -329,7 +329,7 @@ function buddyboss_wall_input_filter( &$activity ) {
   				//yes, we are on someone else's profile
 
   				//it should be '%INITIATOR% posted on %TARGET% wall'
-  				$new_action = sprintf( __( "%s wrote on %s Wall", 'buddyboss-wall' ), '%INITIATOR%' , '%TARGET%' );
+  				$new_action = sprintf( __( "%1$s wrote on %2$s Wall", 'buddyboss-wall' ), '%INITIATOR%' , '%TARGET%' );
   			} else {
   				//nope.
 
@@ -338,7 +338,7 @@ function buddyboss_wall_input_filter( &$activity ) {
   				//temporary solution
   				$arrayKeys = array_keys($mentioned);
   				$user_link = bp_core_get_userlink( $arrayKeys[0] );
-  				$new_action = sprintf( __( "%s mentioned %s in a public message", 'buddyboss-wall' ), '%INITIATOR%' , $user_link );
+  				$new_action = sprintf( __( "%1$s mentioned %2$s in a public message", 'buddyboss-wall' ), '%INITIATOR%' , $user_link );
   				$activity_target_user_id = false;
   			}
   		}

@@ -1,5 +1,7 @@
 <?php
 
+use AlphaSSS\HTTP\HTTP;
+
 /**
  * Returns URI for non-member register page
  * 
@@ -32,7 +34,7 @@ function get_pre_member_register_uri()
  */
 function get_non_member_register_url()
 {
-	return str_replace( '/wp', '',  site_url( get_non_member_register_uri(), detect_protocol_name() ) );
+	return str_replace( '/wp', '',  site_url( get_non_member_register_uri(), HTTP::protocol() ) );
 }
 
 /**
@@ -47,7 +49,7 @@ function get_non_member_register_url()
  */
 function get_pre_member_register_url()
 {
-	return str_replace( '/wp', '', site_url( get_pre_member_register_uri(), detect_protocol_name() ) );
+	return str_replace( '/wp', '', site_url( get_pre_member_register_uri(), HTTP::protocol() ) );
 }
 
 /**

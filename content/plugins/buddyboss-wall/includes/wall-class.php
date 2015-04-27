@@ -189,10 +189,15 @@ class BuddyBoss_Wall_BP_Component extends BP_Component
 		$load_css      = $this->option( 'LOAD_CSS' );
 		$load_tooltips = $this->option( 'LOAD_TOOLTIPS' );
 
+    	// FontAwesome icon fonts. If browsing on a secure connection, use HTTPS.
+		wp_register_style('fontawesome', "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css", false, null);
+		wp_enqueue_style( 'fontawesome' );
+
 		if ( $load_css )
 		{
 			// Wall stylesheet.
-			wp_enqueue_style( 'buddyboss-wall-main', buddyboss_wall()->assets_url . '/css/buddyboss-wall.min.css', array(), '1.0.7', 'all' );
+			//wp_enqueue_style( 'buddyboss-wall-main', buddyboss_wall()->assets_url . '/css/buddyboss-wall.css', array(), '1.1.3', 'all' );
+			wp_enqueue_style( 'buddyboss-wall-main', buddyboss_wall()->assets_url . '/css/buddyboss-wall.min.css', array(), '1.1.3', 'all' );
 		}
 
 		// Scripts
@@ -201,7 +206,14 @@ class BuddyBoss_Wall_BP_Component extends BP_Component
 			wp_enqueue_script( 'buddyboss-wall-tooltip', buddyboss_wall()->assets_url . '/js/jquery.tooltipster.min.js', array( 'jquery' ), '3.0.5', true );
 		}
 
-		wp_enqueue_script( 'buddyboss-wall-main', buddyboss_wall()->assets_url . '/js/buddyboss-wall.min.js', array( 'jquery', 'buddyboss-wall-tooltip' ), '1.0.7', true );
+        //wp_enqueue_script( 'buddyboss-wall-main', buddyboss_wall()->assets_url . '/js/buddyboss-wall.js', array( 'jquery', 'buddyboss-wall-tooltip' ), '1.0.7', true );
+        wp_enqueue_script( 'buddyboss-wall-main', buddyboss_wall()->assets_url . '/js/buddyboss-wall.min.js', array( 'jquery', 'buddyboss-wall-tooltip' ), '1.0.7', true );
+
+        if(buddyboss_wall()->is_wall_privacy_enabled())
+		{      
+//            wp_enqueue_script( 'buddyboss-wall-privacy', buddyboss_wall()->assets_url . '/js/buddyboss-wall-privacy.js', array( 'jquery', 'buddyboss-wall-tooltip' ), '1.1.4', true );
+        	wp_enqueue_script( 'buddyboss-wall-privacy', buddyboss_wall()->assets_url . '/js/buddyboss-wall-privacy.min.js', array( 'jquery', 'buddyboss-wall-tooltip' ), '1.1.4', true );
+        }
 
 		// Localization
 		$js_vars_array = array_merge(
@@ -454,39 +466,38 @@ class BuddyBoss_Wall_BP_Component extends BP_Component
 			$my_acct->href = trailingslashit( $activity_link );
 			$wp_admin_bar->add_node( $my_acct );
 
-			if (current_user_can('generate_invitation_code')) {
-				// Change 'Activity' to 'Wall'
-				$wp_admin_bar->add_menu( array(
-					'parent' => 'my-account-buddypress',
-					'id'     => 'my-account-' . $bp->activity->id,
-					'title'  => __( 'Wall', 'buddyboss-wall' ),
-					'href'   => trailingslashit( $activity_link )
-				) );
 
-				// Personal/Wall
-				$wp_admin_bar->add_menu( array(
-					'parent' => 'my-account-' . $bp->activity->id,
-					'id'     => 'my-account-' . $bp->activity->id . '-wall',
-					'title'  => __( 'Wall', 'buddyboss-wall' ),
-					'href'   => trailingslashit( $activity_link )
-				) );
+			// Change 'Activity' to 'Wall'
+			$wp_admin_bar->add_menu( array(
+				'parent' => 'my-account-buddypress',
+				'id'     => 'my-account-' . $bp->activity->id,
+				'title'  => __( 'Wall', 'buddyboss-wall' ),
+				'href'   => trailingslashit( $activity_link )
+			) );
 
-				// News Feed
-				$wp_admin_bar->add_menu( array(
-					'parent' => 'my-account-' . $bp->activity->id,
-					'id'     => 'my-account-' . $bp->activity->id . '-feed',
-					'title'  => __( 'News Feed', 'buddyboss-wall' ),
-					'href'   => trailingslashit( $activity_link . 'news-feed' )
-				) );
+			// Personal/Wall
+			$wp_admin_bar->add_menu( array(
+				'parent' => 'my-account-' . $bp->activity->id,
+				'id'     => 'my-account-' . $bp->activity->id . '-wall',
+				'title'  => __( 'Wall', 'buddyboss-wall' ),
+				'href'   => trailingslashit( $activity_link )
+			) );
 
-				// Favorites
-				$wp_admin_bar->add_menu( array(
-					'parent' => 'my-account-' . $bp->activity->id,
-					'id'     => 'my-account-' . $bp->activity->id . '-favorites',
-					'title'  => __( 'My Likes', 'buddyboss-wall' ),
-					'href'   => trailingslashit( $activity_link . 'favorites' )
-				) );
-			}
+			// News Feed
+			$wp_admin_bar->add_menu( array(
+				'parent' => 'my-account-' . $bp->activity->id,
+				'id'     => 'my-account-' . $bp->activity->id . '-feed',
+				'title'  => __( 'News Feed', 'buddyboss-wall' ),
+				'href'   => trailingslashit( $activity_link . 'news-feed' )
+			) );
+
+			// Favorites
+			$wp_admin_bar->add_menu( array(
+				'parent' => 'my-account-' . $bp->activity->id,
+				'id'     => 'my-account-' . $bp->activity->id . '-favorites',
+				'title'  => __( 'My Likes', 'buddyboss-wall' ),
+				'href'   => trailingslashit( $activity_link . 'favorites' )
+			) );
 		}
 	}
 
@@ -528,7 +539,7 @@ class BuddyBoss_Wall_BP_Component extends BP_Component
 		$table2 = bp_core_get_table_prefix() . 'bp_activity_meta';
 
 		// Default WHERE
-		$where = "WHERE ( $table.user_id = $user_id AND $table.type!='activity_comment' AND $table.type!='friends' )";
+		$where = "WHERE ( $table.user_id = $user_id AND $table.type!='activity_comment' AND $table.type!='friends'  AND $table.type!='last_activity' )";
 
 		// Add @mentions
 		$mentions_modifier = "OR ( $table.content LIKE '%$user_filter%' AND $table.type!='activity_comment' ) ";
@@ -685,7 +696,7 @@ class BuddyBoss_Wall_BP_Component extends BP_Component
 		$table2 = bp_core_get_table_prefix() . 'bp_activity_meta';
 
 		// Gets friend's updates. If friend's component isn't enabled this returns nothing.
-		$where = "WHERE ( $table.user_id IN ($user_list) AND $table.type != 'activity_comment' )";
+		$where = "WHERE ( $table.user_id IN ($user_list) AND $table.type != 'activity_comment'  AND $table.type!='last_activity' )";
 
 		// Get's updates from user's groups
 		$group_modifier = "OR ( $table.item_id IN ($group_list) AND $table.component = '$groups_object' ) ";

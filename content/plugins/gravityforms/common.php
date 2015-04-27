@@ -94,22 +94,34 @@ class GFCommon {
 		return $text;
 	}
 
-	public static function format_number( $number, $number_format ) {
+	public static function format_number( $number, $number_format, $currency = '', $include_thousands_sep = false ) {
 		if ( ! is_numeric( $number ) ) {
 			return $number;
 		}
 
 		//replacing commas with dots and dots with commas
 		if ( $number_format == 'currency' ) {
+			if ( empty( $currency ) ) {
+				$currency = GFCommon::get_currency();
+			}
+
 			if ( false === class_exists( 'RGCurrency' ) ) {
 				require_once( GFCommon::get_base_path() . '/currency.php' );
 			}
-			$currency = new RGCurrency( GFCommon::get_currency() );
+			$currency = new RGCurrency( $currency );
 			$number   = $currency->to_money( $number );
-		} elseif ( $number_format == 'decimal_comma' ) {
-			$number = str_replace( ',', '|', $number );
-			$number = str_replace( '.', ',', $number );
-			$number = str_replace( '|', '.', $number );
+		} else {
+			if ( $number_format == 'decimal_comma' ) {
+				$dec_point     = ',';
+				$thousands_sep = $include_thousands_sep ? '.' : '';
+			} else {
+				$dec_point     = '.';
+				$thousands_sep = $include_thousands_sep ? ',' : '';
+			}
+
+			$number    = explode( '.', $number );
+			$number[0] = number_format( $number[0], 0, '', $thousands_sep );
+			$number    = implode( $dec_point, $number );
 		}
 
 		return $number;
@@ -271,6 +283,7 @@ class GFCommon {
 	}
 
 	public static function is_valid_email( $email ) {
+
 		return filter_var( $email, FILTER_VALIDATE_EMAIL );
 	}
 
@@ -289,8 +302,8 @@ class GFCommon {
 		return true;
 	}
 
-	public static function get_label( $field, $input_id = 0, $input_only = false ) {
-		return RGFormsModel::get_label( $field, $input_id, $input_only );
+	public static function get_label( $field, $input_id = 0, $input_only = false, $allow_admin_label = true ) {
+		return RGFormsModel::get_label( $field, $input_id, $input_only, $allow_admin_label );
 	}
 
 	public static function get_input( $field, $id ) {
@@ -756,12 +769,12 @@ class GFCommon {
 		return implode( $separator, $ary );
 	}
 
-	public static function format_variable_value( $value, $url_encode, $esc_html, $format ) {
+	public static function format_variable_value( $value, $url_encode, $esc_html, $format, $nl2br = true ) {
 		if ( $esc_html ) {
 			$value = esc_html( $value );
 		}
 
-		if ( $format == 'html' ) {
+		if ( $format == 'html' && $nl2br ) {
 			$value = nl2br( $value );
 		}
 
@@ -773,7 +786,10 @@ class GFCommon {
 	}
 
 	public static function replace_variables( $text, $form, $lead, $url_encode = false, $esc_html = true, $nl2br = true, $format = 'html' ) {
+
 		$text = $nl2br ? nl2br( $text ) : $text;
+
+		$text = apply_filters( 'gform_pre_replace_merge_tags', $text, $form, $lead, $url_encode, $esc_html, $nl2br, $format );
 
 		//Replacing field variables: {FIELD_LABEL:FIELD_ID} {My Field:2}
 		preg_match_all( '/{[^{]*?:(\d+(\.\d+)?)(:(.*?))?}/mi', $text, $matches, PREG_SET_ORDER );
@@ -794,7 +810,7 @@ class GFCommon {
 					$value = rgar( $value, $input_id );
 				}
 
-				$value = self::format_variable_value( $value, $url_encode, $esc_html, $format );
+				$value = self::format_variable_value( $value, $url_encode, $esc_html, $format, $nl2br );
 
 				$modifier = strtolower( rgar( $match, 4 ) );
 
@@ -850,21 +866,32 @@ class GFCommon {
 		}
 
 		//pricing fields
-		if ( strpos( $text, '{pricing_fields}' ) !== false ) {
-			$pricing_fields = self::get_submitted_pricing_fields( $form, $lead, $format );
-			if ( $format == 'html' ) {
-				$text = str_replace(
-					'{pricing_fields}', '<table width="99%" border="0" cellpadding="1" cellspacing="0" bgcolor="#EAEAEA">
-                                                           <tr><td>
-                                                                <table width="100%" border="0" cellpadding="5" cellspacing="0" bgcolor="#FFFFFF">' .
-					                    $pricing_fields .
-					                    '</table>
-                                                           </tr></td>
-                                                     </table>',
-					$text
-				);
-			} else {
-				$text = str_replace( '{pricing_fields}', $pricing_fields, $text );
+		$pricing_matches = array();
+		preg_match_all( "/{pricing_fields(:(.*?))?}/", $text, $pricing_matches, PREG_SET_ORDER );
+		foreach ( $pricing_matches as $match ) {
+			$options 		 = explode( ',', rgar( $match, 2 ) );
+			$use_value       = in_array( 'value', $options );
+			$use_admin_label = in_array( 'admin', $options );
+
+			//all submitted pricing fields using text
+			if ( strpos( $text, $match[0] ) !== false ) {
+				$pricing_fields = self::get_submitted_pricing_fields( $form, $lead, $format, ! $use_value, $use_admin_label );
+
+				if ( $format == 'html' ) {
+					$text = str_replace(
+						$match[0], '<table width="99%" border="0" cellpadding="1" cellspacing="0" bgcolor="#EAEAEA">
+															   <tr><td>
+																	<table width="100%" border="0" cellpadding="5" cellspacing="0" bgcolor="#FFFFFF">' .
+											$pricing_fields .
+											'</table>
+															   </tr></td>
+														 </table>',
+						$text
+					);
+				}
+				else {
+					$text = str_replace( $match[0], $pricing_fields, $text );
+				}
 			}
 		}
 
@@ -1078,7 +1105,7 @@ class GFCommon {
 		foreach ( $form['fields'] as $field ) {
 			$field_value = '';
 
-			$field_label = $use_admin_label && ! empty( $field->adminLabel ) ? $field->adminLabel : esc_html( GFCommon::get_label( $field ) );
+			$field_label = $use_admin_label && ! empty( $field->adminLabel ) ? $field->adminLabel : esc_html( GFCommon::get_label( $field, 0, false, $use_admin_label ) );
 
 			switch ( $field->type ) {
 				case 'captcha' :
@@ -1463,6 +1490,7 @@ class GFCommon {
 		if ( empty( $email_to ) && rgar( $notification, 'toType' ) == 'routing' ) {
 			$email_to = array();
 			foreach ( $notification['routing'] as $routing ) {
+				GFCommon::log_debug( __METHOD__ . '(): Evaluating Routing - rule => ' . print_r( $routing, 1 ) );
 
 				$source_field   = RGFormsModel::get_field( $form, $routing['fieldId'] );
 				$field_value    = RGFormsModel::get_lead_field_value( $lead, $source_field );
@@ -1471,6 +1499,10 @@ class GFCommon {
 				if ( $is_value_match ) {
 					$email_to[] = $routing['email'];
 				}
+
+				GFCommon::log_debug( __METHOD__ . '(): Evaluating Routing - field value => ' . print_r( $field_value, 1 ) );
+				$is_value_match = $is_value_match ? 'Yes' : 'No';
+				GFCommon::log_debug( __METHOD__ . '(): Evaluating Routing - is value match? ' . $is_value_match );
 			}
 
 			$email_to = join( ',', $email_to );
@@ -1509,13 +1541,14 @@ class GFCommon {
 	}
 
 	public static function send_notifications( $notification_ids, $form, $lead, $do_conditional_logic = true, $event = 'form_submission' ) {
+		$entry_id = rgar( $lead, 'id' );
 		if ( ! is_array( $notification_ids ) || empty( $notification_ids ) ) {
-			GFCommon::log_debug( "GFCommon::send_notifications(): Aborting. No notifications to process for {$event} event." );
+			GFCommon::log_debug( "GFCommon::send_notifications(): Aborting. No notifications to process for {$event} event for entry #{$entry_id}." );
 
 			return;
 		}
 
-		GFCommon::log_debug( "GFCommon::send_notifications(): Processing notifications for {$event} event: " . print_r( $notification_ids, true ) . "\n(only active/applicable notifications are sent)" );
+		GFCommon::log_debug( "GFCommon::send_notifications(): Processing notifications for {$event} event for entry #{$entry_id}: " . print_r( $notification_ids, true ) . "\n(only active/applicable notifications are sent)" );
 
 		foreach ( $notification_ids as $notification_id ) {
 			if ( ! isset( $form['notifications'][ $notification_id ] ) ) {
@@ -1608,6 +1641,8 @@ class GFCommon {
 	}
 
 	private static function send_email( $from, $to, $bcc, $reply_to, $subject, $message, $from_name = '', $message_format = 'html', $attachments = '' ) {
+		
+		global $phpmailer;
 
 		$to    = str_replace( ' ', '', $to );
 		$bcc   = str_replace( ' ', '', $bcc );
@@ -1668,6 +1703,10 @@ class GFCommon {
 			if ( has_filter( 'phpmailer_init' ) ) {
 				GFCommon::log_debug( __METHOD__ . '(): The WordPress phpmailer_init hook has been detected, usually used by SMTP plugins, it can impact mail delivery.' );
 			}
+
+			if ( ! empty( $phpmailer->ErrorInfo ) ) {
+				GFCommon::log_debug( __METHOD__ . '(): PHPMailer class returned an error message: ' . $phpmailer->ErrorInfo );
+			}			
 		} else {
 			GFCommon::log_debug( 'GFCommon::send_email(): Aborting. The gform_pre_send_email hook was used to set the abort_email parameter to true.' );
 		}
@@ -2637,6 +2676,30 @@ class GFCommon {
 	public static function file_name_has_disallowed_extension( $file_name ) {
 
 		return self::match_file_extension( $file_name, self::get_disallowed_file_extensions() ) || strpos( strtolower( $file_name ), '.php.' ) !== false;
+	}
+
+	public static function check_type_and_ext( $file, $file_name = ''){
+		if ( empty( $file_name ) ) {
+			$file_name = $file['name'];
+		}
+		$tmp_name = $file['tmp_name'];
+		// Whitelist the mime type and extension
+		$wp_filetype = wp_check_filetype_and_ext( $tmp_name, $file_name );
+		$ext = empty( $wp_filetype['ext'] ) ? '' : $wp_filetype['ext'];
+		$type = empty( $wp_filetype['type'] ) ? '' : $wp_filetype['type'];
+		$proper_filename = empty( $wp_filetype['proper_filename'] ) ? '' : $wp_filetype['proper_filename'];
+
+		if ( $proper_filename ) {
+			return new WP_Error( 'invalid_file', __( 'There was an problem while verifying your file.' ) );
+		}
+		if ( ! $ext ) {
+			return new WP_Error( 'illegal_extension', __( 'Sorry, this file extension is not permitted for security reasons.' ) );
+		}
+		if ( ! $type ) {
+			return new WP_Error( 'illegal_type', __( 'Sorry, this file type is not permitted for security reasons.' ) );
+		}
+
+		return true;
 	}
 
 	public static function to_money( $number, $currency_code = '' ) {
@@ -3981,6 +4044,7 @@ class GFCommon {
 		$message_format = 'html';
 
 		$resume_url  = add_query_arg( array( 'gf_token' => $resume_token ), $embed_url );
+		$resume_url = esc_url( $resume_url );
 		$resume_link = "<a href='{$resume_url}'>{$resume_url}</a>";
 		$message .= $resume_link;
 

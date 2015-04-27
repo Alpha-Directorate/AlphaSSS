@@ -21,7 +21,7 @@
  * 1. jQuery + Globals
  * ====================================================================
  */
-var jq = $ = jQuery;
+var jq = $ = jQuery.noConflict();
 
 // Window.Code fallback
 window.Code = window.Code || { Util: false, PhotoSwipe: false };
@@ -364,12 +364,13 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
 
   var uploader = false;
 
-  var _l = {};
+  var _l = {},
+  filesAdded = 0;
 
   var state = util.state || {},
       lang  = util.lang;
 
-  var pic_status = false;
+  var pics_uploaded = [];
 
   var APP = {
 
@@ -388,12 +389,13 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
         return false;
       }
 
+      this.setup_modal();
       this.setup_textbox();
-
+      
       setTimeout( function() {
         self.start_uploader();
       }, 10 );
-
+      
       $.ajaxPrefilter( APP.prefilter );
     },
 
@@ -432,7 +434,7 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
       if ( $add_photo.length && $whats_new_content.length ) {
         $whats_new_content.before( $add_photo.html() );
       }
-
+      
       // Add photo preview pane
       var $preview_pane = $('#buddyboss-media-tpl-preview');
 
@@ -453,11 +455,13 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
         return false;
       }
 
-      _l.$add_photo = $('#buddyboss-media-add-photo');
-      _l.$add_photo_button = $('#buddyboss-media-add-photo-button');
+      _l.$add_photo = $('#buddyboss-media-bulk-uploader');
+      _l.$open_uploder_button = $('#buddyboss-media-add-photo-button');
+      _l.$add_photo_button = $('#logo-file-browser-button');
       _l.$post_button = $('#whats-new-submit').find('[type=submit],button');
-      _l.$preview_pane = $('#buddyboss-media-preview');
-      _l.$preview_inner = $('#buddyboss-media-preview-inner');
+      _l.$uploader = $('#buddyboss-media-bulk-uploader');
+      _l.$uploaded = $('#buddyboss-media-bulk-uploader-uploaded .images');
+      _l.$preview_pane = $('#buddyboss-media-preview-inner');
 
       return true;
     },
@@ -473,14 +477,39 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
     setup_textbox: function() {
       _l.$whats_new.blur(function(){
         setTimeout(function(){
-          if ( pic_status && pic_status.name ) {
+          if ( pics_uploaded && pics_uploaded.length > 0 ) {
             _l.$post_button.removeAttr('disabled');
             _l.$post_button.prop('disabled', false);
           }
         }, 200)
       });
     },
-
+    
+    /**
+     * Setup fancybox
+     *
+     * @return {void}
+     */
+    setup_modal: function() {
+      _l.$open_uploder_button.fancybox({
+    href : '#buddyboss-media-bulk-uploader-wrapper',
+    minWidth : 500,
+    beforeLoad : function(){
+        $('#buddyboss-media-bulk-uploader-text').val( _l.$whats_new.val() );
+    },
+    beforeClose: function(){
+        if( $('#buddyboss-media-bulk-uploader-text').length > 0 ){ 
+      _l.$whats_new.val( $('#buddyboss-media-bulk-uploader-text').val() ); 
+        }
+    }
+      });
+      
+      $('#aw-whats-new-submit-bbmedia').click(function(){
+    $.fancybox.close();
+    _l.$post_button.trigger('click');
+      });
+    },
+    
     /**
      * We use jQuery's Ajax.preFilter hook to add picture related
      * uploads to new status update's when needed. Be wary of the
@@ -496,23 +525,26 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
       var action = bbmedia_getQueryVariable( options.data, 'action' );
 
       if( typeof action == 'undefined' || action != 'post_update')
-	     return;
+       return;
 
       var new_data,
-          pic_html;
+          pic_html = '';
 
-      if ( typeof pic_status == 'object' && pic_status.hasOwnProperty('name') ) {
-
-        pic_html = $('<a/>')
-          .attr( 'href', pic_status.url )
-          .attr( 'target', '_blank' )
-          .attr( 'title', pic_status.name )
-          .addClass( 'buddyboss-media-photo-link' )
-          .html( pic_status.name )[0].outerHTML;
-
+      if ( pics_uploaded.length > 0 ) {
+    for( var i=0; i< pics_uploaded.length; i++ ){
+        var pic = $('<a/>')
+      .attr( 'href', pics_uploaded[i].url )
+      .attr( 'target', '_blank' )
+      .attr( 'title', pics_uploaded[i].name )
+      .addClass( 'buddyboss-media-photo-link' )
+      .html( pics_uploaded[i].name )[0].outerHTML;
+    
+    pic_html += pic;
+    }
+    
         new_data = $.extend( {}, origOptions.data, {
           content: origOptions.data.content + ' ' + pic_html,
-          has_pic: pic_status
+          pics_uploaded: pics_uploaded
         });
 
         options.data = $.param( new_data );
@@ -543,18 +575,6 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
           }
         })(options.success);
       }
-
-      /**
-      console.log( 'options' );
-      console.log( options );
-      console.log(  );
-      console.log( 'options.data' );
-      console.log( options.data );
-      console.log(  );
-      console.log( 'origOptions' );
-      console.log( origOptions );
-      console.log(  );
-      /**/
     },
 
     /**
@@ -567,20 +587,6 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
      */
     post_success: function( response ) {
 
-      /* Remove picture preview and animate up */
-      if ( _l.$preview_inner &&  _l.$preview_inner.length ){
-        _l.$preview_inner.html('');
-      }
-
-      if ( _l.$preview_pane && _l.$preview_inner.length ) {
-        _l.$preview_pane.stop().animate({height:'0px'});
-      }
-
-      /* BuddyBoss: Check if we're on the pic page and refresh after upload */
-      if ( 0 !== $( '#is-buddyboss-media-grid' ).length ) {
-        document.location = window.location.href;
-      }
-
       /* BuddyBoss: If we're using pics, we need to attach PhotoSwipe */
       var $new = $("li.new-update").find('.buddyboss-media-photo-wrap');
       if ( $new.length > 0 && typeof BuddyBossSwiper == 'object'
@@ -588,61 +594,22 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
         BuddyBossSwiper.reset();
       }
 
-      pic_status = false;
+      /* reset everything upload related */
+      pics_uploaded = [];
+      _l.$preview_pane.html('');
+      _l.$uploaded.html('');
+      uploader.splice( 0, uploader.files.length );
+      filesAdded = 0;
     },
-
+    
     /**
      * Handles upload, upload progress and previewing pics
      *
      * @return {void}
      */
     start_uploader: function() {
-      
-
-      var $previewPane = _l.$preview_pane,
-          $previewInner = _l.$preview_inner;
-          $postButton = _l.$post_button,
-          maxWidth = $('#whats-new-options').width();
-
-      var $progressWrap = $('.buddyboss-media-progress').first(),
-          $progressBar = $progressWrap.find('progress').first(),
-          progressValue = $progressWrap.find('.buddyboss-media-progress-value'),
-          progressPercent = 0,
-          progressTimeout;
-
-      var progressAnimation = function() {
-    
-        if ( $progressBar.val() < 100 ) {
-          $progressBar.val( $progressBar.val() + 2 );
-        } 
-
-        if ( $progressBar.val() < 100 && progressPercent != 100 ) {
-          progressTimeout = setTimeout( progressAnimation, 300 );
-        }
-        else if ( progressPercent == 100 ) {
-          $progressBar.val( 100 );
-        }
-        
-        progressValue.html( $progressBar.val() + '%');
-      }
-
-      $postButton.on( 'click', function( e ) {
-        // Check if we're currently uploading a picture and alert the user
-        if ( $progressWrap.hasClass('uploading') ) {
-          e.preventDefault();
-          e.stopPropagation();
-          alert( lang( 'error_photo_is_uploading' ) );
-          return false;
-        }
-      });
-
-      /*
-      console.log( 'state' );
-      console.log( state );
-      console.log( _l.$add_photo_button );
-      console.log( _l.$add_photo );
-      */
-
+  var $progressBar, progressPercent = 0;
+  
       //var uploader_state = 'closed';
       var ieMobile = navigator.userAgent.indexOf('IEMobile') !== -1;
 
@@ -654,7 +621,9 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
       uploader = new plupload.Uploader({
         runtimes: state.uploader_runtimes || 'html5,flash,silverlight,html4',
         browse_button: _l.$add_photo_button[0],
-        container: _l.$add_photo[0],
+  dragdrop: true,
+        container: 'buddyboss-media-bulk-uploader-reception',
+  drop_element: 'buddyboss-media-bulk-uploader-reception',
         max_file_size: state.uploader_filesize || '10mb',
         multi_selection: state.uploader_multiselect || false,
         url: ajaxurl,
@@ -667,7 +636,7 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
         flash_swf_url: state.uploader_swf_url || '',
         silverlight_xap_url: state.uploader_xap_url || '',
         filters: [
-          { title: lang( 'file_browse_title' ), extensions: state.uploader_filetypes || 'jpg,jpeg,gif,png,bmp' }
+          { title: lang( 'file_browse_title' ), extensions: state.uploader_filetypes || 'jpg,jpeg,gif,png,bmp', prevent_duplicates:true }
         ],
         init: {
           Init: function () {
@@ -683,106 +652,50 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
               });
             }
           },
-          FilesAdded: function(up, files) {            
-            // console.log('////// onsubmit ///////');
-            
-            $('#buddyboss-media-preview').animate({height:'0px'});
-            pic_status = false;
-
-            $progressWrap.addClass('uploading');
-            $postButton.prop("disabled", true).addClass('disabled');
-
-            progressPercent = 0;
-            $progressBar.val(0);
-            progressValue.html(0 + '%');
-            progressTimeout = setTimeout( progressAnimation, 300 );
-
-            //uploader_state = 'closed';
-
+          FilesAdded: function(up, files) {
+        if(up.files.length > state.uploader_max_files || files.length > state.uploader_max_files ) {
+      uploader.splice( filesAdded, uploader.files.length );
+      
+      alert( lang( 'exceed_max_files_per_batch' ) );
+      return false;
+        }
+        
+      for( var i=0; i < files.length; i++ ){
+    if( $( 'div[data-fileid="'+files[i].id+'"]' ).length === 0 ){
+        var newimg = "<div data-fileid='"+ files[i].id +"' class='file uploading'><img src='"+ state.uploader_temp_img +"'><progress class='buddyboss-media-progress-bar' value='0' max='100'></progress></div>";
+         _l.$uploaded.append( newimg );
+         _l.$preview_pane.append( newimg );
+         filesAdded++;
+    }
+      }
+      $.fancybox.update();
             up.start();
           },
 
           UploadProgress: function(up, file) {
             
             if ( file && file.hasOwnProperty( 'percent' ) ) {
-              //cool progress is supported stop the fake progress
-              clearTimeout(progressTimeout);
-              progressPercent = file.percent;
-              $progressBar.val(progressPercent);
-              progressValue.html( progressPercent + '%' );
-            }
-
-            if ( file && file.hasOwnProperty( 'percent' ) && file.percent == 100 && state.isMobile ) {
-              progressValue.html( lang( 'resizing' ) );
+    $progressBar = $('div[data-fileid="'+file.id+'"]').find('progress');
+    progressPercent = file.percent;
+    $progressBar.val(progressPercent);
             }
           },
 
           FileUploaded: function(up, file, info) {
             var responseJSON = $.parseJSON( info.response );
-            // console.log('// ----- upload response ----- //');
-            // console.log(up,file,info,responseJSON);
-
-            $postButton.prop("disabled", false).removeClass('disabled').addClass('uploaded');
-
-            if ( ! responseJSON ) {
-              alert( lang( 'error_uploading_photo' ) );
-            }
-
-            if (responseJSON.hasOwnProperty('error'))
-            {
-              alert(responseJSON.message);
-              return false;
-            }
-
-            if ( state.isMobile ) {
-              progressValue.html( lang( 'one_moment' ) );
-            }
-
-            var pic_uri = responseJSON.hasOwnProperty('url') ? responseJSON.url : false;
-
-            $previewInner.empty();
-
-            $previewPane.animate({ height: 0 }, function()
-            {
-              $progressWrap.removeClass('uploading');
-
-              if ( pic_uri )
-              {
-                $previewInner.html( '<img src="' + pic_uri + '">' );
-
-                var picWidth,
-                    picHeight,
-                    picRatio;
-
-                var $img = $('#buddyboss-media-preview-inner img')
-                  .load(function()
-                  {
-                    picWidth = this.width;   // Note: $(this).width() will not
-                    picHeight = this.height; // work for in memory images.
-
-                    //console.log( picWidth );
-                    //console.log( picHeight );
-                    //console.log('// ----- upload success ----- //');
-
-                    if ( picWidth > maxWidth )
-                    {
-                      picRatio = maxWidth / picWidth;
-                      picWidth = maxWidth;
-                      picHeight = picHeight * picRatio;
-                      $(this).css("width", picWidth);
-                      $(this).css("height", picHeight);  // Scale height based on ratio
-                    }
-                    $('#whats-new-options').animate({height: 40});
-
-                    $previewPane.animate({ height: picHeight });
-                  });
-
-                pic_status = responseJSON;
-              }
-            });
-            
-            //uploader_state = 'closed';
-
+            //console.log('// ----- upload response ----- //');
+            //console.log(up,file,info,responseJSON);
+      $file = $('div[data-fileid="'+file.id+'"]');
+      $file.removeClass('uploading');
+      $file.data('attachment_id',responseJSON.attachment_id);
+      $file.find('>img').attr('src',responseJSON.url);
+      
+      $file.find('progress').replaceWith(
+    "<a href='#' onclick='return window.BuddyBoss_Media_Uploader.removeUploaded(\""+ file.id +"\");' class='delete'>+</a>"
+      );
+    
+      pics_uploaded.push( responseJSON );
+      $.fancybox.update();
           },
 
           Error: function(up, args) {
@@ -792,16 +705,77 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
             $postButton.prop("disabled", false).removeClass('loading');
 
             //uploader_state = 'closed';
-
-            pic_status = false;
           }
         }
       });
 
       uploader.init();
+      
+      if( $('#buddyboss-media-bulk-uploader-reception-fake').length > 0 ){
+    var additional_dropzone = document.getElementById('buddyboss-media-bulk-uploader-reception-fake');
+    $additional_dropzone = $(additional_dropzone);
+    
+    var dropzone = new mOxie.FileDrop({
+    drop_zone: additional_dropzone
+      });
 
-    } // start_uploader();
+      dropzone.ondrop = function( event ) {
+    _l.$open_uploder_button.click();//to open modal window
+    uploader.addFile( dropzone.files );
+      };
 
+      dropzone.init();
+      
+      // -- Configure FILEINPUT -- //
+      
+      var input = new mOxie.FileInput({
+    browse_button: $( "a.browse-file-button", $additional_dropzone )[ 0 ],
+    container: additional_dropzone,
+    multiple: true
+      });
+
+      input.onchange = function( event ) {
+    _l.$open_uploder_button.click();//to open modal window
+    uploader.addFile( input.files );
+      };
+
+      input.init();
+
+      }
+
+    }, // start_uploader();
+
+    removeUploaded: function( fileid ){
+  /* remove from upload files list */
+  var $file = $('div[data-fileid="'+fileid+'"]');
+  if( pics_uploaded.length > 0 ){
+      var pics_uploaded_temp = [];
+      for( var i=0; i<pics_uploaded.length; i++ ){
+    if( pics_uploaded[i].attachment_id !== $file.data('attachment_id') ){
+        pics_uploaded_temp.push( pics_uploaded[i] );
+    }
+      }
+      
+      pics_uploaded = pics_uploaded_temp;
+  }
+  
+  var file_to_remove = false;
+  /* remove from plupload queue */
+  $.each(uploader.files, function(i, ufile) {
+      if( ufile.hasOwnProperty( 'id' ) && ufile.id==fileid ){
+    file_to_remove = ufile;
+      }
+  });
+  
+  if( file_to_remove ){
+      uploader.removeFile(file_to_remove);
+      filesAdded--;
+  }
+  
+  /* delete html */
+  $file.remove();
+  return false;
+    }
   } // APP
 
 
@@ -811,6 +785,9 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
     },
     teardown: function() {
       APP.destroy();
+    },
+    removeUploaded: function( file ) {
+  return APP.removeUploaded( file );
     }
   } // API
 
@@ -829,7 +806,7 @@ window.BuddyBoss_Media_Uploader = ( function( window, $, util, undefined ) {
 /* get querystring value */
 function bbmedia_getQueryVariable( query, variable ) {
     if( typeof query == 'undefined' || query=='' || typeof variable == 'undefined' || variable=='' )
-	return '';
+  return '';
     
   var vars = query.split("&");
 
@@ -849,12 +826,12 @@ $(document).ready(function(){
     //escape key press
     //lets hide 'move media' form if its open
     $(document).keyup(function(e) {
-	if( e.keyCode == 27 && ( bbmedia_move_media_opened===true || bbmedia_tag_friends_opened===true ) ){
-	    if( bbmedia_move_media_opened===true )
-		buddyboss_media_move_media_close();
-	    if( bbmedia_tag_friends_opened===true )
-		buddyboss_media_tag_friends_close();
-	}
+  if( e.keyCode == 27 && ( bbmedia_move_media_opened===true || bbmedia_tag_friends_opened===true ) ){
+      if( bbmedia_move_media_opened===true )
+    buddyboss_media_move_media_close();
+      if( bbmedia_tag_friends_opened===true )
+    buddyboss_media_tag_friends_close();
+  }
     });
     
     /**
@@ -865,9 +842,9 @@ $(document).ready(function(){
      * There might be a better way though.
      */
     if( BBOSS_MEDIA.is_media_page ){
-	docCookies.setItem( "bp-bboss-is-media-page", "yes", "", "/" );
+  docCookies.setItem( "bp-bboss-is-media-page", "yes", "", "/" );
     } else {
-	docCookies.removeItem( "bp-bboss-is-media-page", "/" );
+  docCookies.removeItem( "bp-bboss-is-media-page", "/" );
     }
     
     /**
@@ -876,19 +853,19 @@ $(document).ready(function(){
      * Intercept response for load more activities and remove the 'load_more' link element.
      */
     $.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
-	var originalSuccess = options.success;
+  var originalSuccess = options.success;
 
-	var action = bbmedia_getQueryVariable( options.data, 'action' );
+  var action = bbmedia_getQueryVariable( options.data, 'action' );
 
-	if( typeof action == 'undefined' || action != 'activity_get_older_updates')
-	    return;
-	   
-	options.success = function (data) {
-	    $('#bbmedia-grid-wrapper #activity-stream li.load-more').remove();
-	    if (originalSuccess != null) {
-		originalSuccess(data);
-	    }  
-	};
+  if( typeof action == 'undefined' || action != 'activity_get_older_updates')
+      return;
+     
+  options.success = function (data) {
+      $('#bbmedia-grid-wrapper #activity-stream li.load-more').remove();
+      if (originalSuccess != null) {
+    originalSuccess(data);
+      }  
+  };
     });
 });
 
@@ -904,8 +881,8 @@ function buddyboss_media_initiate_media_move( link ){
     $link.closest( '.activity' ).find('form.ac-form').slideUp();
     
     if( $form_wrapper.is(':visible')){
-	buddyboss_media_move_media_close();
-	return false;
+  buddyboss_media_move_media_close();
+  return false;
     }
     
     $link.closest( '.activity-content' ).after( $form_wrapper );
@@ -913,7 +890,7 @@ function buddyboss_media_initiate_media_move( link ){
     //Highlight previously selected album
     var selected_album = $link.data( 'album_id' );
     if( !selected_album )
-	selected_album = '';//string
+  selected_album = '';//string
     $form.find('#buddyboss_media_move_media_albums').val( selected_album );
     
     $form_wrapper.slideDown(200);
@@ -930,48 +907,48 @@ function buddyboss_media_submit_media_move(){
     $submit_button = $form.find('input[type="submit"]');
     
     if( $submit_button.hasClass('loading') )
-	return false;//previous request hasn't finished yet!
+  return false;//previous request hasn't finished yet!
     
     /**
      * 1. gather data
      * 2. start ajax
      * 3. receive response
      * 4. process response
-     *	    - remove loading class
-     *	    - remove activity item entry if required
-     *		- move form to a different place first
-     *	    - slideup form
+     *      - remove loading class
+     *      - remove activity item entry if required
+     *    - move form to a different place first
+     *      - slideup form
      */
     
     var data = {
-	'action'			    : $form.find('input[name="action"]').val(),
-	'bboss_media_move_media_nonce'	    : $form.find('input[name="bboss_media_move_media_nonce"]').val(),
-	'activity_id'			    : $form.find('input[name="activity_id"]').val(),
-	'buddyboss_media_move_media_albums' : $form.find('select[name="buddyboss_media_move_media_albums"]').val()
+  'action'          : $form.find('input[name="action"]').val(),
+  'bboss_media_move_media_nonce'      : $form.find('input[name="bboss_media_move_media_nonce"]').val(),
+  'activity_id'         : $form.find('input[name="activity_id"]').val(),
+  'buddyboss_media_move_media_albums' : $form.find('select[name="buddyboss_media_move_media_albums"]').val()
     };
     
     $submit_button.addClass('loading');
     $form.find("#message").removeAttr('class').html('');
     
     $.ajax({
-	type: "POST",
-	url: ajaxurl,
-	data: data,
-	success: function (response) {
-	    response = $.parseJSON(response);
-	    if( response.status ){
-		$form.find("#message").addClass('updated').html("<p>" + response.message + "</p>");
-		if( $form.find('input[name="is_single_album"]').val()=='yes' ){
-		    setTimeout(function(){ buddyboss_media_media_move_cleanup( $form, true ); }, 2000);
-		} else {
-		    setTimeout(function(){ buddyboss_media_media_move_cleanup( $form, false ); }, 2000);
-		}
-	    } else {
-		$form.find("#message").addClass('error').html("<p>" + response.message + "</p>");
-	    }
-	    
-	    $submit_button.removeClass('loading');
-	}
+  type: "POST",
+  url: ajaxurl,
+  data: data,
+  success: function (response) {
+      response = $.parseJSON(response);
+      if( response.status ){
+    $form.find("#message").addClass('updated').html("<p>" + response.message + "</p>");
+    if( $form.find('input[name="is_single_album"]').val()=='yes' ){
+        setTimeout(function(){ buddyboss_media_media_move_cleanup( $form, true ); }, 2000);
+    } else {
+        setTimeout(function(){ buddyboss_media_media_move_cleanup( $form, false ); }, 2000);
+    }
+      } else {
+    $form.find("#message").addClass('error').html("<p>" + response.message + "</p>");
+      }
+      
+      $submit_button.removeClass('loading');
+  }
     });
     
     return false;
@@ -983,13 +960,13 @@ function buddyboss_media_media_move_cleanup( $form, remove_activity_item ){
     
     buddyboss_media_move_media_close();
     if( remove_activity_item ){
-	$activity = $form.closest('.activity');
-	
-	$('body').append($form_wrapper);
-	$form_wrapper.hide();
-	$activity.slideUp(200, function(){
-	    $activity.remove();
-	});
+  $activity = $form.closest('.activity');
+  
+  $('body').append($form_wrapper);
+  $form_wrapper.hide();
+  $activity.slideUp(200, function(){
+      $activity.remove();
+  });
     }
 }
 
@@ -1017,8 +994,8 @@ function buddyboss_media_initiate_tagging( link ){
     $link.closest( '.activity' ).find('form.ac-form').slideUp();
     
     if( $form_wrapper.is( ':visible' ) ){
-	buddyboss_media_tag_friends_close();
-	return false;
+  buddyboss_media_tag_friends_close();
+  return false;
     }
     
     $link.closest( '.activity-content' ).after( $form_wrapper );
@@ -1031,29 +1008,29 @@ function buddyboss_media_initiate_tagging( link ){
     
     //populate friends list
      var data = {
-	'action'			    : $form.find('input[name="action"]').val(),
-	'buddyboss_media_tag_friends_nonce' : $form.find('input[name="buddyboss_media_tag_friends_nonce"]').val(),
-	'activity_id'			    : $form.find('input[name="activity_id"]').val()
+  'action'          : $form.find('input[name="action"]').val(),
+  'buddyboss_media_tag_friends_nonce' : $form.find('input[name="buddyboss_media_tag_friends_nonce"]').val(),
+  'activity_id'         : $form.find('input[name="activity_id"]').val()
     };
     
     $.ajax({
-	type: "POST",
-	url: ajaxurl,
-	data: data,
-	success: function (response) {
-	    response = $.parseJSON(response);
-	    $form.find('#invite-list').html(response.friends_list);
-	    $form.find('.main-column-content').html(response.tagged_friends);
-	    
-	    //bind events
-	    $('#invite-list input[name="friends[]"]').change(function(){
-		buddyboss_media_tag_friends_toggle_tag( data.activity_id, $(this).val() );
-	    });
-	    $('#friend-list .action .remove').click(function(e){
-		e.preventDefault();
-		buddyboss_media_tag_friends_toggle_tag( data.activity_id, $(this).data('userid') );
-	    });
-	}
+  type: "POST",
+  url: ajaxurl,
+  data: data,
+  success: function (response) {
+      response = $.parseJSON(response);
+      $form.find('#invite-list').html(response.friends_list);
+      $form.find('.main-column-content').html(response.tagged_friends);
+      
+      //bind events
+      $('#invite-list input[name="friends[]"]').change(function(){
+    buddyboss_media_tag_friends_toggle_tag( data.activity_id, $(this).val() );
+      });
+      $('#friend-list .action .remove').click(function(e){
+    e.preventDefault();
+    buddyboss_media_tag_friends_toggle_tag( data.activity_id, $(this).data('userid') );
+      });
+  }
     });
     
     return false;
@@ -1073,31 +1050,31 @@ function buddyboss_media_tag_friends_toggle_tag( activity_id, friend_id ){
     $form = $('#frm_buddyboss-media-tag-friends');
     
     var data = {
-	'action'			    : $form.find('input[name="action_tag"]').val(),
-	'buddyboss_media_tag_friends_nonce' : $form.find('input[name="buddyboss_media_tag_friends_nonce"]').val(),
-	'activity_id'			    : activity_id,
-	'friend_id'			    : friend_id
+  'action'          : $form.find('input[name="action_tag"]').val(),
+  'buddyboss_media_tag_friends_nonce' : $form.find('input[name="buddyboss_media_tag_friends_nonce"]').val(),
+  'activity_id'         : activity_id,
+  'friend_id'         : friend_id
     };
     
     $.ajax({
-	type: "POST",
-	url: ajaxurl,
-	data: data,
-	success: function (response) {
-	    response = $.parseJSON(response);
-	    $form.find('#invite-list').html(response.friends_list);
-	    $form.find('.main-column-content').html(response.tagged_friends);
-	    
-	    //bind events
-	    $('#invite-list input[name="friends[]"]').change(function(){
-		buddyboss_media_tag_friends_toggle_tag( data.activity_id, $(this).val() );
-	    });
-	    
-	    $('#friend-list .action .remove').click(function(e){
-		e.preventDefault();
-		buddyboss_media_tag_friends_toggle_tag( data.activity_id, $(this).data('userid') );
-	    });
-	}
+  type: "POST",
+  url: ajaxurl,
+  data: data,
+  success: function (response) {
+      response = $.parseJSON(response);
+      $form.find('#invite-list').html(response.friends_list);
+      $form.find('.main-column-content').html(response.tagged_friends);
+      
+      //bind events
+      $('#invite-list input[name="friends[]"]').change(function(){
+    buddyboss_media_tag_friends_toggle_tag( data.activity_id, $(this).val() );
+      });
+      
+      $('#friend-list .action .remove').click(function(e){
+    e.preventDefault();
+    buddyboss_media_tag_friends_toggle_tag( data.activity_id, $(this).data('userid') );
+      });
+  }
     });
 }
 
@@ -1105,40 +1082,40 @@ function buddyboss_media_tag_friends_complete(){
     $form = $('#frm_buddyboss-media-tag-friends');
     
     var data = {
-	'action'			    : $form.find('input[name="action_tag_complete"]').val(),
-	'buddyboss_media_tag_friends_nonce' : $form.find('input[name="buddyboss_media_tag_friends_nonce"]').val(),
-	'activity_id'			    : $form.find('input[name="activity_id"]').val(),
-	'update_action'			    : false
+  'action'          : $form.find('input[name="action_tag_complete"]').val(),
+  'buddyboss_media_tag_friends_nonce' : $form.find('input[name="buddyboss_media_tag_friends_nonce"]').val(),
+  'activity_id'         : $form.find('input[name="activity_id"]').val(),
+  'update_action'         : false
     };
     
     //can we update activity action(to update tagged people details) ?
     if( $form.closest('.activity').find( BuddyBoss_Media_Appstate.activity_header_selector ).length > 0 ){
-	data.update_action = true;
+  data.update_action = true;
     }
     
     $form.find('input[type="submit"]').addClass('loading');
     
     $.ajax({
-	type: "POST",
-	url: ajaxurl,
-	data: data,
-	success: function (response) {
-	    $form.find('input[type="submit"]').removeClass('loading');
-	    if( data.update_action===true ){
-		response = $.parseJSON( response );
-		
-		$activity = $form.closest('.activity');
-		$activity.find( BuddyBoss_Media_Appstate.activity_header_selector ).html( response.activity_action );
-		
-		if( response.activity_tooltip ){
-		    $activity.find('.buddyboss-media-tt-content').remove();
-		    $activity.append(response.activity_tooltip);
-		    
-		    window.BBMediaTooltips.initTooltips();
-		}
-	    }
-	    buddyboss_media_tag_friends_close();
-	}
+  type: "POST",
+  url: ajaxurl,
+  data: data,
+  success: function (response) {
+      $form.find('input[type="submit"]').removeClass('loading');
+      if( data.update_action===true ){
+    response = $.parseJSON( response );
+    
+    $activity = $form.closest('.activity');
+    $activity.find( BuddyBoss_Media_Appstate.activity_header_selector ).html( response.activity_action );
+    
+    if( response.activity_tooltip ){
+        $activity.find('.buddyboss-media-tt-content').remove();
+        $activity.append(response.activity_tooltip);
+        
+        window.BBMediaTooltips.initTooltips();
+    }
+      }
+      buddyboss_media_tag_friends_close();
+  }
     });
     
     return false;
@@ -1156,7 +1133,7 @@ function buddyboss_media_tag_friends_complete(){
      * @return {void}
      */
     BBMediaTooltips.init = function() {
-	BBMediaTooltips.initTooltips();
+  BBMediaTooltips.initTooltips();
     }
     
     /**
@@ -1165,19 +1142,19 @@ function buddyboss_media_tag_friends_complete(){
      * @return {void}
      */
     BBMediaTooltips.initTooltips = function() {
-	// Find tooltips on page
-	$el.tooltips = $('.buddyboss-media-tt-others');
+  // Find tooltips on page
+  $el.tooltips = $('.buddyboss-media-tt-others');
 
-	// Init tooltips
-	if ( $el.tooltips.length ) {
-	    $el.tooltips.tooltipster({
-		contentAsHTML:  true,
-		functionInit:   BBMediaTooltips.getTooltipContent,
-		interactive:    true,
-		position:       'top-left',
-		theme:          'tooltipster-buddyboss'
-	    });
-	}
+  // Init tooltips
+  if ( $el.tooltips.length ) {
+      $el.tooltips.tooltipster({
+    contentAsHTML:  true,
+    functionInit:   BBMediaTooltips.getTooltipContent,
+    interactive:    true,
+    position:       'top-left',
+    theme:          'tooltipster-buddyboss'
+      });
+  }
     }
     
     /**
@@ -1189,17 +1166,17 @@ function buddyboss_media_tag_friends_complete(){
     * @return {string}         Tooltip content
     */
     BBMediaTooltips.getTooltipContent = function( origin, content ) {
-	
-	var $content = origin.closest('.activity').find('.buddyboss-media-tt-content').detach().html();
+  
+  var $content = origin.closest('.activity').find('.buddyboss-media-tt-content').detach().html();
 
-	return $content;
+  return $content;
     }
     
     jQuery(document).ready(function(){
-	if( BuddyBoss_Media_Appstate.enable_tagging==true ){
-	    BBMediaTooltips.initTooltips();
-	    window.BBMediaTooltips = BBMediaTooltips;
-	}
+  if( BuddyBoss_Media_Appstate.enable_tagging==true ){
+      BBMediaTooltips.initTooltips();
+      window.BBMediaTooltips = BBMediaTooltips;
+  }
     });
     
 }( window, window.jQuery ));

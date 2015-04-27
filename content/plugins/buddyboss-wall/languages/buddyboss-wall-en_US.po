@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: BuddyBoss Wall v1.1.2\n"
+"Project-Id-Version: BuddyBoss Wall v1.1.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-12-24 18:42-0600\n"
+"PO-Revision-Date: 2015-04-09 01:41+0800\n"
 "Last-Translator: BuddyBoss <support@buddyboss.com>\n"
 "Language-Team: BuddyBoss <support@buddyboss.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.7.2\n"
+"X-Generator: Poedit 1.7.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
 "X-Poedit-Basepath: .\n"
@@ -19,32 +19,32 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 # @ default
-#: includes/admin.php:219
+#: includes/admin.php:211
 msgid "Save Changes"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/admin.php:283
+#: includes/admin.php:275
 msgid "Enable Wall Component."
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/admin.php:329
+#: includes/admin.php:344
 msgid "Enable mobile theme on iPad."
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/admin.php:379
+#: includes/admin.php:394
 msgid "Choose a theme for mobile phones."
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/admin.php:458
+#: includes/admin.php:473
 msgid "   image size must be 114 x 114 px"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/main-class.php:204 includes/main-class.php:211
+#: includes/main-class.php:205 includes/main-class.php:212
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
@@ -59,8 +59,8 @@ msgid "An unknown error occurred"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/wall-class.php:49 includes/wall-class.php:355
-#: includes/wall-class.php:462 includes/wall-class.php:470
+#: includes/wall-class.php:49 includes/wall-class.php:367
+#: includes/wall-class.php:474 includes/wall-class.php:482
 msgid "Wall"
 msgstr ""
 
@@ -92,8 +92,8 @@ msgid "Like"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/wall-class.php:164 includes/wall-class.php:378
-#: includes/wall-class.php:486
+#: includes/wall-class.php:164 includes/wall-class.php:390
+#: includes/wall-class.php:498
 msgid "My Likes"
 msgstr ""
 
@@ -104,42 +104,42 @@ msgid "Unlike"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/wall-class.php:226
+#: includes/wall-class.php:238
 #, php-format
 msgid "What's new in %s, %s?"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/wall-class.php:230
+#: includes/wall-class.php:242
 #, php-format
 msgid "What's new, %s?"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/wall-class.php:274
+#: includes/wall-class.php:286
 #, php-format
 msgid "You need to <a href=\"%s\" title=\"Log in\">log in</a>"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/wall-class.php:274
+#: includes/wall-class.php:286
 #, php-format
 msgid " or <a class=\"create-account\" href=\"%s\" title=\"Create an account\">create an account</a>"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/wall-class.php:274
+#: includes/wall-class.php:286
 msgid " to post to this user's Wall."
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/wall-class.php:280
+#: includes/wall-class.php:292
 #, php-format
 msgid "You and %s are not friends. Request friendship to post to their Wall."
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/wall-class.php:287
+#: includes/wall-class.php:299
 #, php-format
 msgid "You are mentioning %s in a new update, this user will be sent a notification of your message."
 msgstr ""
@@ -274,22 +274,22 @@ msgid "<h1>Fatal error:</h1><hr/><pre>%s</pre>"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/main-class.php:606
+#: includes/main-class.php:623
 msgid "Disable Notice"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/main-class.php:605
+#: includes/main-class.php:622
 msgid "To use the <strong>BuddyBoss Wall</strong> plugin, please manually update your BuddyBoss theme to version 4.0 or above first. <a href=\"http://www.buddyboss.com/upgrading-to-buddyboss-4-0/\">Read how &rarr;</a>"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/admin.php:234
+#: includes/admin.php:226
 msgid "Make sure BuddyPress <strong>Activity Streams</strong> are enabled for the Wall to function. Go to <em>Settings &rarr; BuddyPress &rarr; Components</em>"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/admin.php:306
+#: includes/admin.php:298
 msgid "Allow Wall posting for all members (not just friends)."
 msgstr ""
 
@@ -300,7 +300,7 @@ msgid "%s posted an update"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/wall-hooks.php:225 includes/wall-hooks.php:332
+#: includes/wall-hooks.php:225
 #, php-format
 msgid "%s wrote on %s Wall"
 msgstr ""
@@ -358,19 +358,13 @@ msgid "Remove Favorite"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/wall-class.php:367 includes/wall-class.php:478
+#: includes/wall-class.php:379 includes/wall-class.php:490
 msgid "News Feed"
 msgstr ""
 
 # @ buddyboss-wall
 #: includes/wall-filters.php:22
 msgid "Like this"
-msgstr ""
-
-# @ buddyboss-wall
-#: includes/wall-hooks.php:341
-#, php-format
-msgid "%s mentioned %s in a public message"
 msgstr ""
 
 # @ buddyboss-wall
@@ -399,7 +393,7 @@ msgid "Available to all members"
 msgstr ""
 
 # @ buddyboss-wall
-#: includes/wall-class.php:228
+#: includes/wall-class.php:240
 #, php-format
 msgid "Write something to %s"
 msgstr ""
@@ -429,4 +423,64 @@ msgstr ""
 # @ buddyboss-wall
 #: buddyboss-wall.php:109
 msgid "Settings"
+msgstr ""
+
+# @ buddyboss-wall
+#: includes/admin.php:146
+msgid "Enable Wall Privacy"
+msgstr ""
+
+# @ buddyboss-wall
+#: includes/admin.php:321
+msgid "Allow members to set privacy options when they post."
+msgstr ""
+
+# @ buddypress-creative-portfolio-pro
+#: includes/wall-privacy.php:127
+msgid "Everyone"
+msgstr ""
+
+# @ buddypress-creative-portfolio-pro
+#: includes/wall-privacy.php:128
+msgid "Logged In Users"
+msgstr ""
+
+# @ buddypress-creative-portfolio-pro
+#: includes/wall-privacy.php:131
+msgid "Only Me"
+msgstr ""
+
+# @ buddypress-creative-portfolio-pro
+#: includes/wall-privacy.php:134
+msgid "My Friends"
+msgstr ""
+
+# @ buddypress-creative-portfolio-pro
+#: includes/wall-privacy.php:137
+msgid "Group Members"
+msgstr ""
+
+# @ buddyboss-wall
+#: includes/wall-privacy.php:340
+msgid "Who can see this:"
+msgstr ""
+
+# @ buddyboss-media
+#: includes/wall-privacy.php:351
+msgid "Save"
+msgstr ""
+
+# @ buddyboss-media
+#: includes/wall-privacy.php:353
+msgid "Cancel"
+msgstr ""
+
+# @ buddyboss-media
+#: includes/wall-privacy.php:376
+msgid "Privacy"
+msgstr ""
+
+# @ buddyboss-wall
+#: includes/wall-privacy.php:434
+msgid "Privacy updated"
 msgstr ""

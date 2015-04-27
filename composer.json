@@ -27,7 +27,14 @@
   },
   "require-dev":{
      "codeception/codeception": "2.0.*",
-     "wp-coding-standards/wpcs": "*"
+     "wp-coding-standards/wpcs": "*",
+     "whatdafox/codeception-mailtrap":"~1.0"
+  },
+
+  "autoload":{
+    "psr-4": {
+        "AlphaSSS\\": "AlphaSSS/"
+    }
   },
   "extra": {
     "webroot-dir": "wp",

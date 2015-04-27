@@ -25,11 +25,51 @@ class BuddyBoss_Media_Photo_Hooks
 		return $this->activity_photo_size;
 	}
 	
+	/**
+	 * Do stuff before activity save.
+	 * 
+	 * @since 2.0.9
+	 * @param type $activity
+	 * @return type void
+	 */
+	public function bp_activity_before_save( $activity ){
+		if( !isset( $activity->content ) || empty( $activity->content ) )
+			return;
+		
+		//check if this activity is a buddyboss media activity.
+		$compat_class_search = ( strstr( $activity->content, 'class="buddyboss-media-photo-link"' ) !== false
+                             || strstr( $activity->content, 'class="buddyboss-pics-photo-link"' ) !== false
+                             || strstr( $activity->content, 'class="buddyboss-pics-picture-link"' ) !== false );
+
+		if ( $compat_class_search && isset( $_POST['pics_uploaded']) && !empty( $_POST['pics_uploaded'] ) ){
+			//if it is, lets increase 'max links allowed per comment'
+			add_filter( 'option_comment_max_links', array( $this, 'increase_comment_max_links' ) );
+		}
+	}
+	
+	/**
+	 * @since 2.0.9
+	 * @param int $max_links_allowed
+	 * @return int
+	 */
+	public function increase_comment_max_links( $max_links_allowed ){
+		/**
+		 * Buddyboss media activities have links to photos in activity content.
+		 * Those are counted in maximum links allowed per comment moderation.
+		 * So lets increase that!
+		 */
+		$max_files_per_batch = (int) buddyboss_media()->option( 'files-per-batch' );
+		return $max_links_allowed + $max_files_per_batch;
+	}
+	
   // Fires when the activity item is saved
   public function bp_activity_after_save( &$activity )
   {
     global $buddyboss_media, $bp;
 
+	//remove filter hooked in before save action
+	remove_filter( 'option_comment_max_links', array( $this, 'increase_comment_max_links' ) );
+	
     $user = $bp->loggedin_user;
     $new_action = $result = false;
 
@@ -37,13 +77,15 @@ class BuddyBoss_Media_Photo_Hooks
                              || strstr( $activity->content, 'class="buddyboss-pics-photo-link"' ) !== false
                              || strstr( $activity->content, 'class="buddyboss-pics-picture-link"' ) !== false );
 
-    if ( $user && $compat_class_search && isset($_POST['has_pic'])
-         && isset($_POST['has_pic']['attachment_id']) )
-    {
+    if ( $user && $compat_class_search && isset( $_POST['pics_uploaded']) && !empty( $_POST['pics_uploaded'] ) ){
       /*$action  = '<a href="'.$user->domain.'">'.$user->fullname.'</a> '
         . __( 'posted a photo', 'buddyboss-media' );*/
 		
 		$action  = '%USER% ' . __( 'posted a photo', 'buddyboss-media' );
+		
+		if( is_array( $_POST['pics_uploaded'] ) && count( $_POST['pics_uploaded'] ) > 1 ){
+			$action  = '%USER% ' . sprintf( __( 'posted %s photos', 'buddyboss-media' ), count( $_POST['pics_uploaded'] ) );
+		}
 		
 		/**
 		 * If the activity is posted in a group
@@ -57,17 +99,20 @@ class BuddyBoss_Media_Photo_Hooks
 				}
 			}
 		}
-		
-      $attachment_id = (int)$_POST['has_pic']['attachment_id'];
+	
+		$attachment_ids = array();
+		foreach( $_POST['pics_uploaded'] as $uploaded_pic ){
+			$attachment_ids[] = (int)$uploaded_pic['attachment_id'];
+		}
 
       $action_key = buddyboss_media_compat( 'activity.action_key' );
       $item_key = buddyboss_media_compat( 'activity.item_key' );
 
       bp_activity_update_meta( $activity->id, $action_key, $action );
-      bp_activity_update_meta( $activity->id, $item_key, $attachment_id );
+      bp_activity_update_meta( $activity->id, $item_key, $attachment_ids );
 
       // Execute our after save action
-      do_action( 'buddyboss_media_photo_posted', $activity, $attachment_id, $action );
+      do_action( 'buddyboss_media_photo_posted', $activity, $attachment_ids, $action );
 
       // Prevent BuddyPress from sending notifications, we'll send our own
     }
@@ -153,10 +198,10 @@ class BuddyBoss_Media_Photo_Hooks
       return $content;
     }
 
-    $media_id = buddyboss_media_compat_get_meta( $act_id, 'activity.item_keys' );
+    $media_ids = buddyboss_media_compat_get_meta( $act_id, 'activity.item_keys' );
 
     // Photo
-    if ( $type === 'photo' && ! empty( $media_id ) )
+    if ( $type === 'photo' && ! empty( $media_ids ) )
     {
 	  /**
 	   * if we are displaying grid layout instead of activity post layout, images should be 'thumbnail' size
@@ -168,33 +213,124 @@ class BuddyBoss_Media_Photo_Hooks
 		$img_size = $this->activity_photo_size();
 	  }
 
-      $image = wp_get_attachment_image_src( $media_id, $img_size );
-
-      if ( ! empty( $image ) && is_array( $image ) && count( $image ) > 2 )
-      {
-        $src = $image[0];
-        $w = $image[1];
-        $h = $image[2];
-		
+	  /**
+	   * After bulk upload feature was added, an array of attachment ids is saved in database.
+	   * Before bulk upload feature, only one image was uploaded and thus, only one attachment id was saved in activity meta.
+	   * In that case, $media_ids will be a int variable, lets convert it to array, for uniformity in following code.
+	   */
+	  if( !is_array( $media_ids ) ){
+		  $media_ids = array( $media_ids );
+	  }
+	  
 		//alt tag
 		$clean_content = wp_strip_all_tags( $content, true );
 		$alt_text = !empty( $clean_content ) ? substr( $clean_content, 0, 100 ) : '';//first 100 characters ?
 		$alt = ' alt="' . esc_attr( $alt_text ) . '"';
+		
+		//let's leave it as it is for grid view
+		if( buddyboss_media_check_custom_activity_template_load() ){
+			foreach( $media_ids as $media_id ){
+				$image = wp_get_attachment_image_src( $media_id, $img_size );
 
-        $full = wp_get_attachment_image_src( $media_id, 'full' );
+				if ( ! empty( $image ) && is_array( $image ) && count( $image ) > 2 ){
+					$src = $image[0];
+					$w = $image[1];
+					$h = $image[2];
 
-        $width_markup = $w > 0 ? ' width="'.$w.'"' : '';
+					$full = wp_get_attachment_image_src( $media_id, 'full' );
 
-        if ( $full !== false && is_array( $full ) && count( $full ) > 2 )
-        {
-		$owner = ($activities_template->activities[$curr_id]->user_id == get_current_user_id())?'1':'0';
-          $content .= '<a class="buddyboss-media-photo-wrap" href="'.$full[0].'">';
-          $content .= '<img data-permalink="'. bp_get_activity_thread_permalink() .'" class="buddyboss-media-photo" src="'.$src.'"'.$width_markup.' ' . $alt . ' data-media="'.$act_id.'" data-owner="'.$owner.'"/></a>';
-        }
-        else {
-          $content .= '<img data-permalink="'. bp_get_activity_thread_permalink() .'" data-media="'.$act_id.'" data-owner="'.$owner.'" class="buddyboss-media-photo" src="'.$src.'"'.$width_markup.' ' . $alt .' />';
-        }
-      }
+					$width_markup = $w > 0 ? ' width="'.$w.'"' : '';
+
+					if ( $full !== false && is_array( $full ) && count( $full ) > 2 ){
+						$owner = ($activities_template->activities[$curr_id]->user_id == get_current_user_id())?'1':'0';
+						$content .= '<a class="buddyboss-media-photo-wrap" href="'.$full[0].'">';
+						$content .= '<img data-permalink="'. bp_get_activity_thread_permalink() .'" class="buddyboss-media-photo" src="'.$src.'"'.$width_markup.' ' . $alt . ' data-media="'.$act_id.'" data-owner="'.$owner.'"/></a>';
+					}
+					else {
+						$content .= '<img data-permalink="'. bp_get_activity_thread_permalink() .'" data-media="'.$act_id.'" data-owner="'.$owner.'" class="buddyboss-media-photo" src="'.$src.'"'.$width_markup.' ' . $alt .' />';
+					}
+				}
+			}
+		} else {
+			/**
+			 * In activity view, we display different number of pics in different ways.
+			 * 
+			 * Here's how multiple photos are displayed.
+			 * 1 photo - normal size.
+			 * 2 photo - both thumbnails
+			 * 3 photo - 1 normal 2 thumbnails
+			 * 4 phtos - all thumbnails
+			 * > 4 photos - 4 thumbnails only. rest are hidden, they can see those in photoswipe
+			 */
+            
+            $image1 = wp_get_attachment_image_src( $media_ids[0], 'full' );
+            $w1 = $image1[1];
+            $h1 = $image1[2]; 
+            
+            $image2 = wp_get_attachment_image_src( $media_ids[1], 'full' );
+            $w2 = $image2[1];
+            $h2 = $image2[2];
+            
+            $two_imgs_name = 'activity-2-thumbnail';
+    
+            // tall images
+            if($w1<$h1 && $w2<$h2) {
+                $two_imgs_name = 'activity-2-thumbnail-tall';
+            }
+            
+			$filesizes = array();
+			switch( count( $media_ids ) ){
+				case 1:
+					$filesizes = array( $img_size );
+					$filenames = array( 'activity-thumbnail' );
+					break;
+				case 2:
+					$filesizes = array( array($w1/2, $h1/2), array($w1/2, $h1/2) );
+					$filenames = array( $two_imgs_name, $two_imgs_name );
+					break;
+				case 3:
+					$filesizes = array( $img_size, array($w1/2, $h1/2), array($w1/2, $h1/2) );
+					$filenames = array( 'activity-thumbnail gallery-type', 'activity-3-thumbnail', 'activity-3-thumbnail' );
+					break;
+				default:
+					$filesizes = array( $img_size, array($w1/3, $h1/3), array($w1/3, $h1/3), array($w1/3, $h1/3) );
+                    $filenames = array( 'activity-thumbnail gallery-type', 'activity-4-thumbnail', 'activity-4-thumbnail', 'activity-4-thumbnail' );
+					break;
+			}
+			
+			$img_counter = 0;
+			$all_imgs_html = '';
+            
+			foreach( $media_ids as $media_id ){
+				$image = wp_get_attachment_image_src( $media_id, $filesizes[$img_counter] );
+
+				if ( ! empty( $image ) && is_array( $image ) && count( $image ) > 2 ){
+					$src = $image[0];
+					$w = $image[1];
+					$h = $image[2];
+
+					$full = wp_get_attachment_image_src( $media_id, 'full' );
+                    
+                    $width_markup = '';
+                    $height_markup = '';
+					
+					//hide more than 4 images
+					$maybe_display_none = $img_counter > 3 ? ' style="display:none"' : '';
+
+					if ( $full !== false && is_array( $full ) && count( $full ) > 2 ){
+						$owner = ($activities_template->activities[$curr_id]->user_id == get_current_user_id())?'1':'0';
+						$all_imgs_html .= '<a class="buddyboss-media-photo-wrap size-' . $filenames[$img_counter] . '" '.$height_markup.'  href="'.$full[0].'" ' . $maybe_display_none . '>';
+						$all_imgs_html .= '<img data-permalink="'. bp_get_activity_thread_permalink() .'" class="buddyboss-media-photo" src="'.$src.'"'.$width_markup.' ' . $alt . ' data-media="'.$act_id.'" data-owner="'.$owner.'"/></a>';
+					}
+					else {
+						$all_imgs_html .= '<img ' . $maybe_display_none . ' data-permalink="'. bp_get_activity_thread_permalink() .'" data-media="'.$act_id.'" data-owner="'.$owner.'" class="buddyboss-media-photo size-' . $filesizes[$img_counter] . '" src="'.$src.'"'.$width_markup.' ' . $alt .' />';
+					}
+				}
+				$img_counter++;
+			}
+			
+			$content .= "<div class='buddyboss-media-photos-wrap-container'>" . $all_imgs_html . "</div>";
+		}
     }
 
     return $content;

@@ -7,8 +7,16 @@
 class_name: AcceptanceTester
 modules:
     enabled:
-        - PhpBrowser
+        - WebDriver
         - AcceptanceHelper
+        - Mailtrap
     config:
-        PhpBrowser:
-            url: 'https://alphasss.dev/'
+        WebDriver:
+            url: 'https://tests.alphasss.com/'
+            browser: phantomjs
+            window_size: 1024x1024
+            capabilities:
+                webStorageEnabled: true
+        Mailtrap:
+            client_id: 08493505f33c2869394436d943262395 
+            inbox_id: 43225

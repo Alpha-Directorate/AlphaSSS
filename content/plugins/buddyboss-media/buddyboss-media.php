@@ -5,7 +5,7 @@
  * Description: BuddyBoss Media Photo Uploading
  * Author:      BuddyBoss
  * Author URI:  http://buddyboss.com
- * Version:     2.0.8
+ * Version:     3.0.2
  */
 
 // Exit if accessed directly
@@ -19,12 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Codebase version
 if ( ! defined( 'BUDDYBOSS_MEDIA_PLUGIN_VERSION' ) ) {
-  define( 'BUDDYBOSS_MEDIA_PLUGIN_VERSION', '2.0.8' );
+  define( 'BUDDYBOSS_MEDIA_PLUGIN_VERSION', '3.0.2' );
 }
 
 // Database version
 if ( ! defined( 'BUDDYBOSS_MEDIA_PLUGIN_DB_VERSION' ) ) {
-  define( 'BUDDYBOSS_MEDIA_PLUGIN_DB_VERSION', 2 );
+  define( 'BUDDYBOSS_MEDIA_PLUGIN_DB_VERSION', 3 );
 }
 
 // Directory

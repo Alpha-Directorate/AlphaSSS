@@ -1,0 +1,36 @@
+<?php 
+
+$I = new AcceptanceTester($scenario);
+$I->wantTo('Check register Main flow first step');
+$I->amOnPage('/');
+$I->see('Register','li');
+$I->click("//a[text()='Register']");
+$I->seeCurrentUrlEquals('/register/');
+$I->see('The Usual First Step');
+$I->see('Your Nickname', 'label');
+$I->seeElement('input', ['id' => 'input_4_3']);
+$I->see('Your Email Address', 'label');
+$I->seeElement('input', ['id' => 'input_4_22']);
+$I->seeElement('input', ['id' => 'choice_4_8_1']);
+$I->seeElement('input', ['value' => 'Next']);
+
+$username = md5(time());
+$password = md5('password');
+
+$I->fillField('#input_4_3',$username);
+$I->fillField('#input_4_4', $password);
+$I->fillField('#input_4_4_2', $password);
+$I->fillField('#input_4_22', md5(time()) . '@yahoo.com');
+$I->checkOption('#choice_4_8_1');
+$I->click("//input[@id='gform_next_button_4_9']");
+$I->see('Confirmation & Dire Warning!');
+$I->see($username, '.red-data');
+$I->see($password, '.red-data');
+$I->checkOption('#choice_4_15_1');
+$I->click("//input[@id='gform_next_button_4_11']");
+$I->see('Your Invitation Code','h1');
+
+// Check is confirmation email is received
+$I->receiveAnEmailWithSubject('Email Confirmation');
+//$I->seeInEmailTextBody('Hello ' . $username . ',');
+//$I->seeInEmailTextBody('To confirm your email, please click the link below');

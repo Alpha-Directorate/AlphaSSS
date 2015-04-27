@@ -2,11 +2,6 @@ jQuery(document).ready(function($) {
 
 	var invitation_requests = [];
 
-	// Show all members list actions
-	$('#members-list li .action').each(function(){
-		$(this).show();
-	});
-
 	function showInvitationRequestPopUp()
 	{
 		$('#invitation-code-modal').modal('hide');

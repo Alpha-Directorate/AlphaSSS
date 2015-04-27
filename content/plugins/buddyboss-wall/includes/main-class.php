@@ -34,6 +34,7 @@ class BuddyBoss_Wall_Plugin
 		'wall-compat',
 		'wall-hooks',
 		'wall-filters',
+        'wall-privacy',
 		'widgets'
 	);
 
@@ -521,6 +522,22 @@ class BuddyBoss_Wall_Plugin
 
 		return $is_enabled;
 	}
+
+    /**
+     * Check if wall privacy is active and enabled in the plugin's admin options.
+     *
+     * @since BuddyBoss Wall (1.0.0)
+     *
+     * @uses BuddyBoss_Media_Plugin::option() Get plugin option
+     *
+     * @return boolean True when the plugin is active
+     */
+    public function is_wall_privacy_enabled()
+    {
+        $is_wall_privacy_enabled = $this->option( 'enabled-wall-privacy' ) === true || $this->option( 'enabled-wall-privacy' ) === 'on';
+
+        return $is_wall_privacy_enabled;
+    }
 
 	/**
 	 * Convenience function to access plugin options, returns false by default

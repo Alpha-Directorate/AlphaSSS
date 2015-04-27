@@ -124,6 +124,14 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 		/* FILTERS */
 		if ( $this->option( 'enabled' ) )
 		{
+			/**
+			 * Priority 1 is mandatory!
+			 * So that it runs before bp_activity_check_moderation_keys, which is hooked in same action.
+			 * bp_activity_check_moderation_keys checks if activity content has links and based on setting it discards update.
+			 * BuddyBoss Media adds links(to photos) in activity content and hence gets caught as spam by bp_activity_check_moderation_keys.
+			 * We'll increase max number of links allowed, if activity post is a BuddyBoss Media post, to overcome this issue.
+			 */
+			add_action( 'bp_activity_before_save', array( $this->hooks, 'bp_activity_before_save' ), 1 );
 			add_action( 'bp_activity_after_save', array( $this->hooks, 'bp_activity_after_save' ) );
 			add_filter( 'bp_get_activity_action', array( $this->hooks, 'bp_get_activity_action' ), 11 );
 			add_filter( 'bp_get_activity_content_body', array( $this->hooks, 'bp_get_activity_content_body' ) );
@@ -185,10 +193,11 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 			'file_browse_title'        => __( 'Upload a Picture', 'buddyboss-media' ),
 			'cancel'                   => __( 'Cancel', 'buddyboss-media' ),
 			'failed'                   => __( 'Failed', 'buddyboss-media' ),
-			'add_photo'                => __( 'Add Photo', 'buddyboss-media' ),
-			'user_add_photo'           => sprintf( __( "Add a photo, %s", 'buddyboss-media' ), $firstname ),
+			'add_photo'                => __( 'Add Photos', 'buddyboss-media' ),
+			'user_add_photo'           => sprintf( __( "Add photos, %s", 'buddyboss-media' ), $firstname ),
 			'photo_uploading'          => __( 'Photo is currently uploading, please wait!', 'buddyboss-media' ),
-			'sure_delete_photo'          => __( 'Sure you want to delete this photo?', 'buddyboss-media' )
+			'sure_delete_photo'          => __( 'Sure you want to delete this photo?', 'buddyboss-media' ),
+			'exceed_max_files_per_batch'	=> sprintf( __( 'You can upload a maximum of %s photos in one update', 'buddyboss-media' ), $this->option( 'files-per-batch' ) ),
 		);
 
 		return apply_filters( 'buddyboss_media_js_translations', $js_translations );
@@ -210,10 +219,12 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 			'uploader_filesize'    => apply_filters( 'buddyboss-media-uploader-filesize', '15mb' ),
 			'uploader_filetypes'   => apply_filters( 'buddyboss-media-uploader-filetypes', 'jpg,jpeg,gif,png,bmp' ),
 			'uploader_runtimes'    => apply_filters( 'buddyboss-media-uploader-runtimes', 'html5,flash,silverlight,html4' ),
-			'uploader_multiselect' => apply_filters( 'buddyboss-media-uploader-multiselect', false ),
+			'uploader_multiselect' => apply_filters( 'buddyboss-media-uploader-multiselect', true ),
+			'uploader_max_files'	=> $this->option( 'files-per-batch' ),
 			'uploader_swf_url'     => apply_filters( 'buddyboss-media-uploader-swf-url', $swf_url ),
 			'uploader_xap_url'     => apply_filters( 'buddyboss-media-uploader-xap-url', $xap_url ),
-			'uploader_embed_panel' => apply_filters( 'buddyboss-media-uploader-embed-panel', true )
+			'uploader_embed_panel' => apply_filters( 'buddyboss-media-uploader-embed-panel', true ),
+			'uploader_temp_img'	   => apply_filters( 'buddyboss-media-uploader-temp-image', buddyboss_media()->assets_url . '/img/placeholder-150x150.png' ),
 		);
 
 		return apply_filters( 'buddyboss_media_js_app_state', $app_state );
@@ -228,8 +239,8 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 		wp_enqueue_style( 'fontawesome' );
 
 		// CSS > Main
-		//wp_enqueue_style( 'buddyboss-media-main', $assets . '/css/buddyboss-media.css', array( 'fontawesome' ), '2.0.4', 'all' );
-		wp_enqueue_style( 'buddyboss-media-main', $assets . '/css/buddyboss-media.min.css', array( 'fontawesome' ), '2.0.4', 'all' );
+		//wp_enqueue_style( 'buddyboss-media-main', $assets . '/css/buddyboss-media.css', array( 'fontawesome' ), '3.0.2', 'all' );
+		wp_enqueue_style( 'buddyboss-media-main', $assets . '/css/buddyboss-media.min.css', array( 'fontawesome' ), '3.0.2', 'all' );
 
 		// JS > PhotoSwipe
 		wp_enqueue_script( 'buddyboss-media-klass', $assets . '/vendor/photoswipe/klass.min.js', array( 'jquery' ), '1.0', false );
@@ -240,15 +251,19 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 		wp_deregister_script( 'plupload' );
 		wp_enqueue_script( 'moxie', $assets . '/vendor/plupload2/moxie.js', array( 'jquery' ), '1.2.1' );
 		wp_enqueue_script( 'plupload', $assets . '/vendor/plupload2/plupload.dev.js', array( 'jquery', 'moxie' ), '2.1.2' );
-
+		
 		if( bp_is_active( 'friends' ) && buddyboss_media()->option( 'enable_tagging' )=='yes' ){
 			//tooltip is only required if friends tagging is enabled.
 			wp_enqueue_script( 'jquery-tooltipster', $assets . '/js/jquery.tooltipster.min.js', array( 'jquery' ), '3.0.5', true );
 		}
 		
+		// Fancybox
+		wp_enqueue_script( 'jquery-fancybox', $assets . '/vendor/fancybox/jquery.fancybox.pack.js', array( 'jquery' ), '2.1.5', true );
+		wp_enqueue_style( 'jquery-fancybox', $assets . '/vendor/fancybox/jquery.fancybox.css', array(), '2.1.5', 'all' );
+		
 		// JS > Main
-		//wp_enqueue_script( 'buddyboss-media-main', $assets . '/js/buddyboss-media.js', array( 'jquery', 'plupload' ), '2.0.6', true );
-		wp_enqueue_script( 'buddyboss-media-main', $assets . '/js/buddyboss-media.min.js', array( 'jquery', 'plupload' ), '2.0.6', true );
+		//wp_enqueue_script( 'buddyboss-media-main', $assets . '/js/buddyboss-media.js', array( 'jquery', 'plupload', 'jquery-fancybox' ), '3.0.0', true );
+		wp_enqueue_script( 'buddyboss-media-main', $assets . '/js/buddyboss-media.min.js', array( 'jquery', 'plupload', 'jquery-fancybox' ), '3.0.0', true );
 		
 		$data = array(
 			'is_media_page'	=> ( buddyboss_media()->option('all-media-page') && is_page( buddyboss_media()->option('all-media-page') ) ) ? true : false,
@@ -301,7 +316,7 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 		?>
 		<script type="text/html" id="buddyboss-media-tpl-add-photo">
 			<div id="buddyboss-media-add-photo">
-				<button type="button" id="buddyboss-media-add-photo-button"><?php _e( 'Add Photo', 'buddyboss-media' ); ?></button>
+				<button type="button" id="buddyboss-media-add-photo-button"><?php _e( 'Add Photos', 'buddyboss-media' ); ?></button>
 				<div class="buddyboss-media-progress">
 					<div class="buddyboss-media-progress-value">0%</div>
 					<progress class="buddyboss-media-progress-bar" value="0" max="100"></progress>
@@ -311,11 +326,31 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 		</script>
 
 		<script type="text/html" id="buddyboss-media-tpl-preview">
-			<div class="clearfix" id="buddyboss-media-preview">
-				<div id="buddyboss-media-preview-inner"></div>
-				<div id="buddyboss-media-preview-details">
-					<?php _e( 'Say something about this photo...', 'buddyboss-media' );?>
+			<div id="buddyboss-media-preview">
+				<div class="clearfix" id="buddyboss-media-preview-inner">
+					
 				</div>
+				
+				<?php $component_slug = buddyboss_media_component_slug(); ?>
+				
+				<?php if( bp_is_my_profile() && bp_is_current_component( $component_slug ) ):?>
+					<div id="buddyboss-media-bulk-uploader-reception-fake" class="image-drop-box">
+						<h3 class="buddyboss-media-drop-instructions"><?php _e( 'Drop files anywhere to upload', 'buddyboss-media' );?></h3>
+						<p class="buddyboss-media-drop-separator"><?php _e( 'or', 'buddyboss-media' );?></p>
+						<a title="<?php _e( 'Select Files', 'buddyboss-media' );?>" class="browse-file-button button" href="#"> <?php _e( 'Select Files', 'buddyboss-media' );?></a>
+					</div>
+				
+					<?php 
+					/* show only image drop zone and hide the rest of activity update form on uploads and albums section in user profile */
+					?>
+					<style type="text/css">
+						body.bp-user.my-account.<?php echo $component_slug;?> #buddyboss-media-add-photo,
+						body.bp-user.my-account.<?php echo $component_slug;?> #whats-new,
+						body.bp-user.my-account.<?php echo $component_slug;?> #whats-new-options{
+							display: none !important;
+						}
+					</style>
+				<?php endif; ?>
 			</div><!-- #buddyboss-media-preview -->
 		</script>
 		
@@ -355,6 +390,23 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 				</div><!-- #buddyboss-media-move-media -->
 				<div id="message"></div>
 			</form>
+		</div>
+		
+		<div id="buddyboss-media-bulk-uploader-wrapper" style="display:none">
+			<div id="buddyboss-media-bulk-uploader">
+				<div id="buddyboss-media-bulk-uploader-uploaded">
+					<textarea id="buddyboss-media-bulk-uploader-text" placeholder="<?php esc_attr_e( 'Say something about the photo(s)...', 'buddyboss-media' ) ;?>"></textarea>
+					<div class="images clearfix">
+						
+					</div>
+				</div>
+				<div id="buddyboss-media-bulk-uploader-reception" class="image-drop-box">
+					<h3 class="buddyboss-media-drop-instructions"><?php _e( 'Drop files anywhere to upload', 'buddyboss-media' );?></h3>
+                    <p class="buddyboss-media-drop-separator"><?php _e( 'or', 'buddyboss-media' );?></p>
+					<a id="logo-file-browser-button" title="Select image" class="browse-file-button" href="#"> <?php _e( 'Select Files', 'buddyboss-media' );?></a>
+				</div>
+				<input type="submit" id="aw-whats-new-submit-bbmedia" value="<?php esc_attr_e( 'Post Update', 'buddypress' ); ?>" />
+			</div>
 		</div>
 		<?php endif; ?>
 		

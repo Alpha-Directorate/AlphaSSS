@@ -27,6 +27,12 @@ Release Notes: http://www.buddyboss.com/release-notes/
 /*--------------------------------------------------------------
 CHANGELOG
 ----------------------------------------------------------------
+Version 3
+----------------------------------------------------------------
+3.0.2 - March 31, 2015
+3.0.1 - March 28, 2015
+3.0.0 - March 25, 2015
+----------------------------------------------------------------
 Version 2
 ----------------------------------------------------------------
 2.0.8 - February 6, 2015
@@ -56,6 +62,117 @@ Version 1
 --------------------------------------------------------------*/
 
 
+
+/*--------------------------------------------------------------
+Version 3
+--------------------------------------------------------------*/
+/*--------------------------------------------------------------
+3.0.2 - March 31, 2015
+--------------------------------------------------------------*/
+
+BUG FIXES:
+
+	Improved layout of 3 image uploads (small images) in activity streams
+	Fixed "medium" vs "large" image sizes in activity streams
+
+CHANGED FILES:
+
+	/assets/css/buddyboss-media.css
+	/assets/css/buddyboss-media.min.css
+	buddyboss-media.php
+	/includes/admin.php
+	/includes/types/photo-hooks.php
+	/languages/buddyboss-media-en_US.po
+	/languages/buddyboss-media-en_US.mo
+	readme.txt
+
+TESTED WITH:
+
+	WordPress 4.1+
+	BuddyPress 2.1, 2.2+
+/*--------------------------------------------------------------
+3.0.1 - March 28, 2015
+--------------------------------------------------------------*/
+
+BUG FIXES:
+
+	Improved layout of 2 image uploads in activity streams
+
+CHANGED FILES:
+
+	/assets/css/buddyboss-media.css
+	/assets/css/buddyboss-media.min.css
+	buddyboss-media.php
+	/includes/types/photo-class.php
+	/includes/types/photo-hooks.php
+	readme.txt
+
+TESTED WITH:
+
+	WordPress 4.1+
+	BuddyPress 2.1, 2.2+
+
+/*--------------------------------------------------------------
+3.0.0 - March 25, 2015
+--------------------------------------------------------------*/
+
+FEATURES:
+
+	Bulk uploading allows for multiple photo uploads at once
+	Bulk uploading displays grouped photos in activity stream
+	Removed post form on Photos and Albums pages, replaced with DropZone
+	Added Italian translations, credits to Massimiliano Napoli
+
+BUG FIXES:
+
+	Fix for 'bp_is_active' error while upgrading BuddyPress
+	Now using jQuery in noConflict mode
+	Delete tagging notifications when corresponding photos activities are deleted
+
+CHANGED FILES:
+
+	/assets/css/buddyboss-media.css
+	/assets/css/buddyboss-media.min.css
+	/assets/img/remove-photo.png (added)
+	/assets/js/buddyboss-media.js
+	/assets/js/buddyboss-media.min.js
+	/assets/vendor/fancybox/blank.gif (added)
+	/assets/vendor/fancybox/fancybox_loading.gif (added)
+	/assets/vendor/fancybox/fancybox_loading@2x.gif (added)
+	/assets/vendor/fancybox/fancybox_overlay.png (added)
+	/assets/vendor/fancybox/fancybox_sprite.png (added)
+	/assets/vendor/fancybox/fancybox_sprite@2x.png (added)
+	/assets/vendor/fancybox/helpers/fancybox_buttons.png (added)
+	/assets/vendor/fancybox/helpers/jquery.fancybox-buttons.css (added)
+	/assets/vendor/fancybox/helpers/jquery.fancybox-buttons.js (added)
+	/assets/vendor/fancybox/helpers/jquery.fancybox-media.js (added)
+	/assets/vendor/fancybox/helpers/jquery.fancybox-thumbs.css (added)
+	/assets/vendor/fancybox/helpers/jquery.fancybox-thumbs.js (added)
+	/assets/vendor/fancybox/jquery.fancybox.css (added)
+	/assets/vendor/fancybox/jquery.fancybox.js (added)
+	/assets/vendor/fancybox/jquery.fancybox.pack.js (added)
+	buddyboss-media.php
+	/includes/admin.php
+	/includes/albums/album-functions.php
+	/includes/albums/album-template.php
+	/includes/main-class.php
+	/includes/tagging/class.BuddyBoss_Media_Tagging.php
+	/includes/tagging/class.BuddyBoss_Media_Tagging_Notifications.php
+	/includes/types/photo-class.php
+	/includes/types/photo-hooks.php
+	/languages/buddyboss-media-it_IT.mo (added)
+	/languages/buddyboss-media-it_IT.po (added)
+	/languages/buddyboss-media-en_US.po
+	/languages/buddyboss-media-en_US.mo
+	readme.txt
+	/templates/global-media-grid.php (removed)
+	/templates/members/single/buddyboss-media-album-create.php
+	/templates/members/single/buddyboss-media-album-edit.php
+
+TESTED WITH:
+
+	WordPress 4.1+
+	BuddyPress 2.1, 2.2+
 
 /*--------------------------------------------------------------
 Version 2

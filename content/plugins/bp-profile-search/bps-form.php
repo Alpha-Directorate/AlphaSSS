@@ -111,7 +111,7 @@ echo "<div class='editfield field_$id field_$name$alt'>";
 		if (empty ($label))
 			$label = $field->name;
 		else
-echo "<input type='hidden' name='label_$id' value='$label' />";
+echo "<input type='hidden' name='label_$id' value='". esc_attr ($label). "' />";
 
 		if (empty ($desc))
 			$desc = $field->description;

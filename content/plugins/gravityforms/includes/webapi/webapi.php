@@ -89,6 +89,7 @@ if ( class_exists( 'GFForms' ) ) {
 
 		// Scripts
 		public function scripts() {
+			$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG || isset( $_GET['gform_debug'] ) ? '' : '.min';
 			$scripts = array(
 				array(
 					'handle'  => 'gfwebapi_hmac_sha1',
@@ -108,7 +109,7 @@ if ( class_exists( 'GFForms' ) ) {
 				),
 				array(
 					'handle'  => 'gfwebapi_settings.js',
-					'src'     => GFCommon::get_base_url() . '/includes/webapi/js/gfwebapi_settings.js',
+					'src'     => GFCommon::get_base_url() . "/includes/webapi/js/gfwebapi_settings{$min}.js",
 					'version' => $this->_version,
 					'deps'    => array( 'jquery', 'thickbox' ),
 					'enqueue' => array(
@@ -121,10 +122,11 @@ if ( class_exists( 'GFForms' ) ) {
 		}
 
 		public function styles() {
+			$min = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG || isset( $_GET['gform_debug'] ) ? '' : '.min';
 			$styles = array(
 				array(
 					'handle'  => 'gfwebap_settings',
-					'src'     => GFCommon::get_base_url() . '/includes/webapi/css/gfwebapi_settings.css',
+					'src'     => GFCommon::get_base_url() . "/includes/webapi/css/gfwebapi_settings{$min}.css",
 					'version' => $this->_version,
 					'deps'    => array( 'thickbox' ),
 					'enqueue' => array(
@@ -351,6 +353,8 @@ if ( class_exists( 'GFForms' ) ) {
 			if ( false == $route ) {
 				return;
 			}
+
+			send_origin_headers();
 
 			$settings = get_option( 'gravityformsaddon_gravityformswebapi_settings' );
 			if ( empty( $settings ) || ! $settings['enabled'] ) {
@@ -1367,7 +1371,7 @@ if ( class_exists( 'GFForms' ) ) {
 					$gf_results         = new GFResults( $this->_slug, array() );
 					$max_execution_time = 5;
 					$results            = $gf_results->get_results_data( $form, $fields, $search_criteria, $state, $max_execution_time );
-					if ( 'complete' == $results['status'] ) {
+					if ( 'complete' == rgar( $data, 'status' ) ) {
 						$status = 200;
 						if ( false == empty( $state ) ) {
 							delete_option( $key_tmp );
@@ -1409,10 +1413,13 @@ if ( class_exists( 'GFForms' ) ) {
 				}
 			}
 
-			$fields = $results['field_data'];
+			$fields = rgar( $results, 'field_data' );
 
-			// add choice labels to the results so the client doesn't need to cross-reference with the form object
-			$results['field_data'] = $this->results_data_add_labels( $form, $fields );
+			if ( ! empty( $fields ) ) {
+				// add choice labels to the results so the client doesn't need to cross-reference with the form object
+				$results['field_data'] = $this->results_data_add_labels( $form, $fields );
+			}
+
 
 			$this->end( $status, $results );
 		}
@@ -1545,7 +1552,6 @@ if ( class_exists( 'GFForms' ) ) {
 				header_remove( 'X-Pingback' );
 			}
 
-			send_origin_headers();
 			header( 'Content-Type: application/json; charset=' . get_option( 'blog_charset' ), true );
 			$output_json = json_encode( $output );
 
