@@ -135,6 +135,7 @@ class DmConfirmEmail_Models_ConfirmForm {
      * @param $errors
      * @param $redirect
      * @return mixed
+     * @todo add custom message "Your email is now confirmed. Your password has been sent to your email.""
      */
     public function successMessage($errors, $redirect) {
         $errors->add('dmec_key_success', esc_html($this->message['confirmed_message']), 'message');
