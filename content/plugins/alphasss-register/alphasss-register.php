@@ -8,6 +8,8 @@ Author URI:
 Text Domain: alphasss-register
 */
 
+use AlphaSSS\Repositories\User as UserRepository;
+
 load_plugin_textdomain( 'alphasss-register', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 // Require helper functions
@@ -131,6 +133,38 @@ add_action( 'plugins_loaded', function(){
 					}
 				break;
 
+				case 22:
+					if ( $email = trim( rgpost( 'input_22' ) ) ) {
+
+						// Email format validation
+						if ( filter_var( $email, FILTER_VALIDATE_EMAIL ) ) {
+
+							// Check is email already in use
+							if ( UserRepository::isEmailExists($email) ) {
+								$is_username_validation_error = true;
+								$field['validation_message']  = __('This email already in use. Please pick up another one.', 'alphasss-register');
+							}
+
+						} else {
+							// Incorrect email format
+							$is_username_validation_error = true;
+							$field['validation_message']  = __('Please enter the valid email address.', 'alphasss-register');
+						}
+
+					} else {
+						// If email was passes as empty string
+						$is_username_validation_error = true;
+						$field['validation_message']  = __('Please enter your email.', 'alphasss-register');
+					}
+
+					// Mark form validation as failed
+					if ( $is_username_validation_error ) {
+						$validation_result['is_valid'] = false;
+						$field['failed_validation']    = true;
+					}
+				break;
+
+				// Password validation
 				case 4:
 					if ($password = rgpost( 'input_4' )) {
 						$confirm_password  = rgpost( 'input_4_2' );
@@ -172,19 +206,22 @@ add_action( 'plugins_loaded', function(){
 						// Data confirmed?
 						if ( 'Yes' == $is_register_data_approved ) {
 
-							$username = sanitize_text_field ( rgpost( 'input_3' ) );
-							$password = sanitize_text_field ( rgpost( 'input_4' ) );
-							$email    = md5( time() ) . '@alphasss.com';
+							$username        = sanitize_text_field ( rgpost( 'input_3' ) );
+							$password        = sanitize_text_field ( rgpost( 'input_4' ) );
+							$email           = sanitize_text_field ( rgpost( 'input_22' ) );
+							$encrypted_email = ( new AlphaSSS\Helpers\Encryption )->encode( $email );
+							$hashed_email    = hash('sha512', $email);
 
 							// Create a new user
-							$user_id = wp_create_user( $username, $password, $email );
-							//--
+							$user_id = wp_create_user( $username, $password, $encrypted_email );
 
 							// Sending email confirmation to newly created user
-							(new DmConfirmEmail_Models_Registration( $username, $email ))->register();
+							( new DmConfirmEmail_Models_Registration( $username, $email ) )->register();
 							
 							// Set Pre Member Role to user
-							wp_update_user( array ('ID' => $user_id, 'role' => 'pre_member' ) ) ;
+							wp_update_user( array('ID' => $user_id, 'role' => 'pre_member' ) ) ;
+
+							update_user_meta($user_id, 'hashed_email', $hashed_email);
 						}
 					} else if (isset( $_POST['input_15_1'] ) && !$_POST['input_15_1'] ){
 						$field['validation_message']   = __('Please confirm you have written down or memorized your nickname/password? You are anonymous, and we cannot recover your lost login info.', 'alphasss-register');
