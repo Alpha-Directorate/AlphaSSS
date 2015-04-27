@@ -20,7 +20,7 @@ $password = md5('password');
 $I->fillField('#input_4_3',$username);
 $I->fillField('#input_4_4', $password);
 $I->fillField('#input_4_4_2', $password);
-$I->fillField('#input_4_22', md5(time()) . '@gmail.com');
+$I->fillField('#input_4_22', md5(time()) . '@yahoo.com');
 $I->checkOption('#choice_4_8_1');
 $I->click("//input[@id='gform_next_button_4_9']");
 $I->see('Confirmation & Dire Warning!');

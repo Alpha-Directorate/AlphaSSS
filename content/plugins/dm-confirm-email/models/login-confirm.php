@@ -29,19 +29,11 @@ class DmConfirmEmail_Models_ConfirmForm {
         $confirmed = $this->checkUserKey($key);
 
         if($confirmed) {
-            // Create user
-            $user = $this->createUser();
 
-            // Check if user was created
-            if($user) {
-                // Delete temp data
-                $this->deleteTempData();
+            // Delete temp data
+            $this->deleteTempData();
 
-                add_filter('wp_login_errors', array($this, 'successMessage'), 10, 2);
-            } else {
-                add_filter('wp_login_errors', array($this, 'failCreationMessage'), 10, 2);
-            } // end check if user was created
-
+            add_filter('wp_login_errors', array($this, 'successMessage'), 10, 2);
         } else {
             add_filter('wp_login_errors', array($this, 'failMessage'), 10, 2);
         }

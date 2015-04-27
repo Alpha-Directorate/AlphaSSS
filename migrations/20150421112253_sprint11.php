@@ -48,7 +48,7 @@ class Sprint11 extends AbstractMigration
 
         // Enable group creation for members
         $this->execute( 'UPDATE `wp_options` SET `option_value` = 0 WHERE `option_name`="bp_restrict_group_creation"' );
-
+        
         // Add member role to administrator
         $user = ( new \WP_CLI\Fetchers\User )->get_check( 'Founder_Counselor' );
 
@@ -66,6 +66,9 @@ class Sprint11 extends AbstractMigration
 
         // Add nadya in to group "Sex Lovers United"
         $this->execute( 'INSERT INTO `wp_bp_groups_members` VALUES(NULL,1,79,0,0,0,"WebGuy","2014-11-03 20:27:25","",1,0,0)' );
+
+         // Add exists hashed admin, required for testing
+        $this->execute( sprintf( 'INSERT INTO `wp_usermeta` VALUES (NULL, 1,"hashed_email","%s")', hash('sha512', 'admin@alphasss.com') ) );
         
         // Update gravity form, add email
         global $wpdb;
