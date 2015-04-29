@@ -9,6 +9,7 @@ modules:
     enabled:
         - WebDriver
         - AcceptanceHelper
+        - MailtrapHelper
         - Mailtrap
     config:
         WebDriver:
@@ -18,5 +19,8 @@ modules:
             capabilities:
                 webStorageEnabled: true
         Mailtrap:
+            client_id: 08493505f33c2869394436d943262395 
+            inbox_id: 43225
+        MailtrapHelper:
             client_id: 08493505f33c2869394436d943262395 
             inbox_id: 43225
