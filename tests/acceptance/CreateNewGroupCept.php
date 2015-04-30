@@ -13,3 +13,7 @@ $I->moveMouseOver("//a[@title='My Account']");
 $I->see('Group', 'li');
 $I->moveMouseOver("//a[@class='ab-item' and text()='Group']");
 $I->see('Create My Group', '.ab-item');
+$I->moveMouseOver("//a[@title='My Account']");
+$I->see('Log Out','.ab-item');
+$I->click("//a[@class='ab-item' and text()='Log Out']");
+$I->wait(3);
