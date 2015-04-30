@@ -56,7 +56,12 @@ $I->seeCurrentUrlEquals('/register-pre-member/');
 $I->see('Browse','li');
 $I->click("//a[text()='Browse']");
 
+$elen->does(function(AcceptanceTester $I) {
+	$I->see('Browse','li');
+	$I->click("//a[text()='Browse']");
+});
+
 $I->wait(3);
 $I->seeElement("//li[@id='".md5('elen')."']/div[@class='item']/div[@class='item-meta']/span[@class='activity']/div[@class='member-online']");
 $I->see('Request Invitation', '#' . md5('elen'));
-$I->click("//li[@id='".md5('elen')."']/div[@class='action']/div[@class='generic-button']/a[@class='request-invitation']");
+$I->click('Request Invitation', '#' . md5('elen'));
