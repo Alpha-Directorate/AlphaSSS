@@ -27,7 +27,7 @@ class Sprint12 extends AbstractMigration
     public function up()
     {
         // Adding GF role
-        add_role( 'gf', 'GF' );
+        add_role( 'gf', 'Girlfriend' );
 
         // Add gf role to user
         $user = ( new \WP_CLI\Fetchers\User )->get_check( 'elen' );
