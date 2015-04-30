@@ -39,6 +39,10 @@ class Sprint12 extends AbstractMigration
         $role = get_role( 'gf' );
         $role->add_cap( 'generate_invitation_code' );
         //--
+
+        if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'alphasss-group' ) ) {
+            activate_plugin( $plugin->file, '' );
+        }
     }
 
     /**
@@ -59,5 +63,9 @@ class Sprint12 extends AbstractMigration
 
         // Removing GF role
         remove_role( 'gf' );
+
+        if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'alphasss-group' ) ) {
+            deactivate_plugins( $plugin->file, '' );
+        }
     }
 }

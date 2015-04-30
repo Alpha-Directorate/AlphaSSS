@@ -18,4 +18,25 @@ class User {
 
 		return $found_email != NULL;
 	}
+
+	/**
+	 * Method checks is current user have specific role
+	 * 
+	 * @param string $role_key
+	 * @return boolean
+	 */
+	public static function hasRole($role_key)
+	{
+		// Detect current user
+		$current_user = wp_get_current_user();
+
+		if ( $current_user instanceof \WP_User ) {
+
+			foreach ( $current_user->roles as $role ) {
+				if ( $role == $role_key ) return true;
+			}
+		}
+
+		return false;
+	}
 }
