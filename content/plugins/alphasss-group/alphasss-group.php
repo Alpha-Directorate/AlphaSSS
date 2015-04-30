@@ -10,18 +10,76 @@
 
 use AlphaSSS\Repositories\User;
 
-add_filter ('bp_user_can_create_groups', function($can_create, $restricted) {
+load_plugin_textdomain( 'alphasss-group', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
-	$can_create_group = false;
+add_action( 'plugins_loaded', function(){
 
-	$current_user = wp_get_current_user();
+	add_filter ('bp_user_can_create_groups', function($can_create, $restricted) {
 
-	if ( User::hasRole('gf') ) {
-		 $can_create_group = true;
-	}
+		$can_create_group = false;
 
-	return $can_create_group;
-	
-}, 10, 2);
+		if ( User::hasRole('gf') AND ! User::isAdminOfGroup() ) {
+			 $can_create_group = true;
+		}
+
+		return $can_create_group;
+		
+	}, 10, 2);
+
+	add_action( 'wp_before_admin_bar_render', function($wp_admin_bar){
+
+		if ( is_user_logged_in() AND User::isAdminOfGroup() ) {
+
+			global $wp_admin_bar;
+
+			// Remove top-bar menu items
+			$wp_admin_bar->remove_menu('my-account-groups-memberships');
+			$wp_admin_bar->remove_menu('my-account-groups-invites');
+			//--
+
+			// Setup the logged in user variables
+			$user_domain = bp_loggedin_user_domain();
+			$groups_link = trailingslashit( $user_domain . 'groups' );
+
+			// Pending group invites
+			$count   = groups_get_invite_count_for_user();
+			$title   = _x( 'Groups', 'My Account Groups', 'buddypress' );
+			$pending = _x( 'No Pending Invites', 'My Account Groups sub nav', 'buddypress' );
+
+			if ( !empty( $count['total'] ) ) {
+				$title   = sprintf( _x( 'Groups <span class="count">%s</span>', 'My Account Groups nav', 'buddypress' ), $count );
+				$pending = sprintf( _x( 'Pending Invites <span class="count">%s</span>', 'My Account Groups sub nav', 'buddypress' ), $count );
+			}
+
+			// My Groups
+			$wp_admin_bar->add_menu( array(
+				'parent' => 'my-account-groups',
+				'id'     => 'my-account-groups-memberships',
+				'title'  => _x( 'Memberships', 'My Account Groups sub nav', 'buddypress' ),
+				'href'   => trailingslashit( $groups_link )
+			) );
+
+			// Invitations
+			$wp_admin_bar->add_menu( array(
+				'parent' => 'my-account-groups',
+				'id'     => 'my-account-groups-invites',
+				'title'  => $pending,
+				'href'   => trailingslashit( $groups_link . 'invites' )
+			) );
+
+			// Add new top-bar menu items
+			$wp_admin_bar->add_menu( array(
+				'parent'   => 'my-account-groups',
+				'id'       => 'my-account-group-created',
+				'title'    => __( 'Group Created', 'buddypress' ),
+				'position' => 0
+			) );
+		}
+
+	}, 10, 2 );
+
+});
+
+
 
 
