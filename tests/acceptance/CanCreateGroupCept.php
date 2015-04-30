@@ -1,6 +1,6 @@
 <?php 
 $I = new AcceptanceTester($scenario);
-$I->wantTo('chack who can create a group');
+$I->wantTo('check who can create a group');
 
 // GF can create a group
 $I->amOnPage('/');
