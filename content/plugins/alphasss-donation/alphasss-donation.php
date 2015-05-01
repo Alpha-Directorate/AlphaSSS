@@ -70,40 +70,6 @@ add_action( 'bp_loaded', function(){
 
 			return $meets_condition;
 		}
-
-		/**
-		* Method contains the markup that will be displayed on the main
-		* plugin tab
-		*/
-		public function display( $group_id = null )
-		{
-			$group_id = bp_get_group_id();
-			echo 'What a cool plugin!';
-		}
-
-		/**
-		* settings_screen() is the catch-all method for displaying the content
-		* of the edit, create, and Dashboard admin panels
-		*/
-		public function settings_screen( $group_id = null )
-		{
-			$setting = groups_get_groupmeta( $group_id, 'group_extension_example_1_setting' );
-
-			/**
-			* Save your plugin setting here: <input type="text" name="group_extension_example_1_setting" value="<?php echo esc_attr( $setting ) ?>" />
-			*/
-		}
-
-		/**
-		* settings_sceren_save() contains the catch-all logic for saving
-		* settings from the edit, create, and Dashboard admin panels
-		*/
-		public function settings_screen_save( $group_id = null )
-		{
-			$setting = Arr::get( $_POST, 'group_extension_example_1_setting', '' ); // input var okay
-
-			groups_update_groupmeta( $group_id, 'group_extension_example_1_setting', $setting );
-		}
 	}
 
 	bp_register_group_extension( 'AlphaSSS_Donation' );
