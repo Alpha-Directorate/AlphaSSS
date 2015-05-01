@@ -263,3 +263,7 @@ You're the boss, so have fun editing!
 #profile-edit-form input[type='text'],textarea {
     width: 100% !important;
 }
+
+#wp-admin-bar-my-account-group-created .ab-item{
+    color: #c0c0c0 !important;
+}

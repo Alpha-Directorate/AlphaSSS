@@ -31,7 +31,7 @@ add_filter('wp_authenticate_user', function($user) {
 	$activation_link = $wpdb->get_row(sprintf("SELECT * FROM `wp_dmec` WHERE `user_login` = '%s'", $user->data->user_login), ARRAY_A);
 
 	return $activation_link != NULL
-		? new WP_Error('account_not_confirmed',__('Your account isn\'t active. Please click to confirmation link in your email.'))
+		? new WP_Error('account_not_confirmed',__('Your account isn\'t active. Please click the link in your email to confirm it.'))
 		: $user;
 
 }, 10, 2);

@@ -23,7 +23,8 @@
     "wp-cli/wp-cli": "*",
     "nesbot/carbon": "~1.14",
     "pubnub/pubnub": "3.7.*",
-    "robmorgan/phinx": "*"
+    "robmorgan/phinx": "*",
+    "illuminate/database": "5.0.*"
   },
   "require-dev":{
      "codeception/codeception": "2.0.*",
@@ -33,7 +34,8 @@
 
   "autoload":{
     "psr-4": {
-        "AlphaSSS\\": "AlphaSSS/"
+        "AlphaSSS\\": "AlphaSSS/",
+        "Codeception\\Module\\": "Mailtrap/"
     }
   },
   "extra": {

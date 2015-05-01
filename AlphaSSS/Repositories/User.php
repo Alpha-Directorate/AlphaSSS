@@ -18,4 +18,46 @@ class User {
 
 		return $found_email != NULL;
 	}
+
+	/**
+	 * Method checks is current user have specific role
+	 * 
+	 * @param string $role_key
+	 * @return boolean
+	 */
+	public static function hasRole($role_key)
+	{
+		// Detect current user
+		$current_user = wp_get_current_user();
+
+		if ( $current_user instanceof \WP_User ) {
+
+			foreach ( $current_user->roles as $role ) {
+				if ( $role == $role_key ) return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Method checks that current user has group(s) where he/she is admin
+	 * 
+	 * @return boolean
+	 */
+	public static function isAdminOfGroup()
+	{
+		// Detect current user
+		$current_user = wp_get_current_user();
+
+		if ( $current_user instanceof \WP_User ) {
+
+			// Gets all groups where current user is admin
+			$user_group = \BP_Groups_Member::get_is_admin_of($current_user->ID);
+			
+			return (boolean) $user_group['groups'];
+		}
+
+		return false;
+	}
 }

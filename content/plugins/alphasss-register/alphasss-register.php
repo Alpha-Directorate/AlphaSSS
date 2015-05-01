@@ -142,7 +142,7 @@ add_action( 'plugins_loaded', function(){
 							// Check is email already in use
 							if ( UserRepository::isEmailExists($email) ) {
 								$is_username_validation_error = true;
-								$field['validation_message']  = __('This email already in use. Please pick up another one.', 'alphasss-register');
+								$field['validation_message']  = __('This email already in use. Please pick another one.', 'alphasss-register');
 							}
 
 						} else {
