@@ -55,7 +55,7 @@ class User {
 			// Gets all groups where current user is admin
 			$user_group = \BP_Groups_Member::get_is_admin_of($current_user->ID);
 			
-			return (boolean) $user_group;
+			return (boolean) $user_group['groups'];
 		}
 
 		return false;

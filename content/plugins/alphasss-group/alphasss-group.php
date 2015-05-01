@@ -6,6 +6,7 @@
  * Author:      AlphaSSS
  * Author URI:  http://alphasss.com
  * Version:     0.0.1
+ * Text Domain: alphasss-group
  */
 
 use AlphaSSS\Repositories\User;
@@ -28,7 +29,8 @@ add_action( 'plugins_loaded', function(){
 
 	add_action( 'wp_before_admin_bar_render', function($wp_admin_bar){
 
-		if ( is_user_logged_in() AND User::isAdminOfGroup() ) {
+		// GF already has own group
+		if ( is_user_logged_in() AND User::hasRole('gf') AND User::isAdminOfGroup() ) {
 
 			global $wp_admin_bar;
 
@@ -71,7 +73,7 @@ add_action( 'plugins_loaded', function(){
 			$wp_admin_bar->add_menu( array(
 				'parent'   => 'my-account-groups',
 				'id'       => 'my-account-group-created',
-				'title'    => __( 'Group Created', 'buddypress' ),
+				'title'    => _x( 'Group Created', 'My Account Groups sub nav' ,'alphasss-group' ),
 				'position' => 0
 			) );
 		}

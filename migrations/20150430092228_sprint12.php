@@ -29,10 +29,16 @@ class Sprint12 extends AbstractMigration
         // Adding GF role
         add_role( 'gf', 'Girlfriend' );
 
-        // Add gf role to user
-        $user = ( new \WP_CLI\Fetchers\User )->get_check( 'elen' );
-        $user->remove_role( 'member' );
-        $user->add_role( 'gf' );
+        // Add gf role to elen
+        $elen = ( new \WP_CLI\Fetchers\User )->get_check( 'elen' );
+        $elen->remove_role( 'member' );
+        $elen->add_role( 'gf' );
+        //--
+
+        // Add gf role to nadya
+        $nadya = ( new \WP_CLI\Fetchers\User )->get_check( 'nadya' );
+        $nadya->remove_role( 'member' );
+        $nadya->add_role( 'gf' );
         //--
 
         // Add caps to gf
@@ -50,10 +56,16 @@ class Sprint12 extends AbstractMigration
      */
     public function down()
     {
-        // Remove gf role to user
-        $user = ( new \WP_CLI\Fetchers\User )->get_check( 'elen' );
-        $user->remove_role( 'gf' );
-        $user->add_role( 'member' );
+        // Remove gf role to elen
+        $elen = ( new \WP_CLI\Fetchers\User )->get_check( 'elen' );
+        $elen->remove_role( 'gf' );
+        $elen->add_role( 'member' );
+        //--
+
+        // Remove gf role to nadya
+        $nadya = ( new \WP_CLI\Fetchers\User )->get_check( 'nadya' );
+        $nadya->remove_role( 'gf' );
+        $nadya->add_role( 'member' );
         //--
 
         // Remove caps to gf
