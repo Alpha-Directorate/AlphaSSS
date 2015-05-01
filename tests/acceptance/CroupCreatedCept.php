@@ -14,7 +14,7 @@ $I->seeCurrentUrlEquals('/browse/elen/');
 $I->moveMouseOver("//a[@title='My Account']");
 $I->see('Group', 'li');
 $I->moveMouseOver("//a[@class='ab-item' and text()='Group']");
-$I->dontsee('Create My Group', '.ab-item');
+$I->dontSee('Create My Group');
 $I->see('Group Created', '.ab-item');
 $I->moveMouseOver("//a[@title='My Account']");
 $I->see('Log Out','.ab-item');
