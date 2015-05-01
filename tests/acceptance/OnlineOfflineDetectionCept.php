@@ -25,7 +25,6 @@ $I->seeElement("//li[@id='".md5('elen')."']/div[@class='item']/div[@class='item-
 //--
 
 // Check offline detection
-$I->wantTo('see how offline detection is works');
 $elen->does(function(AcceptanceTester $I) {
 	$I->seeCurrentUrlEquals('/browse/elen/');
 	$I->moveMouseOver("//a[@title='My Account']");
