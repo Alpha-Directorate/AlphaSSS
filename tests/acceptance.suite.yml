@@ -16,6 +16,7 @@ modules:
             url: 'https://tests.alphasss.com/'
             browser: phantomjs
             window_size: maximize
+            restart: true
             capabilities:
                 handlesAlerts: true
                 webStorageEnabled: true
