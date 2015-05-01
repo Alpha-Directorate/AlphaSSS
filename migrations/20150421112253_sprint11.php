@@ -57,8 +57,8 @@ class Sprint11 extends AbstractMigration
         //--
 
         // Change owner of test group
-        $this->execute( 'UPDATE `wp_bp_groups` SET `creator_id` = 78 WHERE `id`=1' );
-        $this->execute( 'UPDATE `wp_bp_groups_members` SET `user_id` = 78 WHERE `id`=1' );
+        $this->execute( 'UPDATE `wp_bp_groups` SET `creator_id` = 80 WHERE `id`=1' );
+        $this->execute( 'UPDATE `wp_bp_groups_members` SET `user_id` = 80 WHERE `id`=1' );
         //--
 
         // Delete 1-on-1 Video Chat
