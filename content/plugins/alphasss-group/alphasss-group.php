@@ -80,6 +80,14 @@ add_action( 'plugins_loaded', function(){
 
 	}, 10, 2 );
 
+	// Removing Settings and Forum from group creation process
+	add_action( 'bp_before_create_group_content_template', function(){
+		global $bp;
+
+		unset( $bp->groups->group_creation_steps['group-settings'] );
+		unset( $bp->groups->group_creation_steps['forum'] );
+	}, 10, 2 );
+
 });
 
 
