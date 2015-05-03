@@ -1,0 +1,23 @@
+class_name: SeleniumTester
+modules:
+    enabled:
+        - WebDriver
+        - AcceptanceHelper
+        - MailtrapHelper
+        - Mailtrap
+    config:
+        WebDriver:
+            url: 'https://tests.alphasss.com/'
+            browser: firefox
+            window_size: maximize
+            port: 4445
+            restart: true
+            capabilities:
+                handlesAlerts: true
+                webStorageEnabled: true
+        Mailtrap:
+            client_id: 08493505f33c2869394436d943262395 
+            inbox_id: 43225
+        MailtrapHelper:
+            client_id: 08493505f33c2869394436d943262395 
+            inbox_id: 43225
