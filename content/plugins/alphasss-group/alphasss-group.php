@@ -88,6 +88,16 @@ add_action( 'plugins_loaded', function(){
 		unset( $bp->groups->group_creation_steps['forum'] );
 	}, 10, 2 );
 
+	// Pre define group name
+	add_action( 'bp_get_new_group_name', function($group_name){
+
+		if (! $group_name) {
+			$group_name = sprintf( __( "%s's Group", 'alphasss-group' ), ucfirst( bp_core_get_user_displayname( bp_loggedin_user_id() ) ) );
+		}
+
+		return $group_name;
+	});
+
 });
 
 
