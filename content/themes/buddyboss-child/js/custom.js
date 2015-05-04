@@ -12,6 +12,5 @@ jQuery(document).ready(function($) {
 
 	// Reposition when a modal is shown
 	$('.modal').on('show.bs.modal', reposition);
-alert('ss');
-	 $('[data-toggle="tooltip"]').tooltip();
+	$('[data-toggle="tooltip"]').tooltip();
 });
