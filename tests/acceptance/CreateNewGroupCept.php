@@ -18,6 +18,19 @@ $I->seeCurrentUrlEquals('/groups/create/step/group-details/');
 $I->see('1. Details');
 $I->see('2. Photo');
 $I->see('3. Invites');
+
+// Tooltips tests
+$I->dontSee('Group Name Create Tooltip');
+$I->seeElement('//label[@for="group-name"]/ul/li[2]/div[@class="alphasss-tooltip"]');
+$I->moveMouseOver('//label[@for="group-name"]/ul/li[2]/div[@class="alphasss-tooltip"]');
+$I->see('Group Name Create Tooltip');
+
+$I->dontSee('Group Description Create Tooltip');
+$I->seeElement('//label[@for="group-desc"]/ul/li[2]/div[@class="alphasss-tooltip"]');
+$I->moveMouseOver('//label[@for="group-desc"]/ul/li[2]/div[@class="alphasss-tooltip"]');
+$I->see('Group Description Create Tooltip');
+//--
+
 $I->seeElement('//input[@id="group-creation-create" and @value="Create My Group and Continue"]');
 $I->moveMouseOver("//a[@title='My Account']");
 $I->see('Log Out','.ab-item');
