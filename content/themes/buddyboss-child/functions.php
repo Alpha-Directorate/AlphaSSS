@@ -44,17 +44,16 @@ function buddyboss_child_scripts_styles()
    * http://codex.wordpress.org/Function_Reference/wp_deregister_style
    **/
 
-  /*
+  wp_enqueue_script( 'bootstrap-js', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js', array('jquery') );
+  wp_enqueue_script( 'custom-js', get_stylesheet_directory_uri() . '/js/custom.js', array('bootstrap-js') );
+
+    /*
    * Styles
    */
   wp_enqueue_style( 'buddyboss-child-custom', get_stylesheet_directory_uri().'/css/custom.css' );
+  wp_enqueue_style( 'bootstrap-css', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' );
 }
 add_action( 'wp_enqueue_scripts', 'buddyboss_child_scripts_styles', 9999 );
-
-// Add bootstrap
-wp_enqueue_script( 'bootstrap-js', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js', array('jquery') );
-wp_enqueue_style( 'bootstrap-css', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' );
-//
 
 add_filter('alphasss_top_alerts', function(){
 
@@ -69,7 +68,7 @@ add_filter('alphasss_top_alerts', function(){
 
 function tooltip($translation, $position = 'top')
 {
- 	return sprintf('<div class="alphasss-tooltip" data-toggle="tooltip" data-placement="top" title="%s"></div>', $translation);
+ 	return sprintf('<div class="alphasss-tooltip" data-delay-show="100" data-toggle="tooltip" data-placement="top" title="%s"></div>', $translation);
 }
 
 
