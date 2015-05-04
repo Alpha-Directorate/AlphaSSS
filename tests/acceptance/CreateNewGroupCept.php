@@ -19,6 +19,9 @@ $I->see('1. Details');
 $I->see('2. Photo');
 $I->see('3. Invites');
 
+// Check pre definded group name
+$I->seeInField('#group-name', "Nadya's Group");
+
 // Tooltips tests
 $I->dontSee('Group Name Create Tooltip');
 $I->seeElement('//label[@for="group-name"]/ul/li[2]/div[@class="alphasss-tooltip"]');
