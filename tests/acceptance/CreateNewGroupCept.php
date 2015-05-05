@@ -22,6 +22,14 @@ $I->see('3. Invites');
 // Check pre definded group name
 $I->seeInField('#group-name', "nadya's Group");
 
+$I->amGoingTo('check group description javascript');
+$I->see('140 characters left', '#about-count');
+$text = " AlphaSSS ";
+$I->fillField('#group-desc', $text);
+$I->see((140 - strlen($text)) . ' characters left', '#about-count');
+$I->fillField('#group-desc',  str_repeat($text, 100));
+$I->see('0 characters left', '#about-count');
+
 // Tooltips tests
 $I->dontSee('Group Name Create Tooltip');
 $I->seeElement('//label[@for="group-name"]/ul/li[2]/div[@class="alphasss-tooltip"]');

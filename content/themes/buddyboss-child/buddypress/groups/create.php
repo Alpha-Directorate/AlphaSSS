@@ -4,6 +4,21 @@
 
 	<?php do_action( 'bp_before_create_group_content_template' ); ?>
 
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+	
+			$("#about-count").text((140 - $('#group-desc').val().length) + " <?php _e('characters left'); ?>" )
+
+			$("#group-desc").keydown(function(){
+				$("#about-count").text((140 - $(this).val().length) + " <?php _e('characters left'); ?>" );
+			});
+
+			$("#group-desc").keyup(function(){
+				$("#about-count").text((140 - $(this).val().length) + " <?php _e('characters left'); ?>" );
+			});
+		});
+	</script>
+
 	<form action="<?php bp_group_creation_form_action(); ?>" method="post" id="create-group-form" class="standard-form" enctype="multipart/form-data">
 
 		<?php do_action( 'bp_before_create_group' ); ?>
@@ -42,7 +57,8 @@
 							<li><?php echo tooltip( __( 'Group Description Create Tooltip', 'buddypress' ) ); ?></li>
 						</ul>
 					</label>
-					<textarea name="group-desc" id="group-desc" aria-required="true"><?php bp_new_group_description(); ?></textarea>
+					<textarea name="group-desc" maxlength="140" id="group-desc" aria-required="true"><?php bp_new_group_description(); ?></textarea>
+					<span id="about-count" style="float:right"></span>
 				</div>
 
 				<?php
