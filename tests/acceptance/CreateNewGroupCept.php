@@ -20,7 +20,7 @@ $I->see('2. Photo');
 $I->see('3. Invites');
 
 // Check pre definded group name
-$I->seeInField('#group-name', "Nadya's Group");
+$I->seeInField('#group-name', "nadya's Group");
 
 // Tooltips tests
 $I->dontSee('Group Name Create Tooltip');
