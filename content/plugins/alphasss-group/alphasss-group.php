@@ -10,17 +10,28 @@
  */
 
 use AlphaSSS\Repositories\User;
+use AlphaSSS\Helpers\Arr;
 
 load_plugin_textdomain( 'alphasss-group', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 add_action( 'plugins_loaded', function(){
 
+	global $bp;
+
 	add_filter ('bp_user_can_create_groups', function($can_create, $restricted) {
 
-		$can_create_group = false;
+		global $bp;
 
+		$can_create_group = false;
 		if ( User::hasRole('gf') AND ! User::isAdminOfGroup() ) {
 			 $can_create_group = true;
+		} else if ( bp_is_current_component('groups') AND bp_is_current_action('create') ) {
+
+			$current_step = Arr::get( $bp->action_variables, 1 );
+
+			if ( Arr::get( $bp->action_variables, 0 ) == 'step' ) {
+				$can_create_group = true;
+			}
 		}
 
 		return $can_create_group;
@@ -97,5 +108,4 @@ add_action( 'plugins_loaded', function(){
 
 		return $group_name;
 	});
-
 });
