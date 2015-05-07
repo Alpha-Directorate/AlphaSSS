@@ -109,6 +109,9 @@ function groups_action_create_group() {
 		bp_core_redirect( trailingslashit( bp_get_root_domain() . '/' . bp_get_groups_root_slug() ) );
 	}
 
+	unset( $bp->groups->group_creation_steps['group-settings'] );
+	unset( $bp->groups->group_creation_steps['forum'] );
+
 	// Make sure creation steps are in the right order
 	groups_action_sort_creation_steps();
 

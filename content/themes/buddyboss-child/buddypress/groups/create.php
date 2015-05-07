@@ -4,21 +4,6 @@
 
 	<?php do_action( 'bp_before_create_group_content_template' ); ?>
 
-	<script type="text/javascript">
-		jQuery(document).ready(function($) {
-	
-			$("#about-count").text((140 - $('#group-desc').val().length) + " <?php _e('characters left'); ?>" )
-
-			$("#group-desc").keydown(function(){
-				$("#about-count").text((140 - $(this).val().length) + " <?php _e('characters left'); ?>" );
-			});
-
-			$("#group-desc").keyup(function(){
-				$("#about-count").text((140 - $(this).val().length) + " <?php _e('characters left'); ?>" );
-			});
-		});
-	</script>
-
 	<form action="<?php bp_group_creation_form_action(); ?>" method="post" id="create-group-form" class="standard-form" enctype="multipart/form-data">
 
 		<?php do_action( 'bp_before_create_group' ); ?>
@@ -39,6 +24,21 @@
 			<?php if ( bp_is_group_creation_step( 'group-details' ) ) : ?>
 
 				<?php do_action( 'bp_before_group_details_creation_step' ); ?>
+
+				<script type="text/javascript">
+					jQuery(document).ready(function($) {
+				
+						$("#about-count").text((140 - $('#group-desc').val().length) + " <?php _e('characters left'); ?>" )
+
+						$("#group-desc").keydown(function(){
+							$("#about-count").text((140 - $(this).val().length) + " <?php _e('characters left'); ?>" );
+						});
+
+						$("#group-desc").keyup(function(){
+							$("#about-count").text((140 - $(this).val().length) + " <?php _e('characters left'); ?>" );
+						});
+					});
+				</script>
 
 				<div>
 					<label for="group-name">
