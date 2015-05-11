@@ -118,11 +118,13 @@ add_action( 'plugins_loaded', function(){
 		}
 	}, 100 );
 
-	// Remove "Manage" section for Girlfriend
+	// Remove "Manage" section for Girlfriend even if Girlfriend is admin of group
 	add_action( 'groups_setup_nav', function(){
+		global $bp;
 
+		// Is this group page and user don't have role administrator
 		if ( bp_is_group() AND ! User::hasRole( 'administrator' ) ) {
-			bp_core_remove_subnav_item('sex-lovers-united', 'admin');
+			bp_core_remove_subnav_item($bp->groups->current_group->slug, 'admin');
 		}
 	}, 100 );
 });
