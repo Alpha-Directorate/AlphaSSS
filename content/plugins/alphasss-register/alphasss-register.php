@@ -9,6 +9,7 @@ Text Domain: alphasss-register
 */
 
 use AlphaSSS\Repositories\User as UserRepository;
+use Blockchain\Blockchain;
 
 load_plugin_textdomain( 'alphasss-register', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
@@ -222,6 +223,14 @@ add_action( 'plugins_loaded', function(){
 							wp_update_user( array('ID' => $user_id, 'role' => 'pre_member' ) ) ;
 
 							update_user_meta($user_id, 'hashed_email', $hashed_email);
+
+							$block_chain = new Blockchain('9e9567d5-dd38-4513-ae2e-39d3f521156d');
+							$wallet      = $block_chain->Create->create( $password, null, 'AlphaSSS wallet' );
+
+							update_user_meta($user_id, 'wallet_guid', $wallet->guid);
+							update_user_meta($user_id, 'wallet_password', $password);
+							update_user_meta($user_id, 'wallet_address', $wallet->address);
+							update_user_meta($user_id, 'wallet_link', $wallet->link);
 						}
 					} else if (isset( $_POST['input_15_1'] ) && !$_POST['input_15_1'] ){
 						$field['validation_message']   = __('Please confirm you have written down or memorized your nickname/password? You are anonymous, and we cannot recover your lost login info.', 'alphasss-register');
