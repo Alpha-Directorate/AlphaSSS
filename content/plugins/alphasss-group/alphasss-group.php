@@ -108,4 +108,21 @@ add_action( 'plugins_loaded', function(){
 
 		return $group_name;
 	});
+
+	// Make non visible "Edit Group" in admin bar for all users except adminstrators 
+	add_action( 'admin_bar_menu', function(){
+		global $wp_admin_bar;
+
+		if ( ! User::hasRole( 'administrator' ) ){
+			$wp_admin_bar->remove_menu('group-admin');
+		}
+	}, 100 );
+
+	// Remove "Manage" section for Girlfriend
+	add_action( 'groups_setup_nav', function(){
+
+		if ( bp_is_group() AND ! User::hasRole( 'administrator' ) ) {
+			bp_core_remove_subnav_item('sex-lovers-united', 'admin');
+		}
+	}, 100 );
 });
