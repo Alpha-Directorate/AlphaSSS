@@ -49,6 +49,7 @@ $I->click('//input[@id="group-creation-next"]');
 $I->seeCurrentUrlEquals('/groups/create/step/group-invites/');
 $I->click('//input[@id="group-creation-finish"]');
 $I->seeCurrentUrlEquals('/groups/nadyas-group/');
+$I->seeElement('#nav-forum');
 $I->moveMouseOver("//a[@title='My Account']");
 $I->see('Log Out','.ab-item');
 $I->click("//a[@class='ab-item' and text()='Log Out']");

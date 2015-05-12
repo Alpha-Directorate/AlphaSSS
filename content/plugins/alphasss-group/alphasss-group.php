@@ -127,4 +127,26 @@ add_action( 'plugins_loaded', function(){
 			bp_core_remove_subnav_item($bp->groups->current_group->slug, 'admin');
 		}
 	}, 100 );
+
+	add_action('groups_created_group', function($group_id){
+
+		$group = new BP_Groups_Group($group_id);
+
+		// Customize group options 
+		$group->status       = 'private';
+		$group->enable_forum = 1;
+		$group->save();
+		//--
+
+		// Create the initial forum for group
+		$forum_id = bbp_insert_forum( array(
+			'post_parent'  => bbp_get_group_forums_root_id(),
+			'post_title'   => $group->name,
+			'post_content' => $group->description,
+			'post_status'  => 'private'
+		) );
+
+		bbp_add_forum_id_to_group( $group_id, $forum_id );
+		bbp_add_group_id_to_forum( $forum_id, $group_id );
+	}, 100);
 });
