@@ -138,7 +138,15 @@ add_action( 'plugins_loaded', function(){
 		$group->save();
 		//--
 
-		// Create forum for group
-		groups_new_group_forum($group_id, $group->name, $group->description);
+		// Create the initial forum
+		$forum_id = bbp_insert_forum( array(
+			'post_parent'  => bbp_get_group_forums_root_id(),
+			'post_title'   => $group->name,
+			'post_content' => $group->description,
+			'post_status'  => 'private'
+		) );
+
+		bbp_add_forum_id_to_group( $group_id, $forum_id );
+		bbp_add_group_id_to_forum( $forum_id, $group_id );
 	}, 100);
 });
