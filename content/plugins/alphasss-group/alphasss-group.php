@@ -124,7 +124,7 @@ add_action( 'plugins_loaded', function(){
 
 		// Is this group page and user don't have role administrator
 		if ( bp_is_group() AND ! User::hasRole( 'administrator' ) ) {
-			//bp_core_remove_subnav_item($bp->groups->current_group->slug, 'admin');
+			bp_core_remove_subnav_item($bp->groups->current_group->slug, 'admin');
 		}
 	}, 100 );
 
@@ -138,7 +138,7 @@ add_action( 'plugins_loaded', function(){
 		$group->save();
 		//--
 
-		// Create the initial forum
+		// Create the initial forum for group
 		$forum_id = bbp_insert_forum( array(
 			'post_parent'  => bbp_get_group_forums_root_id(),
 			'post_title'   => $group->name,
