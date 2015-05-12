@@ -16,6 +16,7 @@ $I->see('Group', 'li');
 $I->moveMouseOver("//a[@class='ab-item' and text()='Group']");
 $I->dontSee('Create My Group');
 
+// Check group created 
 $I->seeElement('//ul[@id="wp-admin-bar-my-account-groups-default"]/li[@id="wp-admin-bar-my-account-group-created"]/div[@class="ab-item ab-empty-item"]');
 $I->moveMouseOver("//a[@title='My Account']");
 $I->see('Log Out','.ab-item');
