@@ -124,7 +124,21 @@ add_action( 'plugins_loaded', function(){
 
 		// Is this group page and user don't have role administrator
 		if ( bp_is_group() AND ! User::hasRole( 'administrator' ) ) {
-			bp_core_remove_subnav_item($bp->groups->current_group->slug, 'admin');
+			//bp_core_remove_subnav_item($bp->groups->current_group->slug, 'admin');
 		}
 	}, 100 );
+
+	add_action('groups_created_group', function($group_id){
+
+		$group = new BP_Groups_Group($group_id);
+
+		// Customize group options 
+		$group->status       = 'private';
+		$group->enable_forum = 1;
+		$group->save();
+		//--
+
+		// Create forum for group
+		groups_new_group_forum($group_id, $group->name, $group->description);
+	}, 100);
 });
