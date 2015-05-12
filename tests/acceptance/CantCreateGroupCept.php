@@ -14,7 +14,7 @@ $I->seeCurrentUrlEquals('/browse/saybb/');
 $I->moveMouseOver("//a[@title='My Account']");
 $I->see('Group', 'li');
 $I->moveMouseOver("//a[@class='ab-item' and text()='Group']");
-$I->dontSee('Create My Group');
+$I->dontSeeElement('//ul[@id="wp-admin-bar-my-account-groups-default"]/li[@id="wp-admin-bar-my-account-groups-create"]/a[@class="ab-item"');
 $I->moveMouseOver("//a[@title='My Account']");
 $I->see('Log Out','.ab-item');
 $I->click("//a[@class='ab-item' and text()='Log Out']");
