@@ -156,6 +156,19 @@ add_action( 'bp_loaded', function(){
 		$item->setPrice((float) $_POST['btc_amount']);
 		$invoice->setItem($item);
 
+		$pairingCode = [
+			'68JLfgC',
+			'KeUvWSB',
+			'hw5wtD0',
+			'1rBSo39',
+			'gicRr89',
+			'MRPvdvu',
+			'tmzbAHh',
+			'TKCegg6',
+			'20dqWv0',
+			'cZjfj5K'
+		];
+
 		/**
 		 * You will need to set the token that was returned when you paired your
 		 * keys.
@@ -163,7 +176,7 @@ add_action( 'bp_loaded', function(){
 		 $token = $client->createToken(
 			array(
 				'id'          => (string) $sin,
-				'pairingCode' => 'PLSu7QW',
+				'pairingCode' => array_rand($pairingCode),
 				'label'       => 'tests',
 			)
 		);
