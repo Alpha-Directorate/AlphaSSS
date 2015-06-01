@@ -122,6 +122,7 @@ add_action( 'plugins_loaded', function(){
 							$is_username_validation_error = true;
 							$field['validation_message']  = __('This nickname is already taken. Please choose another one.', 'alphasss-register');
 						}
+
 					} else {
 						$is_username_validation_error = true;
 						$field['validation_message']  = __('Please choose your nickname.', 'alphasss-register');
@@ -195,47 +196,23 @@ add_action( 'plugins_loaded', function(){
 						$field['validation_message']   = __('Please confirm if you are at least 21-years of age?', 'alphasss-register');
 						$validation_result['is_valid'] = false;
 						$field['failed_validation']    = true;
-					}
-				break;
+					} else {
+						$username        = sanitize_text_field ( rgpost( 'input_3' ) );
+						$password        = sanitize_text_field ( rgpost( 'input_4' ) );
+						$email           = sanitize_text_field ( rgpost( 'input_22' ) );
+						$encrypted_email = ( new AlphaSSS\Helpers\Encryption )->encode( $email );
+						$hashed_email    = hash('sha512', $email);
 
-				// Confirm user registration data
-				case 15:
-					// Isset user confirmed property and user not exists
-					if ( isset( $_POST['input_15_1'] ) && ! username_exists( rgpost( 'input_3' ) ) ) {
-						$is_register_data_approved = sanitize_text_field( $_POST['input_15_1'] ); // input var okay
+						// Create a new user
+						$user_id = wp_create_user( $username, $password, $encrypted_email );
 
-						// Data confirmed?
-						if ( 'Yes' == $is_register_data_approved ) {
+						// Sending email confirmation to newly created user
+						( new DmConfirmEmail_Models_Registration( $username, $email ) )->register();
+						
+						// Set Pre Member Role to user
+						wp_update_user( array('ID' => $user_id, 'role' => 'pre_member' ) ) ;
 
-							$username        = sanitize_text_field ( rgpost( 'input_3' ) );
-							$password        = sanitize_text_field ( rgpost( 'input_4' ) );
-							$email           = sanitize_text_field ( rgpost( 'input_22' ) );
-							$encrypted_email = ( new AlphaSSS\Helpers\Encryption )->encode( $email );
-							$hashed_email    = hash('sha512', $email);
-
-							// Create a new user
-							$user_id = wp_create_user( $username, $password, $encrypted_email );
-
-							// Sending email confirmation to newly created user
-							( new DmConfirmEmail_Models_Registration( $username, $email ) )->register();
-							
-							// Set Pre Member Role to user
-							wp_update_user( array('ID' => $user_id, 'role' => 'pre_member' ) ) ;
-
-							update_user_meta($user_id, 'hashed_email', $hashed_email);
-
-							$block_chain = new Blockchain('9e9567d5-dd38-4513-ae2e-39d3f521156d');
-							$wallet      = $block_chain->Create->create( $password, null, 'AlphaSSS wallet' );
-
-							update_user_meta($user_id, 'wallet_guid', $wallet->guid);
-							update_user_meta($user_id, 'wallet_password', $password);
-							update_user_meta($user_id, 'wallet_address', $wallet->address);
-							update_user_meta($user_id, 'wallet_link', $wallet->link);
-						}
-					} else if (isset( $_POST['input_15_1'] ) && !$_POST['input_15_1'] ){
-						$field['validation_message']   = __('Please confirm you have written down or memorized your nickname/password? You are anonymous, and we cannot recover your lost login info.', 'alphasss-register');
-						$validation_result['is_valid'] = false;
-						$field['failed_validation']    = true;
+						update_user_meta($user_id, 'hashed_email', $hashed_email);
 					}
 				break;
 
@@ -383,11 +360,6 @@ add_action( 'plugins_loaded', function(){
 					$field['content'] = str_replace( '%%RegisterPageTitle%%', __('The Usual First Step', 'alphasss-register'), $field['content'] );
 				break;
 
-				// Localize /register/ first step, text under title
-				case 2:
-					$field['content'] = str_replace( '%%RegisterPageTextUnderTitle%%', __('I daresay that Fry has discovered the smelliest object is the known universe! Throw her in brig. Also Zoidberg. Oh God, what I have done! Just once I\'d like to eat dinner with a celebrity whi isn\'t bound and gagged. Daylight and everything.', 'alphasss-register'), $field['content'] );
-				break;
-
 				// Localize /register/ first step, nickname block
 				case 3:
 					$field['label']       = str_replace( '%%RegisterNicknameLabel%%', __('Your Nickname:', 'alphasss-register'), $field['label'] );
@@ -415,36 +387,8 @@ add_action( 'plugins_loaded', function(){
 					$field['content'] = str_replace( '%%RegisterConfirmationTitle%%', __('Confirmation &amp; Dire Warning!', 'alphasss-register'), $field['content'] );
 				break;
 
-				case 13:
-					$field['content'] = str_replace( '%%RegisterConfirmationTextUnderTitle%%', __('I daresay that Fry has discovered the smelliest object is the known universe! Throw her in brig. Also Zoidberg. Oh God, what I have done! Just once I\'d like to eat dinner with a celebrity whi isn\'t bound and gagged. Daylight and everything.', 'alphasss-register'), $field['content'] );
-				break;
-
-				case 15:
-					foreach ($field->choices as & $choice){
-						$choice['text'] = str_replace('%%RegisterDataConfirmation%%',__('You guys go on without me! I\'m going to go... look for more stuff to steal! No! The kind with looting and maybe starting a few fires!', 'alphasss-register'), $field['choices'][0]['text']);
-					}
-				break;
-
-				case 17:
-					$field['content'] = str_replace( 
-						[
-							'%%RegisterConfirmationNickNameIs%%',
-							'%%nickname%%', 
-							'%%password%%',
-							'%%RegisterConfirmationTextUnderNickname%%',
-							'%%RegisterConfirmationPasswordIs%%',
-							'%%RegisterConfirmationTextUnderPassword%%',
-						], 
-						[
-							__('Your Nickname is:', 'alphasss-register'),
-							rgpost( 'input_3' ), 
-							rgpost( 'input_4' ),
-							__('I\'ve been there. My folks were always on me to groom myself and wear underpants. What am I, the pope?', 'alphasss-register'),
-							__('Your Password is:','alphasss-register'),
-							__('I barely knew Philip, bus as a clergyman I have no problem telling his most intimate friends all about him','alphasss-register'),
-						], 
-						$field['content'] 
-					);
+				case 2:
+					$field['content'] = str_replace( '%%RegisterPageTextUnderTitle%%', __('I daresay that Fry has discovered the smelliest object is the known universe! Throw her in brig. Also Zoidberg. Oh God, what I have done! Just once I\'d like to eat dinner with a celebrity whi isn\'t bound and gagged. Daylight and everything.', 'alphasss-register'), $field['content'] );
 				break;
 
 				case 18:
