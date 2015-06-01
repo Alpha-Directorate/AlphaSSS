@@ -24,7 +24,9 @@
     "nesbot/carbon": "~1.14",
     "pubnub/pubnub": "3.7.*",
     "robmorgan/phinx": "*",
-    "illuminate/database": "5.0.*"
+    "illuminate/database": "5.0.*",
+    "blockchain/blockchain": "dev-master",
+    "bitpay/php-client": "~2.0"
   },
   "require-dev":{
      "codeception/codeception": "2.0.*",
