@@ -76,6 +76,9 @@ add_action( 'plugins_loaded', function(){
 							bp_set_member_type(get_current_user_id(), 'member');
 
 							alphasss_invitation()->update_invitation_code( $invite_code, array('activated_member_id' => $user->ID) );
+
+							// Added custom action
+							do_action('member_registered');
 							
 						} else {
 							$_SESSION['guessing-attempts']++;
@@ -200,11 +203,13 @@ add_action( 'plugins_loaded', function(){
 						$username        = sanitize_text_field ( rgpost( 'input_3' ) );
 						$password        = sanitize_text_field ( rgpost( 'input_4' ) );
 						$email           = sanitize_text_field ( rgpost( 'input_22' ) );
-						$encrypted_email = ( new AlphaSSS\Helpers\Encryption )->encode( $email );
+						$encrypted_email = ( new AlphaSSS\Helpers\Encryption )->encode( $email ) . '@alphasss.com';
 						$hashed_email    = hash('sha512', $email);
 
 						// Create a new user
 						$user_id = wp_create_user( $username, $password, $encrypted_email );
+
+						$user = get_userdata($user_id);
 
 						// Sending email confirmation to newly created user
 						( new DmConfirmEmail_Models_Registration( $username, $email ) )->register();
@@ -268,6 +273,9 @@ add_action( 'plugins_loaded', function(){
 								bp_set_member_type($user->ID, 'member');
 
 								alphasss_invitation()->update_invitation_code($invite_code, array('activated_member_id' => $user->ID));
+
+								// Added custom action
+								do_action('member_registered');
 							} else {
 								$validation_result['is_valid'] = false;
 								$field['failed_validation']    = true;
