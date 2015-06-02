@@ -14,6 +14,7 @@ require_once('models/login-confirm.php');
 require_once('models/login-resend.php');
 require_once('models/plugin-page.php');
 require_once('models/welcome_message.php');
+require_once('models/member.php');
 require_once('inc/pluggable.php');
 
 class DmConfirmEmail {
@@ -45,6 +46,9 @@ class DmConfirmEmail {
 
         // Welcome email
         new DmConfirmEmail_Models_WelcomeMessage();
+
+        // Member confirm member
+        new DmConfirmEmail_Models_Member();
 
         // Enqueue admin script
         add_action('admin_enqueue_scripts', array($this, 'enqueueScripts'));
