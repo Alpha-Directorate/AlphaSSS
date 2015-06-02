@@ -26,8 +26,10 @@ class DmConfirmEmail_Models_Member {
 			$message = html_entity_decode($parsedMessage);
 			$email   = ( new AlphaSSS\Helpers\Encryption )->decode( str_replace('@alphasss.com', '', $user->user_email) );
 
+			$headers[] = 'Bcc: ' . get_option('admin_email');
+
 			// Send email
-			$send = wp_mail( $email, $subject, $message );
+			$send = wp_mail( $email, $subject, $message, $headers );
 		});
 	}
 }
