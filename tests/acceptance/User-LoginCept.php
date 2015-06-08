@@ -18,5 +18,3 @@ $I->click("//a[@class='ab-item' and text()='Log Out']");
 $I->seeCurrentUrlEquals('/browse/founder_counselor/?loggedout=true');
 $I->see('Register','li');
 $I->see('Login','.button');
-
-
