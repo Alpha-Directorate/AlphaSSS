@@ -29,3 +29,11 @@ $I->see('Your Invitation Code','h1');
 $I->receiveAnEmailWithSubject('Email Confirmation');
 //$I->seeInEmailTextBody('Hello ' . $username . ',');
 //$I->seeInEmailTextBody('To confirm your email, please click the link below');
+$I->seeActivationLink();
+$I->amOnPage($I->getActivationLink());
+
+$I->fillField('log',$username);
+$I->fillField('pwd', $password);
+$I->click('Log In');
+$I->seeCurrentUrlEquals('/register-pre-member/');
+$I->dontSeeElement('#wp-admin-bar-user-credits');
