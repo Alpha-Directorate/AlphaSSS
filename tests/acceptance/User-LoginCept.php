@@ -12,7 +12,6 @@ $I->click('Log In');
 $I->seeCurrentUrlEquals('/browse/founder_counselor/');
 $I->dontSee('Login','.button');
 $I->dontSee('Register','li');
-$I->seeElement('#wp-admin-bar-user-credits');
 $I->moveMouseOver("//a[@title='My Account']");
 $I->see('Log Out','.ab-item');
 $I->click("//a[@class='ab-item' and text()='Log Out']");

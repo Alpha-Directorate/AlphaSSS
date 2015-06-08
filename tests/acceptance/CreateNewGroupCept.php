@@ -13,7 +13,6 @@ $I->seeElement('#wp-admin-bar-user-credits');
 $I->moveMouseOver("//a[@title='My Account']");
 $I->see('Group', 'li');
 $I->moveMouseOver("//a[@class='ab-item' and text()='Group']");
-$I->seeElement('//ul[@id="wp-admin-bar-my-account-groups-default"]/li[@id="wp-admin-bar-my-account-groups-create"]/a');
 $I->click('//ul[@id="wp-admin-bar-my-account-groups-default"]/li[@id="wp-admin-bar-my-account-groups-create"]/a[@class="ab-item"]');
 $I->seeCurrentUrlEquals('/groups/create/step/group-details/');
 $I->see('1. Details');
