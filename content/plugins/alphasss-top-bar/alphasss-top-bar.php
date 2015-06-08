@@ -17,6 +17,7 @@ load_plugin_textdomain('alphasss-top-bar', false, basename(dirname( __FILE__ )) 
 add_action( 'plugins_loaded', function(){
 
 	if (is_user_logged_in()) {
+
 		add_action( 'admin_bar_menu', function($wp_admin_bar){
 
 			$user_id      = get_current_user_id();
@@ -80,6 +81,15 @@ add_action( 'plugins_loaded', function(){
 				'href'     => wp_logout_url(),
 				'position' => 3
 			) );
+
+			if ( current_user_can('generate_invitation_code') ) {
+				$wp_admin_bar->add_menu( array(
+					'parent'    => 'top-secondary',
+					'id'        => 'user-credits',
+					'title'     => '<img class="avatar user-78-avatar avatar-26 photo" height="26" width="26" alt="' . __('Buy Credits') . '" title="' . __('Buy Credits') . '" src="' . plugins_url( 'assets/img/coin_single_gold.png', __FILE__ ) . '">',
+					'href'      => wp_logout_url(),
+				) );
+			}
 			//--
 
 		});
