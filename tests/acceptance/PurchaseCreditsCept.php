@@ -9,7 +9,7 @@ $I->seeCurrentUrlEquals('/wp/wp-login.php');
 $I->fillField('log','saybb');
 $I->fillField('pwd','funkadelicbro87');
 $I->click('Log In');
-$I->seeCurrentUrlEquals('/browse/founder_counselor/');
+$I->seeCurrentUrlEquals('/browse/saybb/');
 $I->dontSee('Login','.button');
 $I->dontSee('Register','li');
 $I->seeElement('#wp-admin-bar-user-credits');
