@@ -11,6 +11,8 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+use AlphaSSS\HTTP\HTTP;
+
 //Loads the plugin's translated strings
 load_plugin_textdomain('alphasss-top-bar', false, basename(dirname( __FILE__ )) . '/languages');
 
@@ -87,7 +89,7 @@ add_action( 'plugins_loaded', function(){
 					'parent'    => 'top-secondary',
 					'id'        => 'user-credits',
 					'title'     => '<img class="avatar user-78-avatar avatar-26 photo" height="26" width="26" alt="' . __('Buy Credits') . '" title="' . __('Buy Credits') . '" src="' . plugins_url( 'assets/img/coin_single_gold.png', __FILE__ ) . '">',
-					'href'      => wp_logout_url(),
+					'href'      => str_replace( '/wp', '',  site_url( '/purchase-credits/', HTTP::protocol() ) ),
 				) );
 			}
 			//--

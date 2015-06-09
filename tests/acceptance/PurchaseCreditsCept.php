@@ -10,7 +10,7 @@ $I->fillField('log','saybb');
 $I->fillField('pwd','funkadelicbro87');
 $I->click('Log In');
 $I->seeCurrentUrlEquals('/browse/saybb/');
-$I->dontSee('Login','.button');
-$I->dontSee('Register','li');
 $I->seeElement('#wp-admin-bar-user-credits');
+$I->click('#wp-admin-bar-user-credits a');
+$I->seeCurrentUrlEquals('/purchase-credits/');
 ?>
