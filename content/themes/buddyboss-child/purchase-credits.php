@@ -19,15 +19,18 @@ Template Name: Purchase Credits
 		<div id="content" role="main">
 
 			<h1 class="entry-title"><?php _e('Select Credits'); ?></h1>
-
+			<br />
 			<p><?php _e('How many Credits would you like to buy?'); ?></p>
 
 			<form >
-				<select>
-					
+				<select class="form-control" id="credit-selection">
+					<option value=""><?php _e('Any amount you choose:'); ?></option>
+					<?php foreach(\AlphaSSS\Repositories\Credit::creditList() as $amount):?>
+						<option value="<?php echo $amount; ?>"><?php printf(__('%d Credits ($%d USD)'), $amount*100, $amount);?></option>
+					<?php endforeach;?>
 				</select>
-
-				<button>Proceed to Payment</button>
+				<br />
+				<button><?php _e('Proceed to Payment');?></button>
 			</form>
 
 		</div><!-- #content -->
