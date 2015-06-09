@@ -63,7 +63,7 @@ add_action( 'bp_loaded', function(){
 		}
 	}
 
-	
+
 
 	/**
 	 * This action send money to user

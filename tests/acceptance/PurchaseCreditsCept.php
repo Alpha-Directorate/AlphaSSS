@@ -13,4 +13,5 @@ $I->seeCurrentUrlEquals('/browse/saybb/');
 $I->seeElement('#wp-admin-bar-user-credits');
 $I->click('#wp-admin-bar-user-credits a');
 $I->seeCurrentUrlEquals('/purchase-credits/');
+$I->seeElement('#credit-selection');
 ?>
