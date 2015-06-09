@@ -1,15 +1,14 @@
 <?php
 /**
- * Plugin Name: AlphaSSS Donation
+ * Plugin Name: AlphaSSS Credits
  * Plugin URI:  http://alphasss.com/
- * Description: Alphasss micro donation plugin
+ * Description: Alphasss credits plugin
  * Author:      AlphaSSS
  * Author URI:  http://alphasss.com
  * Version:     0.0.1
  */
 
 use AlphaSSS\Helpers\Arr;
-use Blockchain\Blockchain;
 
 add_action( 'bp_loaded', function(){
 
@@ -25,62 +24,8 @@ add_action( 'bp_loaded', function(){
 			] );
 		}
 
-		/**
-		 * Method checks whether the current user meets an access condition.
-		 * Added one custom option 'non-admin'
-		 *
-		 * @param string $access_condition 'anyone', 'loggedin', 'member',
-		 *        'mod', 'non-admin', 'admin' or 'noone'.
-		 * @return bool
-		 */
-		protected function user_meets_access_condition( $access_condition ) {
-			$group = groups_get_group( array(
-				'group_id' => $this->group_id,
-			) );
-
-			switch ( $access_condition ) {
-				case 'admin' :
-					$meets_condition = groups_is_user_admin( bp_loggedin_user_id(), $this->group_id );
-					break;
-
-				case 'non-admin':
-					$meets_condition = ! groups_is_user_admin( bp_loggedin_user_id(), $this->group_id );
-					break;
-
-				case 'mod' :
-					$meets_condition = groups_is_user_mod( bp_loggedin_user_id(), $this->group_id );
-					break;
-
-				case 'member' :
-					$meets_condition = groups_is_user_member( bp_loggedin_user_id(), $this->group_id );
-					break;
-
-				case 'loggedin' :
-					$meets_condition = is_user_logged_in();
-					break;
-
-				case 'noone' :
-					$meets_condition = false;
-					break;
-
-				case 'anyone' :
-				default :
-					$meets_condition = true;
-					break;
-			}
-
-			return $meets_condition;
-		}
-
 		public function display( $group_id = NULL ) {
 			if ( ! $group_id ) $group_id = bp_get_group_id();
-
-			$Blockchain = new Blockchain('9e9567d5-dd38-4513-ae2e-39d3f521156d');
-			
-			$Blockchain->Wallet->credentials( 
-				get_user_meta( get_current_user_id( ), 'wallet_guid', true),
-				get_user_meta( get_current_user_id( ), 'wallet_password', true)
-			);
 
 			?>
 			<hr />
@@ -103,7 +48,7 @@ add_action( 'bp_loaded', function(){
 				});
 			</script>
 			<span>Your address is <?php echo get_user_meta( get_current_user_id( ), 'wallet_address', true); ?></span><br />
-			Your ballance is <span id="balance"><?php echo $Blockchain->Wallet->getBalance(); ?></span> BTC
+			Your ballance is <span id="balance"><?php echo 50 ?></span> BTC
 			<form class="form-inline">
 				<div class="form-group">
 					<select class="form-control" id="btc-amount" required>
@@ -118,7 +63,7 @@ add_action( 'bp_loaded', function(){
 		}
 	}
 
-	bp_register_group_extension( 'AlphaSSS_Donation' );
+	
 
 	/**
 	 * This action send money to user
@@ -184,37 +129,12 @@ add_action( 'bp_loaded', function(){
 		$client->setToken($token);
 		// Send invoice
 		$client->createInvoice($invoice);
- 
-		// create http client instance
-		$client = new Guzzle\Http\Client();
-		 
-		// create a request
-		$request = $client->get($invoice->getUrl());
-		 
-		// send request / get response
-		$response = $request->send();
 
-		// crate crawler instance from body HTML code
-		$crawler = new Symfony\Component\DomCrawler\Crawler($response->getBody(true));
-		 
-		// apply css selector filter
-		$filter = $crawler->filterXpath('//code[@id="addressCode"]');
-
-		foreach ($filter as $element) {
-			$address = $element->nodeValue;
-		}
-		
-		$Blockchain = new Blockchain('9e9567d5-dd38-4513-ae2e-39d3f521156d');
-		$Blockchain->Wallet->credentials( 
-			get_user_meta( get_current_user_id( ), 'wallet_guid', true),
-			get_user_meta( get_current_user_id( ), 'wallet_password', true)
-		);
-		$Blockchain->Wallet->send($address, $invoice->getBtcPrice());
 
 		// Prepare data
 		$data = array(
 			'data' => array(
-				'amount' => $Blockchain->Wallet->getBalance()
+				'amount' => 50
 			)
 		);
 		//--
