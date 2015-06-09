@@ -30,7 +30,7 @@ Template Name: Purchase Credits
 					<?php endforeach;?>
 				</select>
 				<br />
-				<button><?php _e('Proceed to Payment');?></button>
+				<button id="purchase-credits"><?php _e('Proceed to Payment');?></button>
 			</form>
 
 		</div><!-- #content -->
@@ -43,4 +43,21 @@ Template Name: Purchase Credits
 	</div>
 
 </div><!-- .page-left-column -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		var credit_selection = $('#credit-selection').val();
+
+		if (! credit_selection) {
+			$('#purchase-credits').attr('disabled', true);
+		}
+
+		$('#credit-selection').change(function(){
+			if ($(this).val()) {
+				$('#purchase-credits').attr('disabled', false);
+			} else {
+				$('#purchase-credits').attr('disabled', true);
+			}
+		});
+	});
+</script>
 <?php get_footer(); ?>
