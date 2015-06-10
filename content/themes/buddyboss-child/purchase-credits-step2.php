@@ -22,7 +22,7 @@ Template Name: Purchase Credits
 			<br />
 			<p id="credit-balance"><?php printf( __( 'Your current balance is %d credits' ), get_user_meta( get_current_user_id( ), 'credit_balance', true ) ); ?></p>
 
-
+			<iframe></iframe>
 		</div><!-- #content -->
 	</div><!-- #primary -->
 

@@ -9,10 +9,20 @@
  */
 
 use AlphaSSS\Helpers\Arr;
+use AlphaSSS\HTTP\HTTP;
+use \AlphaSSS\Repositories\Credit;
 
 add_action( 'bp_loaded', function(){
 
 	load_plugin_textdomain( 'alphasss-donation', false, basename( dirname( __FILE__ ) ) . '/languages' );
+
+	if ( HTTP::isPost() AND $credits_amount = Arr::get( $_POST, 'credits-amount' ) ) {
+		if ( in_array( $credits_amount, Credit::creditList() ) ) {
+			
+		} else {
+			//@TODO add notification that wrong amount was selected
+		}
+	}
 
 	// Once when member registred add zero credit amount to member
 	add_action('member_registered', function(){
