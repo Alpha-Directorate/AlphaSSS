@@ -16,4 +16,9 @@ class HTTP {
 	{
 		return is_ssl() ? 'https' : 'http';
 	}
+
+	public static function isPost()
+	{
+		return $_SERVER['REQUEST_METHOD'] === 'POST';
+	} 
 }
