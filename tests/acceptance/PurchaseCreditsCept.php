@@ -21,4 +21,9 @@ $I->dontSeeElement('#purchase-credits', ['disabled' => true]);
 $I->seeElement('#purchase-credits', ['disabled' => false]);
 $I->selectOption('#credit-selection', 'Any amount you choose:');
 $I->seeElement('#purchase-credits', ['disabled' => true]);
+$I->selectOption('#credit-selection', '1000 Credits ($10 USD)');
+$I->seeElement('#purchase-credits', ['disabled' => false]);
+$I->click('#purchase-credits');
+$I->seeCurrentUrlEquals('/pay-with-bitpay/');
+$I->see(0, '#credit-balance')
 ?>

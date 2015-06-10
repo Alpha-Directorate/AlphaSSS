@@ -41,6 +41,14 @@ class Sprint15 extends AbstractMigration
         ], true );
 
         update_post_meta( $id, '_wp_page_template', 'purchase-credits.php' );
+
+        $id = wp_insert_post( [
+            'post_type'     => 'page',
+            'post_status'   => 'publish',
+            'post_title'    => 'Pay with BitPay'
+        ], true );
+
+        update_post_meta( $id, '_wp_page_template', 'purchase-credits-step2.php' );
     }
 
     /**

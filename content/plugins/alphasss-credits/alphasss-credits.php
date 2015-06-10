@@ -14,6 +14,11 @@ add_action( 'bp_loaded', function(){
 
 	load_plugin_textdomain( 'alphasss-donation', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
+	// Once when member registred add zero credit amount to member
+	add_action('member_registered', function(){
+		update_user_meta(get_current_user_id(), 'credit_balance', 0);
+	});
+
 	class AlphaSSS_Donation extends BP_Group_Extension {
 
 		public function __construct() {
@@ -47,18 +52,8 @@ add_action( 'bp_loaded', function(){
 					});
 				});
 			</script>
-			<span>Your address is <?php echo get_user_meta( get_current_user_id( ), 'wallet_address', true); ?></span><br />
-			Your ballance is <span id="balance"><?php echo 50 ?></span> BTC
-			<form class="form-inline">
-				<div class="form-group">
-					<select class="form-control" id="btc-amount" required>
-						<option value="">Select amount of transaction</option>
-						<option value="1">1 USD</option>
-						<option value="2">2 USD</option>
-					</select>
-				</div>
-				<button id="pay-btc">Pay</button>
-			</form>
+			<span>Your address is <?php echo get_user_meta( get_current_user_id( ), 'credit_balance', true); ?></span><br />
+
 			<?php
 		}
 	}
