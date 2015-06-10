@@ -17,6 +17,11 @@ class HTTP {
 		return is_ssl() ? 'https' : 'http';
 	}
 
+	/**
+	 * This function checks is a current request method is POST
+	 * 
+	 * @return boolean
+	 */
 	public static function isPost()
 	{
 		return $_SERVER['REQUEST_METHOD'] === 'POST';
