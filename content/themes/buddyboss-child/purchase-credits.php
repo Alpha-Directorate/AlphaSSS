@@ -22,15 +22,15 @@ Template Name: Purchase Credits
 			<br />
 			<p><?php _e('How many Credits would you like to buy?'); ?></p>
 
-			<form action="<?php echo str_replace( '/wp', '', site_url( '/pay-with-bitpay/', \AlphaSSS\HTTP\HTTP::protocol() ) );?>" method="POST">
+			<form id="submit-credits" action="<?php echo str_replace( '/wp', '', site_url( '/pay-with-bitpay/', \AlphaSSS\HTTP\HTTP::protocol() ) );?>" method="POST">
 				<select class="form-control" id="credit-selection" name="credits-amount">
 					<option value=""><?php _e('Any amount you choose:'); ?></option>
 					<?php foreach(\AlphaSSS\Repositories\Credit::creditList() as $amount):?>
-						<option value="<?php echo $amount; ?>"><?php printf(__('%d Credits ($%d USD)'), $amount*100, $amount);?></option>
+						<option value="<?php echo $amount; ?>"><?php printf(__('%d Credits ($%.2f USD)'), $amount*100, $amount);?></option>
 					<?php endforeach;?>
 				</select>
 				<br />
-				<button id="purchase-credits"><?php _e('Proceed to Payment');?></button>
+				<input id="purchase-credits" type="submit" value="<?php _e('Proceed to Payment');?>" />
 			</form>
 
 		</div><!-- #content -->

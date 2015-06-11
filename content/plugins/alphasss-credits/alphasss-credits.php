@@ -48,6 +48,7 @@ add_action( 'bp_loaded', function(){
 
 			$item = new \Bitpay\Item();
 			$item->setPrice((float) $credits_amount);
+			$item->setDescription(sprintf(__("Purchase %s Credits ($%.2f USD)"), $credits_amount*100, $credits_amount));
 			$invoice->setItem($item);
 
 			/**

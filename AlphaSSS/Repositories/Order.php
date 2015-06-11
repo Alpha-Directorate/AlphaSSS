@@ -20,7 +20,9 @@ class Order {
 			'price'      => $invoice->getPrice()
 		];
 
-		$wpdb->insert( self::$table, $data, $format );
+		$order_id = $wpdb->insert( self::$table, $data, $format );
+
+		return self::find($order_id);
 	}
 
 	public static function update($order_id, Array $data)
@@ -30,7 +32,7 @@ class Order {
 
 	public static function find($order_id)
 	{
-
+		return self::findOneBy(['order_ids' => [$order_id]]);
 	}
 
 	public static function findOneBy(Array $args = [])
@@ -50,6 +52,10 @@ class Order {
 
 		if ($user_id = Arr::get($args, 'user_id')) {
 			$where_args[] = sprintf('`user_id` = %d', $user_id);
+		}
+
+		if ($order_ids = Arr::get($args, 'order_ids')) {
+			$where_args[] = sprintf('`id` IN (%s)', implode(',', $order_ids));
 		}
 
 		if (count($where_args) > 0) {
