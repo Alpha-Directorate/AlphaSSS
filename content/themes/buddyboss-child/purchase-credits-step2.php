@@ -22,12 +22,19 @@ Template Name: Purchase Credits
 			<br />
 			<p id="credit-balance"><?php printf( __( 'Your current balance is %d credits' ), get_user_meta( get_current_user_id( ), 'credit_balance', true ) ); ?></p>
 
-			<iframe></iframe>
+			<?php $order = \AlphaSSS\Repositories\Order::getLastUserOrder( get_current_user_id( ) );?>
+
+			<iframe src="<?php echo $order['url'];?>" name="bitpay_checkout" width="600" height="670" style="border:3px solid #c0c0c0"></iframe>
 		</div><!-- #content -->
 	</div><!-- #primary -->
 
 	<div id="secondary" class="widget-area" role="complementary">
-		The Day The Earth Stood Stoopid
+		<div style="border:3px solid #c0c0c0">
+			The Day The Earth Stood Stoopid
+			<p>
+				
+			</p>
+		</div>
 	</div>
 
 </div><!-- .page-left-column -->
