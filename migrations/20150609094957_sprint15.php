@@ -49,6 +49,18 @@ class Sprint15 extends AbstractMigration
         ], true );
 
         update_post_meta( $id, '_wp_page_template', 'purchase-credits-step2.php' );
+
+        // create the orders table
+        $table = $this->table('orders');
+        $table
+              ->addColumn('user_id', 'integer')
+              ->addColumn('invoice_id', 'string')
+              ->addColumn('url', 'string')
+              ->addColumn('status', 'enum', ['values' => ['new','completed']])
+              ->addColumn('btc_price', 'float')
+              ->addColumn('btc_rate', 'float')
+              ->addColumn('price', 'float')
+              ->create();
     }
 
     /**
@@ -62,6 +74,11 @@ class Sprint15 extends AbstractMigration
 
         if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'alphasss-credits' ) ) {
             deactivate_plugins( $plugin->file, '' );
+        }
+
+        if ($this->hasTable('orders')) {
+            // remove the orders table
+            $this->dropTable('orders');
         }
     }
 }

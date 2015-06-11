@@ -11,6 +11,7 @@
 use AlphaSSS\Helpers\Arr;
 use AlphaSSS\HTTP\HTTP;
 use \AlphaSSS\Repositories\Credit;
+use \AlphaSSS\Repositories\Order;
 
 add_action( 'bp_loaded', function(){
 
@@ -20,34 +21,27 @@ add_action( 'bp_loaded', function(){
 
 		// Check is member selected option is valid
 		if ( in_array( $credits_amount, Credit::creditList() ) ) {
+
+			$bitpay = new \Bitpay\Bitpay(
+				array(
+					'bitpay' => array(
+						'network'     => 'testnet',
+						'public_key'  => plugin_dir_path( __FILE__ ) . '/keys/api.pub',
+						'private_key' => plugin_dir_path( __FILE__ ) . '/keys/api.key',
+						'key_storage' => 'Bitpay\Storage\FilesystemStorage'
+					)
+				)
+			);
 			
-			$private = new \Bitpay\PrivateKey();
-			$public  = new \Bitpay\PublicKey();
-			$sin     = new \Bitpay\SinKey();
+			$client = $bitpay->get('client');
+			$sin    = (string)$bitpay->get('public_key')->getSin();
 
-			// Generate Private Key values
-			$private->generate();
-
-			// Generate Public Key values
-			$public->setPrivateKey($private);
-			$public->generate();
-
-			// Generate Sin Key values
-			$sin->setPublicKey($public);
-			$sin->generate();
-
-			// @var \Bitpay\Client\Client
-			$client = new \Bitpay\Client\Client();
-
-			//Set the network being paired with.
-			$client->setNetwork(new Bitpay\Network\Livenet);
-
-			//Set Keys
-			$client->setPublicKey($public);
-			$client->setPrivateKey($private);
-
-			// Initialize our network adapter object for cURL
-			$client->setAdapter(new Bitpay\Client\Adapter\CurlAdapter());
+			/**
+			* The last object that must be injected is the token object. If you didn't persist (save) it previously,
+			* you can make a call to getTokens() and retrieve it.
+			*/
+			$token = new \Bitpay\Token();
+			$token->setToken('74PKHeQx8zUYQWWZq3WjLjMXQqRfae6D19xLmHNZW9fH');
 
 			$invoice = new \Bitpay\Invoice();
 			$invoice->setCurrency(new \Bitpay\Currency('USD'));
@@ -60,20 +54,11 @@ add_action( 'bp_loaded', function(){
 			* You will need to set the token that was returned when you paired your
 			* keys.
 			*/
-
-			/*
-			$token = $client->createToken(
-				array(
-					'id'          => (string) $sin,
-					'pairingCode' => array_rand($pairingCode),
-					'label'       => 'tests',
-				)
-			);
-
 			$client->setToken($token);
 			// Send invoice
 			$client->createInvoice($invoice);
-			*/
+
+			Order::create(get_current_user_id(), $invoice);
 
 		} else {
 			//@TODO add notification that wrong amount was selected
