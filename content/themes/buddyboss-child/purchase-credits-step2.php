@@ -30,9 +30,10 @@ Template Name: Purchase Credits
 
 	<div id="secondary" class="widget-area" role="complementary">
 		<div style="border:3px solid #c0c0c0">
-			The Day The Earth Stood Stoopid
-			<p>
-				
+			<b>The Day The Earth Stood Stoopid</b>
+			<br />
+			<p style="padding:5px">
+				Of all the friends I've had… you're the first. Dear God, they'll be killed on our doorstep! And there's no trash pickup until January 3rd. Goodbye, friends. I never thought I'd die like this. But I always really hoped. Yeah. Give a little credit to our public schools. You'll have all the Slurm you can drink when you're partying with Slurms McKenzie
 			</p>
 		</div>
 	</div>
