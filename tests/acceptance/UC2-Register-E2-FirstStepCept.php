@@ -26,7 +26,7 @@ $I->click("//input[@id='gform_next_button_4_9']");
 $I->see('Please enter the valid email address.');
 $I->fillField('#input_4_22','admin@alphasss.com');
 $I->click("//input[@id='gform_next_button_4_9']");
-$I->see('This email already in use. Please pick up another one.');
+$I->see('This email already in use. Please pick another one.');
 
 
 // Password validation

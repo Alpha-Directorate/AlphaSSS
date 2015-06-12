@@ -199,7 +199,8 @@ You're the boss, so have fun editing!
     background-repeat: no-repeat;
     width: 28px;
     height: 28px;
-    float:right;
+    cursor: pointer;
+    float: left;
 }
 
 #profile-view .profile-fields {
@@ -217,7 +218,6 @@ You're the boss, so have fun editing!
 #profile-view .alphasss-tooltip,
 #profile-edit-form .alphasss-tooltip {
     float: left;
-    cursor: pointer;
 }
 
 #profile-view .profile-fields td ul,
@@ -228,6 +228,7 @@ You're the boss, so have fun editing!
 
 #profile-view .profile-fields td ul li,
 #profile-edit-form label ul li,
+#group-create-body li,
 .profile-edit-list li {
     display: inline-block;
     margin: 0;
@@ -262,4 +263,8 @@ You're the boss, so have fun editing!
 
 #profile-edit-form input[type='text'],textarea {
     width: 100% !important;
+}
+
+#wp-admin-bar-my-account-group-created .ab-item{
+    color: #c0c0c0 !important;
 }

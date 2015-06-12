@@ -13,10 +13,8 @@ $I->seeCurrentUrlEquals('/browse/founder_counselor/');
 $I->dontSee('Login','.button');
 $I->dontSee('Register','li');
 $I->moveMouseOver("//a[@title='My Account']");
-$I->see('Log Out');
+$I->see('Log Out','.ab-item');
 $I->click("//a[@class='ab-item' and text()='Log Out']");
 $I->seeCurrentUrlEquals('/browse/founder_counselor/?loggedout=true');
 $I->see('Register','li');
 $I->see('Login','.button');
-
-
