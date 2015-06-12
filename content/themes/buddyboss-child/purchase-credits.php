@@ -48,30 +48,28 @@ Template Name: Purchase Credits
 				<select class="form-control" id="credit-selection" name="credits-amount">
 					<option value=""><?php _e('Any amount you choose:'); ?></option>
 					<?php foreach(\AlphaSSS\Repositories\Credit::creditList() as $amount):?>
-						<option value="<?php echo $amount; ?>"><?php printf(__('%d Credits ($%.2f USD)'), $amount*100, $amount);?></option>
+						<option value="<?php echo $amount; ?>"><?php printf(__('%.2f Credits ($%.2f USD)'), $amount, $amount);?></option>
 					<?php endforeach;?>
 				</select>
-				<br />
-				<input id="purchase-credits" type="submit" value="<?php _e('Proceed to Payment');?>" />
+				
+				<div class="submit">
+					<button id="purchase-credits" class="button" type="submit"><?php _e('Proceed to Payment');?></button>
+				</div>
 			</form>
 
 		</div><!-- #content -->
 	</div><!-- #primary -->
 
 	<div id="secondary" class="widget-area" role="complementary">
-		<div style="border:3px solid #c0c0c0;padding:5px;width:400px;margin-bottom:50px">
-			<b><?php _e("What are Bitcoins?"); ?></b>
-			<br />
-			<br />
+		<div class="information-box">
+			<h3><?php _e("What are Bitcoins?"); ?></h3>
 			<p>
 				<?php _e("Oh sure! Blame the wizards! You know the worst thing about being a slave? They make you work, but they don't pay you or let you go. Ah, yes! John Quincy Adding Machine. He struck a chord with the voters when he pledged not to go on a killing spree.");?>
 			</p>
 		</div>
 
-		<div style="border:3px solid #c0c0c0;padding:5px;width:400px">
-			<b><?php _e("What are Credits?"); ?></b>
-			<br />
-			<br />
+		<div class="information-box">
+			<h3><?php _e("What are Credits?"); ?></h3>
 			<p>
 				<?php _e("You don't know how to do any of those. Doomsday device? Ah, now the ball's in Farnsworth's court! Good news, everyone! There's a report on TV with some very bad news! That's a popular name today. Little \"e\", big \"B\"? Moving along… Isn't it true that you have been paid for your testimony?");?>
 			</p>
