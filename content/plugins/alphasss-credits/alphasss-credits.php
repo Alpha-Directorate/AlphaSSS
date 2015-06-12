@@ -41,7 +41,7 @@ add_action( 'bp_loaded', function(){
 			* you can make a call to getTokens() and retrieve it.
 			*/
 			$token = new \Bitpay\Token();
-			$token->setToken('74PKHeQx8zUYQWWZq3WjLjMXQqRfae6D19xLmHNZW9fH');
+			$token->setToken( getenv( 'BITPAY_TOKEN' ) );
 
 			$invoice = new \Bitpay\Invoice();
 			$invoice->setCurrency(new \Bitpay\Currency('USD'));
@@ -51,15 +51,21 @@ add_action( 'bp_loaded', function(){
 			$item->setDescription(sprintf(__("Purchase %s Credits ($%.2f USD)"), $credits_amount*100, $credits_amount));
 			$invoice->setItem($item);
 
-			/**
-			* You will need to set the token that was returned when you paired your
-			* keys.
-			*/
-			$client->setToken($token);
-			// Send invoice
-			$client->createInvoice($invoice);
+			try {
+				/**
+				* You will need to set the token that was returned when you paired your
+				* keys.
+				*/
+				$client->setToken($token);
 
-			Order::create(get_current_user_id(), $invoice);
+				// Send invoice
+				$client->createInvoice($invoice);
+
+				Order::create(get_current_user_id(), $invoice);
+
+			} catch (Exception $e) {
+				//@TODO send email here that something going wrong
+			}
 
 		} else {
 			//@TODO add notification that wrong amount was selected

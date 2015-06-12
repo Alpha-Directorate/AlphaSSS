@@ -4,6 +4,29 @@ Template Name: Purchase Credits
 */
 ?>
 
+<?php
+
+	global $wp_query;
+
+	// Only logged in users can see this page
+	if ( ! is_user_logged_in()) {
+		$wp_query->set_404();
+		status_header( 404 );
+		get_template_part( 404 ); exit();
+	} else {
+		$user = wp_get_current_user();
+
+		if ( isset( $user->roles ) && is_array( $user->roles ) ) {
+			// Show 404 for all no member users
+			if ( in_array( [ 'member', 'gf', 'administrator' ], $user->roles ) ) {
+				$wp_query->set_404();
+				status_header( 404 );
+				get_template_part( 404 ); exit();
+			} 
+		}
+	}
+?>
+
 <?php get_header(); ?>
 
 <div class="page-three-columns">
@@ -29,11 +52,12 @@ Template Name: Purchase Credits
 	</div><!-- #primary -->
 
 	<div id="secondary" class="widget-area" role="complementary">
-		<div style="border:3px solid #c0c0c0">
-			<b>The Day The Earth Stood Stoopid</b>
+		<div style="border:3px solid #c0c0c0;padding:5px;width:400px">
+			<b><?php _e("The Day The Earth Stood Stoopid"); ?></b>
 			<br />
-			<p style="padding:5px">
-				Of all the friends I've had… you're the first. Dear God, they'll be killed on our doorstep! And there's no trash pickup until January 3rd. Goodbye, friends. I never thought I'd die like this. But I always really hoped. Yeah. Give a little credit to our public schools. You'll have all the Slurm you can drink when you're partying with Slurms McKenzie
+			<br />
+			<p>
+				<?php _e("Of all the friends I've had… you're the first. Dear God, they'll be killed on our doorstep! And there's no trash pickup until January 3rd. Goodbye, friends. I never thought I'd die like this. But I always really hoped. Yeah. Give a little credit to our public schools. You'll have all the Slurm you can drink when you're partying with Slurms McKenzie");?>
 			</p>
 		</div>
 	</div>
