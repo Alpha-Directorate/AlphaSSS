@@ -108,6 +108,14 @@ You're the boss, so have fun editing!
         width: 69%;
     }
 
+    .page-three-columns .primary-custom h1 {
+        font-size: 46px;
+    }
+
+    .page-three-columns .primary-custom p {
+        font-size: 18px;
+    }
+
     .page-three-columns .secondary-custom-right {
         position: absolute;
         right: 0;

@@ -62,10 +62,4 @@ Template Name: Purchase Credits
 
 </div><!-- .page-left-column -->
 
-<script type="text/javascript">
-	$('iframe#bitpay-iframe').load(function() {
-		console.log($(this).contents().find('.rate'));
-	});
-</script>
-
 <?php get_footer(); ?>
