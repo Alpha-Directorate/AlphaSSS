@@ -25,7 +25,6 @@
     "pubnub/pubnub": "3.7.*",
     "robmorgan/phinx": "*",
     "illuminate/database": "5.0.*",
-    "blockchain/blockchain": "dev-master",
     "bitpay/php-client": "~2.0"
   },
   "require-dev":{

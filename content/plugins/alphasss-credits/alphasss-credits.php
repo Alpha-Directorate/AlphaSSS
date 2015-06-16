@@ -45,6 +45,7 @@ add_action( 'bp_loaded', function(){
 
 			$invoice = new \Bitpay\Invoice();
 			$invoice->setCurrency(new \Bitpay\Currency('USD'));
+			$invoice->setNotificationUrl( str_replace( '/wp', '', site_url( '/ipn.php', \AlphaSSS\HTTP\HTTP::protocol() ) ) );
 
 			$item = new \Bitpay\Item();
 			$item->setPrice((float) $credits_amount);

@@ -98,5 +98,10 @@
     	<?php do_action( 'buddyboss_inside_wrapper' ); ?>
         <div id="page" class="hfeed site">
             <div id="main" class="wrapper">
+
+            <?php if (is_home()):?>
+                <?php echo get_new_royalslider(1);?>
+            <?php endif;?>
+
             <?php do_action( 'alphasss_top_alerts' ); ?>
 

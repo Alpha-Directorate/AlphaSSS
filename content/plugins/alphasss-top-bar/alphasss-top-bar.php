@@ -87,9 +87,15 @@ add_action( 'plugins_loaded', function(){
 			if ( current_user_can('generate_invitation_code') ) {
 				$wp_admin_bar->add_menu( array(
 					'parent'    => 'top-secondary',
-					'id'        => 'user-credits',
-					'title'     => '<img class="avatar user-78-avatar avatar-26 photo" height="26" width="26" alt="' . __('Buy Credits') . '" title="' . __('Buy Credits') . '" src="' . plugins_url( 'assets/img/coin_single_gold.png', __FILE__ ) . '">',
-					'href'      => str_replace( '/wp', '',  site_url( '/purchase-credits/', HTTP::protocol() ) ),
+					'id'        => 'user-credits-icon',
+					'title'     => '<img class="avatar user-78-avatar avatar-26 photo" height="26" width="26"  src="' . plugins_url( 'assets/img/coin_single_gold.png', __FILE__ ) . '">',
+				) );
+
+				$wp_admin_bar->add_menu( array(
+					'parent'   => 'user-credits-icon',
+					'id'       => 'user-credits',
+					'title'    => __('Buy Credits'),
+					'href'     => str_replace( '/wp', '',  site_url( '/purchase-credits/', HTTP::protocol() ) )
 				) );
 			}
 			//--
