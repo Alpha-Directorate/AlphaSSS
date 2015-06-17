@@ -12,6 +12,7 @@ use AlphaSSS\Helpers\Arr;
 use AlphaSSS\HTTP\HTTP;
 use \AlphaSSS\Repositories\Credit;
 use \AlphaSSS\Repositories\Order;
+use AlphaSSS\Helpers\EmailAddressEncryption;
 
 add_action( 'bp_loaded', function(){
 
@@ -49,7 +50,7 @@ add_action( 'bp_loaded', function(){
 			$invoice = new \Bitpay\Invoice();
 			$invoice->setCurrency(new \Bitpay\Currency('USD'));
 			$invoice->setNotificationUrl( str_replace( '/wp', '', site_url( '/ipn.php', \AlphaSSS\HTTP\HTTP::protocol() ) ) );
-			$invoice->setNotificationEmail($user->user_email);
+			$invoice->setNotificationEmail( EmailAddressEncryption::decrypt( $user->user_email ) );
 
 			$item = new \Bitpay\Item();
 			$item->setPrice((float) $credits_amount);
