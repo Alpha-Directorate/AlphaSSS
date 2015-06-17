@@ -9,7 +9,7 @@ Text Domain: alphasss-register
 */
 
 use AlphaSSS\Repositories\User as UserRepository;
-use Blockchain\Blockchain;
+use AlphaSSS\Helpers\EmailAddressEncryption;
 
 load_plugin_textdomain( 'alphasss-register', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
@@ -203,7 +203,7 @@ add_action( 'plugins_loaded', function(){
 						$username        = sanitize_text_field ( rgpost( 'input_3' ) );
 						$password        = sanitize_text_field ( rgpost( 'input_4' ) );
 						$email           = sanitize_text_field ( rgpost( 'input_22' ) );
-						$encrypted_email = ( new AlphaSSS\Helpers\Encryption )->encode( $email ) . '@alphasss.com';
+						$encrypted_email = EmailAddressEncryption::encode( $email );
 						$hashed_email    = hash('sha512', $email);
 
 						// Create a new user

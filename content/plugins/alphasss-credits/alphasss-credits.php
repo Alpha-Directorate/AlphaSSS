@@ -22,6 +22,9 @@ add_action( 'bp_loaded', function(){
 		// Check is member selected option is valid
 		if ( in_array( $credits_amount, Credit::creditList() ) ) {
 
+			// Detect the current user
+			$user = wp_get_current_user();
+
 			$bitpay = new \Bitpay\Bitpay(
 				array(
 					'bitpay' => array(
@@ -46,6 +49,7 @@ add_action( 'bp_loaded', function(){
 			$invoice = new \Bitpay\Invoice();
 			$invoice->setCurrency(new \Bitpay\Currency('USD'));
 			$invoice->setNotificationUrl( str_replace( '/wp', '', site_url( '/ipn.php', \AlphaSSS\HTTP\HTTP::protocol() ) ) );
+			$invoice->setNotificationEmail($user->user_email);
 
 			$item = new \Bitpay\Item();
 			$item->setPrice((float) $credits_amount);
@@ -62,7 +66,7 @@ add_action( 'bp_loaded', function(){
 				// Send invoice
 				$client->createInvoice($invoice);
 
-				Order::create(get_current_user_id(), $invoice);
+				Order::create($user->ID, $invoice);
 
 			} catch (Exception $e) {
 				//@TODO send email here that something going wrong
