@@ -34,6 +34,10 @@ class Sprint15 extends AbstractMigration
             activate_plugin( $plugin->file, '' );
         }
 
+        if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'new-royalslider' ) ) {
+            activate_plugin( $plugin->file, '' );
+        }
+
         $id = wp_insert_post( [
             'post_type'     => 'page',
             'post_status'   => 'publish',
@@ -73,6 +77,10 @@ class Sprint15 extends AbstractMigration
         }
 
         if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'alphasss-credits' ) ) {
+            deactivate_plugins( $plugin->file, '' );
+        }
+
+        if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'new-royalslider' ) ) {
             deactivate_plugins( $plugin->file, '' );
         }
 

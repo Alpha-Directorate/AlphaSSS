@@ -9,7 +9,7 @@ $I->fillField('log','nadya');
 $I->fillField('pwd','funkadelicbro87');
 $I->click('Log In');
 $I->seeCurrentUrlEquals('/browse/nadya/');
-$I->seeElement('#wp-admin-bar-user-credits');
+$I->seeElement('#wp-admin-bar-user-credits-icon');
 $I->moveMouseOver("//a[@title='My Account']");
 $I->see('Group', 'li');
 $I->moveMouseOver("//a[@class='ab-item' and text()='Group']");
