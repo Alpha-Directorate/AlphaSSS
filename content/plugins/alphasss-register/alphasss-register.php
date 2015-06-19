@@ -423,7 +423,7 @@ add_action( 'plugins_loaded', function(){
 
 				case 22:
 					$field['label']       = str_replace( '%%RegisterEmailLabel%%', __('Your Email Address:', 'alphasss-register'), $field['label'] );
-					$field['description'] = str_replace( '%%RegisterEmailDescription%%', __("We need rest. The spirit is willing, but the flesh is spongy and bruised. Oh sure! Blame the wizards! Ummm…to eBay? Leela, Bender, we're going grave robbing.", 'alphasss-register'), $field['description'] );
+					$field['description'] = str_replace( '%%RegisterEmailDescription%%', __('We need rest. The spirit is willing, but the flesh is spongy and bruised. Oh sure! Blame the wizards! Ummm...to eBay? Leela, Bender, we\'re going grave robbing.', 'alphasss-register'), $field['description'] );
 				break;
 			}
 		}
