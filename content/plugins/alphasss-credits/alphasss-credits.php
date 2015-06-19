@@ -57,7 +57,6 @@ add_action( 'bp_loaded', function(){
 				->setNotificationEmail( EmailAddressEncryption::decode( $user->user_email ) )
 				->setTransactionSpeed(\Bitpay\Invoice::TRANSACTION_SPEED_LOW)
 				->setFullNotifications(TRUE)
-				->setOrderId(Order::generateOrderNumber($user->ID))
 				->setItem($item);
 
 			try {
@@ -71,7 +70,6 @@ add_action( 'bp_loaded', function(){
 				$client->createInvoice($invoice);
 
 				Order::create($user->ID, $invoice);
-
 			} catch (Exception $e) {
 				//@TODO send email here that something going wrong
 			}
