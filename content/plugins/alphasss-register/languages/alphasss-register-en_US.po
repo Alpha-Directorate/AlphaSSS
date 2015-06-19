@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2015-03-20 15:58+0300\n"
-"PO-Revision-Date: 2015-03-20 15:58+0300\n"
+"PO-Revision-Date: 2015-06-19 19:46+0300\n"
 "Last-Translator: Fractal Overflow <fractal-overflow@alphadirectorate.com>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -105,7 +105,7 @@ msgstr ""
 
 #: ../alphasss-register.php:334
 msgid "The Usual First Step"
-msgstr ""
+msgstr "The test translation"
 
 #: ../alphasss-register.php:339 ../alphasss-register.php:370
 msgid ""
