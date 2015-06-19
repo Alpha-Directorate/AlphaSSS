@@ -69,6 +69,7 @@ add_action( 'bp_loaded', function(){
 				// Send invoice
 				$client->createInvoice($invoice);
 
+				//New Order creation 
 				Order::create($user->ID, $invoice);
 			} catch (Exception $e) {
 				//@TODO send email here that something going wrong
