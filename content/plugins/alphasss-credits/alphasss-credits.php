@@ -47,15 +47,17 @@ add_action( 'bp_loaded', function(){
 			$token = new \Bitpay\Token();
 			$token->setToken( getenv( 'BITPAY_TOKEN' ) );
 
-			$invoice = new \Bitpay\Invoice();
-			$invoice->setCurrency(new \Bitpay\Currency('USD'));
-			$invoice->setNotificationUrl( str_replace( '/wp', '', site_url( '/ipn.php', \AlphaSSS\HTTP\HTTP::protocol() ) ) );
-			$invoice->setNotificationEmail( EmailAddressEncryption::decode( $user->user_email ) );
-
 			$item = new \Bitpay\Item();
 			$item->setPrice((float) $credits_amount);
-			$item->setDescription(sprintf(__("Purchase %s Credits ($%.2f USD)"), $credits_amount*100, $credits_amount));
-			$invoice->setItem($item);
+			$item->setDescription(sprintf(__("Purchase %.2f Credits ($%.2f USD)"), $credits_amount, $credits_amount));
+
+			$invoice = new \Bitpay\Invoice();
+			$invoice->setCurrency(new \Bitpay\Currency('USD'))
+				->setNotificationUrl( str_replace( '/wp', '', site_url( '/ipn.php', \AlphaSSS\HTTP\HTTP::protocol() ) ) )
+				->setNotificationEmail( EmailAddressEncryption::decode( $user->user_email ) )
+				->setTransactionSpeed(\Bitpay\Invoice::TRANSACTION_SPEED_LOW)
+				->setFullNotifications(TRUE)
+				->setItem($item);
 
 			try {
 				/**
@@ -67,8 +69,8 @@ add_action( 'bp_loaded', function(){
 				// Send invoice
 				$client->createInvoice($invoice);
 
+				//New Order creation 
 				Order::create($user->ID, $invoice);
-
 			} catch (Exception $e) {
 				//@TODO send email here that something going wrong
 			}
