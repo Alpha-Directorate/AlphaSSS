@@ -1,5 +1,6 @@
 <?php 
 $I = new AcceptanceTester($scenario);
+$I->resizeWindow(1024, 1024);
 $I->wantTo('Group creation for GF');
 $I->amOnPage('/');
 $I->see('Login','.button');

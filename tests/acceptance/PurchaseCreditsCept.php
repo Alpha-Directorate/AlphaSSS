@@ -1,5 +1,6 @@
 <?php 
 $I = new AcceptanceTester($scenario);
+$I->resizeWindow(1024, 1024);
 $I->wantTo('purchase AlphaSSS credits');
 $I->amOnPage('/');
 $I->click("//a[@class='button' and text()='Login']");
