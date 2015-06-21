@@ -1,5 +1,6 @@
 <?php 
 $I = new AcceptanceTester($scenario);
+$I->resizeWindow(1024, 1024);
 $I->wantTo('check default offline settings');
 $I->amOnPage('/');
 $I->see('Browse','li');

@@ -1,5 +1,6 @@
 <?php 
 $I = new AcceptanceTester($scenario);
+$I->resizeWindow(1024, 1024);
 $I->wantTo('can\'t create group if it\'s already created');
 
 // GF group already created

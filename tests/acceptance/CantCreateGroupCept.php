@@ -1,5 +1,6 @@
 <?php 
 $I = new AcceptanceTester($scenario);
+$I->resizeWindow(1024, 1024);
 $I->wantTo('Test behaviour when user cant create a group');
 
 //Member cannot create a group

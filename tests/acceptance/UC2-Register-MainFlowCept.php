@@ -1,12 +1,13 @@
 <?php 
 
 $I = new AcceptanceTester($scenario);
+$I->resizeWindow(1024, 1024);
 $I->wantTo('Check register Main flow first step');
 $I->amOnPage('/');
 $I->see('Register','li');
-$I->click("//a[text()='Register']");
+$I->click("#menu-item-107 a");
 $I->seeCurrentUrlEquals('/register/');
-$I->see('The Usual First Step');
+$I->see('Sign-up, the usual First Step...');
 $I->see('Your Nickname', 'label');
 $I->seeElement('input', ['id' => 'input_4_3']);
 $I->see('Your Email Address', 'label');
