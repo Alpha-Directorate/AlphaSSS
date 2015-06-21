@@ -11,4 +11,4 @@ $I->see('Where has our privacy online gone?','h1');
 $I->click(['link' => 'Alpha Social Club']);
 $I->seeCurrentUrlEquals('/');
 $I->see('Where has our privacy online gone?','h1');
-$I->dontSeeElement('#wp-admin-bar-user-credits');
+$I->dontSeeElement('#wp-admin-bar-user-credits-icon');

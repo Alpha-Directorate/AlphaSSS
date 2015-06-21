@@ -12,6 +12,7 @@ use AlphaSSS\Helpers\Arr;
 use AlphaSSS\HTTP\HTTP;
 use \AlphaSSS\Repositories\Credit;
 use \AlphaSSS\Repositories\Order;
+use AlphaSSS\Helpers\EmailAddressEncryption;
 
 add_action( 'bp_loaded', function(){
 
@@ -21,6 +22,9 @@ add_action( 'bp_loaded', function(){
 
 		// Check is member selected option is valid
 		if ( in_array( $credits_amount, Credit::creditList() ) ) {
+
+			// Detect the current user
+			$user = wp_get_current_user();
 
 			$bitpay = new \Bitpay\Bitpay(
 				array(
@@ -43,14 +47,17 @@ add_action( 'bp_loaded', function(){
 			$token = new \Bitpay\Token();
 			$token->setToken( getenv( 'BITPAY_TOKEN' ) );
 
-			$invoice = new \Bitpay\Invoice();
-			$invoice->setCurrency(new \Bitpay\Currency('USD'));
-			$invoice->setNotificationUrl( str_replace( '/wp', '', site_url( '/ipn.php', \AlphaSSS\HTTP\HTTP::protocol() ) ) );
-
 			$item = new \Bitpay\Item();
 			$item->setPrice((float) $credits_amount);
-			$item->setDescription(sprintf(__("Purchase %s Credits ($%.2f USD)"), $credits_amount*100, $credits_amount));
-			$invoice->setItem($item);
+			$item->setDescription(sprintf(__("Purchase %.2f Credits ($%.2f USD)"), $credits_amount, $credits_amount));
+
+			$invoice = new \Bitpay\Invoice();
+			$invoice->setCurrency(new \Bitpay\Currency('USD'))
+				->setNotificationUrl( str_replace( '/wp', '', site_url( '/ipn.php', \AlphaSSS\HTTP\HTTP::protocol() ) ) )
+				->setNotificationEmail( EmailAddressEncryption::decode( $user->user_email ) )
+				->setTransactionSpeed(\Bitpay\Invoice::TRANSACTION_SPEED_LOW)
+				->setFullNotifications(TRUE)
+				->setItem($item);
 
 			try {
 				/**
@@ -62,8 +69,8 @@ add_action( 'bp_loaded', function(){
 				// Send invoice
 				$client->createInvoice($invoice);
 
-				Order::create(get_current_user_id(), $invoice);
-
+				//New Order creation 
+				Order::create($user->ID, $invoice);
 			} catch (Exception $e) {
 				//@TODO send email here that something going wrong
 			}

@@ -29,15 +29,15 @@ Template Name: Purchase Credits
 
 <?php get_header(); ?>
 
-<div class="page-three-columns">
+<div class="page-three-columns page-three-columns-custom">
 
-	<div id="secondary" class="widget-area left-widget-area" role="complementary">
+	<div id="secondary" class="widget-area left-widget-area secondary-custom" role="complementary">
 		<aside class="widget widget-error">
 			<img src="https://avatars3.githubusercontent.com/u/432548?v=3&s=460">
 		</aside>
 	</div>
 
-	<div id="primary" class="site-content">
+	<div id="primary" class="site-content primary-custom">
 	
 		<div id="content" role="main">
 
@@ -51,7 +51,7 @@ Template Name: Purchase Credits
 		</div><!-- #content -->
 	</div><!-- #primary -->
 
-	<div id="secondary" class="widget-area" role="complementary">
+	<div id="secondary" class="widget-area secondary-custom-right" role="complementary">
 		<div class="information-box">
 			<h3><?php _e("The Day The Earth Stood Stoopid"); ?></h3>
 			<p>
@@ -61,4 +61,5 @@ Template Name: Purchase Credits
 	</div>
 
 </div><!-- .page-left-column -->
+
 <?php get_footer(); ?>

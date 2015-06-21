@@ -34,6 +34,10 @@ class Sprint15 extends AbstractMigration
             activate_plugin( $plugin->file, '' );
         }
 
+        if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'new-royalslider' ) ) {
+            activate_plugin( $plugin->file, '' );
+        }
+
         $id = wp_insert_post( [
             'post_type'     => 'page',
             'post_status'   => 'publish',
@@ -53,6 +57,7 @@ class Sprint15 extends AbstractMigration
         // create the orders table
         $table = $this->table('orders');
         $table
+              ->addColumn('order_number', 'string', array('limit' => 50, 'null' => false))
               ->addColumn('user_id', 'integer')
               ->addColumn('invoice_id', 'string')
               ->addColumn('url', 'string')
@@ -60,6 +65,7 @@ class Sprint15 extends AbstractMigration
               ->addColumn('btc_price', 'float')
               ->addColumn('btc_rate', 'float')
               ->addColumn('price', 'float')
+              ->addIndex(array('order_number'), array('unique' => true))
               ->create();
     }
 
@@ -73,6 +79,10 @@ class Sprint15 extends AbstractMigration
         }
 
         if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'alphasss-credits' ) ) {
+            deactivate_plugins( $plugin->file, '' );
+        }
+
+        if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'new-royalslider' ) ) {
             deactivate_plugins( $plugin->file, '' );
         }
 

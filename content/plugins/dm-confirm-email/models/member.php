@@ -4,6 +4,9 @@
  *
  * Handles new registration
  */
+
+use AlphaSSS\Helpers\EmailAddressEncryption;
+
 class DmConfirmEmail_Models_Member {
 
 	public function __construct()
@@ -24,7 +27,7 @@ class DmConfirmEmail_Models_Member {
 			// Clean the message
 			$subject = html_entity_decode($parsedSubject);
 			$message = html_entity_decode($parsedMessage);
-			$email   = ( new AlphaSSS\Helpers\Encryption )->decode( str_replace('@alphasss.com', '', $user->user_email) );
+			$email   = EmailAddressEncryption::decode( $user->user_email );
 
 			$headers[] = 'Bcc: ' . get_option('admin_email');
 

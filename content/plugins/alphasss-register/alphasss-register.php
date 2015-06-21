@@ -9,7 +9,7 @@ Text Domain: alphasss-register
 */
 
 use AlphaSSS\Repositories\User as UserRepository;
-use Blockchain\Blockchain;
+use AlphaSSS\Helpers\EmailAddressEncryption;
 
 load_plugin_textdomain( 'alphasss-register', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
@@ -203,7 +203,7 @@ add_action( 'plugins_loaded', function(){
 						$username        = sanitize_text_field ( rgpost( 'input_3' ) );
 						$password        = sanitize_text_field ( rgpost( 'input_4' ) );
 						$email           = sanitize_text_field ( rgpost( 'input_22' ) );
-						$encrypted_email = ( new AlphaSSS\Helpers\Encryption )->encode( $email ) . '@alphasss.com';
+						$encrypted_email = EmailAddressEncryption::encode( $email );
 						$hashed_email    = hash('sha512', $email);
 
 						// Create a new user
@@ -423,7 +423,7 @@ add_action( 'plugins_loaded', function(){
 
 				case 22:
 					$field['label']       = str_replace( '%%RegisterEmailLabel%%', __('Your Email Address:', 'alphasss-register'), $field['label'] );
-					$field['description'] = str_replace( '%%RegisterEmailDescription%%', __('The key to victory is discipline, and that means a well made bad. You will practice until you can make your bed in your sleep.', 'alphasss-register'), $field['description'] );
+					$field['description'] = str_replace( '%%RegisterEmailDescription%%', __('We need rest. The spirit is willing, but the flesh is spongy and bruised. Oh sure! Blame the wizards! Ummm...to eBay? Leela, Bender, we\'re going grave robbing.', 'alphasss-register'), $field['description'] );
 				break;
 			}
 		}
