@@ -12,13 +12,13 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 //Loads the plugin's translated strings
-load_plugin_textdomain('alphasss-top-navigation', false, basename(dirname( __FILE__ )) . '/languages');
+load_plugin_textdomain('alphasss', false, basename(dirname( __FILE__ )) . '/languages');
 
-__('Blog', 'alphasss-top-navigation');
-__('Register', 'alphasss-top-navigation');
-__('Home', 'alphasss-top-navigation');
-__('Browse', 'alphasss-top-navigation');
-__('Forum', 'alphasss-top-navigation');
+__('Blog', 'alphasss');
+__('Register', 'alphasss');
+__('Home', 'alphasss');
+__('Browse', 'alphasss');
+__('Forum', 'alphasss');
 
 add_action( 'plugins_loaded', function(){
 
@@ -26,7 +26,7 @@ add_action( 'plugins_loaded', function(){
 	add_filter('wp_nav_menu_items', function($items, $args) {
 		ob_start();
 		wp_loginout('/');
-		$loginoutlink = str_replace('Log in', __('Login', 'alphasss-top-navigation'), ob_get_contents());
+		$loginoutlink = str_replace('Log in', __('Login', 'alphasss'), ob_get_contents());
 		ob_end_clean();
 
 		// Add login element to navigation menu
@@ -42,7 +42,7 @@ add_action( 'plugins_loaded', function(){
 	add_filter('wp_get_nav_menu_items', function($items, $menu){
 
 		foreach ( $items as $key => $item ) {
-			$items[$key]->title = __($items[$key]->title, 'alphasss-top-navigation');
+			$items[$key]->title = __($items[$key]->title, 'alphasss');
 
 			if ($items[$key]->title == 'Register') {
 				if (is_user_logged_in()) {

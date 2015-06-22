@@ -6,6 +6,7 @@
  * Author:      AlphaSSS
  * Author URI:  http://alphasss.com
  * Version:     0.0.1
+ * Text Domain: alphasss
  */
 
 use AlphaSSS\Helpers\Arr;
@@ -16,7 +17,7 @@ use AlphaSSS\Helpers\EmailAddressEncryption;
 
 add_action( 'bp_loaded', function(){
 
-	load_plugin_textdomain( 'alphasss-donation', false, basename( dirname( __FILE__ ) ) . '/languages' );
+	load_plugin_textdomain( 'alphasss', false, basename( dirname( __FILE__ ) ) . '/languages' );
 
 	if ( HTTP::isPost() AND $credits_amount = Arr::get( $_POST, 'credits-amount' ) ) {
 
@@ -49,7 +50,7 @@ add_action( 'bp_loaded', function(){
 
 			$item = new \Bitpay\Item();
 			$item->setPrice((float) $credits_amount);
-			$item->setDescription(sprintf(__("Purchase %.2f Credits ($%.2f USD)"), $credits_amount, $credits_amount));
+			$item->setDescription(sprintf(__("Purchase %.2f Credits ($%.2f USD)", 'alphasss'), $credits_amount, $credits_amount));
 
 			$invoice = new \Bitpay\Invoice();
 			$invoice->setCurrency(new \Bitpay\Currency('USD'))

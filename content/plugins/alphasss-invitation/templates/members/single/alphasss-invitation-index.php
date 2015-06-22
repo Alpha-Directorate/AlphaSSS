@@ -5,24 +5,24 @@
 <div id="buddypress">
 	<div class="item-list-tabs no-ajax" id="subnav" role="navigation">
 		<ul>
-			<li class="selected" id="photos-all"><a href="#"><?php _e( 'Invite Someone', 'alphasss-invitation' );?></a></li>
+			<li class="selected" id="photos-all"><a href="#"><?php _e( 'Invite Someone', 'alphasss' );?></a></li>
 		</ul>
 	</div>
 
-	<h2><?php _e('Space Pilot 3000', 'alphasss-invitation');?></h2>
+	<h2><?php _e('Space Pilot 3000', 'alphasss');?></h2>
 	
-	<p><?php _e('I\'ve got to find a way to escape the horrible ravages of youth. Suddenly, I\'m going to the bathroom like clockwork, every three hours. And those jerks at Social Security stopped sending me checks. Now I have to pay them! Please, Don-Bot... look into your hard drive, and open your mercy file!', 'alphasss-invitation');?></p>
+	<p><?php _e('I\'ve got to find a way to escape the horrible ravages of youth. Suddenly, I\'m going to the bathroom like clockwork, every three hours. And those jerks at Social Security stopped sending me checks. Now I have to pay them! Please, Don-Bot... look into your hard drive, and open your mercy file!', 'alphasss');?></p>
 
 	<div id="invitation_code_message" class="alphasss-invitation-hidden in-place-message">
-		<p><?php _e('Here\'s the invitation code that you can use:', 'alphasss-invitation'); ?><br />
+		<p><?php _e('Here\'s the invitation code that you can use:', 'alphasss'); ?><br />
 
 		<span id="invitation-code"></span> <br />
 
-		<?php _e('The code is valid for 24 hours since the time it was generated.', 'alphasss-invitation');?></p>
+		<?php _e('The code is valid for 24 hours since the time it was generated.', 'alphasss');?></p>
 	</div>
 
 	<center>
-		<input type="button" id="generate_code" class="button" value="<?php _e( 'Generate Invitation Code', 'alphasss-invitation' );?>" />
+		<input type="button" id="generate_code" class="button" value="<?php _e( 'Generate Invitation Code', 'alphasss' );?>" />
 	</center>
 </div>
 
