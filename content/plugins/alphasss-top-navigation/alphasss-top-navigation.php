@@ -12,7 +12,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 //Loads the plugin's translated strings
-load_plugin_textdomain('alphasss', false, basename(dirname( __FILE__ )) . '/languages');
+load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
 
 __('Blog', 'alphasss');
 __('Register', 'alphasss');

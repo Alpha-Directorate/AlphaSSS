@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: alphasss\n"
 "POT-Creation-Date: 2015-06-22 20:17+0300\n"
-"PO-Revision-Date: 2015-06-22 20:17+0300\n"
+"PO-Revision-Date: 2015-06-22 22:23+0300\n"
 "Last-Translator: Fractal Overflow <fractal-overflow@alphadirectorate.com>\n"
 "Language-Team: AlphaSSS Team\n"
 "Language: en_US\n"
@@ -137,7 +137,7 @@ msgstr ""
 
 #: ../../../plugins/alphasss-register/alphasss-register.php:368
 msgid "The Usual First Step"
-msgstr ""
+msgstr "Sign-up, the usual First Step..."
 
 #: ../../../plugins/alphasss-register/alphasss-register.php:373
 msgid "Your Nickname:"
@@ -148,6 +148,8 @@ msgid ""
 "The key to victory is discipline, and that means a well made bad. You will "
 "practice until you can make your bed in your sleep."
 msgstr ""
+"Do not use any part of your first/last name or reuse any previously used "
+"nicknames or handles. Never imply or suggest your true identity."
 
 #: ../../../plugins/alphasss-register/alphasss-register.php:379
 msgid "Password:"
@@ -176,6 +178,9 @@ msgid ""
 "once I'd like to eat dinner with a celebrity whi isn't bound and gagged. "
 "Daylight and everything."
 msgstr ""
+"Privacy and anonymity are fundamental to us. And so, we ask you to provide "
+"us only with minimum amount of information. Your true identity should never "
+"be known1 (TODO) to us – this is our most salient rule."
 
 #: ../../../plugins/alphasss-register/alphasss-register.php:417
 msgid "Don't have any invitation code?"
@@ -195,6 +200,9 @@ msgid ""
 "sure! Blame the wizards! Ummm...to eBay? Leela, Bender, we're going grave "
 "robbing."
 msgstr ""
+"Please use an anonymous email service (e.g. Gmail, Hotmail, etc.) Ideally, "
+"it's best to create a brand new, separate email account. And to be clear: We "
+"never sell or give away your email to anybody. Never."
 
 #: ../../../plugins/alphasss-group/alphasss-group.php:59
 msgid "Groups"

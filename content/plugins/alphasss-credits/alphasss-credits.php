@@ -17,7 +17,7 @@ use AlphaSSS\Helpers\EmailAddressEncryption;
 
 add_action( 'bp_loaded', function(){
 
-	load_plugin_textdomain( 'alphasss', false, basename( dirname( __FILE__ ) ) . '/languages' );
+	load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
 
 	if ( HTTP::isPost() AND $credits_amount = Arr::get( $_POST, 'credits-amount' ) ) {
 

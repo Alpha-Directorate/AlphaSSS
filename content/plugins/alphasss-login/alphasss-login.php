@@ -9,7 +9,7 @@
  * Text Domain: alphasss
  */
 
-load_plugin_textdomain( 'alphasss', false, basename( dirname( __FILE__ ) ) . '/languages' );
+load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
 
 add_filter( 'login_redirect', function($redirect_to, $request, $user){
 

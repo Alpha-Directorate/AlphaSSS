@@ -11,7 +11,7 @@ Text Domain: alphasss
 use AlphaSSS\Repositories\User as UserRepository;
 use AlphaSSS\Helpers\EmailAddressEncryption;
 
-load_plugin_textdomain( 'alphasss', false, basename( dirname( __FILE__ ) ) . '/languages' );
+load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
 
 // Require helper functions
 require_once( 'includes/alphasss-register-functions.php' );

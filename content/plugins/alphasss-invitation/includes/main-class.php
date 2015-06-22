@@ -345,15 +345,7 @@ if ( ! class_exists( 'Alphasss_Invitation_Plugin' ) ):
 		 * Method setup right localization
 		 */
 		private function setup_textdomain() {
-
-			$domain = 'alphasss';
-			$locale = apply_filters('plugin_locale', get_locale(), $domain);
-
-			//first try to load from wp-content/languages/plugins/ directory
-			load_textdomain($domain, WP_LANG_DIR.'/plugins/'.$domain.'-'.$locale.'.mo');
-			
-			//if not found, then load from alphasss-invitation/languages/ directory
-			load_plugin_textdomain( $domain, false, $this->lang_dir );
+			load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
 		}
 
 		private function __construct() {}
