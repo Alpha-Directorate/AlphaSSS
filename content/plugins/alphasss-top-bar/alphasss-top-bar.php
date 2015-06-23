@@ -129,14 +129,14 @@ add_action( 'plugins_loaded', function(){
 					'parent'   => 'my-account-buddypress',
 					'id'       => 'my-account-finances',
 					'title'    => __( 'Finances', 'alphasss' ),
-					'href'     =>  $bp->loggedin_user->domain . 'finances'
+					'href'     =>  $bp->loggedin_user->domain . 'accounting'
 				) );
 
 				$wp_admin_bar->add_menu( array(
 					'parent'   => 'my-account-finances',
 					'id'       => 'my-account-finances-accounting',
 					'title'    => __( 'Accounting', 'alphasss' ),
-					'href'     =>  $bp->loggedin_user->domain . 'finances'
+					'href'     =>  $bp->loggedin_user->domain . 'accounting'
 				) );
 
 				$wp_admin_bar->add_menu( array(

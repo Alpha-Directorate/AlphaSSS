@@ -8,6 +8,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 use \AlphaSSS\Repositories\User;
+use \AlphaSSS\Helpers\Arr;
 
 if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 
@@ -29,9 +30,9 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 
 		public function setup_globals( $args = array() )
 		{
-			if (true) {
-				add_action( 'bp_setup_nav', array($this, 'update_bp_menus'), 100 );
-			}
+			add_action( 'bp_setup_nav', array($this, 'update_bp_menus'), 100 );
+			add_action('bp_before_member_header_meta', array($this, 'setup_text_below_activity'));
+
 
 			parent::setup_globals();
 		}
@@ -39,6 +40,26 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 		public function setup_actions()
 		{
 			parent::setup_actions();
+		}
+
+		public function setup_text_below_activity()
+		{
+			global $bp;
+			
+			$permitted_pages_for_activity_text = array_map(function($url){
+				$url = parse_url($url);
+
+				return $url['path'];
+			},
+			[
+				$bp->displayed_user->domain . 'accounting/',
+				$bp->displayed_user->domain . 'accounting/',
+				$bp->displayed_user->domain . 'accounting/'
+			]);
+			
+			if ( in_array( Arr::get( $_SERVER, 'REQUEST_URI' ), $permitted_pages_for_activity_text) ) {
+				alphasss_gf_finances_load_template('members/single/alphasss_gf_finances_activity_text');
+			}
 		}
 
 		/**
@@ -53,25 +74,41 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 				! User::hasRole('gf') || 
 				( $bp->displayed_user->domain != $bp->loggedin_user->domain ) ) return;
 
-			$profile_link = $bp->loggedin_user->domain . $bp->activity->slug . '/';
-
 			bp_core_new_nav_item( array(
 				'name'                => __( 'Finances', 'alphasss' ),
-				'slug'                => 'finances',
+				'slug'                => 'accounting',
 				'position'            => 200,
 				'screen_function'     => 'alphasss_gf_finances_screen_grid',
-				'default_subnav_slug' => 'my-finances'
+				'default_subnav_slug' => 'my-accounting'
 			) );
 
-			$alphasss_gf_finances_link = $bp->displayed_user->domain . $this->slug . '/';
+			$alphasss_gf_finances_link = $bp->displayed_user->domain;
 
 			bp_core_new_subnav_item( array(
-				'name'            => __( 'Finances', 'alphasss' ),
-				'slug'            => 'finances',
-				'parent_slug'     => $this->slug,
+				'name'            => __( 'Accounting', 'alphasss' ),
+				'slug'            => 'my-accounting',
+				'parent_slug'     => 'accounting',
 				'parent_url'      => $alphasss_gf_finances_link,
 				'screen_function' => 'alphasss_gf_finances_screen_grid',
 				'position'        => 10
+			) );
+
+			bp_core_new_subnav_item( array(
+				'name'            => __( 'Time Value', 'alphasss' ),
+				'slug'            => 'my-time-value',
+				'parent_slug'     => 'accounting',
+				'parent_url'      => $alphasss_gf_finances_link,
+				'screen_function' => 'alphasss_gf_finances_screen_grid',
+				'position'        => 20
+			) );
+
+			bp_core_new_subnav_item( array(
+				'name'            => __( 'Levels', 'alphasss' ),
+				'slug'            => 'my-levels',
+				'parent_slug'     => 'accounting',
+				'parent_url'      => $alphasss_gf_finances_link,
+				'screen_function' => 'alphasss_gf_finances_screen_grid',
+				'position'        => 30
 			) );
 		}
 
