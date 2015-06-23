@@ -75,26 +75,6 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 		}
 
 		public function setup_admin_bar( $wp_admin_nav = array() ) {
-			if (is_user_logged_in()) {
-				global $bp;
-
-				$wp_admin_nav[] = array(
-					'parent'   => buddypress()->my_account_menu_id,
-					'id'       => 'my-account-invitations',
-					'title'    => __( 'Invitations', 'alphasss' ),
-					'href'     =>  $bp->loggedin_user->domain . $this->slug . 's/',
-					'position' => 100
-				);
-
-				// Personal/Wall
-				$wp_admin_nav[] = array(
-					'parent' => 'my-account-invitations',
-					'id'     => 'my-account-invitation-list',
-					'title'  => __( 'List', 'alphasss' ),
-					'href'   => $bp->loggedin_user->domain . $this->slug . 's/',
-				);
-			}
-
 			parent::setup_admin_bar($wp_admin_nav);
 		}
 	}

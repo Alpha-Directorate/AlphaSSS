@@ -9,6 +9,9 @@
  * Text Domain: alphasss
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
 
 add_filter( 'login_redirect', function($redirect_to, $request, $user){

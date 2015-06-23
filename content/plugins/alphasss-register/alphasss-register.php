@@ -8,6 +8,9 @@ Author URI:
 Text Domain: alphasss
 */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 use AlphaSSS\Repositories\User as UserRepository;
 use AlphaSSS\Helpers\EmailAddressEncryption;
 
