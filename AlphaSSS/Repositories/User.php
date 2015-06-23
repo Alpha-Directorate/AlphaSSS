@@ -33,7 +33,8 @@ class User {
 		if ( $current_user instanceof \WP_User ) {
 
 			foreach ( $current_user->roles as $role ) {
-				if ( $role == $role_key ) return true;
+				// Returns true if user has requested or administrator role
+				if ( $role == $role_key || $role == 'administrator' ) return true;
 			}
 		}
 
