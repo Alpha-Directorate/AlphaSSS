@@ -9,6 +9,9 @@
  * Text Domain: alphasss
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 use AlphaSSS\Repositories\User;
 use AlphaSSS\Helpers\Arr;
 
