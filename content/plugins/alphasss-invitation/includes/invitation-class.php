@@ -15,7 +15,7 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 		{
 			parent::start(
 				'invitation',
-				__( 'Invitation' , 'alphasss-invitation' ),
+				__( 'Invitation' , 'alphasss' ),
 				dirname( __FILE__ )
 			);
 		}
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 			$profile_link = $bp->loggedin_user->domain . $bp->activity->slug . '/';
 
 			bp_core_new_nav_item( array(
-				'name'                => __( 'Invitations', 'alphasss-invitation' ),
+				'name'                => __( 'Invitations', 'alphasss' ),
 				'slug'                => 'invitations',
 				'position'            => 100,
 				'screen_function'     => 'alphasss_invitation_screen_grid',
@@ -65,7 +65,7 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 			$alphasss_invitation_link = $bp->displayed_user->domain . $this->slug . '/';
 
 			bp_core_new_subnav_item( array(
-				'name'            => __( 'Invitations', 'alphasss-invitation' ),
+				'name'            => __( 'Invitations', 'alphasss' ),
 				'slug'            => 'invitations',
 				'parent_slug'     => $this->slug,
 				'parent_url'      => $alphasss_invitation_link,
@@ -81,7 +81,7 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 				$wp_admin_nav[] = array(
 					'parent'   => buddypress()->my_account_menu_id,
 					'id'       => 'my-account-invitations',
-					'title'    => __( 'Invitations', 'alphasss-invitation' ),
+					'title'    => __( 'Invitations', 'alphasss' ),
 					'href'     =>  $bp->loggedin_user->domain . $this->slug . 's/',
 					'position' => 100
 				);
@@ -90,7 +90,7 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 				$wp_admin_nav[] = array(
 					'parent' => 'my-account-invitations',
 					'id'     => 'my-account-invitation-list',
-					'title'  => __( 'List', 'alphasss-invitation' ),
+					'title'  => __( 'List', 'alphasss' ),
 					'href'   => $bp->loggedin_user->domain . $this->slug . 's/',
 				);
 			}
