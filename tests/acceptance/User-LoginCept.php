@@ -13,7 +13,7 @@ $I->click('Log In');
 $I->seeCurrentUrlEquals('/browse/founder_counselor/');
 $I->dontSee('Login','.button');
 $I->dontSee('Register','li');
-$I->moveMouseOver("//a[@title='My Account']");
+$I->moveMouseOver("//li[@id='wp-admin-bar-my-account']");
 $I->see('Log Out','.ab-item');
 $I->click("//a[@class='ab-item' and text()='Log Out']");
 $I->seeCurrentUrlEquals('/browse/founder_counselor/?loggedout=true');

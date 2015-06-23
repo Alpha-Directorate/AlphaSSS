@@ -13,6 +13,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 use AlphaSSS\HTTP\HTTP;
+use \AlphaSSS\Repositories\User;
 
 //Loads the plugin's translated strings
 load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
@@ -100,7 +101,58 @@ add_action( 'plugins_loaded', function(){
 				) );
 			}
 			//--
-
 		});
+
+		add_action('wp_before_admin_bar_render', function(){
+
+			global $wp_admin_bar, $bp;
+
+			if ( User::hasRole( 'member' ) || User::hasRole( 'gf' ) ) {
+
+				$wp_admin_bar->add_menu( array(
+					'parent'   => 'my-account-buddypress',
+					'id'       => 'my-account-invitations',
+					'title'    => __( 'Invitations', 'alphasss' ),
+					'href'     =>  $bp->loggedin_user->domain . alphasss_invitation()->component->slug .'s',
+				) );
+
+				$wp_admin_bar->add_menu( array(
+					'parent'   => 'my-account-invitations',
+					'id'       => 'my-account-invitation-list',
+					'title'    => __( 'List', 'alphasss' ),
+					'href'     =>  $bp->loggedin_user->domain . alphasss_invitation()->component->slug .'s',
+				) );
+			}
+
+			if ( User::hasRole( 'gf' ) ) {
+				$wp_admin_bar->add_menu( array(
+					'parent'   => 'my-account-buddypress',
+					'id'       => 'my-account-finances',
+					'title'    => __( 'Finances', 'alphasss' ),
+					'href'     =>  $bp->loggedin_user->domain . 'finances'
+				) );
+
+				$wp_admin_bar->add_menu( array(
+					'parent'   => 'my-account-finances',
+					'id'       => 'my-account-finances-accounting',
+					'title'    => __( 'Accounting', 'alphasss' ),
+					'href'     =>  $bp->loggedin_user->domain . 'finances'
+				) );
+
+				$wp_admin_bar->add_menu( array(
+					'parent'   => 'my-account-finances',
+					'id'       => 'my-account-finances-time-value',
+					'title'    => __( 'Time Value', 'alphasss' ),
+					'href'     =>  $bp->loggedin_user->domain . 'finances'
+				) );
+
+				$wp_admin_bar->add_menu( array(
+					'parent'   => 'my-account-finances',
+					'id'       => 'my-account-finances-levels',
+					'title'    => __( 'Levels', 'alphasss' ),
+					'href'     =>  $bp->loggedin_user->domain . 'finances'
+				) );
+			}
+		}, 120);
 	}
 });
