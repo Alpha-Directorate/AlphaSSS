@@ -12,6 +12,8 @@
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+use \AlphaSSS\Repositories\AccountingEvent;
+
 // Directory
 if ( ! defined( 'ALPHASSS_GF_FINANCES_PLUGIN_DIR' ) ) {
 	define( 'ALPHASSS_GF_FINANCES_PLUGIN_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
@@ -68,5 +70,11 @@ function alphasss_gf_finances()
 
   return $alphasss_gf_finances;
 }
+
+add_action('set_user_role', function($user_id, $role){
+	if ($role == 'gf') {
+		AccountingEvent::createSingUpEvent($user_id);
+	}
+}, 10, 2); 
 
 ?>

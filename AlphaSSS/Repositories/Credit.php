@@ -1,5 +1,7 @@
 <?php namespace AlphaSSS\Repositories;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 class Credit {
 
 	public static function creditList()

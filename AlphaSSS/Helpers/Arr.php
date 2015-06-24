@@ -1,6 +1,6 @@
-<?php
+<?php namespace AlphaSSS\Helpers;
 
-namespace AlphaSSS\Helpers;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Array helper.
