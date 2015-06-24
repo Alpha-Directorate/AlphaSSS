@@ -32,6 +32,8 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 		{
 			add_action( 'bp_setup_nav', array($this, 'update_bp_menus'), 100 );
 			add_action('bp_before_member_header_meta', array($this, 'setup_text_below_activity'));
+			wp_enqueue_script( 'tablesorter', ALPHASSS_GF_FINANCES_PLUGIN_URL . 'assets/js/tablesorter/jquery.tablesorter.min.js',array('jquery') );
+			wp_enqueue_style( 'buddyboss-child-custom', ALPHASSS_GF_FINANCES_PLUGIN_URL.'assets/js/tablesorter/themes/blue/style.css' );
 
 			parent::setup_globals();
 		}
