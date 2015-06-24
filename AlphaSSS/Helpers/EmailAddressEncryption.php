@@ -1,5 +1,7 @@
 <?php namespace AlphaSSS\Helpers;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 use AlphaSSS\Helpers\Encryption;
 
 class EmailAddressEncryption {
