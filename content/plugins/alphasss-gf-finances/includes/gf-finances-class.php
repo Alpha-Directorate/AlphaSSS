@@ -35,7 +35,7 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 			wp_enqueue_script( 'tablesorter', ALPHASSS_GF_FINANCES_PLUGIN_URL . 'assets/js/tablesorter/jquery.tablesorter.min.js',array('jquery') );
 			wp_enqueue_script( 'jstz', ALPHASSS_GF_FINANCES_PLUGIN_URL . 'assets/js/jstz.min.js', array('jquery') );
 			wp_enqueue_script( 'mustache', ALPHASSS_GF_FINANCES_PLUGIN_URL . 'assets/js/mustache.min.js', array('jquery') );
-			wp_enqueue_style( 'buddyboss-child-custom', ALPHASSS_GF_FINANCES_PLUGIN_URL.'assets/js/tablesorter/themes/blue/style.css' );
+			wp_enqueue_style( 'tablesorter-css', ALPHASSS_GF_FINANCES_PLUGIN_URL.'assets/js/tablesorter/themes/blue/style.css' );
 
 			parent::setup_globals();
 		}
