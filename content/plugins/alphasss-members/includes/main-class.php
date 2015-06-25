@@ -182,7 +182,7 @@ if ( ! class_exists( 'Alphasss_Members_Plugin' ) ):
 			$this->plugin_url = ALPHASSS_MEMBERS_PLUGIN_URL;
 
 			// Languages
-			$this->lang_dir = dirname( $this->basename ) . '/languages/';
+			$this->lang_dir = WP_LANG_DIR . '/plugins/alphasss';
 
 			// Includes
 			$this->includes_dir = $this->plugin_dir . 'includes';
@@ -217,16 +217,9 @@ if ( ! class_exists( 'Alphasss_Members_Plugin' ) ):
 		/**
 		 * Method setup right localization
 		 */
-		private function setup_textdomain() {
-
-			$domain = 'buddyboss-invitation';
-			$locale = apply_filters('plugin_locale', get_locale(), $domain);
-
-			//first try to load from wp-content/languages/plugins/ directory
-			load_textdomain($domain, WP_LANG_DIR.'/plugins/'.$domain.'-'.$locale.'.mo');
-			
+		private function setup_textdomain() {			
 			//if not found, then load from buddboss-wall/languages/ directory
-			load_plugin_textdomain( 'buddyboss-invitation', false, $this->lang_dir );
+			load_plugin_textdomain( 'alphasss', false, $this->lang_dir );
 		}
 
 		private function __construct() {}

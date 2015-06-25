@@ -1,5 +1,6 @@
 <?php 
 $I = new AcceptanceTester($scenario);
+$I->resizeWindow(1024, 1024);
 $I->wantTo('Verify that home page is works');
 $I->amOnPage('/');
 $I->see('Where has our privacy online gone?','h1');

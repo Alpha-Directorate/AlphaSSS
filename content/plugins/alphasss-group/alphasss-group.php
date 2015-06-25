@@ -6,13 +6,16 @@
  * Author:      AlphaSSS
  * Author URI:  http://alphasss.com
  * Version:     0.0.1
- * Text Domain: alphasss-group
+ * Text Domain: alphasss
  */
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 use AlphaSSS\Repositories\User;
 use AlphaSSS\Helpers\Arr;
 
-load_plugin_textdomain( 'alphasss-group', false, basename( dirname( __FILE__ ) ) . '/languages' );
+load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
 
 add_action( 'plugins_loaded', function(){
 
@@ -84,7 +87,7 @@ add_action( 'plugins_loaded', function(){
 			$wp_admin_bar->add_menu( array(
 				'parent'   => 'my-account-groups',
 				'id'       => 'my-account-group-created',
-				'title'    => _x( 'Group Created', 'My Account Groups sub nav' ,'alphasss-group' ),
+				'title'    => _x( 'Group Created', 'My Account Groups sub nav' ,'alphasss' ),
 				'position' => 0
 			) );
 		}
@@ -103,7 +106,7 @@ add_action( 'plugins_loaded', function(){
 	add_action( 'bp_get_new_group_name', function($group_name){
 
 		if (! $group_name) {
-			$group_name = sprintf( __( "%s's Group", 'alphasss-group' ), bp_core_get_user_displayname( bp_loggedin_user_id() ) );
+			$group_name = sprintf( __( "%s's Group", 'alphasss' ), bp_core_get_user_displayname( bp_loggedin_user_id() ) );
 		}
 
 		return $group_name;

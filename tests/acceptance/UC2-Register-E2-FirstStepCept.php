@@ -1,5 +1,6 @@
 <?php 
 $I = new AcceptanceTester($scenario);
+$I->resizeWindow(1024, 1024);
 $I->wantTo('Test validation of username');
 $I->amOnPage('/');
 $I->see('Register','li');

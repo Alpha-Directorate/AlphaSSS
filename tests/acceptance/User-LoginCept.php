@@ -1,5 +1,6 @@
 <?php 
 $I = new AcceptanceTester($scenario);
+$I->resizeWindow(1024, 1024);
 $I->wantTo('Check the user precondition works');
 $I->amOnPage('/');
 $I->see('Register','li');
@@ -12,7 +13,7 @@ $I->click('Log In');
 $I->seeCurrentUrlEquals('/browse/founder_counselor/');
 $I->dontSee('Login','.button');
 $I->dontSee('Register','li');
-$I->moveMouseOver("//a[@title='My Account']");
+$I->moveMouseOver("//li[@id='wp-admin-bar-my-account']");
 $I->see('Log Out','.ab-item');
 $I->click("//a[@class='ab-item' and text()='Log Out']");
 $I->seeCurrentUrlEquals('/browse/founder_counselor/?loggedout=true');

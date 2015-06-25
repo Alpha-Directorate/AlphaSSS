@@ -6,15 +6,17 @@
  * Author:      AlphaSSS
  * Author URI:  http://alphasss.com
  * Version:     0.0.1
+ * Text Domain: alphasss
  */
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 use AlphaSSS\HTTP\HTTP;
+use \AlphaSSS\Repositories\User;
 
 //Loads the plugin's translated strings
-load_plugin_textdomain('alphasss-top-bar', false, basename(dirname( __FILE__ )) . '/languages');
+load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
 
 add_action( 'plugins_loaded', function(){
 
@@ -61,7 +63,7 @@ add_action( 'plugins_loaded', function(){
 			$wp_admin_bar->add_menu( array(
 				'parent'   => 'user-actions',
 				'id'       => 'edit-profile',
-				'title'    => __( 'Profile', 'alphasss-top-bar' ),
+				'title'    => __( 'Profile', 'alphasss' ),
 				'href'     => bp_get_members_component_link( 'profile' ),
 				'position' => 1
 			) );	
@@ -70,7 +72,7 @@ add_action( 'plugins_loaded', function(){
 				$wp_admin_bar->add_menu( array(
 					'parent'   => 'user-actions',
 					'id'       => 'register-profile',
-					'title'    => __( 'Register', 'alphasss-top-bar' ),
+					'title'    => __( 'Register', 'alphasss' ),
 					'href'     => get_pre_member_register_url(),
 					'position' => 2
 				) );
@@ -79,7 +81,7 @@ add_action( 'plugins_loaded', function(){
 			$wp_admin_bar->add_menu( array(
 				'parent'   => 'user-actions',
 				'id'       => 'logout',
-				'title'    => __( 'Log Out', 'alphasss-top-bar' ),
+				'title'    => __( 'Log Out', 'alphasss' ),
 				'href'     => wp_logout_url(),
 				'position' => 3
 			) );
@@ -94,12 +96,63 @@ add_action( 'plugins_loaded', function(){
 				$wp_admin_bar->add_menu( array(
 					'parent'   => 'user-credits-icon',
 					'id'       => 'user-credits',
-					'title'    => __('Buy Credits'),
+					'title'    => __('Buy Credits', 'alphasss'),
 					'href'     => str_replace( '/wp', '',  site_url( '/purchase-credits/', HTTP::protocol() ) )
 				) );
 			}
 			//--
-
 		});
+
+		add_action('wp_before_admin_bar_render', function(){
+
+			global $wp_admin_bar, $bp;
+
+			if ( User::hasRole( 'member' ) || User::hasRole( 'gf' ) ) {
+
+				$wp_admin_bar->add_menu( array(
+					'parent'   => 'my-account-buddypress',
+					'id'       => 'my-account-invitations',
+					'title'    => __( 'Invitations', 'alphasss' ),
+					'href'     =>  $bp->loggedin_user->domain . alphasss_invitation()->component->slug .'s',
+				) );
+
+				$wp_admin_bar->add_menu( array(
+					'parent'   => 'my-account-invitations',
+					'id'       => 'my-account-invitation-list',
+					'title'    => __( 'List', 'alphasss' ),
+					'href'     =>  $bp->loggedin_user->domain . alphasss_invitation()->component->slug .'s',
+				) );
+			}
+
+			if ( User::hasRole( 'gf' ) ) {
+				$wp_admin_bar->add_menu( array(
+					'parent'   => 'my-account-buddypress',
+					'id'       => 'my-account-finances',
+					'title'    => __( 'Finances', 'alphasss' ),
+					'href'     =>  $bp->loggedin_user->domain . 'accounting'
+				) );
+
+				$wp_admin_bar->add_menu( array(
+					'parent'   => 'my-account-finances',
+					'id'       => 'my-account-finances-accounting',
+					'title'    => __( 'Accounting', 'alphasss' ),
+					'href'     =>  $bp->loggedin_user->domain . 'accounting'
+				) );
+
+				$wp_admin_bar->add_menu( array(
+					'parent'   => 'my-account-finances',
+					'id'       => 'my-account-finances-time-value',
+					'title'    => __( 'Time Value', 'alphasss' ),
+					'href'     =>  $bp->loggedin_user->domain . 'finances'
+				) );
+
+				$wp_admin_bar->add_menu( array(
+					'parent'   => 'my-account-finances',
+					'id'       => 'my-account-finances-levels',
+					'title'    => __( 'Levels', 'alphasss' ),
+					'href'     =>  $bp->loggedin_user->domain . 'finances'
+				) );
+			}
+		}, 120);
 	}
 });
