@@ -13,6 +13,8 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 use \AlphaSSS\Repositories\AccountingEvent;
+use \AlphaSSS\Helpers\Arr;
+use Carbon\Carbon;
 
 // Directory
 if ( ! defined( 'ALPHASSS_GF_FINANCES_PLUGIN_DIR' ) ) {
@@ -75,6 +77,44 @@ add_action('set_user_role', function($user_id, $role){
 	if ($role == 'gf') {
 		AccountingEvent::createSingUpEvent($user_id);
 	}
-}, 10, 2); 
+}, 10, 2);
+
+add_action( 'wp_ajax_get_gf_accountiong_events', function(){
+
+	// Not have GF role? Return 404
+	if ( ! \AlphaSSS\Repositories\User::hasRole('gf') ) {
+
+		status_header(404);
+
+		wp_die();
+	}
+	//--
+
+	header('Content-Type: application/json');
+
+	if ( ! $event_records = \AlphaSSS\Repositories\AccountingEvent::findBy( ['user_id' => get_current_user_id()] ) ) {
+		$event_records = [];
+	}
+
+	// Getting user timerzone or wordpress timezone
+	$gf_timezone = Arr::get( $_POST, 'timezone_name', get_option('timezone_string') );
+
+	// Formatting event date
+	foreach ($event_records as &$event_record) {
+		$event_record['display_date'] = (new Carbon( $event_record['event_date'], 'UTC' ) )->setTimezone($gf_timezone)->format('F j, Y g:i a');
+	}
+
+	// Preparing the responce data
+	$data = [
+		'data' => [
+			'event_records' => $event_records
+		]
+	];
+	//--
+
+	echo json_encode($data);
+
+	wp_die();
+});
 
 ?>
