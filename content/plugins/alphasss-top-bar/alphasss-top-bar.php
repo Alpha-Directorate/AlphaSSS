@@ -115,13 +115,6 @@ add_action( 'plugins_loaded', function(){
 					'title'    => __( 'Invitations', 'alphasss' ),
 					'href'     =>  $bp->loggedin_user->domain . alphasss_invitation()->component->slug .'s',
 				) );
-
-				$wp_admin_bar->add_menu( array(
-					'parent'   => 'my-account-invitations',
-					'id'       => 'my-account-invitation-list',
-					'title'    => __( 'List', 'alphasss' ),
-					'href'     =>  $bp->loggedin_user->domain . alphasss_invitation()->component->slug .'s',
-				) );
 			}
 
 			if ( User::hasRole( 'gf' ) ) {
