@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: alphasss\n"
-"POT-Creation-Date: 2015-06-22 20:17+0300\n"
-"PO-Revision-Date: 2015-06-22 22:23+0300\n"
+"POT-Creation-Date: 2015-06-26 11:09+0300\n"
+"PO-Revision-Date: 2015-06-26 11:09+0300\n"
 "Last-Translator: Fractal Overflow <fractal-overflow@alphadirectorate.com>\n"
 "Language-Team: AlphaSSS Team\n"
 "Language: en_US\n"
@@ -22,26 +22,27 @@ msgstr ""
 "X-Poedit-SearchPath-6: ../../../plugins/alphasss-profile\n"
 "X-Poedit-SearchPath-7: ../../../plugins/alphasss-top-bar\n"
 "X-Poedit-SearchPath-8: ../../../plugins/alphasss-top-navigation\n"
+"X-Poedit-SearchPath-9: ../../../plugins/alphasss-gf-finances\n"
 
-#: ../../../plugins/alphasss-credits/alphasss-credits.php:53
+#: ../../../plugins/alphasss-credits/alphasss-credits.php:56
 #, php-format
 msgid "Purchase %.2f Credits ($%.2f USD)"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:50
-#: ../../../plugins/alphasss-register/alphasss-register.php:245
+#: ../../../plugins/alphasss-register/alphasss-register.php:53
+#: ../../../plugins/alphasss-register/alphasss-register.php:248
 msgid "The Late Philip J. Fry"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:51
-#: ../../../plugins/alphasss-register/alphasss-register.php:246
-#: ../../../plugins/alphasss-register/alphasss-register.php:330
-#: ../../../plugins/alphasss-register/alphasss-register.php:403
+#: ../../../plugins/alphasss-register/alphasss-register.php:54
+#: ../../../plugins/alphasss-register/alphasss-register.php:249
+#: ../../../plugins/alphasss-register/alphasss-register.php:333
+#: ../../../plugins/alphasss-register/alphasss-register.php:406
 msgid "Your Invitation Code"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:52
-#: ../../../plugins/alphasss-register/alphasss-register.php:247
+#: ../../../plugins/alphasss-register/alphasss-register.php:55
+#: ../../../plugins/alphasss-register/alphasss-register.php:250
 msgid ""
 "My fellow Earthicans, as I have explained in my book \"Earth in Balance\", "
 "and the much more popular \"Harry Potter and the Balance of Earth\" we need "
@@ -49,64 +50,64 @@ msgid ""
 "new code</a>"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:53
-#: ../../../plugins/alphasss-register/alphasss-register.php:248
+#: ../../../plugins/alphasss-register/alphasss-register.php:56
+#: ../../../plugins/alphasss-register/alphasss-register.php:251
 msgid "Request Invitation Code"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:119
-#: ../../../plugins/alphasss-profile/alphasss-profile.php:34
-#: ../../../plugins/alphasss-profile/alphasss-profile.php:72
+#: ../../../plugins/alphasss-register/alphasss-register.php:122
+#: ../../../plugins/alphasss-profile/alphasss-profile.php:37
+#: ../../../plugins/alphasss-profile/alphasss-profile.php:75
 msgid ""
 "You may use only the following characters: letters (a-z), numbers (0-9), "
 "dashes (-), underscores (_), apostrophes ('), and periods (.). Try again "
 "please."
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:126
-#: ../../../plugins/alphasss-profile/alphasss-profile.php:52
-#: ../../../plugins/alphasss-profile/alphasss-profile.php:89
+#: ../../../plugins/alphasss-register/alphasss-register.php:129
+#: ../../../plugins/alphasss-profile/alphasss-profile.php:55
+#: ../../../plugins/alphasss-profile/alphasss-profile.php:92
 msgid "This nickname is already taken. Please choose another one."
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:131
-#: ../../../plugins/alphasss-profile/alphasss-profile.php:94
+#: ../../../plugins/alphasss-register/alphasss-register.php:134
+#: ../../../plugins/alphasss-profile/alphasss-profile.php:97
 msgid "Please choose your nickname."
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:150
+#: ../../../plugins/alphasss-register/alphasss-register.php:153
 msgid "This email already in use. Please pick another one."
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:156
+#: ../../../plugins/alphasss-register/alphasss-register.php:159
 msgid "Please enter the valid email address."
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:162
+#: ../../../plugins/alphasss-register/alphasss-register.php:165
 msgid "Please enter your email."
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:179
+#: ../../../plugins/alphasss-register/alphasss-register.php:182
 msgid "The 2 passwords do not match. Please try again."
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:185
+#: ../../../plugins/alphasss-register/alphasss-register.php:188
 msgid "Your password must be strong. It's for your own protection."
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:190
+#: ../../../plugins/alphasss-register/alphasss-register.php:193
 msgid "Please choose your password."
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:199
+#: ../../../plugins/alphasss-register/alphasss-register.php:202
 msgid "Please confirm if you are at least 21-years of age?"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:282
+#: ../../../plugins/alphasss-register/alphasss-register.php:285
 msgid "Please contact admin"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:331
+#: ../../../plugins/alphasss-register/alphasss-register.php:334
 msgid ""
 "I meant 'physically'. Look, perhaps you could let me work for a little food? "
 "I could clean the floors or paint a fence, or service you sexually? Hello, "
@@ -114,36 +115,36 @@ msgid ""
 "'bout them Knicks?"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:335
-#: ../../../plugins/alphasss-register/alphasss-register.php:407
+#: ../../../plugins/alphasss-register/alphasss-register.php:338
+#: ../../../plugins/alphasss-register/alphasss-register.php:410
 msgid "Invitation Code:"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:345
+#: ../../../plugins/alphasss-register/alphasss-register.php:348
 msgid "Don't have any invitation code? Then ask the members."
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:346
+#: ../../../plugins/alphasss-register/alphasss-register.php:349
 msgid ""
 "Get the code from one of the members currently online. Who said that? Sure "
 "you <a href=\"/browse/\">members online</a>! Ummm...to eBay? Stop! Don't "
 "shoot fire stick in space canoe! Cause explosive decompression!"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:354
-#: ../../../plugins/alphasss-register/alphasss-register.php:431
+#: ../../../plugins/alphasss-register/alphasss-register.php:357
+#: ../../../plugins/alphasss-register/alphasss-register.php:434
 msgid "Finish"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:368
+#: ../../../plugins/alphasss-register/alphasss-register.php:371
 msgid "The Usual First Step"
 msgstr "Sign-up, the usual First Step..."
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:373
+#: ../../../plugins/alphasss-register/alphasss-register.php:376
 msgid "Your Nickname:"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:374
+#: ../../../plugins/alphasss-register/alphasss-register.php:377
 msgid ""
 "The key to victory is discipline, and that means a well made bad. You will "
 "practice until you can make your bed in your sleep."
@@ -151,27 +152,27 @@ msgstr ""
 "Do not use any part of your first/last name or reuse any previously used "
 "nicknames or handles. Never imply or suggest your true identity."
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:379
+#: ../../../plugins/alphasss-register/alphasss-register.php:382
 msgid "Password:"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:384
+#: ../../../plugins/alphasss-register/alphasss-register.php:387
 msgid ""
 "Isn't it true that you have been paid for your testimony? Soothe us with "
 "sweet lies. Why would I want to know that?"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:390
+#: ../../../plugins/alphasss-register/alphasss-register.php:393
 msgid ""
 "Hey, quess that you're accessories to. File not found. Oh Sure! Blame the "
 "wizards! We'll need to have a look inside you with this camera."
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:395
+#: ../../../plugins/alphasss-register/alphasss-register.php:398
 msgid "Confirmation &amp; Dire Warning!"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:399
+#: ../../../plugins/alphasss-register/alphasss-register.php:402
 msgid ""
 "I daresay that Fry has discovered the smelliest object is the known "
 "universe! Throw her in brig. Also Zoidberg. Oh God, what I have done! Just "
@@ -182,19 +183,19 @@ msgstr ""
 "us only with minimum amount of information. Your true identity should never "
 "be known1 (TODO) to us – this is our most salient rule."
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:417
+#: ../../../plugins/alphasss-register/alphasss-register.php:420
 msgid "Don't have any invitation code?"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:418
+#: ../../../plugins/alphasss-register/alphasss-register.php:421
 msgid "Who said that? SURE you can die! You want to die?!"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:425
+#: ../../../plugins/alphasss-register/alphasss-register.php:428
 msgid "Your Email Address:"
 msgstr ""
 
-#: ../../../plugins/alphasss-register/alphasss-register.php:426
+#: ../../../plugins/alphasss-register/alphasss-register.php:429
 msgid ""
 "We need rest. The spirit is willing, but the flesh is spongy and bruised. Oh "
 "sure! Blame the wizards! Ummm...to eBay? Leela, Bender, we're going grave "
@@ -204,45 +205,47 @@ msgstr ""
 "it's best to create a brand new, separate email account. And to be clear: We "
 "never sell or give away your email to anybody. Never."
 
-#: ../../../plugins/alphasss-group/alphasss-group.php:59
+#: ../../../plugins/alphasss-group/alphasss-group.php:62
 msgid "Groups"
 msgstr ""
 
-#: ../../../plugins/alphasss-group/alphasss-group.php:60
+#: ../../../plugins/alphasss-group/alphasss-group.php:63
 msgid "No Pending Invites"
 msgstr ""
 
-#: ../../../plugins/alphasss-group/alphasss-group.php:63
+#: ../../../plugins/alphasss-group/alphasss-group.php:66
 #, php-format
 msgid "Groups <span class=\"count\">%s</span>"
 msgstr ""
 
-#: ../../../plugins/alphasss-group/alphasss-group.php:64
+#: ../../../plugins/alphasss-group/alphasss-group.php:67
 #, php-format
 msgid "Pending Invites <span class=\"count\">%s</span>"
 msgstr ""
 
-#: ../../../plugins/alphasss-group/alphasss-group.php:71
+#: ../../../plugins/alphasss-group/alphasss-group.php:74
 msgid "Memberships"
 msgstr ""
 
-#: ../../../plugins/alphasss-group/alphasss-group.php:87
+#: ../../../plugins/alphasss-group/alphasss-group.php:90
 msgid "Group Created"
 msgstr ""
 
-#: ../../../plugins/alphasss-group/alphasss-group.php:106
+#: ../../../plugins/alphasss-group/alphasss-group.php:109
 #, php-format
 msgid "%s's Group"
 msgstr ""
 
 #: ../../../plugins/alphasss-invitation/alphasss-invitation.php:50
 #: ../../../plugins/alphasss-members/alphasss-members.php:38
+#: ../../../plugins/alphasss-gf-finances/alphasss-gf-finances.php:47
 #, php-format
 msgid "Couldn't load main class at:<br/>%s"
 msgstr ""
 
 #: ../../../plugins/alphasss-invitation/alphasss-invitation.php:62
 #: ../../../plugins/alphasss-members/alphasss-members.php:50
+#: ../../../plugins/alphasss-gf-finances/alphasss-gf-finances.php:59
 #, php-format
 msgid "<h1>Fatal error:</h1><hr/><pre>%s</pre>"
 msgstr ""
@@ -295,12 +298,8 @@ msgstr ""
 
 #: ../../../plugins/alphasss-invitation/includes/invitation-class.php:58
 #: ../../../plugins/alphasss-invitation/includes/invitation-class.php:68
-#: ../../../plugins/alphasss-invitation/includes/invitation-class.php:84
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:115
 msgid "Invitations"
-msgstr ""
-
-#: ../../../plugins/alphasss-invitation/includes/invitation-class.php:93
-msgid "List"
 msgstr ""
 
 #: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:8
@@ -331,7 +330,7 @@ msgstr ""
 msgid "Generate Invitation Code"
 msgstr ""
 
-#: ../../../plugins/alphasss-login/alphasss-login.php:37
+#: ../../../plugins/alphasss-login/alphasss-login.php:40
 msgid ""
 "Your account isn't active. Please click the link in your email to confirm it."
 msgstr ""
@@ -410,21 +409,46 @@ msgstr ""
 msgid "Add channel prefix"
 msgstr ""
 
-#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:65
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:66
 msgid "Profile"
 msgstr ""
 
-#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:74
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:75
 #: ../../../plugins/alphasss-top-navigation/alphasss-top-navigation.php:18
 msgid "Register"
 msgstr ""
 
-#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:83
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:84
 msgid "Log Out"
 msgstr ""
 
-#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:98
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:99
 msgid "Buy Credits"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:122
+msgid "List"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:131
+#: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:21
+#: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:81
+msgid "Finances"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:138
+#: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:91
+msgid "Accounting"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:145
+#: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:100
+msgid "Time Value"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:152
+#: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:109
+msgid "Levels"
 msgstr ""
 
 #: ../../../plugins/alphasss-top-navigation/alphasss-top-navigation.php:17
@@ -445,4 +469,37 @@ msgstr ""
 
 #: ../../../plugins/alphasss-top-navigation/alphasss-top-navigation.php:29
 msgid "Login"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:7
+msgid "Date"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:8
+msgid "Transaction Description"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:9
+msgid "Income"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:9
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:10
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:11
+msgid "(Credits)"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:10
+msgid "Withdrawal"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:11
+msgid "Ending Ballance"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss_gf_finances_activity_text.php:3
+msgid ""
+"Congratulations! You are now at the highest level <b>10</b>, and your "
+"earnings share is <b>100%</b>, and AlphaSSS makes no commission. Read more "
+"about <a href='#'>levels</a>."
 msgstr ""
