@@ -18,7 +18,7 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 		{
 			parent::start(
 				'gf-finances',
-				__( 'Finances' , 'alphasss' ),
+				__( 'Financials' , 'alphasss' ),
 				dirname( __FILE__ )
 			);
 		}
@@ -78,7 +78,7 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 				( $bp->displayed_user->domain != $bp->loggedin_user->domain ) ) return;
 
 			bp_core_new_nav_item( array(
-				'name'                => __( 'Finances', 'alphasss' ),
+				'name'                => __( 'Financials', 'alphasss' ),
 				'slug'                => 'accounting',
 				'position'            => 200,
 				'screen_function'     => 'alphasss_gf_finances_screen_grid',

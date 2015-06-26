@@ -101,7 +101,7 @@ add_action( 'wp_ajax_get_gf_accountiong_events', function(){
 
 	// Formatting event date
 	foreach ($event_records as &$event_record) {
-		$event_record['display_date'] = (new Carbon( $event_record['event_date'], 'UTC' ) )->setTimezone($gf_timezone)->format('F j, Y g:i A');
+		$event_record['display_date'] = (new Carbon( $event_record['event_date'], 'UTC' ) )->setTimezone($gf_timezone)->format('F j, Y, g:i a');
 	}
 
 	// Preparing the responce data

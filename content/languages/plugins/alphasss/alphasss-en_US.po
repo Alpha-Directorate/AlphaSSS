@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: alphasss\n"
-"POT-Creation-Date: 2015-06-26 11:09+0300\n"
-"PO-Revision-Date: 2015-06-26 11:09+0300\n"
+"POT-Creation-Date: 2015-06-26 22:19+0300\n"
+"PO-Revision-Date: 2015-06-26 22:19+0300\n"
 "Last-Translator: Fractal Overflow <fractal-overflow@alphadirectorate.com>\n"
 "Language-Team: AlphaSSS Team\n"
 "Language: en_US\n"
@@ -297,20 +297,19 @@ msgid "Invitation"
 msgstr ""
 
 #: ../../../plugins/alphasss-invitation/includes/invitation-class.php:58
-#: ../../../plugins/alphasss-invitation/includes/invitation-class.php:68
 #: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:115
 msgid "Invitations"
 msgstr ""
 
-#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:8
+#: ../../../plugins/alphasss-invitation/includes/invitation-class.php:68
 msgid "Invite Someone"
 msgstr ""
 
-#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:12
+#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:5
 msgid "Space Pilot 3000"
 msgstr ""
 
-#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:14
+#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:7
 msgid ""
 "I've got to find a way to escape the horrible ravages of youth. Suddenly, "
 "I'm going to the bathroom like clockwork, every three hours. And those jerks "
@@ -318,15 +317,15 @@ msgid ""
 "Please, Don-Bot... look into your hard drive, and open your mercy file!"
 msgstr ""
 
-#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:17
+#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:10
 msgid "Here's the invitation code that you can use:"
 msgstr ""
 
-#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:21
+#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:14
 msgid "The code is valid for 24 hours since the time it was generated."
 msgstr ""
 
-#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:25
+#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:18
 msgid "Generate Invitation Code"
 msgstr ""
 
@@ -426,27 +425,23 @@ msgstr ""
 msgid "Buy Credits"
 msgstr ""
 
-#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:122
-msgid "List"
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:124
+#: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:21
+#: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:81
+msgid "Financials"
 msgstr ""
 
 #: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:131
-#: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:21
-#: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:81
-msgid "Finances"
-msgstr ""
-
-#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:138
 #: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:91
 msgid "Accounting"
 msgstr ""
 
-#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:145
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:138
 #: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:100
 msgid "Time Value"
 msgstr ""
 
-#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:152
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:145
 #: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:109
 msgid "Levels"
 msgstr ""
