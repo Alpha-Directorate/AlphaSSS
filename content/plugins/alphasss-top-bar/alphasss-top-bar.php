@@ -121,7 +121,7 @@ add_action( 'plugins_loaded', function(){
 				$wp_admin_bar->add_menu( array(
 					'parent'   => 'my-account-buddypress',
 					'id'       => 'my-account-finances',
-					'title'    => __( 'Finances', 'alphasss' ),
+					'title'    => __( 'Financials', 'alphasss' ),
 					'href'     =>  $bp->loggedin_user->domain . 'accounting'
 				) );
 
