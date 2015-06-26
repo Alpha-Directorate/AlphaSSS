@@ -59,15 +59,15 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 				'slug'                => 'invitations',
 				'position'            => 100,
 				'screen_function'     => 'alphasss_invitation_screen_grid',
-				'default_subnav_slug' => 'my-invitations'
+				'default_subnav_slug' => 'invite-someone'
 			) );
 
 			$alphasss_invitation_link = $bp->displayed_user->domain . $this->slug . '/';
 
 			bp_core_new_subnav_item( array(
-				'name'            => __( 'Invitations', 'alphasss' ),
-				'slug'            => 'invitations',
-				'parent_slug'     => $this->slug,
+				'name'            => __( 'Invite Someone', 'alphasss' ),
+				'slug'            => 'invite-someone',
+				'parent_slug'     => 'invitations',
 				'parent_url'      => $alphasss_invitation_link,
 				'screen_function' => 'alphasss_invitation_screen_grid',
 				'position'        => 10
