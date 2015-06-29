@@ -46,6 +46,7 @@ $I->see('Congratulations! You are now at the highest level');
 $I->wait(3);
 $I->see('Sing-up Event');
 $I->see('Sign-up Bonus');
+$I->see('Talk Session - 30 min');
 $I->click('#user-invitations');
 $I->seeCurrentUrlEquals('/browse/elen/invitations/');
 $I->dontSee('Congratulations! You are now at the highest level');
