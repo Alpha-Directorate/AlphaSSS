@@ -78,6 +78,7 @@ add_action('set_user_role', function($user_id, $role){
 		AccountingEvent::createSingUpEvent($user_id);
 		AccountingEvent::createSingUpBonusEvent($user_id, Carbon::now()->addMinutes(1));
 		AccountingEvent::create($user_id, AccountingEvent::TALK_SESSION_EVENT, 30, 0, Carbon::now()->addMinutes(40));
+		AccountingEvent::create($user_id, AccountingEvent::GIFT_CARD_PURCHASE_EVENT, 0, 60, Carbon::now()->addMinutes(60));
 	}
 }, 10, 2);
 
