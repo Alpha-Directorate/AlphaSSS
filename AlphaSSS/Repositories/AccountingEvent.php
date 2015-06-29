@@ -160,6 +160,10 @@ class AccountingEvent {
 					case self::TALK_SESSION_EVENT:
 						$record['description'] = sprintf(__('Talk Session - %d min','alphasss'), $record['income_credits']);
 					break;
+
+					case self::GIFT_CARD_PURCHASE_EVENT:
+						$record['description'] = sprintf(__('Gift Card - %s - $%d','alphasss'), 'Amazon' ,$record['withdrawal_credits']);
+					break;
 				}
 			}
 		}
