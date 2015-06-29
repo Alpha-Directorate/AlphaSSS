@@ -104,6 +104,20 @@ class AccountingEvent {
 		return self::create($user_id, self::SINGUP_EVENT, 0, 0, $event_date);
 	}
 
+	/**
+	 * This methods adds a singup bonus event
+	 * 
+	 * @param integer $user_id
+	 * @param mixed $event_date The singup accounting event creation date
+	 * @see https://alphasss.atlassian.net/wiki/display/REQ/Use+Case+20+-+Financials#UseCase20-Financials-20.7
+	 * 
+	 * @return void AccountingEvent::create
+	 */
+	public static function createSingUpBonusEvent($user_id, $event_date = NULL)
+	{
+		return self::create($user_id, self::SINGUP_BONUS_EVENT, 100, 0, $event_date);
+	}
+
 	public function findBy(Array $args = [])
 	{
 		global $wpdb;
@@ -135,6 +149,10 @@ class AccountingEvent {
 				switch ($record['event_type']) {
 					case self::SINGUP_EVENT:
 						$record['description'] = __('Sing-up Event','alphasss');
+					break;
+
+					case self::SINGUP_BONUS_EVENT:
+						$record['description'] = __('Sign-up Bonus','alphasss');
 					break;
 				}
 			}

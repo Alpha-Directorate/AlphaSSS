@@ -76,6 +76,7 @@ function alphasss_gf_finances()
 add_action('set_user_role', function($user_id, $role){
 	if ($role == 'gf') {
 		AccountingEvent::createSingUpEvent($user_id);
+		AccountingEvent::createSingUpBonusEvent($user_id, Carbon::now()->addMinutes(1));
 	}
 }, 10, 2);
 
