@@ -53,6 +53,8 @@ class AccountingEvent {
 			}
 		}
 
+		update_user_meta( $user_id, 'credit_balance', $ballance );
+
 		// No date was passed? Use current one.
 		if (! $event_date) {
 			$event_date = Carbon::now();
@@ -153,6 +155,10 @@ class AccountingEvent {
 
 					case self::SINGUP_BONUS_EVENT:
 						$record['description'] = __('Sign-up Bonus','alphasss');
+					break;
+
+					case self::TALK_SESSION_EVENT:
+						$record['description'] = sprintf(__('Talk Session - %d min','alphasss'), $record['income_credits']);
 					break;
 				}
 			}
