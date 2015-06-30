@@ -1,3 +1,5 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit;?>
+
 <h2><?php _e('The Deep South', 'alphasss');?></h2>
  
 <p><?php _e("No! The cat shelter's on to me. Shinier than yours, meatbag. I'll get my kit! Kids don't turn rotten just from watching TV.", 'alphasss'); ?></p>

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: alphasss\n"
-"POT-Creation-Date: 2015-06-26 22:19+0300\n"
-"PO-Revision-Date: 2015-06-26 22:19+0300\n"
+"POT-Creation-Date: 2015-06-30 16:23+0300\n"
+"PO-Revision-Date: 2015-06-30 16:23+0300\n"
 "Last-Translator: Fractal Overflow <fractal-overflow@alphadirectorate.com>\n"
 "Language-Team: AlphaSSS Team\n"
 "Language: en_US\n"
@@ -492,9 +492,99 @@ msgstr ""
 msgid "Ending Ballance"
 msgstr ""
 
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-time-value.php:6
+msgid "Check to Edit"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-time-value.php:7
+msgid "Session Time"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-time-value.php:8
+msgid "Session Value"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-time-value.php:15
+#, php-format
+msgid "%d min"
+msgstr ""
+
 #: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss_gf_finances_activity_text.php:3
 msgid ""
 "Congratulations! You are now at the highest level <b>10</b>, and your "
 "earnings share is <b>100%</b>, and AlphaSSS makes no commission. Read more "
 "about <a href='#'>levels</a>."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:3
+msgid "The Deep South"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:5
+msgid ""
+"No! The cat shelter's on to me. Shinier than yours, meatbag. I'll get my "
+"kit! Kids don't turn rotten just from watching TV."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:7
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:11
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:15
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:19
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:23
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:27
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:31
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:35
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:39
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:43
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:47
+#, php-format
+msgid "Level %d"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:9
+msgid "Now Fry, it's been a few years since medical school, so remind me."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:13
+msgid "Disemboweling in your species: fatal or non-fatal?"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:17
+msgid "And those jerks at Social Security stopped sending me checks."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:21
+msgid ""
+"You'll have all the Slurm you can drink when you're partying with Slurms "
+"McKenzie!"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:25
+msgid "Robot 1-X, save my friends! And Zoidberg!"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:29
+msgid "As an interesting side note, as a head without a body, I envy the dead."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:33
+msgid ""
+"Well I'da done better, but it's plum hard pleading a case while awaiting "
+"trial for that there incompetence."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:37
+msgid "Leela, are you alright? You got wanged on the head."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:41
+msgid "I'll get my kit! Stop it, stop it. It's fine. I will 'destroy' you!"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:45
+msgid "Who am I making this out to? File not found. It must be wonderful."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:49
+msgid "We live long and are celebrated poopers."
 msgstr ""

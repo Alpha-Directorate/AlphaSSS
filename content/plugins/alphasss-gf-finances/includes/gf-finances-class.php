@@ -101,7 +101,7 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 				'slug'            => 'my-time-value',
 				'parent_slug'     => $this->slug,
 				'parent_url'      => $alphasss_gf_finances_link,
-				'screen_function' => 'alphasss_gf_finances_timevalue_screen',
+				'screen_function' => 'alphasss_gf_finances_time_value_screen',
 				'position'        => 20
 			) );
 
@@ -127,18 +127,18 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 		bp_core_load_template( apply_filters( 'alphasss_finances_screen_grid', 'members/single/plugins' ) );
 	}
 
-	function alphasss_gf_finances_timevalue_screen()
-	{
-		add_action( 'bp_template_content', function() {
-			alphasss_gf_finances_load_template( 'members/single/alphasss-gf-finances-accounting' );
-		} );
-		bp_core_load_template( apply_filters( 'alphasss_finances_screen_grid', 'members/single/plugins' ) );
-	}
-
 	function alphasss_gf_finances_levels_screen()
 	{
 		add_action( 'bp_template_content', function() {
 			alphasss_gf_finances_load_template( 'members/single/alphasss-gf-finances-levels' );
+		} );
+		bp_core_load_template( apply_filters( 'alphasss_finances_screen_grid', 'members/single/plugins' ) );
+	}
+
+	function alphasss_gf_finances_time_value_screen()
+	{
+		add_action( 'bp_template_content', function() {
+			alphasss_gf_finances_load_template( 'members/single/alphasss-gf-finances-time-value' );
 		} );
 		bp_core_load_template( apply_filters( 'alphasss_finances_screen_grid', 'members/single/plugins' ) );
 	}
