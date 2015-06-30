@@ -55,9 +55,9 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 				return $url['path'];
 			},
 			[
-				$bp->displayed_user->domain . 'accounting/',
-				$bp->displayed_user->domain . 'accounting/',
-				$bp->displayed_user->domain . 'accounting/'
+				$bp->displayed_user->domain . $this->slug . '/',
+				$bp->displayed_user->domain . $this->slug . '/my-time-value/',
+				$bp->displayed_user->domain . $this->slug . '/levels/'
 			]);
 			
 			if ( in_array( Arr::get( $_SERVER, 'REQUEST_URI' ), $permitted_pages_for_activity_text) ) {
@@ -79,18 +79,18 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 
 			bp_core_new_nav_item( array(
 				'name'                => __( 'Financials', 'alphasss' ),
-				'slug'                => 'accounting',
+				'slug'                => $this->slug,
 				'position'            => 200,
 				'screen_function'     => 'alphasss_gf_finances_screen_grid',
 				'default_subnav_slug' => 'my-accounting'
 			) );
 
-			$alphasss_gf_finances_link = $bp->displayed_user->domain;
+			$alphasss_gf_finances_link = $bp->displayed_user->domain . $this->slug . '/';
 
 			bp_core_new_subnav_item( array(
 				'name'            => __( 'Accounting', 'alphasss' ),
 				'slug'            => 'my-accounting',
-				'parent_slug'     => 'accounting',
+				'parent_slug'     => $this->slug,
 				'parent_url'      => $alphasss_gf_finances_link,
 				'screen_function' => 'alphasss_gf_finances_screen_grid',
 				'position'        => 10
@@ -99,18 +99,18 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 			bp_core_new_subnav_item( array(
 				'name'            => __( 'Time Value', 'alphasss' ),
 				'slug'            => 'my-time-value',
-				'parent_slug'     => 'accounting',
+				'parent_slug'     => $this->slug,
 				'parent_url'      => $alphasss_gf_finances_link,
-				'screen_function' => 'alphasss_gf_finances_screen_grid',
+				'screen_function' => 'alphasss_gf_finances_timevalue_screen',
 				'position'        => 20
 			) );
 
 			bp_core_new_subnav_item( array(
 				'name'            => __( 'Levels', 'alphasss' ),
-				'slug'            => 'my-levels',
-				'parent_slug'     => 'accounting',
+				'slug'            => 'levels',
+				'parent_slug'     => $this->slug,
 				'parent_url'      => $alphasss_gf_finances_link,
-				'screen_function' => 'alphasss_gf_finances_screen_grid',
+				'screen_function' => 'alphasss_gf_finances_levels_screen',
 				'position'        => 30
 			) );
 		}
@@ -123,6 +123,22 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 	function alphasss_gf_finances_screen_grid() {
 		add_action( 'bp_template_content', function() {
 			alphasss_gf_finances_load_template( 'members/single/alphasss-gf-finances-accounting' );
+		} );
+		bp_core_load_template( apply_filters( 'alphasss_finances_screen_grid', 'members/single/plugins' ) );
+	}
+
+	function alphasss_gf_finances_timevalue_screen()
+	{
+		add_action( 'bp_template_content', function() {
+			alphasss_gf_finances_load_template( 'members/single/alphasss-gf-finances-accounting' );
+		} );
+		bp_core_load_template( apply_filters( 'alphasss_finances_screen_grid', 'members/single/plugins' ) );
+	}
+
+	function alphasss_gf_finances_levels_screen()
+	{
+		add_action( 'bp_template_content', function() {
+			alphasss_gf_finances_load_template( 'members/single/alphasss-gf-finances-levels' );
 		} );
 		bp_core_load_template( apply_filters( 'alphasss_finances_screen_grid', 'members/single/plugins' ) );
 	}
