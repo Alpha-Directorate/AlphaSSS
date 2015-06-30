@@ -13,7 +13,7 @@
 		<tr> 
 			<td class="text-center"><input type="checkbox" /></td> 
 			<td class="text-center"><?php printf(__('%d min'), $value); ?></td> 
-			<td class="text-center">{{ income_credits }}</td> 
+			<td class="text-center"><a>not used</a></td> 
 		</tr>
 	<?php endforeach;?>
 	</tbody> 
