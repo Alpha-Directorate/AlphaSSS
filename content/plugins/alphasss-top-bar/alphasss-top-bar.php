@@ -122,28 +122,28 @@ add_action( 'plugins_loaded', function(){
 					'parent'   => 'my-account-buddypress',
 					'id'       => 'my-account-finances',
 					'title'    => __( 'Financials', 'alphasss' ),
-					'href'     =>  $bp->loggedin_user->domain . 'accounting'
+					'href'     =>  $bp->loggedin_user->domain . alphasss_gf_finances()->component->slug
 				) );
 
 				$wp_admin_bar->add_menu( array(
 					'parent'   => 'my-account-finances',
 					'id'       => 'my-account-finances-accounting',
 					'title'    => __( 'Accounting', 'alphasss' ),
-					'href'     =>  $bp->loggedin_user->domain . 'accounting'
+					'href'     =>  $bp->loggedin_user->domain . alphasss_gf_finances()->component->slug
 				) );
 
 				$wp_admin_bar->add_menu( array(
 					'parent'   => 'my-account-finances',
 					'id'       => 'my-account-finances-time-value',
 					'title'    => __( 'Time Value', 'alphasss' ),
-					'href'     =>  $bp->loggedin_user->domain . 'finances'
+					'href'     =>  $bp->loggedin_user->domain . alphasss_gf_finances()->component->slug . '/my-time-value'
 				) );
 
 				$wp_admin_bar->add_menu( array(
 					'parent'   => 'my-account-finances',
 					'id'       => 'my-account-finances-levels',
 					'title'    => __( 'Levels', 'alphasss' ),
-					'href'     =>  $bp->loggedin_user->domain . 'finances'
+					'href'     =>  $bp->loggedin_user->domain . alphasss_gf_finances()->component->slug  . '/levels'
 				) );
 			}
 		}, 120);
