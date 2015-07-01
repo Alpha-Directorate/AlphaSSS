@@ -30,8 +30,14 @@
 			if ($(this).attr('checked') == 'checked'){
 				$(this).parent('td').next('td').next('td').html(createTimeValueInput() + ' credits');
 			} else {
-				a = $('<a>').addClass('time-value-link').text('not used');
-				$(this).parent('td').next('td').next('td').html(a);
+				input_value = $(this).parent('td').next('td').next('td').find('.input-small').val();
+
+				if (input_value > 0) {
+ 					$(this).parent('td').next('td').next('td').text(input_value);
+				} else {
+					a = $('<a>').addClass('time-value-link').text('not used');
+					$(this).parent('td').next('td').next('td').html(a);
+				}
 			}
 		});
 
