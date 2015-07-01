@@ -341,3 +341,7 @@ You're the boss, so have fun editing!
     width: 30px;
 }
 
+#time-value-table a{
+    cursor: pointer;
+}
+

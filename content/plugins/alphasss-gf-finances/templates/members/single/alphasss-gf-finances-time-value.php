@@ -13,7 +13,7 @@
 		<tr> 
 			<td class="text-center"><input class="time-value-checkbox" type="checkbox" /></td> 
 			<td class="text-center"><?php printf(__('%d min'), $value); ?></td> 
-			<td class="text-center"><a>not used</a></td> 
+			<td class="text-center"><a class="time-value-link">not used</a></td> 
 		</tr>
 	<?php endforeach;?>
 	</tbody> 
@@ -23,10 +23,23 @@
 	$(document).ready(function(){
 		$('.time-value-checkbox').click(function(){
 			if ($(this).attr('checked') == 'checked'){
-				$(this).parent('td').next('td').next('td').html('<input value="0" class="input-small" /> credits');
+				$(this).parent('td').next('td').next('td').html(createTimeValueInput() + ' credits');
 			} else {
-				$(this).parent('td').next('td').next('td').html('<a>not used</a>');
+				a = $('<a>').addClass('time-value-link').text('not used');
+				$(this).parent('td').next('td').next('td').html(a);
 			}
 		});
+
+		$('.time-value-link').live('click', function(){
+			$(this).parent('td').prev('td').prev('td').find('.time-value-checkbox').attr('checked', true);
+			$(this).parent('td').html(createTimeValueInput() + ' credits');
+		});
+
+		function createTimeValueInput()
+		{
+			input = $('<input value="0" />').addClass('input-small');
+
+			return input.prop('outerHTML');
+		}
 	});
 </script>
