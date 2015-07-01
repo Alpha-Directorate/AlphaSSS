@@ -337,3 +337,7 @@ You're the boss, so have fun editing!
     border:3px solid #c0c0c0;
 }
 
+#time-value-table input{
+    width: 30px;
+}
+
