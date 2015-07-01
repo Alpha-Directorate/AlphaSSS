@@ -9,11 +9,16 @@
 		</tr>
 	</thead> 
 	<tbody>
-		<?php foreach ([30, 45, 60, 90, 120] as $value):?>
+		<?php $time_values = get_user_meta( get_current_user_id(), 'gf_finances_time_values', true ); ?>
+		<?php foreach ( $time_values as $time => $value ):?>
 		<tr> 
 			<td class="text-center"><input class="time-value-checkbox" type="checkbox" /></td> 
-			<td class="text-center"><?php printf(__('%d min'), $value); ?></td> 
-			<td class="text-center"><a class="time-value-link">not used</a></td> 
+			<td class="text-center"><?php printf( __('%d min' ), $time ); ?></td>
+			<?php if ( $time > 0 ):?>
+				<td class="text-center"><a class="time-value-link">not used</a></td>
+			<?php else :?>
+				<td class="text-center"><a class="time-value-link">not used</a></td>
+			<?php endif;?>
 		</tr>
 	<?php endforeach;?>
 	</tbody> 
