@@ -15,7 +15,7 @@
 			<td class="text-center"><input class="time-value-checkbox" type="checkbox" /></td> 
 			<td class="text-center"><?php printf( __('%d min' ), $time ); ?></td>
 			<?php if ( $time > 0 ):?>
-				<td class="text-center"><a class="time-value-link">not used</a></td>
+				<td class="text-center"><?php echo $value; ?></td>
 			<?php else :?>
 				<td class="text-center"><a class="time-value-link">not used</a></td>
 			<?php endif;?>
@@ -39,6 +39,10 @@
 					$(this).parent('td').next('td').next('td').html(a);
 				}
 			}
+		});
+
+		$('.input-small').change(function(){
+			
 		});
 
 		$('.time-value-link').live('click', function(){
