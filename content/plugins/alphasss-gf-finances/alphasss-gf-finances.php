@@ -85,16 +85,42 @@ add_action('set_user_role', function($user_id, $role){
 	}
 }, 10, 2);
 
+add_action( 'wp_ajax_get_gf_time_value', function(){
+
+	$gf_time_values = get_user_meta( get_current_user_id(), 'gf_finances_time_values', true );
+
+	$time = (int) Arr::get( $_GET, 'time' );
+
+	$value = isset( $gf_time_values[$time] )
+		? $gf_time_values[$time]
+		: 0;
+
+	// Preparing the responce data
+	$data = [
+		'data' => [
+			'time_value' => $value
+		]
+	];
+	//--
+
+	echo json_encode($data);
+
+	wp_die();
+});
+
 add_action( 'wp_ajax_update_gf_time_values', function(){
+
+	header('Content-Type: application/json');
 
 	$gf_time_values = get_user_meta( get_current_user_id(), 'gf_finances_time_values', true );
 
 	$time = (int) Arr::get( $_POST, 'time' );
 
 	if ( isset( $gf_time_values[$time] ) ) {
+		
 		$gf_time_values[$time] = Arr::get( $_POST, 'value', 0);
 
-		update_user_meta(get_current_user_id(), 'gf_finances_time_values', $gf_time_values);
+		update_user_meta(get_current_user_id(), 'gf_finances_time_values',$gf_time_values);
 	}
 
 	wp_die();
