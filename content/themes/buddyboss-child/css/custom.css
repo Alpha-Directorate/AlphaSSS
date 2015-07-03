@@ -351,6 +351,7 @@ You're the boss, so have fun editing!
 
 #time-value-table input{
     width: 40px;
+    outline: 0;
 }
 
 #time-value-table a{
