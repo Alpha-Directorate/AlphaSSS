@@ -16,6 +16,7 @@ require_once 'class-option.php';
 
 add_action( 'plugins_loaded', function(){
 
+	// Check is is_updated is empty or 0
 	if ( ! @file_get_contents(BASEPATH . 'migrations/theme/is_updated' ) ) {
 		
 		global $wp_customize;
