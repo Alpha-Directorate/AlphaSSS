@@ -9,10 +9,14 @@
  * Version:     0.0.1
  * Text Domain: alphasss
  */
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+require_once BASEPATH . 'wp/wp-includes/class-wp-customize-setting.php';
+require_once 'class-option.php';
 
 add_action( 'plugins_loaded', function(){
-	
-	if ( file_get_contents(BASEPATH . 'migrations/theme/is_updated' ) ) {
+
+	if ( ! @file_get_contents(BASEPATH . 'migrations/theme/is_updated' ) ) {
 		
 		global $wp_customize;
 
@@ -23,13 +27,13 @@ add_action( 'plugins_loaded', function(){
 			
 			foreach ( $data['options'] as $option_key => $option_value ) {
 				
-				$option = new WP_Customize_Setting( $wp_customize, $option_key, array(
+				$option = new CEI_Option( $wp_customize, $option_key, array(
 					'default'		=> '',
 					'type'			=> 'option',
 					'capability'	=> 'edit_theme_options'
 				) );
 				
-				$option->update( $option_value );
+				$option->import( $option_value );
 			}
 		}
 		
@@ -40,7 +44,7 @@ add_action( 'plugins_loaded', function(){
 			set_theme_mod( $key, $val );
 		}
 
-		file_put_contents( BASEPATH . 'migrations/theme/is_updated', 0 );
+		file_put_contents( BASEPATH . 'migrations/theme/is_updated', 1 );
 	}
 });
  
