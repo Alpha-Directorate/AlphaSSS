@@ -29,6 +29,10 @@ class Sprint17 extends AbstractMigration
         if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'customizer-export-import' ) ) {
             activate_plugin( $plugin->file, '' );
         }
+
+        if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'alphasss-theme-migration' ) ) {
+            activate_plugin( $plugin->file, '' );
+        }
     }
 
     /**
@@ -37,6 +41,10 @@ class Sprint17 extends AbstractMigration
     public function down()
     {
         if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'customizer-export-import' ) ) {
+            deactivate_plugins( $plugin->file, '' );
+        }
+
+        if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'alphasss-theme-migration' ) ) {
             deactivate_plugins( $plugin->file, '' );
         }
     }

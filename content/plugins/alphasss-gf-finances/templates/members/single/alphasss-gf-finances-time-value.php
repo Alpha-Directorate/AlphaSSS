@@ -42,7 +42,7 @@
 			}
 		});
 
-		$('.input-small').live('blur', function(){
+		$('.input-small').live('input', function(){
 			time = $(this).parent('td').prev('td').text();
 
 			post_data = {
