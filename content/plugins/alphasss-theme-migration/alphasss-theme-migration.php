@@ -33,8 +33,18 @@ add_action( 'plugins_loaded', function(){
 					'type'			=> 'option',
 					'capability'	=> 'edit_theme_options'
 				) );
-				
-				$option->import( $option_value );
+
+				if ( in_array($option_key, [
+					'blogname',
+					'blogdescription',
+					'show_on_front',
+					'page_on_front',
+					'page_for_posts'
+				]) ) {
+					update_option( $option_key, $option_value );
+				} else {
+					$option->import( $option_value );
+				}
 			}
 		}
 		
