@@ -14,7 +14,7 @@
 		<tr> 
 			<td class="text-center"><input class="time-value-checkbox" type="checkbox" /></td> 
 			<td class="text-center"><?php printf( __('%d min' ), $time ); ?></td>
-			<?php if ( $time > 0 ):?>
+			<?php if ( $value > 0 ):?>
 				<td class="text-center"><?php echo $value; ?></td>
 			<?php else :?>
 				<td class="text-center"><a class="time-value-link">not used</a></td>
@@ -41,8 +41,18 @@
 			}
 		});
 
-		$('.input-small').change(function(){
-			
+		$('.input-small').live('change', function(){
+			time = $(this).parent('td').prev('td').text();
+
+			post_data = {
+				time  : time,
+				value : $(this).val(),
+				action: 'update_gf_time_values'
+			}
+
+			$.post(ajaxurl, post_data, function(data){
+			 	
+			});
 		});
 
 		$('.time-value-link').live('click', function(){
