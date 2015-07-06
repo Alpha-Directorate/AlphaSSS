@@ -85,6 +85,24 @@ add_action('set_user_role', function($user_id, $role){
 	}
 }, 10, 2);
 
+add_action( 'wp_ajax_is_gf_time_values', function(){
+	header('Content-Type: application/json');
+
+	$gf_time_values = get_user_meta( get_current_user_id(), 'gf_finances_time_values', true );
+
+	$is_gf_time_values = false;
+
+	foreach ($gf_time_values as $time_price) {
+		if ($time_price > 0) {
+			$is_gf_time_values = true;
+		}
+	}
+
+	echo json_encode( ['data' => [ 'is_gf_time_values' => $is_gf_time_values ] ] );
+
+	wp_die();
+} );
+
 add_action( 'wp_ajax_get_gf_time_value', function(){
 
 	$gf_time_values = get_user_meta( get_current_user_id(), 'gf_finances_time_values', true );
