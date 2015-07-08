@@ -140,8 +140,12 @@ add_action( 'wp_ajax_update_gf_time_values', function(){
 	$time = (int) Arr::get( $_POST, 'time' );
 
 	if ( isset( $gf_time_values[$time] ) ) {
+
+		if ( ! $value = trim( Arr::get( $_POST, 'value', 0) ) ) {
+			$value = 0;
+		}
 		
-		$gf_time_values[$time] = Arr::get( $_POST, 'value', 0);
+		$gf_time_values[$time] = $value;
 
 		update_user_meta(get_current_user_id(), 'gf_finances_time_values',$gf_time_values);
 	}

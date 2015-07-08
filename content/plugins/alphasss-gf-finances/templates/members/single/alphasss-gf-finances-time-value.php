@@ -32,7 +32,7 @@
 			if ( ! data.data.is_gf_time_values){
 				$('#profile-alerts').prepend(dangerAlert(
 					"<p>" + "<?php _e('Session Values not configured...', 'alphasss');?>" + "</p><br />" + 
-	 				"<p>" + "<?php _e('You currently do not have any talk session values defined. Therefore, you cannot start audio-video. But you can change this in the table below.', 'alphasss');?>" + "</p>", true));
+					"<p>" + "<?php _e('You currently do not have any talk session values defined. Therefore, you cannot start audio-video. But you can change this in the table below.', 'alphasss');?>" + "</p>", true));
 			}
 		}, 'json');
 
