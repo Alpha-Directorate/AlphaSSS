@@ -36,6 +36,16 @@
 			}
 		}, 'json');
 
+		$(window).on('beforeunload', function (e) {
+			$('.input-small').each(function(){
+				var el   = this;
+				
+				var time = $(el).parent('td').prev('td').text();
+
+				update_time(time, el);
+			});
+		});
+
 		$('.time-value-checkbox').click(function(){
 			time = $(this).parent('td').next('td').text();
 
@@ -46,7 +56,6 @@
 			} else {
 				input_value = $(this).parent('td').next('td').next('td').find('.input-small').val();
 
-				update_time(time,input_value);
 				get_data = {
 					time  : time,
 					action: 'get_gf_time_value'
@@ -71,31 +80,52 @@
 			}
 		});
 
-		function update_time(time, value)
+		function update_time(time, el)
 		{
+			var el = $(el);
+			var time = time;
+
 			post_data = {
 				time  : time,
-				value : value,
+				value : el.val(),
 				action: 'update_gf_time_values'
 			}
 
-			$.post(ajaxurl, post_data, function(data){});
+			$.post(ajaxurl, post_data, function(data){
+				get_data = {
+					time  : time,
+					action: 'get_gf_time_value'
+				}
+
+				$.ajax({
+					url: ajaxurl, 
+					data: get_data,
+					dataType: "json",
+					success: function(response){
+						value = response.data.time_value;
+
+						el.val(value);
+					}
+				});
+			});
 		}
 
-		$('.input-small').live('input', function(){
-			value = $(this).val();
+		$('.input-small').live({
+			focusout: function(){
+				var el   = this;
+				var time = $(el).parent('td').prev('td').text();
 
-			// if value is float
-			if ( value == Number(value) && value%1!==0) {
-				// Filter float value
-				$(this).val(Number(value.toString().match(/^\d+(?:\.\d{0,2})?/)));
+				update_time(time, el);
+			},
+			input: function() {
+				value = $(this).val();
+
+				// if value is float
+				if ( value == Number(value) && value%1!==0) {
+					// Filter float value
+					$(this).val(Number(value.toString().match(/^\d+(?:\.\d{0,2})?/)));
+				}
 			}
-		});
-
-		$('.input-small').live('change', function(){
-			time = $(this).parent('td').prev('td').text();
-
-			update_time(time, $(this).val());
 		});
 
 		$('.time-value-link').live('click', function(){
@@ -103,20 +133,6 @@
 			$(this).parent('td').prev('td').prev('td').find('.time-value-checkbox').attr('checked', true);
 			$(this).parent('td').html(createTimeValueInput(time) + ' credits');
 		});
-
-		function toFixed(value, precision) {
-			var precision = precision || 0,
-			    power = Math.pow(10, precision),
-			    absValue = Math.abs(Math.round(value * power)),
-			    result = (value < 0 ? '-' : '') + String(Math.floor(absValue / power));
-
-			if (precision > 0) {
-			    var fraction = String(absValue % power),
-			        padding = new Array(Math.max(precision - fraction.length, 0) + 1).join('0');
-			    result += '.' + padding + fraction;
-			}
-			return result;
-		}
 
 		function createTimeValueInput(time)
 		{

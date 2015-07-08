@@ -145,6 +145,8 @@ add_action( 'wp_ajax_update_gf_time_values', function(){
 
 		if ( is_numeric($value) && $value >= 0 && $value <= 1000  ) {
 			$gf_time_values[$time] = $value * 100;
+		} else if (strlen($value) == 0) {
+			$gf_time_values[$time] = 0;
 		}
 
 		update_user_meta(get_current_user_id(), 'gf_finances_time_values',$gf_time_values);
