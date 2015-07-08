@@ -82,6 +82,16 @@
 			$.post(ajaxurl, post_data, function(data){});
 		}
 
+		$('.input-small').live('input', function(){
+			value = $(this).val();
+
+			// if value is float
+			if ( value == Number(value) && value%1!==0) {
+				// Filter float value
+				$(this).val(Number(value.toString().match(/^\d+(?:\.\d{0,2})?/)));
+			}
+		});
+
 		$('.input-small').live('change', function(){
 			time = $(this).parent('td').prev('td').text();
 
@@ -93,6 +103,20 @@
 			$(this).parent('td').prev('td').prev('td').find('.time-value-checkbox').attr('checked', true);
 			$(this).parent('td').html(createTimeValueInput(time) + ' credits');
 		});
+
+		function toFixed(value, precision) {
+			var precision = precision || 0,
+			    power = Math.pow(10, precision),
+			    absValue = Math.abs(Math.round(value * power)),
+			    result = (value < 0 ? '-' : '') + String(Math.floor(absValue / power));
+
+			if (precision > 0) {
+			    var fraction = String(absValue % power),
+			        padding = new Array(Math.max(precision - fraction.length, 0) + 1).join('0');
+			    result += '.' + padding + fraction;
+			}
+			return result;
+		}
 
 		function createTimeValueInput(time)
 		{
@@ -110,7 +134,7 @@
 				success: function(response){
 					value = response.data.time_value;
 
-					input = $('<input maxlength="5" value="' + value + '" />').addClass('input-small');
+					input = $('<input value="' + value + '" />').addClass('input-small');
 				},
 				async: false
 			});
