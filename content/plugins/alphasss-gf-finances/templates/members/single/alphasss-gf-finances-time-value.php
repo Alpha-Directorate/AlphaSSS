@@ -39,10 +39,14 @@
 		$(window).on('beforeunload', function (e) {
 			$('.input-small').each(function(){
 				var el   = this;
-				
+
 				var time = $(el).parent('td').prev('td').text();
 
 				update_time(time, el);
+
+				setTimeout(function(){
+					console.log('reloaded');
+				}, 3000);
 			});
 		});
 
