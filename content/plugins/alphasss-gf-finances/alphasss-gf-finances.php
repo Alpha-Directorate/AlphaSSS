@@ -121,7 +121,7 @@ add_action( 'wp_ajax_get_gf_time_value', function(){
 	// Preparing the responce data
 	$data = [
 		'data' => [
-			'time_value' => $value
+			'time_value' => $value / 100
 		]
 	];
 	//--
@@ -141,11 +141,11 @@ add_action( 'wp_ajax_update_gf_time_values', function(){
 
 	if ( isset( $gf_time_values[$time] ) ) {
 
-		if ( ! $value = trim( Arr::get( $_POST, 'value', 0) ) ) {
-			$value = 0;
+		$value = trim( Arr::get( $_POST, 'value', 0) );
+
+		if ( is_numeric($value) && $value >= 0 && $value <= 1000  ) {
+			$gf_time_values[$time] = $value * 100;
 		}
-		
-		$gf_time_values[$time] = $value;
 
 		update_user_meta(get_current_user_id(), 'gf_finances_time_values',$gf_time_values);
 	}

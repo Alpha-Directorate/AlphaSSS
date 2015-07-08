@@ -15,7 +15,7 @@
 			<td class="text-center"><input class="time-value-checkbox" type="checkbox" /></td> 
 			<td class="text-center"><?php printf( __('%d min' ), $time ); ?></td>
 			<?php if ( $value > 0 ):?>
-				<td class="text-center"><?php echo $value; ?></td>
+				<td class="text-center"><?php echo (int) $value/100; ?></td>
 			<?php else :?>
 				<td class="text-center"><a class="time-value-link">not used</a></td>
 			<?php endif;?>
@@ -37,31 +37,55 @@
 		}, 'json');
 
 		$('.time-value-checkbox').click(function(){
+			time = $(this).parent('td').next('td').text();
+
+			var el = $(this);
+
 			if ($(this).attr('checked') == 'checked'){
-				time = $(this).parent('td').next('td').text();
 				$(this).parent('td').next('td').next('td').html(createTimeValueInput(time) + ' credits');
 			} else {
 				input_value = $(this).parent('td').next('td').next('td').find('.input-small').val();
 
-				if (input_value > 0) {
- 					$(this).parent('td').next('td').next('td').text(input_value);
-				} else {
-					a = $('<a>').addClass('time-value-link').text('not used');
-					$(this).parent('td').next('td').next('td').html(a);
+				update_time(time,input_value);
+				get_data = {
+					time  : time,
+					action: 'get_gf_time_value'
 				}
+
+				$.ajax({
+					url: ajaxurl, 
+					data: get_data,
+					dataType: "json",
+					success: function(response){
+						time_value = response.data.time_value;
+
+						if (time_value > 0) {
+		 					el.parent('td').next('td').next('td').text(time_value);
+						} else {
+							a = $('<a>').addClass('time-value-link').text('not used');
+							el.parent('td').next('td').next('td').html(a);
+						}
+					},
+					async: false
+				});
 			}
 		});
 
-		$('.input-small').live('input', function(){
-			time = $(this).parent('td').prev('td').text();
-
+		function update_time(time, value)
+		{
 			post_data = {
 				time  : time,
-				value : $(this).val(),
+				value : value,
 				action: 'update_gf_time_values'
 			}
 
 			$.post(ajaxurl, post_data, function(data){});
+		}
+
+		$('.input-small').live('change', function(){
+			time = $(this).parent('td').prev('td').text();
+
+			update_time(time, $(this).val());
 		});
 
 		$('.time-value-link').live('click', function(){
@@ -86,7 +110,7 @@
 				success: function(response){
 					value = response.data.time_value;
 
-					input = $('<input value="' + value + '" />').addClass('input-small');
+					input = $('<input maxlength="5" value="' + value + '" />').addClass('input-small');
 				},
 				async: false
 			});
