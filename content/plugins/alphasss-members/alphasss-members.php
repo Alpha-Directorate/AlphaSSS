@@ -12,6 +12,8 @@
  // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+use \AlphaSSS\Repositories\User;
+
 // Directory
 if ( ! defined( 'ALPHASSS_MEMBERS_PLUGIN_DIR' ) ) {
 	define( 'ALPHASSS_MEMBERS_PLUGIN_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
@@ -119,6 +121,9 @@ add_action( 'plugins_loaded', function(){
 		// Show top alert on all pages except activate(top navigation element Register)
 		$params['show_top_alert'] = ( $_SERVER['REQUEST_URI'] != get_pre_member_register_uri() );
 	}
+
+	// Check is current user is GF
+	$params['isGF'] = User::hasRole('gf');
 
 	// Setup PubNub connection params
 	$params['pubnub'] = array(
