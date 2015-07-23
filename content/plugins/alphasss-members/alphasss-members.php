@@ -13,6 +13,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 use \AlphaSSS\Repositories\User;
+use \AlphaSSS\Helpers\Arr;
 
 // Directory
 if ( ! defined( 'ALPHASSS_MEMBERS_PLUGIN_DIR' ) ) {
@@ -120,6 +121,8 @@ add_action( 'plugins_loaded', function(){
 		
 		// Show top alert on all pages except activate(top navigation element Register)
 		$params['show_top_alert'] = ( $_SERVER['REQUEST_URI'] != get_pre_member_register_uri() );
+	} else {
+		$params = array('nickname' => time() );
 	}
 
 	// Check is current user is GF
@@ -128,8 +131,8 @@ add_action( 'plugins_loaded', function(){
 	// Setup PubNub connection params
 	$params['pubnub'] = array(
 		'ssl'           => is_ssl(),
-		'publish_key'   => 'pub-c-bd645d1e-f4aa-4719-9008-d14e29514bab',
-		'subscribe_key' => 'sub-c-8e1b190a-b033-11e4-83d7-0619f8945a4f',
+		'publish_key'   => getenv( 'PublishKey' ),
+		'subscribe_key' => getenv( 'SubscribeKey' ),
 		'uuid'          => md5($params['nickname'])
 	);
 

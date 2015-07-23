@@ -23,7 +23,7 @@ class EmailAddressEncryption {
 	 * @param string $user_email User email
 	 * @return string
 	 */
-	public function encode($user_email)
+	public static function encode($user_email)
 	{
 		return ( new Encryption )->encode( $user_email ) . '@alphasss.com';
 	}
