@@ -22,6 +22,23 @@ jQuery(document).ready(function($) {
 		}, 600);
 	}
 
+	$('.request-session').click(function(){
+
+		uuid = $(this).parent().parent().parent().attr('id');
+		
+		pubnub.publish({
+			channel: uuid + '_session',
+			message: {
+				'requestor': php_vars.nickname
+			},
+			callback: function(m) {
+				console.log(m);
+			}
+		});
+
+		return false;
+	});
+
 	$('#wp-admin-bar-logout a').click(function(){
 		pubnub.unsubscribe({
 			channel: 'onlineUsers'

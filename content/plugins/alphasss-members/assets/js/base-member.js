@@ -225,6 +225,9 @@ jQuery(document).ready(function($) {
     pubnub.subscribe({
     	channel: 'onlineUsers',
     	callback: function(m) {},
+        state: {
+            isGF:isGF
+        },
     	presence: function(details){
     		var uuid = 'uuid' in details && (''+details.uuid).toLowerCase();
 
@@ -238,13 +241,6 @@ jQuery(document).ready(function($) {
                 $('.member-online').hide();
             });
     	}
-    });
-
-    pubnub.state({
-        channel: "onlineUsers",
-        uuid: uuid,
-        state: {"isGF" : isGF},
-        callback: function(m){}
     });
 
     // This method sends a message to the AlphaSSS Chrome extension 

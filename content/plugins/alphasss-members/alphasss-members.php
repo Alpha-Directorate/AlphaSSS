@@ -63,7 +63,7 @@ add_action( 'plugins_loaded', function(){
 		));
 	});
 
-	wp_enqueue_script( 'pubnub', '//cdn.pubnub.com/pubnub.min.js', array('jquery') );
+	wp_enqueue_script( 'pubnub', '//cdn.pubnub.com/pubnub-3.7.13.min.js', array('jquery') );
 	wp_enqueue_script( 'alphasss-alerts', ALPHASSS_MEMBERS_PLUGIN_URL . '/assets/js/alerts.js' );
 	wp_enqueue_script( 'alphasss-members-base', ALPHASSS_MEMBERS_PLUGIN_URL . 'assets/js/base-member.js',array('jquery') );
 
@@ -71,6 +71,19 @@ add_action( 'plugins_loaded', function(){
 
 		if ( current_user_can('generate_invitation_code') ) {
 			wp_enqueue_script( 'alphasss-members', ALPHASSS_MEMBERS_PLUGIN_URL . 'assets/js/member.js',array('jquery') );
+
+			add_action( 'bp_directory_members_actions', function(){
+				echo bp_get_button( array(
+					'id'                => 'request_session',
+					'component'         => 'members',
+					'must_be_logged_in' => true,
+					'block_self'        => false,
+					'link_href'         => wp_nonce_url( bp_get_group_permalink( $group ) . 'request-session', 'groups_request_session' ),
+					'link_text'         => __( 'Request Session', 'alphasss' ),
+					'link_title'        => __( 'Request Session', 'alphasss' ),
+					'link_class'        => 'group-button request-session',
+				) );
+			} );
 
 			/**
 			 * This action returns uuid
@@ -122,7 +135,7 @@ add_action( 'plugins_loaded', function(){
 		// Show top alert on all pages except activate(top navigation element Register)
 		$params['show_top_alert'] = ( $_SERVER['REQUEST_URI'] != get_pre_member_register_uri() );
 	} else {
-		$params = array('nickname' => time() );
+		$params = ['nickname' => time()];
 	}
 
 	// Check is current user is GF
@@ -131,8 +144,8 @@ add_action( 'plugins_loaded', function(){
 	// Setup PubNub connection params
 	$params['pubnub'] = array(
 		'ssl'           => is_ssl(),
-		'publish_key'   => getenv( 'PublishKey' ),
-		'subscribe_key' => getenv( 'SubscribeKey' ),
+		'publish_key'   => 'pub-c-d2597e03-9bf1-43af-b8af-05ddb6399476',
+		'subscribe_key' => 'sub-c-3d05d42a-3142-11e5-9b16-02ee2ddab7fe',
 		'uuid'          => md5($params['nickname'])
 	);
 
