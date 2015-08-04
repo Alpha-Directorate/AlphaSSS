@@ -70,6 +70,7 @@ add_action( 'plugins_loaded', function(){
 	if ( is_user_logged_in() ) {
 
 		if ( current_user_can('generate_invitation_code') ) {
+			wp_enqueue_script( 'webrtc', ALPHASSS_MEMBERS_PLUGIN_URL . 'assets/js/webrtc.js',array('jquery') );
 			wp_enqueue_script( 'alphasss-members', ALPHASSS_MEMBERS_PLUGIN_URL . 'assets/js/member.js',array('jquery') );
 
 			add_action( 'bp_directory_members_actions', function(){

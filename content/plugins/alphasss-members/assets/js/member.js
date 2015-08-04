@@ -2,6 +2,23 @@ jQuery(document).ready(function($) {
 
 	var invitation_requests = [];
 
+	var phone = PHONE({
+	    number        : '2234',
+	    publish_key: 'pub-c-d2597e03-9bf1-43af-b8af-05ddb6399476',
+	    subscribe_key: 'sub-c-3d05d42a-3142-11e5-9b16-02ee2ddab7fe',
+	    media         : { audio : true, video : true },
+	    ssl: true
+	});
+
+	// When Call Comes In or is to be Connected
+    phone.receive(function(session){
+        // Display Your Friend's Live Video
+        session.connected(function(session){
+            $('#alerts').append(session.video);
+        });
+
+    });
+
 	function showInvitationRequestPopUp()
 	{
 		$('#invitation-code-modal').modal('hide');
