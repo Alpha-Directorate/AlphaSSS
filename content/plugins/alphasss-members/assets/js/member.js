@@ -46,7 +46,8 @@ jQuery(document).ready(function($) {
 		pubnub.publish({
 			channel: uuid + '_session',
 			message: {
-				'requestor': php_vars.nickname
+				'requestor': php_vars.nickname,
+				'avatar': php_vars.avatar
 			},
 			callback: function(m) {
 				console.log(m);

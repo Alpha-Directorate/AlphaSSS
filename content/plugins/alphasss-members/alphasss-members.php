@@ -135,6 +135,8 @@ add_action( 'plugins_loaded', function(){
 		
 		// Show top alert on all pages except activate(top navigation element Register)
 		$params['show_top_alert'] = ( $_SERVER['REQUEST_URI'] != get_pre_member_register_uri() );
+
+		$params['avatar'] = bp_core_fetch_avatar(array('item_id' => $user->ID, 'type' => 'thumb', 'width' => 32, 'height' => 32, 'class' => 'friend-avatar','html'=>false));
 	} else {
 		$params = ['nickname' => time()];
 	}
@@ -162,7 +164,7 @@ add_action( 'plugins_loaded', function(){
 	wp_localize_script( 'alphasss-members-base', 'php_vars', $params );
 	wp_localize_script( 'alphasss-members', 'php_vars', $params );
 	wp_localize_script( 'alphasss-alerts', 'php_vars', $params );
-});
+}, 1000);
 
 /**
  * Must be called after hook 'plugins_loaded'

@@ -176,11 +176,6 @@ add_action( 'bp_setup_globals', 'bp_core_set_avatar_globals' );
 function bp_core_fetch_avatar( $args = '' ) {
 	$bp = buddypress();
 
-	// If avatars are disabled for the root site, obey that request and bail
-	if ( ! $bp->avatar->show_avatars ) {
-		return;
-	}
-
 	global $current_blog;
 
 	// Set the default variables array and parse it against incoming $args array.
