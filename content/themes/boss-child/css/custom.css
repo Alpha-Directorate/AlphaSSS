@@ -42,6 +42,11 @@ You're the boss, so have fun editing!
 @media screen and (max-width: 720px) {
 
 
+	/*
+	.just_an_example {
+		color: black;
+	}
+	*/
 
 
 }/* don't delete this closing bracket */
@@ -75,10 +80,11 @@ You're the boss, so have fun editing!
 @media screen and (min-width: 721px)  {
 
 
-// #buddypress div#item-nav .item-list-tabs ul {
-// 	background: red;
-// }
-
+	/*
+	.just_an_example {
+		color: black;
+	}
+	*/
 
 
 }/* don't delete this closing bracket */

@@ -4,6 +4,9 @@ global $class;
     <!-- if widgets are loaded for any BuddyPress component, display the BuddyPress sidebar -->
 
     <div class="page-right-sidebar <?php echo $class; ?>">
+    
+    <!-- This is more dummy so plugins like buddypress-learndash can work -->
+    <?php the_content(); ?>
 
 	<!-- BuddyPress template content -->
 

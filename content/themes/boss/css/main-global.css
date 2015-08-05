@@ -3105,8 +3105,8 @@ article.format-quote .entry-content blockquote {
 }
 
 .comments-area ol.children {
-    margin-top: 56px;
-    padding-top: 60px;
+    margin-top: 38px;
+    padding-top: 40px;
     border-top: 1px solid rgba(0,0,0,0.11);
 }
 
@@ -3120,8 +3120,8 @@ article.format-quote .entry-content blockquote {
 }
 
 .commentlist > li.comment {
-    margin-bottom: 30px;
-    padding-bottom: 30px;
+    margin-bottom: 40px;
+    padding-bottom: 38px;
     border-bottom: 1px solid rgba(0,0,0,0.11);
 } 
 

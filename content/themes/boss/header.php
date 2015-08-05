@@ -176,7 +176,7 @@
                                        
                                         <!-- Dashboard links -->
                                         <?php 
-                                        if( get_option( 'buddyboss_dashboard' ) !== '0' && current_user_can( 'level_10' ) ): 
+                                        if( get_option( 'buddyboss_dashboard' ) !== '0' && ( current_user_can( 'level_10' ) || bp_get_member_type(get_current_user_id()) == 'teacher' || bp_get_member_type(get_current_user_id()) == 'group_leader') ): 
                                         ?>
                                         <div id="dashboard-links" class="bp_components">
                                             <ul>

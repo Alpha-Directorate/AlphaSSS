@@ -10,7 +10,7 @@ if ( ! isset( $content_width ) )
 	$content_width = 625;
 
 /**
- * Sets up theme defaults and registers the various WordPress features that BuddyBoss supports.
+ * Sets up theme defaults and registers the various WordPress features that Boss supports.
  *
  * @uses load_theme_textdomain() For translation/localization support.
  * @uses add_editor_style() To add a Visual Editor stylesheet.
@@ -25,7 +25,7 @@ function buddyboss_setup()
 	// Completely Disable Adminbar from frontend.
 	//show_admin_bar( false );
 	
-	// Makes BuddyBoss available for translation.
+	// Makes Boss available for translation.
 	load_theme_textdomain( 'boss', get_template_directory() . '/languages' );
 
 	// This theme styles the visual editor with editor-style.css to match the theme style.
@@ -284,41 +284,41 @@ function buddyboss_scripts_styles()
 	if ( !is_admin() ) {
         
         // Activate our main stylesheets. Load FontAwesome first.
-		wp_enqueue_style( 'boss-main-global', get_template_directory_uri().'/css/main-global.css', array( 'fontawesome'), '1.1.7', 'all' );
+		wp_enqueue_style( 'boss-main-global', get_template_directory_uri().'/css/main-global.css', array( 'fontawesome'), '1.1.8', 'all' );
         
         // Switch between mobile and desktop
         if(isset($_COOKIE['switch_mode']) && (get_option( 'boss_layout_switcher' ) != 'no')){
             if($_COOKIE['switch_mode'] == 'mobile') {
-                wp_enqueue_style( 'boss-main-mobile', get_template_directory_uri().'/css/main-mobile.css', array( 'fontawesome'), '1.1.7', 'all' );
+                wp_enqueue_style( 'boss-main-mobile', get_template_directory_uri().'/css/main-mobile.css', array( 'fontawesome'), '1.1.8', 'all' );
                 $only_mobile = true;              
             } else {
-                wp_enqueue_style( 'boss-main-desktop', get_template_directory_uri().'/css/main-desktop.css', array( 'fontawesome'), '1.1.7', 'screen and (min-width: 481px)' );
-                wp_enqueue_style( 'boss-main-mobile', get_template_directory_uri().'/css/main-mobile.css', array( 'fontawesome'), '1.1.7', 'screen and (max-width: 480px)' );
+                wp_enqueue_style( 'boss-main-desktop', get_template_directory_uri().'/css/main-desktop.css', array( 'fontawesome'), '1.1.8', 'screen and (min-width: 481px)' );
+                wp_enqueue_style( 'boss-main-mobile', get_template_directory_uri().'/css/main-mobile.css', array( 'fontawesome'), '1.1.8', 'screen and (max-width: 480px)' );
             }
         // Defaults   
         } else {
             if(is_phone()) {
-                wp_enqueue_style( 'boss-main-mobile', get_template_directory_uri().'/css/main-mobile.css', array( 'fontawesome'), '1.1.7', 'all' );
+                wp_enqueue_style( 'boss-main-mobile', get_template_directory_uri().'/css/main-mobile.css', array( 'fontawesome'), '1.1.8', 'all' );
                 $only_mobile = true; 
             } elseif ( wp_is_mobile() ) {
                 if(get_option('boss_layout_tablet') == 'desktop') {
-                     wp_enqueue_style( 'boss-main-desktop', get_template_directory_uri().'/css/main-desktop.css', array( 'fontawesome'), '1.1.7', 'all' );
+                     wp_enqueue_style( 'boss-main-desktop', get_template_directory_uri().'/css/main-desktop.css', array( 'fontawesome'), '1.1.8', 'all' );
                 }  else {
-                    wp_enqueue_style( 'boss-main-mobile', get_template_directory_uri().'/css/main-mobile.css', array( 'fontawesome'), '1.1.7', 'all' );
+                    wp_enqueue_style( 'boss-main-mobile', get_template_directory_uri().'/css/main-mobile.css', array( 'fontawesome'), '1.1.8', 'all' );
                     $only_mobile = true; 
                 } 
             } else {
                 if(get_option('boss_layout_desktop') == 'mobile') {
-                    wp_enqueue_style( 'boss-main-mobile', get_template_directory_uri().'/css/main-mobile.css', array( 'fontawesome'), '1.1.7', 'all' );
+                    wp_enqueue_style( 'boss-main-mobile', get_template_directory_uri().'/css/main-mobile.css', array( 'fontawesome'), '1.1.8', 'all' );
                     $only_mobile = true; 
                 }  else {
-                     wp_enqueue_style( 'boss-main-desktop', get_template_directory_uri().'/css/main-desktop.css', array( 'fontawesome'), '1.1.7', 'screen and (min-width: 481px)' );
+                     wp_enqueue_style( 'boss-main-desktop', get_template_directory_uri().'/css/main-desktop.css', array( 'fontawesome'), '1.1.8', 'screen and (min-width: 481px)' );
                 }
             }
             
             // Media query fallback
             if(!wp_script_is( 'boss-main-mobile', 'enqueued' )) {
-                 wp_enqueue_style( 'boss-main-mobile', get_template_directory_uri().'/css/main-mobile.css', array( 'fontawesome'), '1.1.7', 'screen and (max-width: 480px)' );
+                 wp_enqueue_style( 'boss-main-mobile', get_template_directory_uri().'/css/main-mobile.css', array( 'fontawesome'), '1.1.8', 'screen and (max-width: 480px)' );
             }
         }
 
@@ -2346,7 +2346,7 @@ function buddyboss_body_classes( $classes ) {
  *
  */
 function buddyboss_js_correct_notification_count(){
-	if( !is_user_logged_in() || !buddyboss_is_bp_active())
+	if( !is_user_logged_in() || !buddyboss_is_bp_active() || !function_exists("bp_notifications_get_all_notifications_for_user"))
 		return;
 	$notifications = bp_notifications_get_all_notifications_for_user( bp_loggedin_user_id() );
 	if( !empty( $notifications ) ){
@@ -2616,3 +2616,18 @@ add_action('boss_get_group_template', 'boss_get_group_template');
 function boss_get_group_template(){
     get_template_part( 'buddypress', 'group-single' );
 }
+
+/**
+ * Add image size for cover photo.
+ *
+ * @since Boss 1.1.7
+ */
+if ( ! function_exists( 'boss_cover_thumbnail' ) ) :
+
+add_action( 'after_setup_theme', 'boss_cover_thumbnail' );
+
+function boss_cover_thumbnail() {
+    add_image_size( 'boss-cover-image', 1500, 500, true );
+}
+
+endif;

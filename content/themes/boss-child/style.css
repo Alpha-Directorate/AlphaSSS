@@ -7,7 +7,7 @@ Author URI: 	http://www.buddyboss.com
 License: 		GNU General Public License v3 or later
 License URI: 	http://www.gnu.org/licenses/gpl-3.0.html
 Template: 		boss
-Version: 		1.1.6
+Version: 		1.1.8
 */
 
 /*
@@ -32,19 +32,17 @@ parent theme and are located in /boss/css/ in the parent theme.
 -- PARENT THEME --
 
 1. buddyboss-slides.css 			Boss homepage slider
-2. wordpress.css 					WordPress styles (always loaded)
-3. buddypress.css 					BuddyPress (only if BuddyPress is activated)
-4. bbpress.css						bbPress (only if bbPress is activated)
-5. plugins.css 						Support for 3rd party plugins
-6. options.css 						Output from Customizer settings
+2. main-global.css 					Global theme styles
+3. main-desktop.css 				Desktop-only theme styles
+4. main-mobile.css					Mobile-only theme styles
 
 -- CHILD THEME --
 
-7. custom.css
+5. custom.css
 
 The later on a stylesheet is loaded, the higher precedent it gets.
 So for example, if you define a CSS element in custom.css that has already
-been defined in wordpress.css, the version in custom.css will be used.
+been defined in main-global.css, the version in custom.css will be used.
 
 Each stylesheet includes a table of contents to help you navigate
 through it. You will notice that many of them include a section with

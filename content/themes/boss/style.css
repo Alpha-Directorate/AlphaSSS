@@ -1,12 +1,12 @@
 /*
-Theme Name:     Boss. 1.1.7
+Theme Name:     Boss. 1.1.8
 Theme URI:      http://www.buddyboss.com/product/boss-theme/
 Description:    Boss provides a whole new way of visualizing BuddyPress.
 Author:         BuddyBoss.com
 Author URI:     http://www.buddyboss.com
 License: 		GNU General Public License v3 or later
 License URI: 	http://www.gnu.org/licenses/gpl-3.0.html
-Version:        1.1.7
+Version:        1.1.8
 */
 
  
@@ -38,7 +38,7 @@ and is located in the /buddyboss-inc/buddyboss-slides/ folder.
 
 The later on a stylesheet is loaded, the higher precedent it gets.
 So for example, if you define a CSS element in custom.css that has already
-been defined in wordpress.css, the version in custom.css will be used.
+been defined in main-global.css, the version in custom.css will be used.
 
 Each stylesheet includes a table of contents to help you navigate
 through it. You will notice that many of them include a section with

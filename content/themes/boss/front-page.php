@@ -19,7 +19,7 @@ get_header(); ?>
 <?php else : ?>
 	<div class="page-full-width">
 <?php endif; ?>
-    
+
 		<!-- Frontpage Slider -->
 		<?php get_template_part( 'content', 'slides' ); ?>
 
@@ -38,7 +38,11 @@ get_header(); ?>
 					<?php comments_template( '', true ); ?>
 					
 				<?php endwhile; // end of the loop. ?>
-
+               
+                <div class="pagination-below">
+                    <?php buddyboss_pagination(); ?>
+                </div>
+                
 			</div><!-- #content -->
 		</div><!-- #primary -->
 

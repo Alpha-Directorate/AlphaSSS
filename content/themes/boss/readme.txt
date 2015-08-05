@@ -29,8 +29,61 @@ Release Notes: http://www.buddyboss.com/release-notes/
 CHANGELOG
 ----------------------------------------------------------------
 /*--------------------------------------------------------------
+1.1.8 - July 10, 2015
+--------------------------------------------------------------*/
+
+FEATURES:
+
+	Compressed images, saves 1.7mb of space
+	LearnDash compatibility
+	Improved documentation
+
+BUG FIXES:
+
+	Fixed front-page post pagination
+	Fixed issues with cover photo cropping
+	Fixed comment padding
+	Fixed PHP errors with notifications off
+	Fixed extra links in profile dropdown
+
+CHANGED FILES:
+
+	/buddyboss-inc/cover-photo.php
+	/buddyboss-inc/theme-functions.php
+	buddypress-group-single.php
+	/css/main-desktop.css
+	/css/main-global.css
+	front-page.php
+	header.php
+	/images/ (all files)
+	/languages/en_US.mo
+	/languages/en_US.po
+	/languages/fr_FR.mo
+	/languages/fr_FR.po
+	readme.txt
+	style.css
+
+TESTED WITH:
+
+	-- WordPress --
+	WordPress 4.0, 4.1, 4.2+
+	BuddyPress 2.1, 2.2, 2.3+
+	bbPress 2.5+
+
+	-- Mobile --
+	iOS 6, 7
+	Android 4.1+ 
+	Windows Phone
+
+	-- Browsers --
+	Chrome
+	Safari
+	Firefox
+	Internet Explorer 9
+
+/*--------------------------------------------------------------
 1.1.7 - June 23, 2015
---------------------------------------------------------------*
+--------------------------------------------------------------*/
 
 BUG FIXES:
 	

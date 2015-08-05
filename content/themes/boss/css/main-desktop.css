@@ -578,7 +578,10 @@ body:not(.tablet) .header-account-login:hover .pop {
     opacity: 1;
     visibility: visible;
 }  
-
+.header-account-login .pop a {
+    line-height: normal;
+}
+.header-account-login .pop a,
 .header-account-login .pop #dashboard-links .menupop a,
 .header-account-login .pop ul > li > .ab-sub-wrapper > ul  li .ab-item,
 .header-account-login .pop .links li a {

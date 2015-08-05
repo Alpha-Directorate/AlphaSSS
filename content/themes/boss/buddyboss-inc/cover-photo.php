@@ -151,7 +151,7 @@ $bb_cover_photo_support = array("user","taxonomy","group","forum");
         return buddyboss_no_cover_photo($object,$object_id); //return blank cover photo
     }
     
-    $attachment = wp_get_attachment_image_src($cover_photo["attachment"],"full");
+    $attachment = wp_get_attachment_image_src($cover_photo["attachment"],"boss-cover-image");
     
     if(empty($attachment)) { //return nothing.
         return buddyboss_no_cover_photo($object,$object_id); //return blank cover photo
@@ -384,7 +384,7 @@ function buddyboss_cover_photo_upload() {
         $value["last_update"] = gmdate("Y-m-d H:i:s");
         buddyboss_cover_photo_update($object,$object_id,$value);
         
-        $url_nfo = wp_get_attachment_image_src( $aid, 'full' );
+        $url_nfo = wp_get_attachment_image_src( $aid, 'boss-cover-image' );
         $return["success"] = __("Cover photo is successfully updated.","boss");
         $return["image"] = $url_nfo[0];
         echo json_encode($return);
