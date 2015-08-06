@@ -48,8 +48,23 @@ function boss_child_theme_scripts_styles()
    * Styles
    */
   wp_enqueue_style( 'boss-child-custom', get_stylesheet_directory_uri().'/css/custom.css' );
+
+  wp_enqueue_script( 'bootstrap-js', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js', array('jquery') );
+  wp_enqueue_script( 'custom-js', get_stylesheet_directory_uri() . '/js/custom.js', array('bootstrap-js') );
+
+    /*
+   * Styles
+   */
+  wp_enqueue_style( 'buddyboss-child-custom', get_stylesheet_directory_uri().'/css/custom.css' );
+  wp_enqueue_style( 'bootstrap-css', '//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css' );
 }
 add_action( 'wp_enqueue_scripts', 'boss_child_theme_scripts_styles', 9999 );
+
+add_filter('alphasss_top_alerts', function(){
+
+  echo '<div id="top-alerts"></div>';
+
+});
 
 
 /****************************** CUSTOM FUNCTIONS ******************************/
@@ -57,5 +72,9 @@ add_action( 'wp_enqueue_scripts', 'boss_child_theme_scripts_styles', 9999 );
 // Add your own custom functions here
 
 
+function tooltip($translation, $position = 'top')
+{
+  return sprintf('<div class="alphasss-tooltip" data-delay-show="100" data-toggle="tooltip" data-placement="top" title="%s"></div>', $translation);
+}
 
 ?>

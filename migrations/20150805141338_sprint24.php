@@ -21,16 +21,29 @@ class Sprint24 extends AbstractMigration
     }
     */
 
-        /**
+    /**
      * Migrate Up.
      */
     public function up()
     {
         update_option( 'template', 'boss' );
         update_option( 'stylesheet', 'boss-child' );
+        update_option( 'buddyboss_panel_hide', '1' );
 
+        // Upgrade WordPress database
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         wp_upgrade();
+        //--
+
+        // Set the main menu
+        $menu      = wp_get_nav_menu_object( 'logged-in-out' );
+        $location  = 'left-panel-menu';
+        $locations = get_nav_menu_locations();
+        
+        $locations[ $location ] = $menu->term_id;
+
+        set_theme_mod( 'nav_menu_locations', $locations );
+        //--
     }
 
     /**

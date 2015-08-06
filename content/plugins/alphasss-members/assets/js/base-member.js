@@ -246,13 +246,15 @@ jQuery(document).ready(function($) {
     // This method sends a message to the AlphaSSS Chrome extension 
     function checkIsChromeExtensionsInstalled() {
         
-        chrome.runtime.sendMessage("kmnilnjjkcgodoooikfloknnkampaoee", {message: 'isInstalled?'},
-          function(response) {
-            // If no response there that means that extension not installed or disabled or doesn't work
-            if (!response){
-                console.log('extension not available');
-            }
-        });
+        if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
+            chrome.runtime.sendMessage("kmnilnjjkcgodoooikfloknnkampaoee", {message: 'isInstalled?'},
+              function(response) {
+                // If no response there that means that extension not installed or disabled or doesn't work
+                if (!response){
+                    console.log('extension not available');
+                }
+            });
+        }
     }
 
     // Create long pooling session with request to extension every 1 second
