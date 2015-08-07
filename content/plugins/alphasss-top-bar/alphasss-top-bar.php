@@ -87,6 +87,7 @@ add_action( 'plugins_loaded', function(){
 			) );
 
 			if ( current_user_can('generate_invitation_code') ) {
+
 				$wp_admin_bar->add_menu( array(
 					'parent'    => 'top-secondary',
 					'id'        => 'user-credits-icon',

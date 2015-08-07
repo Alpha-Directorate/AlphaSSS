@@ -15,13 +15,13 @@ $I->seeElement('input', ['id' => 'input_4_22']);
 $I->seeElement('input', ['id' => 'choice_4_8_1']);
 $I->seeElement('input', ['value' => 'Next']);
 
-$username = md5(time());
+$username = substr(md5(time()), 0, 7);
 $password = md5('password');
 
 $I->fillField('#input_4_3',$username);
 $I->fillField('#input_4_4', $password);
 $I->fillField('#input_4_4_2', $password);
-$I->fillField('#input_4_22', md5(time()) . '@yahoo.com');
+$I->fillField('#input_4_22', $username . '@yahoo.com');
 $I->checkOption('#choice_4_8_1');
 $I->click("//input[@id='gform_next_button_4_9']");
 $I->see('Your Invitation Code','h1');

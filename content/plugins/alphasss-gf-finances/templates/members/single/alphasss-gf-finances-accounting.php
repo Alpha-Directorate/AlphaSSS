@@ -38,9 +38,11 @@
 			$.post(ajaxurl, {'timezone_name': tz.name(), 'action': 'get_gf_accountiong_events'}, function(data){
 			 	records = data.data.event_records;
 
-			 	$('#my-ccountting_events').html(Mustache.render(template, {records: records}));
+			 	if (records.length) {
+			 		$('#my-ccountting_events').html(Mustache.render(template, {records: records}));
 
-				$("#my-ccountting_events table").tablesorter({sortList: [[0,1]]}); 
+					$("#my-ccountting_events table").tablesorter({sortList: [[0,1]]}); 
+			 	}
 			});
 		}); 
 	</script>

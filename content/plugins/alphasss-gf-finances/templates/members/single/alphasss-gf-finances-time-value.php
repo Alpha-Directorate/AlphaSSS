@@ -1,28 +1,30 @@
 <?php if ( ! defined( 'ABSPATH' ) ) exit;?>
 
-<table class="table" id="time-value-table" cellspacing="1">             
-	<thead>
-		<tr> 
-			<th class="header text-center"><?php _e('Check to Edit', 'alphasss');?></th> 
-			<th class="header text-center"><?php _e('Session Time', 'alphasss');?></th> 
-			<th class="header text-center"><?php _e('Session Value', 'alphasss');?></th> 
-		</tr>
-	</thead> 
-	<tbody>
-		<?php $time_values = get_user_meta( get_current_user_id(), 'gf_finances_time_values', true ); ?>
-		<?php foreach ( $time_values as $time => $value ):?>
-		<tr> 
-			<td class="text-center"><input class="time-value-checkbox" type="checkbox" /></td> 
-			<td class="text-center"><?php printf( __('%d min' ), $time ); ?></td>
-			<?php if ( $value > 0 ):?>
-				<td class="text-center"><?php echo (int) $value/100; ?></td>
-			<?php else :?>
-				<td class="text-center"><a class="time-value-link">not used</a></td>
-			<?php endif;?>
-		</tr>
-	<?php endforeach;?>
-	</tbody> 
-</table>
+<div id="bp-group-documents-form">
+	<table class="table" id="time-value-table" cellspacing="1">             
+		<thead>
+			<tr> 
+				<th class="header text-center"><?php _e('Check to Edit', 'alphasss');?></th> 
+				<th class="header text-center"><?php _e('Session Time', 'alphasss');?></th> 
+				<th class="header text-center"><?php _e('Session Value', 'alphasss');?></th> 
+			</tr>
+		</thead> 
+		<tbody>
+			<?php $time_values = get_user_meta( get_current_user_id(), 'gf_finances_time_values', true ); ?>
+			<?php foreach ( $time_values as $time => $value ):?>
+			<tr> 
+				<td class="text-center"><input class="time-value-checkbox" type="checkbox" /></td> 
+				<td class="text-center"><?php printf( __('%d min' ), $time ); ?></td>
+				<?php if ( $value > 0 ):?>
+					<td class="text-center"><?php echo (int) $value/100; ?></td>
+				<?php else :?>
+					<td class="text-center"><a class="time-value-link">not used</a></td>
+				<?php endif;?>
+			</tr>
+		<?php endforeach;?>
+		</tbody> 
+	</table>
+</div>
 
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -30,6 +32,7 @@
 		$.post(ajaxurl, {action: 'is_gf_time_values'}, function(data){
 
 			if ( ! data.data.is_gf_time_values){
+
 				$('#profile-alerts').prepend(dangerAlert(
 					"<p>" + "<?php _e('Session Values not configured...', 'alphasss');?>" + "</p><br />" + 
 					"<p>" + "<?php _e('You currently do not have any talk session values defined. Therefore, you cannot start audio-video. But you can change this in the table below.', 'alphasss');?>" + "</p>", true));
