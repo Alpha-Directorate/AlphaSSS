@@ -1,6 +1,6 @@
 <?php 
 $I = new AcceptanceTester($scenario);
-$I->resizeWindow(1024, 1024);
+$I->resizeWindow(1524, 1024);
 $I->wantTo('Group creation for GF');
 $I->amOnPage('/');
 $I->see('Login','.login');
@@ -10,7 +10,7 @@ $I->fillField('log','nadya');
 $I->fillField('pwd','funkadelicbro87');
 $I->click('Log In');
 $I->seeCurrentUrlEquals('/browse/nadya/');
-//$I->seeElement('#wp-admin-bar-user-credits-icon');
+$I->seeElement('#credits-icon');
 $I->moveMouseOver("//div[@class='header-account-login']");
 $I->see('Group', 'li');
 $I->moveMouseOver("//a[@class='ab-item' and text()='Group']");
