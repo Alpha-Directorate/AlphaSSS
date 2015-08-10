@@ -57,7 +57,7 @@ jQuery(document).ready(function($) {
 		return false;
 	});
 
-	$('#wp-admin-bar-logout a').click(function(){
+	$('.logout a').click(function(){
 		pubnub.unsubscribe({
 			channel: 'onlineUsers'
 		});
