@@ -27,6 +27,14 @@ class BuddyBoss_Media_Admin
 	 * @var array
 	 */
 	public $options = array();
+	
+	private $network_activated = false,
+			$plugin_slug = 'bb-buddyboss-media',
+			$menu_hook = 'admin_menu',
+			$settings_page = 'options-general.php',
+			$capability = 'manage_options',
+			$form_action = 'options.php',
+			$plugin_settings_url;
 
 	/**
 	 * Empty constructor function to ensure a single instance
@@ -108,22 +116,58 @@ class BuddyBoss_Media_Admin
 			return;
 		}
 
-		$actions = array(
-			'admin_init',
-			'admin_menu',
-			'network_admin_menu'
-		);
+		$this->plugin_settings_url = admin_url( 'options-general.php?page=' . $this->plugin_slug );
 
-		if ( isset( $_GET['page'] ) && ( $_GET['page'] == 'buddyboss-media/includes/admin.php' ) )
-		{
-			$actions[] = 'admin_enqueue_scripts';
+		$this->network_activated = $this->is_network_activated();
+
+		//if the plugin is activated network wide in multisite, we need to override few variables
+		if ( $this->network_activated ) {
+			// Main settings page - menu hook
+			$this->menu_hook = 'network_admin_menu';
+
+			// Main settings page - parent page
+			$this->settings_page = 'settings.php';
+
+			// Main settings page - Capability
+			$this->capability = 'manage_network_options';
+
+			// Settins page - form's action attribute
+			$this->form_action = 'edit.php?action=' . $this->plugin_slug;
+
+			// Plugin settings page url
+			$this->plugin_settings_url = network_admin_url('settings.php?page=' . $this->plugin_slug);
 		}
 
-		foreach( $actions as $action )
-		{
-			add_action( $action, array( $this, $action ) );
+		//if the plugin is activated network wide in multisite, we need to process settings form submit ourselves
+		if ( $this->network_activated ) {
+			add_action('network_admin_edit_' . $this->plugin_slug, array( $this, 'save_network_settings_page' ));
 		}
+
+		add_action( 'admin_init', array( $this, 'admin_init' ) );
+		add_action( $this->menu_hook, array( $this, 'admin_menu' ) );
+
+		add_filter( 'plugin_action_links', array( $this, 'add_action_links' ), 10, 2 );
+		add_filter( 'network_admin_plugin_action_links', array( $this, 'add_action_links' ), 10, 2 );
+		
 	}
+	
+	/**
+		* Check if the plugin is activated network wide(in multisite).
+		* 
+		* @return boolean
+		*/
+		private function is_network_activated() {
+		   $network_activated = false;
+		   if ( is_multisite() ) {
+			   if ( !function_exists('is_plugin_active_for_network') )
+				   require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+
+			   if ( is_plugin_active_for_network('buddyboss-media/buddyboss-media.php') ) {
+				   $network_activated = true;
+			   }
+		   }
+		   return $network_activated;
+		}
 
 	/**
 	 * Register admin settings
@@ -163,7 +207,9 @@ class BuddyBoss_Media_Admin
 	 */
 	public function admin_menu()
 	{
-		add_options_page( 'BuddyBoss Media', 'BuddyBoss Media', 'manage_options', __FILE__, array( $this, 'options_page' ) );
+		add_submenu_page(
+				$this->settings_page, 'BuddyBoss Media', 'BuddyBoss Media', $this->capability, $this->plugin_slug, array( $this, 'options_page' )
+		);
 	}
 
 	/**
@@ -216,20 +262,62 @@ class BuddyBoss_Media_Admin
 	?>
 		<div class="wrap">
 			<h2><?php _e( 'BuddyBoss Media', 'buddyboss-media' ); ?></h2>
-			<form action="options.php" method="post">
-			<?php settings_fields( 'buddyboss_media_plugin_options' ); ?>
-			<?php do_settings_sections( __FILE__ ); ?>
+			<form action="<?php echo $this->form_action; ?>" method="post">
+				
+				<?php
+					if ( $this->network_activated && isset($_GET['updated']) ) {
+						echo "<div class='updated'><p>" . __('Settings updated.', 'buddyboss-media') . "</p></div>";
+					}
+				?>
+				
+				<?php settings_fields( 'buddyboss_media_plugin_options' ); ?>
+				<?php do_settings_sections( __FILE__ ); ?>
 
-			<p class="submit">
-				<input name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes' ); ?>" />
-			</p>
+				<p class="submit">
+					<input name="bboss_g_s_settings_submit" type="submit" class="button-primary" value="<?php esc_attr_e( 'Save Changes' ); ?>" />
+				</p>
 			</form>
 		</div>
 
 	<?php
 	}
+	
+	public function add_action_links( $links, $file ) {
+		// Return normal links if not this plugin
+		if ( plugin_basename( basename( constant( 'BUDDYBOSS_MEDIA_PLUGIN_DIR' ) ) . '/buddyboss-media.php' ) != $file ) {
+			return $links;
+		}
 
-	/**
+		$mylinks = array(
+			'<a href="' . esc_url( $this->plugin_settings_url ) . '">' . __( "Settings", "buddyboss-media" ) . '</a>',
+		);
+		return array_merge( $links, $mylinks );
+	}
+
+	public function save_network_settings_page() {
+		if ( ! check_admin_referer( 'buddyboss_media_plugin_options-options' ) )
+			return;
+
+		if ( ! current_user_can( $this->capability ) )
+			die( 'Access denied!' );
+
+		if ( isset( $_POST[ 'bboss_g_s_settings_submit' ] ) ) {
+			$submitted = stripslashes_deep( $_POST[ 'buddyboss_media_plugin_options' ] );
+			$submitted = $this->plugin_options_validate( $submitted );
+
+			update_site_option( 'buddyboss_media_plugin_options', $submitted );
+		}
+
+		// Where are we redirecting to?
+		$base_url = trailingslashit( network_admin_url() ) . 'settings.php';
+		$redirect_url = esc_url_raw(add_query_arg( array( 'page' => $this->plugin_slug, 'updated' => 'true' ), $base_url ));
+
+		// Redirect
+		wp_redirect( $redirect_url );
+		die();
+	}
+
+		/**
 	 * General settings section
 	 *
 	 * @since BuddyBoss Media (1.0.0)
@@ -361,8 +449,11 @@ class BuddyBoss_Media_Admin
 			'show_option_none' => __( '- None -', 'buddyboss-media' ),
 			'selected'         => $all_media_page
 		) );
-		echo '<a href="' . admin_url( add_query_arg( array( 'post_type' => 'page' ), 'post-new.php' ) ) . '" class="button-secondary">' . __( 'New Page', 'buddyboss-media' ) .'</a>';
-		echo '<p class="description">' . __( 'Use a WordPress page to display all media uploaded by all users. (Optional)', 'buddyboss-media' ) . '</p>';
+		echo '<a href="' . admin_url( esc_url(add_query_arg( array( 'post_type' => 'page' ), 'post-new.php' ) )) . '" class="button-secondary">' . __( 'New Page', 'buddyboss-media' ) .'</a>';
+		if ( !empty( $all_media_page ) ) {
+			echo '<a href="' . get_permalink( $all_media_page ) .'" class="button-secondary" target="_bp" style="margin-left: 5px;">' . __( 'View', 'buddyboss-media' ) . '</a>';
+		}
+		echo '<p class="description">' . __( 'Use a WordPress page to display all media uploaded by all users.<br /> You may need to reset your permalinks after changing this setting. Go to Settings > Permalinks.', 'buddyboss-media' ) . '</p>';
 	}
 	
 	/**
@@ -451,7 +542,7 @@ class BuddyBoss_Media_Admin
 			$files_per_batch = 4;
 		}
 
-		echo "<input id='files-per-batch' name='buddyboss_media_plugin_options[files-per-batch]' type='number' value='" . esc_attr( $files_per_batch ) . "' />";
+		echo "<input id='files-per-batch' name='buddyboss_media_plugin_options[files-per-batch]' min='1' type='number' value='" . esc_attr( $files_per_batch ) . "' />";
 		echo '<p class="description">' . __( 'Maximum number of images that can be uploaded in one batch.', 'buddyboss-media' ) . '</p>';
 	}
 	

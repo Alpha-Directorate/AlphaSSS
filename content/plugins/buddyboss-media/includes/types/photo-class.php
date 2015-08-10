@@ -137,6 +137,8 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 			add_filter( 'bp_get_activity_content_body', array( $this->hooks, 'bp_get_activity_content_body' ) );
 			add_filter( 'bp_get_member_latest_update', array( $this->hooks, 'bp_get_member_latest_update' ) );
 			add_action( 'wp_ajax_buddyboss_delete_media', array($this,'delete_media_ajax') );
+			add_action( 'wp_ajax_bbm_activity_mark_fav', array($this,'bbm_activity_mark_fav') );
+			add_action( 'wp_ajax_bbm_activity_mark_unfav', array($this,'bbm_activity_mark_unfav') );
 		}
 		else {
 			add_filter( 'bp_get_activity_content_body', array( $this->hooks, 'off_bp_get_activity_content_body' ) );
@@ -150,7 +152,7 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 
 		// Menu
 		add_action( 'bp_setup_nav', array( $this, 'setup_bp_menu' ), 100 );
-
+		
 		// Front End Assets
 		if ( ! is_admin() && ! is_network_admin() )
 		{
@@ -185,9 +187,13 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 			$firstname = bp_get_user_firstname();
 		}
 
+        $js_app_state = $this->get_js_app_state();
+        $uploader_filetypes = $js_app_state['uploader_filetypes'];
+        $uploader_filesize = $js_app_state['uploader_filesize'];
+
 		$js_translations = array(
 			'error_photo_is_uploading' => __( 'Picture upload currently in progress, please wait until completed.', 'buddyboss-media' ),
-			'error_uploading_photo'    => __( 'Error uploading photo.', 'buddyboss-media' ),
+			'error_uploading_photo'    => __( sprintf('File not supported. Supported file types: %1s & file size: %1s', $uploader_filetypes, $uploader_filesize), 'buddyboss-media' ),
 			'one_moment'               => __( 'One moment...', 'buddyboss-media' ),
 			'resizing'                 => __( 'Resizing...', 'buddyboss-media' ),
 			'file_browse_title'        => __( 'Upload a Picture', 'buddyboss-media' ),
@@ -239,8 +245,8 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 		wp_enqueue_style( 'fontawesome' );
 
 		// CSS > Main
-		//wp_enqueue_style( 'buddyboss-media-main', $assets . '/css/buddyboss-media.css', array( 'fontawesome' ), '3.0.2', 'all' );
-		wp_enqueue_style( 'buddyboss-media-main', $assets . '/css/buddyboss-media.min.css', array( 'fontawesome' ), '3.0.2', 'all' );
+		//wp_enqueue_style( 'buddyboss-media-main', $assets . '/css/buddyboss-media.css', array( 'fontawesome' ), '3.0.4', 'all' );
+		wp_enqueue_style( 'buddyboss-media-main', $assets . '/css/buddyboss-media.min.css', array( 'fontawesome' ), '3.0.4', 'all' );
 
 		// JS > PhotoSwipe
 		wp_enqueue_script( 'buddyboss-media-klass', $assets . '/vendor/photoswipe/klass.min.js', array( 'jquery' ), '1.0', false );
@@ -262,8 +268,8 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 		wp_enqueue_style( 'jquery-fancybox', $assets . '/vendor/fancybox/jquery.fancybox.css', array(), '2.1.5', 'all' );
 		
 		// JS > Main
-		//wp_enqueue_script( 'buddyboss-media-main', $assets . '/js/buddyboss-media.js', array( 'jquery', 'plupload', 'jquery-fancybox' ), '3.0.0', true );
-		wp_enqueue_script( 'buddyboss-media-main', $assets . '/js/buddyboss-media.min.js', array( 'jquery', 'plupload', 'jquery-fancybox' ), '3.0.0', true );
+//		wp_enqueue_script( 'buddyboss-media-main', $assets . '/js/buddyboss-media.js', array( 'jquery', 'plupload', 'jquery-fancybox' ), '3.0.4', true );
+		wp_enqueue_script( 'buddyboss-media-main', $assets . '/js/buddyboss-media.min.js', array( 'jquery', 'plupload', 'jquery-fancybox' ), '3.0.4', true );
 		
 		$data = array(
 			'is_media_page'	=> ( buddyboss_media()->option('all-media-page') && is_page( buddyboss_media()->option('all-media-page') ) ) ? true : false,
@@ -423,25 +429,28 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 	{
 		global $wpdb, $bp;
 
-		if ( ! isset( $bp->displayed_user->id ) )
+		if ( ! isset( $bp->displayed_user->id ) && !  is_admin() )
 		{
 			return;
 		}
 
-		$photos_user_id      = $bp->displayed_user->id;
+		$photos_user_id      = isset( $bp->displayed_user->id ) ? $bp->displayed_user->id : '';
 		$activity_table      = bp_core_get_table_prefix() . 'bp_activity';
 		$activity_meta_table = bp_core_get_table_prefix() . 'bp_activity_meta';
 		$groups_table        = bp_core_get_table_prefix() . 'bp_groups';
 
 		// Prepare a SQL query to retrieve the activity posts
 		// that have pictures associated with them
-		$sql = "SELECT COUNT(*) as photo_count FROM $activity_table a
-						INNER JOIN $activity_meta_table am ON a.id = am.activity_id
-  					LEFT JOIN (SELECT id FROM $groups_table WHERE status != 'public' ) grp ON a.item_id = grp.id
-						WHERE a.user_id = %d
-						AND (am.meta_key = 'buddyboss_media_aid' OR am.meta_key = 'buddyboss_pics_aid' OR am.meta_key = 'bboss_pics_aid')
-						AND (a.component != 'groups' || a.item_id != grp.id)";
-		$sql = $wpdb->prepare( $sql, $photos_user_id );
+//		$sql = "SELECT COUNT(*) as photo_count FROM $activity_table a
+//						INNER JOIN $activity_meta_table am ON a.id = am.activity_id
+//  					LEFT JOIN (SELECT id FROM $groups_table WHERE status != 'public' ) grp ON a.item_id = grp.id
+//						WHERE a.user_id = %d
+//						AND (am.meta_key = 'buddyboss_media_aid' OR am.meta_key = 'buddyboss_pics_aid' OR am.meta_key = 'bboss_pics_aid')
+//						AND (a.component != 'groups' || a.item_id != grp.id)";
+		
+		$new_sql = "SELECT COUNT(id) FROM {$wpdb->prefix}buddyboss_media WHERE media_author = %d";
+		
+		$sql = $wpdb->prepare( $new_sql, $photos_user_id );
 
 		buddyboss_media_log( ' MENU PHOTO COUNT SQL ' );
 		buddyboss_media_log( $sql );
@@ -530,25 +539,81 @@ class BuddyBoss_Media_Type_Photo extends BP_Component
 	public function delete_media_ajax() {
 		error_reporting(0);
 		$activity_id = intval($_POST["media"]);
-		if(empty($activity_id)) {
+		$photo_id = intval($_POST['photo-id']);
+		if( empty( $activity_id ) || empty( $photo_id ) ) {
 			_e("Photo does not exists.","buddyboss-media");
 			exit;
 		}
 		
-		$activity_array = bp_activity_get_specific( array(
-			'activity_ids'     => $activity_id,
-			'display_comments' => 'stream'
-		   ) );
-	  
-		$activity = ! empty( $activity_array['activities'][0] ) ? $activity_array['activities'][0] : false;
+		global $wpdb;
+		//Delete entry from buddyboss_media table
+		$wpdb->delete( $wpdb->prefix . 'buddyboss_media', array( 'media_id' => $photo_id ), array( '%d' ) );
 		
-		if($activity->user_id == get_current_user_id()) {
-			bp_activity_delete(array('id'=>$activity_id));
-			echo "done";
-		} else {
-			_e("You don't have permission to delete this photo.","buddyboss-media");
+		$photo_id_arr = bp_activity_get_meta( $activity_id, 'buddyboss_media_aid' );
+		
+		if ( count( $photo_id_arr ) > 1 ) {
+		
+			$pos = array_search($photo_id ,$photo_id_arr);
+			unset($photo_id_arr[$pos]);
+
+			bp_activity_update_meta($activity_id, 'buddyboss_media_aid', $photo_id_arr );
+
+			echo 'done';
+			exit();
+			
 		}
-		exit;
+		 else {
+			$activity_array = bp_activity_get_specific( array(
+				'activity_ids'     => $activity_id,
+				'display_comments' => 'stream'
+			   ) );
+
+			$activity = ! empty( $activity_array['activities'][0] ) ? $activity_array['activities'][0] : false;
+
+			if($activity->user_id == get_current_user_id()) {
+				bp_activity_delete(array('id'=>$activity_id));
+				echo "done";
+			} else {
+				_e("You don't have permission to delete this photo.","buddyboss-media");
+			}
+			exit;
+		 }
+	}
+	
+	/**
+	 * Ajax for photos like
+	 */
+	public function bbm_activity_mark_fav() {
+		error_reporting(0);
+		// Bail if not a POST action
+		if ( 'POST' !== strtoupper( $_SERVER[ 'REQUEST_METHOD' ] ) )
+			return;
+
+		if ( !  empty($_POST[ 'id' ]) ) {
+			bp_activity_add_user_favorite( $_POST[ 'id' ] );
+			$res['action'] = 'fav';
+			$res['count'] = ( int ) bp_activity_get_meta( ( int ) $_POST[ 'id' ], 'favorite_count' );
+		}
+
+		echo json_encode($res);
+
+		die();
+	}
+	
+	public function bbm_activity_mark_unfav() {
+		error_reporting(0);
+		// Bail if not a POST action
+		if ( 'POST' !== strtoupper( $_SERVER[ 'REQUEST_METHOD' ] ) )
+			return;
+		if ( !  empty($_POST[ 'id' ]) ) {
+			bp_activity_remove_user_favorite( $_POST['id'] );
+			$res['action'] = 'unfav';
+			$res['count'] = ( int ) bp_activity_get_meta( ( int ) $_POST[ 'id' ], 'favorite_count' );
+		}
+
+		echo json_encode($res);
+
+		die();
 	}
 
 } // BuddyBoss_Media_Type_Photo
