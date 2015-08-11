@@ -195,6 +195,7 @@
 })(typeof window === "undefined" ? this : window);
 
 var uuid   = php_vars.pubnub.uuid;
+var isGF   = php_vars.isGF == 1;
 var pubnub = PUBNUB.init(php_vars.pubnub);
 
 jQuery(document).ready(function($) {
@@ -224,6 +225,9 @@ jQuery(document).ready(function($) {
     pubnub.subscribe({
     	channel: 'onlineUsers',
     	callback: function(m) {},
+        state: {
+            isGF:isGF
+        },
     	presence: function(details){
     		var uuid = 'uuid' in details && (''+details.uuid).toLowerCase();
 
@@ -238,4 +242,29 @@ jQuery(document).ready(function($) {
             });
     	}
     });
+
+    // This method sends a message to the AlphaSSS Chrome extension 
+    function checkIsChromeExtensionsInstalled() {
+        
+        if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1) {
+            chrome.runtime.sendMessage("kmnilnjjkcgodoooikfloknnkampaoee", {message: 'isInstalled?'},
+              function(response) {
+                // If no response there that means that extension not installed or disabled or doesn't work
+                if (!response){
+                    console.log('extension not available');
+                }
+            });
+        }
+    }
+
+    // Create long pooling session with request to extension every 1 second
+    function poll(){
+        setTimeout(function() {
+            checkIsChromeExtensionsInstalled();
+            poll();
+        }, 1000);
+    }
+
+    checkIsChromeExtensionsInstalled();
+    poll();
 });

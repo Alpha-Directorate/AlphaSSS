@@ -5,7 +5,7 @@
  * Description: BuddyBoss Media Photo Uploading
  * Author:      BuddyBoss
  * Author URI:  http://buddyboss.com
- * Version:     3.0.2
+ * Version:     3.0.5
  */
 
 // Exit if accessed directly
@@ -19,12 +19,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 // Codebase version
 if ( ! defined( 'BUDDYBOSS_MEDIA_PLUGIN_VERSION' ) ) {
-  define( 'BUDDYBOSS_MEDIA_PLUGIN_VERSION', '3.0.2' );
+  define( 'BUDDYBOSS_MEDIA_PLUGIN_VERSION', '3.0.5' );
 }
 
 // Database version
 if ( ! defined( 'BUDDYBOSS_MEDIA_PLUGIN_DB_VERSION' ) ) {
-  define( 'BUDDYBOSS_MEDIA_PLUGIN_DB_VERSION', 3 );
+  define( 'BUDDYBOSS_MEDIA_PLUGIN_DB_VERSION', '3' );
 }
 
 // Directory
@@ -99,27 +99,12 @@ function buddyboss_media()
   return $buddyboss_media;
 }
 
-/**
- * Settings Link
- * @since 1.1.0
- */
-add_filter ('plugin_action_links', 'buddyboss_media_meta', 10, 2);
-function buddyboss_media_meta ($links, $file)
-{
-  if ($file == plugin_basename (__FILE__))
-  {
-    $settings_link = '<a href="' . add_query_arg( array( 'page' => 'buddyboss-media/includes/admin.php'   ), admin_url( 'options-general.php' ) ) . '">' . esc_html__( 'Settings', 'buddyboss-media' ) . '</a>';
-    array_unshift ($links, $settings_link);
-  }
-  return $links;
-}
-
 register_activation_hook( __FILE__, 'buddyboss_media_setup_db_tables' );
 /**
 * Setup database table for albums.
 * Runs on plugin activation.
 * 
-* @since BuddyBoss Media (1.1)
+* @since BuddyBoss Media (2.0.0)
 */
 function buddyboss_media_setup_db_tables( $network_wide=false ){
    global $wpdb;
@@ -142,13 +127,14 @@ function buddyboss_media_setup_db_tables( $network_wide=false ){
 /**
 * Create database table for albums.
 * 
-* @since BuddyBoss Media (1.1)
+* @since BuddyBoss Media (2.0.0)
 */
 function buddyboss_media_create_db_tables(){
    global $wpdb;
-   $table_name = $wpdb->prefix . 'buddyboss_media_albums';
+   $table_name1 = $wpdb->prefix . 'buddyboss_media_albums';
+   $table_name2 = $wpdb->prefix . 'buddyboss_media';
 
-   $sql = "CREATE TABLE " . $table_name . " (
+   $sql1 = "CREATE TABLE " . $table_name1 . " (
 	   id bigint(20) NOT NULL AUTO_INCREMENT,
 	   user_id bigint(20) NOT NULL,
 	   date_created datetime NULL DEFAULT '0000-00-00',
@@ -158,9 +144,29 @@ function buddyboss_media_create_db_tables(){
 	   privacy varchar(50) NULL DEFAULT 'public',
 	   PRIMARY KEY  (id)
    );";
+   
+   $sql2 = "CREATE TABLE ".$table_name2." (
+		id bigint(20) NOT NULL AUTO_INCREMENT ,
+		blog_id bigint(20) NULL DEFAULT NULL,
+		media_id bigint(20) NOT NULL ,
+		media_author bigint(20) NOT NULL,
+		media_title text,
+		album_id bigint(20),
+		activity_id bigint(20) NULL DEFAULT NULL ,
+		privacy int(3) NULL DEFAULT NULL ,
+		favorites bigint(20) NULL DEFAULT 0 ,
+		upload_date datetime DEFAULT '0000-00-00 00:00:00',
+		PRIMARY KEY  (id),
+		KEY media_id (media_id),
+		KEY media_author (media_author),
+		KEY album_id (album_id),
+		KEY media_author_id (album_id,media_author),
+		KEY activity_id (activity_id)
+	);";
 
-   require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-   dbDelta( $sql );
+	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+   dbDelta( $sql1 );
+   dbDelta( $sql2 );
    
    update_option( 'buddyboss_media_db_version', BUDDYBOSS_MEDIA_PLUGIN_DB_VERSION );
 }

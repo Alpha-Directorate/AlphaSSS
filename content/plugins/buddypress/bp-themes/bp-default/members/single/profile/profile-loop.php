@@ -20,9 +20,9 @@
 
 							<tr<?php bp_field_css_class(); ?>>
 
-								<td class="label"><?php bp_the_profile_field_name(); ?>1</td>
+								<td class="label"><?php bp_the_profile_field_name(); ?></td>
 
-								<td class="data"><?php bp_the_profile_field_value(); ?>1</td>
+								<td class="data"><?php bp_the_profile_field_value(); ?></td>
 
 							</tr>
 

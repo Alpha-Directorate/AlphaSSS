@@ -31,14 +31,16 @@ class BuddyBoss_Media_Tagging_Hooks {
 	
 	protected function load(){
 		//modify activity title
-		add_filter( 'bp_get_activity_action',			array( $this, 'activity_action' ), 20 );//hook a little late
+		add_filter( 'bp_get_activity_action',			array( $this, 'activity_action' ), 20,2 );//hook a little late
 		
 		//add tooltip text at the bottom
 		add_action( 'bp_after_activity_entry_comments', array( $this, 'activity_tagging_tooltip_text' ) );
+		add_action( 'bp_directory_members_item', array( $this, 'activity_tagging_tooltip_text' ) );
 	}
 	
 	public function activity_action( $action ){
-		if( ( $tagged_people = bp_activity_get_meta( bp_get_activity_id(), 'bboss_media_tagged_friends', true ) )!= false ){
+		
+		if( ( $tagged_people = bp_activity_get_meta( bp_get_activity_id() , 'bboss_media_tagged_friends', true ) )!= false ){
 			$count = count( $tagged_people );
 			
 			$current_user_is_tagged = false;
@@ -56,8 +58,8 @@ class BuddyBoss_Media_Tagging_Hooks {
 
 				// Fallback
 				$tagged_txt = '';
-				
-				$args = apply_filters( 'bboss_media_tagged_friends', array(
+
+					$args = apply_filters( 'bboss_media_tagged_friends', array(
 					'per_page'			=> 0,
 					'populate_extras'	=> false,
 					'exclude'			=> bp_loggedin_user_id(),

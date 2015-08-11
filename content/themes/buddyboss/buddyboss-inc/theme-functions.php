@@ -158,17 +158,10 @@ function buddyboss_scripts_styles()
 	}
 
 	/*
-	 * Adds fitVids script
-	 */
-	if ( !is_admin() ) {
-		wp_enqueue_script( 'fitvids', get_template_directory_uri().'/js/fitvids.js', array( 'jquery' ), '1.1.0' );
-	}
-    
-	/*
 	 * Adds custom BuddyBoss JavaScript functionality.
 	 */
 	if ( !is_admin() ) {
-		wp_enqueue_script( 'buddyboss-main', get_template_directory_uri().'/js/buddyboss.js', array( 'jquery' ), '4.1.9' );
+		wp_enqueue_script( 'buddyboss-main', get_template_directory_uri().'/js/buddyboss.js', array( 'jquery' ), '4.1.8' );
 	}
 
 	// Add BuddyBoss words that we need to use in JS to the end of the page

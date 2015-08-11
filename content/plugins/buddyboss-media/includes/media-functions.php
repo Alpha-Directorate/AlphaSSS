@@ -148,4 +148,47 @@ function buddyboss_media_screen_content_sql( $sql ){
           AND (a.component != 'groups' || a.item_id != grp.id)
           ORDER BY a.date_recorded DESC";
 }
+
+//Update buddyboss_media table
+function bbm_update_media_table( $attachment_id, $media_title, $activity_id ) {
+
+	global $wpdb;
+
+	$wpdb->insert(
+			$wpdb->prefix . 'buddyboss_media', array(
+				'blog_id' => get_current_blog_id(),
+				'media_id' => $attachment_id,
+				'media_author' => get_current_user_id(),
+				'media_title' => $media_title,
+				'activity_id' => $activity_id,
+				'upload_date' => current_time( 'mysql' ),
+			),
+			array(
+				'%d',
+				'%d',
+				'%d',
+				'%s',
+				'%d',
+				'%d',
+			)
+	);
+}
+
+//Delete media from buddyboss_media table
+function bbm_delete_row_media_table( $args ) {
+	
+	global $wpdb;
+	
+	$activity_ids = (array)$args['id'];
+	if( empty( $activity_ids ) ){
+		return;
+	}
+	
+	foreach( $activity_ids as $activity_id ) {
+		$wpdb->delete( $wpdb->prefix . 'buddyboss_media', array( 'activity_id' => $activity_id ), array( '%d' ) );
+	}
+	
+}
+
+add_action('bp_before_activity_delete','bbm_delete_row_media_table');
 ?>

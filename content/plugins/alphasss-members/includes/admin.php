@@ -66,11 +66,11 @@ class Alphasss_Members_Admin
 	public function admin_init()
 	{
 		register_setting( 'alpahsss_members_plugin_options', 'alpahsss_members_plugin_options', array( $this, 'plugin_options_validate' ) );
-		add_settings_section( 'general_section', __( 'General Settings', 'alpahsss-members' ), array( $this, 'section_general' ), __FILE__ );
+		add_settings_section( 'general_section', __( 'General Settings', 'alpahsss' ), array( $this, 'section_general' ), __FILE__ );
 
-		add_settings_field( 'publish-key', __( 'Publish key', 'alpahsss-members' ), array( $this, 'setting_publish_key' ), __FILE__, 'general_section' );
-		add_settings_field( 'subscribe-key', __( 'Subscribe key', 'alpahsss-members' ), array( $this, 'setting_subscribe_key' ), __FILE__, 'general_section' );
-		add_settings_field( 'channel-prefix', __( 'Channel prefix', 'alpahsss-members' ), array( $this, 'setting_channel_prefix' ), __FILE__, 'general_section' );
+		add_settings_field( 'publish-key', __( 'Publish key', 'alpahsss' ), array( $this, 'setting_publish_key' ), __FILE__, 'general_section' );
+		add_settings_field( 'subscribe-key', __( 'Subscribe key', 'alpahsss' ), array( $this, 'setting_subscribe_key' ), __FILE__, 'general_section' );
+		add_settings_field( 'channel-prefix', __( 'Channel prefix', 'alpahsss' ), array( $this, 'setting_channel_prefix' ), __FILE__, 'general_section' );
 	}
 
 	public function setting_publish_key()

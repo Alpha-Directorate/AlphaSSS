@@ -1,6 +1,6 @@
-<?php
+<?php namespace AlphaSSS\HTTP;
 
-namespace AlphaSSS\HTTP;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 class HTTP {
 

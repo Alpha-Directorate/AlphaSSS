@@ -1,0 +1,670 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Download Manager Pro v3.2.2\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-10 16:04+0600\n"
+"PO-Revision-Date: 2015-06-10 16:04+0600\n"
+"Last-Translator: \n"
+"Language-Team: Shaon <proshaon@yahoo.com>\n"
+"Language: en_BD\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 1.8.1\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: class.pagination.php:63 wpdm-all-downloads.php:49
+#: wpdm-all-downloads.php:139
+msgid "Next"
+msgstr ""
+
+#: class.pagination.php:64 wpdm-all-downloads.php:50
+#: wpdm-all-downloads.php:138
+msgid "Previous"
+msgstr ""
+
+#: download-manager.php:162
+msgid "Add-Ons &lsaquo; Download Manager"
+msgstr ""
+
+#: download-manager.php:162
+msgid "Add-Ons"
+msgstr ""
+
+#: download-manager.php:163
+msgid "Settings &lsaquo; Download Manager"
+msgstr ""
+
+#: download-manager.php:163
+msgid "Settings"
+msgstr ""
+
+#: file-icon.php:12
+msgid "Select Icon"
+msgstr ""
+
+#: file-icon.php:17
+msgid "Upload New Icon"
+msgstr ""
+
+#: file-icon.php:35 tpls/metaboxes/attach-file.php:66
+msgid "Allowed Files"
+msgstr ""
+
+#: functions.php:7
+msgid "Top Level Category"
+msgstr ""
+
+#: functions.php:18 functions.php:30 functions.php:814 functions.php:833
+#: list-files.php:79 list-files.php:92
+msgid "Downloads"
+msgstr ""
+
+#: functions.php:19
+msgid "File"
+msgstr ""
+
+#: functions.php:20 list-files.php:28
+msgid "Add New"
+msgstr ""
+
+#: functions.php:21
+msgid "Add New File"
+msgstr ""
+
+#: functions.php:22
+msgid "Edit File"
+msgstr ""
+
+#: functions.php:23
+msgid "New File"
+msgstr ""
+
+#: functions.php:24
+msgid "All Files"
+msgstr ""
+
+#: functions.php:25
+msgid "View File"
+msgstr ""
+
+#: functions.php:26
+msgid "Search Files"
+msgstr ""
+
+#: functions.php:27
+msgid "No File Found"
+msgstr ""
+
+#: functions.php:28
+msgid "No Files found in Trash"
+msgstr ""
+
+#: functions.php:55 functions.php:65 wpdm-all-downloads.php:70
+msgid "Categories"
+msgstr ""
+
+#: functions.php:56 list-files.php:76 list-files.php:89
+msgid "Category"
+msgstr ""
+
+#: functions.php:57
+msgid "Search Categories"
+msgstr ""
+
+#: functions.php:58
+msgid "All Categories"
+msgstr ""
+
+#: functions.php:59
+msgid "Parent Category"
+msgstr ""
+
+#: functions.php:60
+msgid "Parent Category:"
+msgstr ""
+
+#: functions.php:61
+msgid "Edit Category"
+msgstr ""
+
+#: functions.php:62
+msgid "Update Category"
+msgstr ""
+
+#: functions.php:63
+msgid "Add New Category"
+msgstr ""
+
+#: functions.php:64
+msgid "New Category Name"
+msgstr ""
+
+#: functions.php:249 functions.php:274 functions.php:336 functions.php:381
+#: functions.php:992 wpdm-all-downloads.php:72
+msgid "Download"
+msgstr ""
+
+#: functions.php:258
+msgid "Download Limit Exceeded"
+msgstr ""
+
+#: functions.php:262
+msgid "Download was expired on"
+msgstr ""
+
+#: functions.php:264 functions.php:271 functions.php:288
+msgid "Download:"
+msgstr ""
+
+#: functions.php:269
+msgid "Download will be available from "
+msgstr ""
+
+#: functions.php:309
+msgid "Please login to download"
+msgstr ""
+
+#: functions.php:381
+msgid "Please take any of the actions above to start download"
+msgstr ""
+
+#: functions.php:395
+msgid "No file attached!"
+msgstr ""
+
+#: functions.php:814
+msgid "Sub-Categories"
+msgstr ""
+
+#: functions.php:832 wpdm-all-downloads.php:69
+msgid "Title"
+msgstr ""
+
+#: functions.php:834
+msgid "Publish Date"
+msgstr ""
+
+#: functions.php:835
+msgid "Update Date"
+msgstr ""
+
+#: functions.php:836
+msgid "Asc"
+msgstr ""
+
+#: functions.php:837
+msgid "Desc"
+msgstr ""
+
+#: functions.php:838 list-files.php:40
+msgid "Search"
+msgstr ""
+
+#: functions.php:1103
+msgid "Unlimited"
+msgstr ""
+
+#: functions.php:1237
+msgid "You don't have permission to download this file"
+msgstr ""
+
+#: functions.php:1243
+msgid "Download link is expired. Please get new download link."
+msgstr ""
+
+#: functions.php:1245
+msgid "Download link is expired or not valid. Please get new download link."
+msgstr ""
+
+#: functions.php:1253
+msgid "Invalid download link."
+msgstr ""
+
+#: functions.php:1330
+msgid "Legends"
+msgstr ""
+
+#: functions.php:1331
+msgid ""
+" Click on the icon to launch media manager to select or upload preview images"
+msgstr ""
+
+#: functions.php:1331
+msgid " Reload link or page templates."
+msgstr ""
+
+#: functions.php:1336 functions.php:1579
+msgid "File Settings"
+msgstr ""
+
+#: functions.php:1337
+msgid ""
+"<b>Link Label:</b> Label to show with download link, like: download now, get "
+"it now<br/>\n"
+"                                    <b>Password:</b> You can set single or "
+"multiple password for a package. In case of multiple password, each password "
+"have to be inside `[]`, like: [1234][456][789sf] and user will be able to "
+"download package using any one of them<br/>\n"
+"                                    <b>PW Usage Limit:</b> When you are "
+"using multiple password, then you may want set a limit, how many time user "
+"will be able to use a password, you can set the numeric value here, suppose "
+"`n`. So each password will expire after it used for `n` times.<br/>\n"
+"                                    <b>Stock Limit:</b> Should be a numeric "
+"value, suppose `9`. After package dowloaded for `9` times, the no one will "
+"able to download it anymore, will show 'out of stock' message<br/>\n"
+"                                    <b>Download Limit/user:</b> Set a "
+"numeric value here if you want to block user after a certain times of "
+"download for this package.<br/>\n"
+"                                    <b>Access</b>: Check the user roles, you "
+"want to enable to download this package, `All Visitors` will enable every "
+"one to download this package<br/>\n"
+"                                    <b>Link Template:</b> Shortcode will be "
+"rendered based on select link template.<br/>\n"
+"                                    <b>Page Template:</b> File details page "
+"will be rendered based on selected page template<br/>\n"
+"                                "
+msgstr ""
+
+#: functions.php:1580
+msgid "Attach File"
+msgstr ""
+
+#: functions.php:1581
+msgid "Other Items"
+msgstr ""
+
+#: functions.php:1852
+msgid "Username is Empty!"
+msgstr ""
+
+#: functions.php:1861
+msgid "Invalid Email Address!"
+msgstr ""
+
+#: functions.php:1907
+msgid "Email already exists."
+msgstr ""
+
+#: functions.php:1916
+msgid "User already exists."
+msgstr ""
+
+#: list-files.php:28
+msgid "Manage Download Packages"
+msgstr ""
+
+#: list-files.php:29
+msgid "Simply Copy and Paste the embed code at anywhere in post contents"
+msgstr ""
+
+#: list-files.php:41
+msgid "Delete Permanently"
+msgstr ""
+
+#: list-files.php:43
+msgid "Apply"
+msgstr ""
+
+#: list-files.php:55
+msgid "Reset Search"
+msgstr ""
+
+#: list-files.php:73 list-files.php:86
+msgid "Icon"
+msgstr ""
+
+#: list-files.php:74 list-files.php:87
+msgid "ID"
+msgstr ""
+
+#: list-files.php:75 list-files.php:88
+msgid "Package Title"
+msgstr ""
+
+#: list-files.php:77 list-files.php:90 wpdm-be-member.php:63
+#: wpdm-login-form.php:29 wpdm-reg-form.php:33
+msgid "Password"
+msgstr ""
+
+#: list-files.php:78 list-files.php:91
+msgid "Access"
+msgstr ""
+
+#: list-files.php:141
+msgid "&laquo;"
+msgstr ""
+
+#: list-files.php:142
+msgid "&raquo;"
+msgstr ""
+
+#: list-files.php:155
+#, php-format
+msgid "Displaying %s&#8211;%s of %s"
+msgstr ""
+
+#: server-file-browser.php:7
+msgid "Not Allowed!"
+msgstr ""
+
+#: server-file-browser.php:79
+msgid "Add file(s) from server"
+msgstr ""
+
+#: settings/basic.php:34
+msgid "Messages"
+msgstr ""
+
+#: settings/basic.php:39
+msgid "Permission Denied Message for Packages:"
+msgstr ""
+
+#: settings/basic.php:48
+msgid "Login Required Message:"
+msgstr ""
+
+#: settings/basic.php:56
+msgid "Server File Browser"
+msgstr ""
+
+#: settings/basic.php:60
+msgid "Server File Browser Base Dir:"
+msgstr ""
+
+#: settings/basic.php:64
+msgid "Reset Base Dir"
+msgstr ""
+
+#: settings/basic.php:70
+msgid "File Browser Access:"
+msgstr ""
+
+#: settings/basic.php:71
+msgid "Who will have access to server file browser"
+msgstr ""
+
+#: settings/basic.php:103
+msgid "File Download"
+msgstr ""
+
+#: settings/basic.php:107
+msgid "Download Speed:"
+msgstr ""
+
+#: settings/basic.php:114
+msgid ""
+"If you get broken download, then try enabling/disabling following options, "
+"as sometimes server may not support output buffering or partial downloads"
+msgstr ""
+
+#: settings/basic.php:117
+msgid "Resumable Downloads"
+msgstr ""
+
+#: settings/basic.php:119 settings/basic.php:126
+msgid "Enabled"
+msgstr ""
+
+#: settings/basic.php:120 settings/basic.php:127
+msgid "Disabled"
+msgstr ""
+
+#: settings/basic.php:124
+msgid "Output Buffering"
+msgstr ""
+
+#: settings/basic.php:133
+msgid "Open in Browser"
+msgstr ""
+
+#: settings/basic.php:134
+msgid ""
+"Try to Open in Browser instead of download when someone clicks on download "
+"link"
+msgstr ""
+
+#: settings/basic.php:143
+msgid "Misc Settings"
+msgstr ""
+
+#: settings/basic.php:152
+msgid "Twitter Bootstrap"
+msgstr ""
+
+#: settings/basic.php:154
+msgid "Active"
+msgstr ""
+
+#: settings/basic.php:155
+msgid "Disable JS"
+msgstr ""
+
+#: settings/basic.php:156
+msgid "Disable CSS"
+msgstr ""
+
+#: settings/basic.php:157
+msgid "Disable Both"
+msgstr ""
+
+#: tpls/metaboxes/attach-file.php:4
+msgid "attached file is missing/deleted"
+msgstr ""
+
+#: tpls/metaboxes/attach-file.php:44
+msgid "Drop files here"
+msgstr ""
+
+#: tpls/metaboxes/icons.php:112
+msgid "Icon URL"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:18
+msgid "Link Label:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:23
+msgid "Password:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:28
+msgid "Stock&nbsp;Limit:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:35
+msgid "Download&nbsp;Count:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:42
+msgid "Allow Access:"
+msgstr ""
+
+#: tpls/metaboxes/package-settings.php:54
+msgid "All Visitors"
+msgstr ""
+
+#: tpls/wpdm-addons-list.php:200
+msgid "WPDM Add-Ons"
+msgstr ""
+
+#: wpdm-all-downloads.php:33
+msgid "All"
+msgstr ""
+
+#: wpdm-all-downloads.php:35
+msgid "Display _MENU_ files per page"
+msgstr ""
+
+#: wpdm-all-downloads.php:36
+msgid "Nothing _START_ to - sorry"
+msgstr ""
+
+#: wpdm-all-downloads.php:37
+msgid "Showing _START_ to _END_ of _TOTAL_ files"
+msgstr ""
+
+#: wpdm-all-downloads.php:38
+msgid "No records available"
+msgstr ""
+
+#: wpdm-all-downloads.php:39
+msgid "(filtered from _MAX_ total files)"
+msgstr ""
+
+#: wpdm-all-downloads.php:40
+msgid "No data available in table"
+msgstr ""
+
+#: wpdm-all-downloads.php:43
+msgid "Loading..."
+msgstr ""
+
+#: wpdm-all-downloads.php:44
+msgid "Processing..."
+msgstr ""
+
+#: wpdm-all-downloads.php:45
+msgid "Search:"
+msgstr ""
+
+#: wpdm-all-downloads.php:47
+msgid "First"
+msgstr ""
+
+#: wpdm-all-downloads.php:48
+msgid "Last"
+msgstr ""
+
+#: wpdm-all-downloads.php:53
+msgid "activate to sort column ascending"
+msgstr ""
+
+#: wpdm-all-downloads.php:54
+msgid "activate to sort column descending"
+msgstr ""
+
+#: wpdm-all-downloads.php:71
+msgid "Create Date"
+msgstr ""
+
+#: wpdm-all-downloads.php:112
+msgid "files"
+msgstr ""
+
+#: wpdm-all-downloads.php:112
+msgid "file"
+msgstr ""
+
+#: wpdm-all-downloads.php:114
+msgid "downloads"
+msgstr ""
+
+#: wpdm-all-downloads.php:114
+msgid "download"
+msgstr ""
+
+#: wpdm-be-member.php:19 wpdm-login-form.php:38
+msgid "Log In"
+msgstr ""
+
+#: wpdm-be-member.php:20
+msgid "Register"
+msgstr ""
+
+#: wpdm-be-member.php:41 wpdm-login-form.php:8
+msgid "You are already logged in."
+msgstr ""
+
+#: wpdm-be-member.php:41 wpdm-login-form.php:8
+msgid "Logout"
+msgstr ""
+
+#: wpdm-be-member.php:54 wpdm-login-form.php:20
+msgid "Login Failed!"
+msgstr ""
+
+#: wpdm-be-member.php:59 wpdm-login-form.php:25 wpdm-reg-form.php:23
+msgid "Username"
+msgstr ""
+
+#: wpdm-be-member.php:70 wpdm-login-form.php:36
+msgid "Remember Me"
+msgstr ""
+
+#: wpdm-be-member.php:77 wpdm-login-form.php:43
+msgid "Forgot Password?"
+msgstr ""
+
+#: wpdm-be-member.php:77 wpdm-login-form.php:43
+msgid "Request New Password."
+msgstr ""
+
+#: wpdm-core.php:230
+msgid "Settings Saved Successfully"
+msgstr ""
+
+#: wpdm-login-form.php:16
+msgid "LogIn"
+msgstr ""
+
+#: wpdm-reg-form.php:19
+msgid "Full Name"
+msgstr ""
+
+#: wpdm-reg-form.php:27
+msgid "E-mail"
+msgstr ""
+
+#: wpdm-reg-form.php:38
+msgid "Confirm Password"
+msgstr ""
+
+#: wpdm-reg-form.php:48
+msgid "Join Now!"
+msgstr ""
+
+#: wpdm-reg-form.php:72
+msgid "Registration is disabled!"
+msgstr ""
+
+#: wpdm-widgets.php:11
+msgid "WPDM Search"
+msgstr ""
+
+#: wpdm-widgets.php:12
+msgid "WordPress Download Manager Search Widget"
+msgstr ""
+
+#: wpdm-widgets.php:44 wpdm-widgets.php:140 wpdm-widgets.php:198
+#: wpdm-widgets.php:287
+msgid "Title:"
+msgstr ""
+
+#: wpdm-widgets.php:60
+msgid "WPDM Pro Affiliate"
+msgstr ""
+
+#: wpdm-widgets.php:61
+#, php-format
+msgid "Earn 20% from each sale referred by you"
+msgstr ""
+
+#: wpdm-widgets.php:92
+msgid "WPDM Affiliate ID:"
+msgstr ""
+
+#: wpdm-widgets.php:97
+msgid "Promo Text:"
+msgstr ""
+
+#: wpdm-widgets.php:202 wpdm-widgets.php:291
+msgid "Number of packages to show:"
+msgstr ""
+
+#: wpdm-widgets.php:206 wpdm-widgets.php:300
+msgid "Link Template:"
+msgstr ""

@@ -16,6 +16,10 @@ function buddyboss_media_content_all_media( $content ){
 		//this is the page that was set in admin to display all media content
 		//lets generate the html for all media content
 		
+		//Fix for MAX_JOIN_SIZE rows
+		global $wpdb;
+		$wpdb->query('SET SQL_BIG_SELECTS=1');
+		
 		//albums tab
 		if( ( $mediatype = get_query_var( 'mediatype' ) )=='albums' ){
 			$content .= buddyboss_media_buffer_template_part( 'global-media-albums', false );
@@ -187,3 +191,35 @@ add_filter( 'bp_get_template_part', 'buddyboss_media_load_activity_template', 10
 function buddyboss_media_register_template_stack(){
 	return buddyboss_media()->templates_dir;
 }
+
+/** Fix for Jetpack plugin **/
+function bbm_global_media_page_jetpack_fix() {
+
+	if ( buddyboss_media()->option( 'all-media-page' ) && is_page( buddyboss_media()->option( 'all-media-page' ) ) ) {
+		remove_filter( 'get_the_excerpt', 'wp_trim_excerpt' );
+	}
+}
+
+add_action( 'wp', 'bbm_global_media_page_jetpack_fix' );
+
+//Delete an activity if photo is deleted by admin
+function bb_delete_media_from_backend( $postid ) {
+
+	$deleted_post = get_post( $postid );
+	if ( $deleted_post->post_type == 'attachment' && $deleted_post->post_mime_type == 'image/jpeg' ) {
+		global $wpdb;
+		$sql = "SELECT activity_id FROM {$wpdb->prefix}buddyboss_media WHERE media_id = %d";
+		$sql = $wpdb->prepare( $sql, $postid );
+		$activity_id = $wpdb->get_var( $sql );
+		
+		$wpdb->delete( $wpdb->prefix . 'buddyboss_media', array( 'activity_id' => $activity_id ), array( '%d' ) );
+		
+		$is_multiple_upload = count( bp_activity_get_meta( $activity_id ,'buddyboss_media_aid' ,true) );
+		
+		if ( $is_multiple_upload == 1 ) {
+			bp_activity_delete( array( 'id' => $activity_id ) );
+		}
+	}
+}
+
+add_action( 'delete_post', 'bb_delete_media_from_backend' );

@@ -17,7 +17,7 @@ function buddyboss_media_update_album( $args='' ){
 		'description'	=> '',
 		'privacy'		=> 'public',
 		'user_id'		=> bp_loggedin_user_id(),
-		'date_created'	=> current_time('mysql'),
+		'date_created'	=> bp_core_current_time(),
 	);
 	
 	$args = wp_parse_args($args, $defaults);
@@ -193,6 +193,8 @@ function buddyboss_media_activity_add_album_id( $activity, $attachment_ids, $act
 		$existing_count += count( $attachment_ids );
 		
 		$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->prefix}buddyboss_media_albums SET total_items=%d WHERE id=%d", $existing_count, $album_id ) );
+		//Update buddyboss_media table
+		$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->prefix}buddyboss_media SET album_id=%d WHERE activity_id=%d", $album_id, $activity->id ) );
 	}
 }
 add_action( 'buddyboss_media_photo_posted', 'buddyboss_media_activity_add_album_id', 10, 3 );
@@ -558,14 +560,42 @@ function buddyboss_media_ajax_move_media(){
 			array( 
 				'total_items' => $items_count,
 			), 
-			array( 'id' => $new_album_id ), 
+			array( 'id' => $activity_id ), 
 			array( 
 				'%d'
 			), 
 			array( '%d' ) 
 		);
+		
+		//Update album id in buddyboss_media table
+		$wpdb->update(
+			$wpdb->prefix . 'buddyboss_media',
+			array( 
+				'album_id' => $new_album_id,
+			), 
+			array( 'activity_id' => $activity_id ), 
+			array( 
+				'%d'
+			), 
+			array( '%d' )
+		);
+		
 	} else {
 		bp_activity_delete_meta( $activity_id, 'buddyboss_media_album_id' );
+		
+		//Null album id in buddyboss_media table
+		$wpdb->update( 
+			$wpdb->prefix . 'buddyboss_media',
+			array( 
+				'album_id' => NULL,
+			), 
+			array( 'activity_id' => $activity_id ), 
+			array( 
+				'%d'
+			), 
+			array( '%d' )
+		);
+		
 	}
 	
 	$retval = array(

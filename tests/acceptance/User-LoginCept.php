@@ -1,20 +1,21 @@
 <?php 
 $I = new AcceptanceTester($scenario);
+$I->resizeWindow(1024, 1024);
 $I->wantTo('Check the user precondition works');
 $I->amOnPage('/');
 $I->see('Register','li');
-$I->see('Login','.button');
-$I->click("//a[@class='button' and text()='Login']");
+$I->see('Login','.login');
+$I->click("//a[@class='login' and text()='Login']");
 $I->seeCurrentUrlEquals('/wp/wp-login.php');
 $I->fillField('log','Founder_Counselor');
 $I->fillField('pwd','#caRousal.72');
 $I->click('Log In');
 $I->seeCurrentUrlEquals('/browse/founder_counselor/');
-$I->dontSee('Login','.button');
+$I->dontSee('Login','.login');
 $I->dontSee('Register','li');
-$I->moveMouseOver("//a[@title='My Account']");
-$I->see('Log Out','.ab-item');
-$I->click("//a[@class='ab-item' and text()='Log Out']");
+$I->moveMouseOver("//div[@class='header-account-login']");
+$I->see('Logout');
+$I->click('Logout', '.logout');
 $I->seeCurrentUrlEquals('/browse/founder_counselor/?loggedout=true');
 $I->see('Register','li');
-$I->see('Login','.button');
+$I->see('Login','.login');

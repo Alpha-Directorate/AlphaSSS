@@ -12,8 +12,8 @@
 			<?php if ( $ud->display_name ) : ?>
 
 				<tr id="wp_displayname">
-					<td class="label"><?php _e( 'Name', 'buddypress' ); ?>1</td>
-					<td class="data"><?php echo $ud->display_name; ?>1</td>
+					<td class="label"><?php _e( 'Name', 'buddypress' ); ?></td>
+					<td class="data"><?php echo $ud->display_name; ?></td>
 				</tr>
 
 			<?php endif; ?>

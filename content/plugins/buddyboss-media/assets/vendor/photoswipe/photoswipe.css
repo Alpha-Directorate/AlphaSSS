@@ -51,10 +51,10 @@ div.ps-zoom-pan-rotate *  { display: block; }
 
 
 /* Carousel */
-div.ps-carousel-item-loading
+/*div.ps-carousel-item-loading
 {
 	background: url(../img/loader.gif) no-repeat center center;
-}
+}*/
 
 div.ps-carousel-item-error
 {
