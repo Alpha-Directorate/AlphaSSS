@@ -28,14 +28,14 @@
 				<script type="text/javascript">
 					jQuery(document).ready(function($) {
 				
-						$("#about-count").text((140 - $('#group-desc').val().length) + " <?php _e('characters left'); ?>" )
+						$("#about-count").text((140 - $('#group-desc').val().length) + " <?php _e('characters left', 'alphasss'); ?>" )
 
 						$("#group-desc").keydown(function(){
-							$("#about-count").text((140 - $(this).val().length) + " <?php _e('characters left'); ?>" );
+							$("#about-count").text((140 - $(this).val().length) + " <?php _e('characters left', 'alphasss'); ?>" );
 						});
 
 						$("#group-desc").keyup(function(){
-							$("#about-count").text((140 - $(this).val().length) + " <?php _e('characters left'); ?>" );
+							$("#about-count").text((140 - $(this).val().length) + " <?php _e('characters left', 'alphasss'); ?>" );
 						});
 					});
 				</script>

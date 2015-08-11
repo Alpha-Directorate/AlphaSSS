@@ -127,7 +127,7 @@ class BuddyBoss_Media_Albums {
 			);
 
 			if ( defined( 'DOING_AJAX' ) && true === (bool) DOING_AJAX ) {
-				$base = remove_query_arg( 's', wp_get_referer() );
+				$base = esc_url(remove_query_arg( 's', wp_get_referer() ));
 			} else {
 				$base = '';
 			}
@@ -137,7 +137,7 @@ class BuddyBoss_Media_Albums {
 			}
 
 			$paginate_links_args = array(
-				'base'      => add_query_arg( $pag_args, $base ),
+				'base'      => esc_url(add_query_arg( $pag_args, $base )),
 				'format'    => '',
 				'total'     => ceil( (int) $this->total_album_count / (int) $this->pag_num ),
 				'current'   => $this->pag_page,
@@ -451,8 +451,13 @@ function buddyboss_media_album_photos_count(){
 	echo buddyboss_media_album_get_photos_count();
 }
 	function buddyboss_media_album_get_photos_count(){
-		global $buddyboss_media_albums_template;
-		return sprintf( __( '%s photos', 'buddyboss-media' ), $buddyboss_media_albums_template->album->total_items );
+		global $buddyboss_media_albums_template, $wpdb;
+		$sql = "SELECT COUNT(id) FROM {$wpdb->prefix}buddyboss_media WHERE album_id = %d";
+		$sql = $wpdb->prepare( $sql, $buddyboss_media_albums_template->album->id );
+		$photos_count = $wpdb->get_var($sql);
+		
+		return sprintf( _n( '%s photo', '%s photos', $photos_count, 'buddyboss-media' ), $photos_count );
+		
 	}
 	
 function buddyboss_media_album_privacy(){
@@ -502,8 +507,8 @@ function buddyboss_media_btn_delete_album( $album_id=false ){
 		return '';
 	
 	$albums_url = $bp->loggedin_user->domain . buddyboss_media_component_slug() . '/albums/';
-	$delete_album_url = add_query_arg( 'delete', $album_id, $albums_url );
-	$delete_album_url = add_query_arg( 'nonce', wp_create_nonce( 'bboss_media_delete_album' ), $delete_album_url );
+	$delete_album_url = esc_url(add_query_arg( 'delete', $album_id, $albums_url ));
+	$delete_album_url = esc_url(add_query_arg( 'nonce', wp_create_nonce( 'bboss_media_delete_album' ), $delete_album_url ));
 	
 	$confimation_message = __( 'Are you sure you want to delete this album? When you delete an album, all its photos go under global uploads.', 'buddyboss-media' );
 	

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2015-06-19 11:51-0800\n"
-"PO-Revision-Date: 2015-06-19 11:52-0800\n"
+"PO-Revision-Date: 2015-06-21 08:02-0800\n"
 "Last-Translator: Fractal Overflow <fractal-overflow@alphadirectorate.com>\n"
 "Language-Team: \n"
 "Language: en\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: ../alphasss-register.php:51 ../alphasss-register.php:246
 #: ../alphasss-register.php:330 ../alphasss-register.php:403
 msgid "Your Invitation Code"
-msgstr ""
+msgstr "Your Invitation Code"
 
 #: ../alphasss-register.php:52 ../alphasss-register.php:247
 msgid ""
@@ -89,6 +89,9 @@ msgid ""
 "little man. I will destroy you! But existing is basically all I do! So, how "
 "'bout them Knicks?"
 msgstr ""
+"Our club is <em>by-invitation-only</em>. So to join AlphaSSS, you must "
+"already have, or request, a new invitation code. Please note that the codes "
+"are short-lived – valid for only 24-hour time period."
 
 #: ../alphasss-register.php:335 ../alphasss-register.php:407
 msgid "Invitation Code:"
@@ -115,7 +118,7 @@ msgstr "Sign-up, the usual First Step..."
 
 #: ../alphasss-register.php:373
 msgid "Your Nickname:"
-msgstr ""
+msgstr "Your Nickname:"
 
 #: ../alphasss-register.php:374
 msgid ""
@@ -127,19 +130,24 @@ msgstr ""
 
 #: ../alphasss-register.php:379
 msgid "Password:"
-msgstr ""
+msgstr "Password:"
 
 #: ../alphasss-register.php:384
 msgid ""
 "Isn't it true that you have been paid for your testimony? Soothe us with "
 "sweet lies. Why would I want to know that?"
 msgstr ""
+"Your password must not be easy to guess! Do not reuse passwords. Your "
+"password is here to protect you. Store it safely, or remember it well."
 
 #: ../alphasss-register.php:390
 msgid ""
 "Hey, quess that you're accessories to. File not found. Oh Sure! Blame the "
 "wizards! We'll need to have a look inside you with this camera."
 msgstr ""
+"Our minimum age policy is 21+. Even though explicit nudity has no place "
+"here, this site is intended for mature audiences only. By checking this box, "
+"you agree and certify that you are 21 years of age or older."
 
 #: ../alphasss-register.php:395
 msgid "Confirmation &amp; Dire Warning!"

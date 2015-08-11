@@ -1,5 +1,7 @@
 <?php namespace AlphaSSS\Helpers;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 use AlphaSSS\Helpers\Encryption;
 
 class EmailAddressEncryption {
@@ -21,7 +23,7 @@ class EmailAddressEncryption {
 	 * @param string $user_email User email
 	 * @return string
 	 */
-	public function encode($user_email)
+	public static function encode($user_email)
 	{
 		return ( new Encryption )->encode( $user_email ) . '@alphasss.com';
 	}

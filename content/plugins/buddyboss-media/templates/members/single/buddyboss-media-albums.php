@@ -14,7 +14,7 @@
 	if( bp_is_my_profile() ){
 		global $bp;
 		$create_album_url = $bp->displayed_user->domain . buddyboss_media_component_slug() . '/albums/';
-		$create_album_url = add_query_arg( 'album', 'new', $create_album_url );
+		$create_album_url = esc_url(add_query_arg( 'album', 'new', $create_album_url ));
 		?>
 		<a href="<?php echo esc_url( $create_album_url );?>" class="button album-create bp-title-button">
 			<?php _e( 'Create an Album', 'buddyboss-media' );?>

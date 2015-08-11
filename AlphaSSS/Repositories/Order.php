@@ -1,5 +1,7 @@
 <?php namespace AlphaSSS\Repositories;
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 use AlphaSSS\Helpers\Arr;
 use \Bitpay\Invoice;
 

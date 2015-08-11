@@ -103,6 +103,10 @@ class BuddyBoss_Media_Photo_Hooks
 		$attachment_ids = array();
 		foreach( $_POST['pics_uploaded'] as $uploaded_pic ){
 			$attachment_ids[] = (int)$uploaded_pic['attachment_id'];
+			
+			//Update buddyboss_media table
+			bbm_update_media_table( (int)$uploaded_pic['attachment_id'], $uploaded_pic['name'], $activity->id );
+			
 		}
 
       $action_key = buddyboss_media_compat( 'activity.action_key' );
@@ -110,8 +114,8 @@ class BuddyBoss_Media_Photo_Hooks
 
       bp_activity_update_meta( $activity->id, $action_key, $action );
       bp_activity_update_meta( $activity->id, $item_key, $attachment_ids );
-
-      // Execute our after save action
+	  
+		// Execute our after save action
       do_action( 'buddyboss_media_photo_posted', $activity, $attachment_ids, $action );
 
       // Prevent BuddyPress from sending notifications, we'll send our own
@@ -170,9 +174,9 @@ class BuddyBoss_Media_Photo_Hooks
   {
     global $buddyboss_media_img_size, $activities_template;
 
-    $curr_id = $activities_template->current_activity;
+    $curr_id = isset( $activities_template->current_activity ) ? $activities_template->current_activity : '';
 
-    $act_id = (int)$activities_template->activities[$curr_id]->id;
+    $act_id =  isset( $activities_template->activities[$curr_id]->id ) && !empty( $activities_template->activities[$curr_id]->id ) ? (int)$activities_template->activities[$curr_id]->id : '';
 
     // This is manual for now
     $type    = 'photo'; // photo/video/audio/file/doc/pdf/etc
@@ -240,14 +244,21 @@ class BuddyBoss_Media_Photo_Hooks
 					$full = wp_get_attachment_image_src( $media_id, 'full' );
 
 					$width_markup = $w > 0 ? ' width="'.$w.'"' : '';
-
+					$comment_count = bp_activity_get_comment_count();
+					$favorite_count = bp_activity_get_meta( $act_id, 'favorite_count' );
+					if ( $this->bbm_get_media_is_favorite() ) {
+						$data_fav = 'bbm-unfav';
+					} else {
+						$data_fav = 'bbm-fav';
+					}
+					
 					if ( $full !== false && is_array( $full ) && count( $full ) > 2 ){
 						$owner = ($activities_template->activities[$curr_id]->user_id == get_current_user_id())?'1':'0';
 						$content .= '<a class="buddyboss-media-photo-wrap" href="'.$full[0].'">';
-						$content .= '<img data-permalink="'. bp_get_activity_thread_permalink() .'" class="buddyboss-media-photo" src="'.$src.'"'.$width_markup.' ' . $alt . ' data-media="'.$act_id.'" data-owner="'.$owner.'"/></a>';
+						$content .= '<img data-permalink="'. bp_get_activity_thread_permalink() .'" data-photo-id="'.$media_id.'" class="buddyboss-media-photo" src="'.$src.'"'.$width_markup.' ' . $alt . ' data-comment-count="'.$comment_count.'" data-favorite-count="'.$favorite_count.'" data-bbmfav="'.$data_fav.'" data-media="'.$act_id.'" data-owner="'.$owner.'"/></a>';
 					}
 					else {
-						$content .= '<img data-permalink="'. bp_get_activity_thread_permalink() .'" data-media="'.$act_id.'" data-owner="'.$owner.'" class="buddyboss-media-photo" src="'.$src.'"'.$width_markup.' ' . $alt .' />';
+						$content .= '<img data-permalink="'. bp_get_activity_thread_permalink() .'" data-photo-id="'.$media_id.'" data-comment-count="'.$comment_count.'" data-favorite-count="'.$favorite_count.'" data-bbmfav="'.$data_fav.'" data-media="'.$act_id.'" data-owner="'.$owner.'" class="buddyboss-media-photo" src="'.$src.'"'.$width_markup.' ' . $alt .' />';
 					}
 				}
 			}
@@ -262,7 +273,9 @@ class BuddyBoss_Media_Photo_Hooks
 			 * 4 phtos - all thumbnails
 			 * > 4 photos - 4 thumbnails only. rest are hidden, they can see those in photoswipe
 			 */
-            
+            $media_ids[0] = isset($media_ids[0]) ? $media_ids[0] : '';
+            $media_ids[1] = isset($media_ids[1]) ? $media_ids[1] : '';
+
             $image1 = wp_get_attachment_image_src( $media_ids[0], 'full' );
             $w1 = $image1[1];
             $h1 = $image1[2]; 
@@ -310,20 +323,28 @@ class BuddyBoss_Media_Photo_Hooks
 					$h = $image[2];
 
 					$full = wp_get_attachment_image_src( $media_id, 'full' );
+					$comment_count = bp_activity_get_comment_count();
+					$favorite_count = bp_activity_get_meta( $act_id, 'favorite_count' );
                     
                     $width_markup = '';
                     $height_markup = '';
 					
 					//hide more than 4 images
 					$maybe_display_none = $img_counter > 3 ? ' style="display:none"' : '';
-
+					
+					if ( $this->bbm_get_media_is_favorite() ) {
+						$data_fav = 'bbm-unfav';
+					} else {
+						$data_fav = 'bbm-fav';
+					}
+					
 					if ( $full !== false && is_array( $full ) && count( $full ) > 2 ){
 						$owner = ($activities_template->activities[$curr_id]->user_id == get_current_user_id())?'1':'0';
 						$all_imgs_html .= '<a class="buddyboss-media-photo-wrap size-' . $filenames[$img_counter] . '" '.$height_markup.'  href="'.$full[0].'" ' . $maybe_display_none . '>';
-						$all_imgs_html .= '<img data-permalink="'. bp_get_activity_thread_permalink() .'" class="buddyboss-media-photo" src="'.$src.'"'.$width_markup.' ' . $alt . ' data-media="'.$act_id.'" data-owner="'.$owner.'"/></a>';
+						$all_imgs_html .= '<img data-photo-id="'.$media_id.'" data-permalink="'. bp_get_activity_thread_permalink() .'" class="buddyboss-media-photo" src="'.$src.'"'.$width_markup.' ' . $alt . ' data-comment-count="'.$comment_count.'" data-favorite-count="'.$favorite_count.'" data-bbmfav="'.$data_fav.'" data-media="'.$act_id.'" data-owner="'.$owner.'"/></a>';
 					}
 					else {
-						$all_imgs_html .= '<img ' . $maybe_display_none . ' data-permalink="'. bp_get_activity_thread_permalink() .'" data-media="'.$act_id.'" data-owner="'.$owner.'" class="buddyboss-media-photo size-' . $filesizes[$img_counter] . '" src="'.$src.'"'.$width_markup.' ' . $alt .' />';
+						$all_imgs_html .= '<img ' . $maybe_display_none . ' data-photo-id="'.$media_id.'" data-permalink="'. bp_get_activity_thread_permalink() .'" data-comment-count="'.$comment_count.'" data-favorite-count="'.$favorite_count.'" data-bbmfav="'.$data_fav.'" data-media="'.$act_id.'" data-owner="'.$owner.'" class="buddyboss-media-photo size-' . $filesizes[$img_counter] . '" src="'.$src.'"'.$width_markup.' ' . $alt .' />';
 					}
 				}
 				$img_counter++;
@@ -361,9 +382,9 @@ class BuddyBoss_Media_Photo_Hooks
   }
 
   public function bp_get_member_latest_update( $update )
-  {
+  {  
     global $members_template;
-
+	
     if ( !bp_is_active( 'activity' ) || empty( $members_template->member->latest_update ) || !$update = maybe_unserialize( $members_template->member->latest_update ) )
       return false;
 
@@ -394,11 +415,19 @@ class BuddyBoss_Media_Photo_Hooks
         }
       }
 
-      return apply_filters( 'buddyboss_media_activity_action', $content );
+		return apply_filters( 'buddyboss_media_activity_action', $content );
     }
 
     return $update['content'];
   }
+
+  //Checking if media is favorite
+	private function bbm_get_media_is_favorite() {
+		global $activities_template;
+
+		return apply_filters( 'bbm_get_media_is_favorite', in_array( $activities_template->activity->id, ( array ) $activities_template->my_favs ) );
+	}
+  
 }
 
 // AJAX update picture

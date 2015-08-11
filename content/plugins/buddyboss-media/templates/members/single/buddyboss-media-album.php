@@ -17,7 +17,7 @@
 				if( bp_is_my_profile() ){
 					global $bp;
 					$edit_album_url = $bp->displayed_user->domain . buddyboss_media_component_slug() . '/albums/';
-					$edit_album_url = add_query_arg( 'album', buddyboss_media_album_get_id(), $edit_album_url );
+					$edit_album_url = esc_url(add_query_arg( 'album', buddyboss_media_album_get_id(), $edit_album_url ));
 					?>
 					<a href="<?php echo esc_url( $edit_album_url );?>" class="button album-edit bp-title-button">
 						<?php _e( 'Edit Album', 'buddyboss-media' );?>

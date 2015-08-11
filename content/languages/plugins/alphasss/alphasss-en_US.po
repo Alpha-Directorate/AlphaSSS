@@ -1,0 +1,590 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: alphasss\n"
+"POT-Creation-Date: 2015-06-30 16:23+0300\n"
+"PO-Revision-Date: 2015-06-30 16:23+0300\n"
+"Last-Translator: Fractal Overflow <fractal-overflow@alphadirectorate.com>\n"
+"Language-Team: AlphaSSS Team\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_x\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ../../../plugins/alphasss-credits\n"
+"X-Poedit-SearchPath-1: ../../../plugins/alphasss-register\n"
+"X-Poedit-SearchPath-2: ../../../plugins/alphasss-group\n"
+"X-Poedit-SearchPath-3: ../../../plugins/alphasss-invitation\n"
+"X-Poedit-SearchPath-4: ../../../plugins/alphasss-login\n"
+"X-Poedit-SearchPath-5: ../../../plugins/alphasss-members\n"
+"X-Poedit-SearchPath-6: ../../../plugins/alphasss-profile\n"
+"X-Poedit-SearchPath-7: ../../../plugins/alphasss-top-bar\n"
+"X-Poedit-SearchPath-8: ../../../plugins/alphasss-top-navigation\n"
+"X-Poedit-SearchPath-9: ../../../plugins/alphasss-gf-finances\n"
+
+#: ../../../plugins/alphasss-credits/alphasss-credits.php:56
+#, php-format
+msgid "Purchase %.2f Credits ($%.2f USD)"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:53
+#: ../../../plugins/alphasss-register/alphasss-register.php:248
+msgid "The Late Philip J. Fry"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:54
+#: ../../../plugins/alphasss-register/alphasss-register.php:249
+#: ../../../plugins/alphasss-register/alphasss-register.php:333
+#: ../../../plugins/alphasss-register/alphasss-register.php:406
+msgid "Your Invitation Code"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:55
+#: ../../../plugins/alphasss-register/alphasss-register.php:250
+msgid ""
+"My fellow Earthicans, as I have explained in my book \"Earth in Balance\", "
+"and the much more popular \"Harry Potter and the Balance of Earth\" we need "
+"to defend our planet against pollution. Also <a href=\"/browse/\">request a "
+"new code</a>"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:56
+#: ../../../plugins/alphasss-register/alphasss-register.php:251
+msgid "Request Invitation Code"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:122
+#: ../../../plugins/alphasss-profile/alphasss-profile.php:37
+#: ../../../plugins/alphasss-profile/alphasss-profile.php:75
+msgid ""
+"You may use only the following characters: letters (a-z), numbers (0-9), "
+"dashes (-), underscores (_), apostrophes ('), and periods (.). Try again "
+"please."
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:129
+#: ../../../plugins/alphasss-profile/alphasss-profile.php:55
+#: ../../../plugins/alphasss-profile/alphasss-profile.php:92
+msgid "This nickname is already taken. Please choose another one."
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:134
+#: ../../../plugins/alphasss-profile/alphasss-profile.php:97
+msgid "Please choose your nickname."
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:153
+msgid "This email already in use. Please pick another one."
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:159
+msgid "Please enter the valid email address."
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:165
+msgid "Please enter your email."
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:182
+msgid "The 2 passwords do not match. Please try again."
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:188
+msgid "Your password must be strong. It's for your own protection."
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:193
+msgid "Please choose your password."
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:202
+msgid "Please confirm if you are at least 21-years of age?"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:285
+msgid "Please contact admin"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:334
+msgid ""
+"I meant 'physically'. Look, perhaps you could let me work for a little food? "
+"I could clean the floors or paint a fence, or service you sexually? Hello, "
+"little man. I will destroy you! But existing is basically all I do! So, how "
+"'bout them Knicks?"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:338
+#: ../../../plugins/alphasss-register/alphasss-register.php:410
+msgid "Invitation Code:"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:348
+msgid "Don't have any invitation code? Then ask the members."
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:349
+msgid ""
+"Get the code from one of the members currently online. Who said that? Sure "
+"you <a href=\"/browse/\">members online</a>! Ummm...to eBay? Stop! Don't "
+"shoot fire stick in space canoe! Cause explosive decompression!"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:357
+#: ../../../plugins/alphasss-register/alphasss-register.php:434
+msgid "Finish"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:371
+msgid "The Usual First Step"
+msgstr "Sign-up, the usual First Step..."
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:376
+msgid "Your Nickname:"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:377
+msgid ""
+"The key to victory is discipline, and that means a well made bad. You will "
+"practice until you can make your bed in your sleep."
+msgstr ""
+"Do not use any part of your first/last name or reuse any previously used "
+"nicknames or handles. Never imply or suggest your true identity."
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:382
+msgid "Password:"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:387
+msgid ""
+"Isn't it true that you have been paid for your testimony? Soothe us with "
+"sweet lies. Why would I want to know that?"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:393
+msgid ""
+"Hey, quess that you're accessories to. File not found. Oh Sure! Blame the "
+"wizards! We'll need to have a look inside you with this camera."
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:398
+msgid "Confirmation &amp; Dire Warning!"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:402
+msgid ""
+"I daresay that Fry has discovered the smelliest object is the known "
+"universe! Throw her in brig. Also Zoidberg. Oh God, what I have done! Just "
+"once I'd like to eat dinner with a celebrity whi isn't bound and gagged. "
+"Daylight and everything."
+msgstr ""
+"Privacy and anonymity are fundamental to us. And so, we ask you to provide "
+"us only with minimum amount of information. Your true identity should never "
+"be known1 (TODO) to us – this is our most salient rule."
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:420
+msgid "Don't have any invitation code?"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:421
+msgid "Who said that? SURE you can die! You want to die?!"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:428
+msgid "Your Email Address:"
+msgstr ""
+
+#: ../../../plugins/alphasss-register/alphasss-register.php:429
+msgid ""
+"We need rest. The spirit is willing, but the flesh is spongy and bruised. Oh "
+"sure! Blame the wizards! Ummm...to eBay? Leela, Bender, we're going grave "
+"robbing."
+msgstr ""
+"Please use an anonymous email service (e.g. Gmail, Hotmail, etc.) Ideally, "
+"it's best to create a brand new, separate email account. And to be clear: We "
+"never sell or give away your email to anybody. Never."
+
+#: ../../../plugins/alphasss-group/alphasss-group.php:62
+msgid "Groups"
+msgstr ""
+
+#: ../../../plugins/alphasss-group/alphasss-group.php:63
+msgid "No Pending Invites"
+msgstr ""
+
+#: ../../../plugins/alphasss-group/alphasss-group.php:66
+#, php-format
+msgid "Groups <span class=\"count\">%s</span>"
+msgstr ""
+
+#: ../../../plugins/alphasss-group/alphasss-group.php:67
+#, php-format
+msgid "Pending Invites <span class=\"count\">%s</span>"
+msgstr ""
+
+#: ../../../plugins/alphasss-group/alphasss-group.php:74
+msgid "Memberships"
+msgstr ""
+
+#: ../../../plugins/alphasss-group/alphasss-group.php:90
+msgid "Group Created"
+msgstr ""
+
+#: ../../../plugins/alphasss-group/alphasss-group.php:109
+#, php-format
+msgid "%s's Group"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/alphasss-invitation.php:50
+#: ../../../plugins/alphasss-members/alphasss-members.php:38
+#: ../../../plugins/alphasss-gf-finances/alphasss-gf-finances.php:47
+#, php-format
+msgid "Couldn't load main class at:<br/>%s"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/alphasss-invitation.php:62
+#: ../../../plugins/alphasss-members/alphasss-members.php:50
+#: ../../../plugins/alphasss-gf-finances/alphasss-gf-finances.php:59
+#, php-format
+msgid "<h1>Fatal error:</h1><hr/><pre>%s</pre>"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/includes/admin.php:69
+#: ../../../plugins/alphasss-members/includes/admin.php:69
+msgid "General Settings"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/includes/admin.php:71
+msgid "Time to expire"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/includes/admin.php:72
+msgid "Guessing attempts limit"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/includes/admin.php:85
+msgid "Setup limit guessing attempts to submit valid invitation code"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/includes/admin.php:98
+msgid "Setup time to live of invitation code"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/includes/admin.php:106
+#: ../../../plugins/alphasss-invitation/includes/admin.php:125
+msgid "Alphasss Invitation"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/includes/admin.php:144
+#: ../../../plugins/alphasss-members/includes/admin.php:154
+msgid "Some dummy text here"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/includes/main-class.php:206
+msgid ""
+"This code is older than 24 hours, and is no longer valid. Simply request a "
+"new invitation code."
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/includes/main-class.php:211
+msgid ""
+"This is not a valid invitation code. If you don't have one, just ask for it."
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/includes/invitation-class.php:18
+msgid "Invitation"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/includes/invitation-class.php:58
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:115
+msgid "Invitations"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/includes/invitation-class.php:68
+msgid "Invite Someone"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:5
+msgid "Space Pilot 3000"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:7
+msgid ""
+"I've got to find a way to escape the horrible ravages of youth. Suddenly, "
+"I'm going to the bathroom like clockwork, every three hours. And those jerks "
+"at Social Security stopped sending me checks. Now I have to pay them! "
+"Please, Don-Bot... look into your hard drive, and open your mercy file!"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:10
+msgid "Here's the invitation code that you can use:"
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:14
+msgid "The code is valid for 24 hours since the time it was generated."
+msgstr ""
+
+#: ../../../plugins/alphasss-invitation/templates/members/single/alphasss-invitation-index.php:18
+msgid "Generate Invitation Code"
+msgstr ""
+
+#: ../../../plugins/alphasss-login/alphasss-login.php:40
+msgid ""
+"Your account isn't active. Please click the link in your email to confirm it."
+msgstr ""
+
+#: ../../../plugins/alphasss-members/alphasss-members.php:104
+#: ../../../plugins/alphasss-members/alphasss-members.php:105
+msgid "Request Invitation"
+msgstr ""
+
+#: ../../../plugins/alphasss-members/alphasss-members.php:132
+#, php-format
+msgid ""
+"Okay! Great, we have sent your request to %s.<br />In a couple of seconds, "
+"we will display your code in this window, right here."
+msgstr ""
+
+#: ../../../plugins/alphasss-members/alphasss-members.php:133
+msgid "Request sent"
+msgstr ""
+
+#: ../../../plugins/alphasss-members/alphasss-members.php:134
+#, php-format
+msgid ""
+"Sorry but the member %s went offline just a moment ago. Here's what you can "
+"do:<br /><p>&nbsp;&nbsp;1. The fastest: Request invitation from anybody who "
+"is online. You'll your code within seconds.</p><p>&nbsp;&nbsp;2. Post your "
+"invitation request in the general forum. Someone will read it and send you "
+"invitation.</p>"
+msgstr ""
+
+#: ../../../plugins/alphasss-members/alphasss-members.php:135
+#, php-format
+msgid ""
+"Your registration is not quite finished yet. To complete it, go to <a href="
+"\"%s\">registration</a> page. Morbo will now introduce tonight's "
+"candidates... PUNY HUMAN NUMBER ONE, PUNY HUMAN NUMBER TWO, and Morbo's good "
+"friend, Richard Nixon. <a href=\"/browse/\">Browse</a>. Would you censor the "
+"Venus de Venus just because you can see her spewers? Yeah, lots of people "
+"did. Soon enough."
+msgstr ""
+
+#: ../../../plugins/alphasss-members/alphasss-members.php:136
+msgid ""
+"Bendless Love<br /> Bender, we're trying our best. You wouldn't. Ask anyway! "
+"I saw you with those two ''ladies of the evening'' at Elzars. Explain that."
+msgstr ""
+
+#: ../../../plugins/alphasss-members/alphasss-members.php:137
+#, php-format
+msgid ""
+"%s has sent you and invitation code:<br />%s<br />Write it down, and use it "
+"to <a href=\"%s\">register now</a>. The code will expire in 24 hours."
+msgstr ""
+
+#: ../../../plugins/alphasss-members/includes/admin.php:71
+msgid "Publish key"
+msgstr ""
+
+#: ../../../plugins/alphasss-members/includes/admin.php:72
+msgid "Subscribe key"
+msgstr ""
+
+#: ../../../plugins/alphasss-members/includes/admin.php:73
+msgid "Channel prefix"
+msgstr ""
+
+#: ../../../plugins/alphasss-members/includes/admin.php:84
+msgid "Add publish key"
+msgstr ""
+
+#: ../../../plugins/alphasss-members/includes/admin.php:96
+msgid "Add subscribe key"
+msgstr ""
+
+#: ../../../plugins/alphasss-members/includes/admin.php:107
+msgid "Add channel prefix"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:66
+msgid "Profile"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:75
+#: ../../../plugins/alphasss-top-navigation/alphasss-top-navigation.php:18
+msgid "Register"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:84
+msgid "Log Out"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:99
+msgid "Buy Credits"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:124
+#: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:21
+#: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:81
+msgid "Financials"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:131
+#: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:91
+msgid "Accounting"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:138
+#: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:100
+msgid "Time Value"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-bar/alphasss-top-bar.php:145
+#: ../../../plugins/alphasss-gf-finances/includes/gf-finances-class.php:109
+msgid "Levels"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-navigation/alphasss-top-navigation.php:17
+msgid "Blog"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-navigation/alphasss-top-navigation.php:19
+msgid "Home"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-navigation/alphasss-top-navigation.php:20
+msgid "Browse"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-navigation/alphasss-top-navigation.php:21
+msgid "Forum"
+msgstr ""
+
+#: ../../../plugins/alphasss-top-navigation/alphasss-top-navigation.php:29
+msgid "Login"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:7
+msgid "Date"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:8
+msgid "Transaction Description"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:9
+msgid "Income"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:9
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:10
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:11
+msgid "(Credits)"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:10
+msgid "Withdrawal"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-accounting.php:11
+msgid "Ending Ballance"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-time-value.php:6
+msgid "Check to Edit"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-time-value.php:7
+msgid "Session Time"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-time-value.php:8
+msgid "Session Value"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-time-value.php:15
+#, php-format
+msgid "%d min"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss_gf_finances_activity_text.php:3
+msgid ""
+"Congratulations! You are now at the highest level <b>10</b>, and your "
+"earnings share is <b>100%</b>, and AlphaSSS makes no commission. Read more "
+"about <a href='#'>levels</a>."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:3
+msgid "The Deep South"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:5
+msgid ""
+"No! The cat shelter's on to me. Shinier than yours, meatbag. I'll get my "
+"kit! Kids don't turn rotten just from watching TV."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:7
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:11
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:15
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:19
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:23
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:27
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:31
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:35
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:39
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:43
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:47
+#, php-format
+msgid "Level %d"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:9
+msgid "Now Fry, it's been a few years since medical school, so remind me."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:13
+msgid "Disemboweling in your species: fatal or non-fatal?"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:17
+msgid "And those jerks at Social Security stopped sending me checks."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:21
+msgid ""
+"You'll have all the Slurm you can drink when you're partying with Slurms "
+"McKenzie!"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:25
+msgid "Robot 1-X, save my friends! And Zoidberg!"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:29
+msgid "As an interesting side note, as a head without a body, I envy the dead."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:33
+msgid ""
+"Well I'da done better, but it's plum hard pleading a case while awaiting "
+"trial for that there incompetence."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:37
+msgid "Leela, are you alright? You got wanged on the head."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:41
+msgid "I'll get my kit! Stop it, stop it. It's fine. I will 'destroy' you!"
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:45
+msgid "Who am I making this out to? File not found. It must be wonderful."
+msgstr ""
+
+#: ../../../plugins/alphasss-gf-finances/templates/members/single/alphasss-gf-finances-levels.php:49
+msgid "We live long and are celebrated poopers."
+msgstr ""

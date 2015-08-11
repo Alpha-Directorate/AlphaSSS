@@ -35,6 +35,7 @@ class BuddyBoss_Media_Plugin
 		'media-pagination',
 		'media-template',
 		'media-bp-notifications',
+		'bbm-migrate',
 
 		// Types
 		'types/photo-class',
@@ -106,6 +107,13 @@ class BuddyBoss_Media_Plugin
 	 * @var array
 	 */
 	public $options = array();
+	
+	/**
+	 * Whether the plugin is activated network wide.
+	 * 
+	 * @var boolean 
+	 */
+	public $network_activated = false;
 
 	/**
 	 * Is BuddyPress installed and activated?
@@ -167,6 +175,9 @@ class BuddyBoss_Media_Plugin
 	 * @var array
 	 */
 	private $data;
+	
+	private $is_bbwall_activated = false,
+			$is_bbwall_network_activated = false;
 
 	/* Singleton
 	 * ===================================================================
@@ -308,10 +319,12 @@ class BuddyBoss_Media_Plugin
 	 */
 	private function setup_globals()
 	{
+		$this->network_activated = $this->is_network_activated();
+		
 		// DEFAULT CONFIGURATION OPTIONS
 		$default_options = $this->default_options;
-
-		$saved_options = get_option( 'buddyboss_media_plugin_options' );
+		
+		$saved_options = $this->network_activated ?  get_site_option( 'buddyboss_media_plugin_options' ) : get_option( 'buddyboss_media_plugin_options' );
 		$saved_options = maybe_unserialize( $saved_options );
 
 		$this->options = wp_parse_args( $saved_options, $default_options );
@@ -371,6 +384,27 @@ class BuddyBoss_Media_Plugin
 	}
 
 	/**
+		 * Check if the plugin is activated network wide(in multisite)
+		 * 
+		 * @since 1.1.0
+		 * @access private
+		 * 
+		 * @return boolean
+		 */
+		private function is_network_activated(){
+			$network_activated = false;
+			if ( is_multisite() ) {
+				if ( ! function_exists( 'is_plugin_active_for_network' ) )
+					require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+
+				if( is_plugin_active_for_network( 'bb-buddyboss-media/buddyboss-media.php' ) ){
+					$network_activated = true;
+				}
+			}
+			return $network_activated;
+		}
+	
+	/**
 	 * Set up the default hooks and actions.
 	 *
 	 * @since BuddyBoss Media (1.0.0)
@@ -391,18 +425,27 @@ class BuddyBoss_Media_Plugin
 		// 	return;
 
 		// Admin
-		if ( ( is_admin() || is_network_admin() ) && current_user_can( 'manage_options' ) )
-		{
-			$this->load_admin();
-		}
+        add_action( 'init', array( $this, 'setup_admin_settings' ) );
 
 		if ( ! $this->is_enabled() )
 			return;
-
+		
 		// Hook into BuddyPress init
+		add_action( 'bp_init',	array( $this, 'setup_actions' ) );
 		add_action( 'bp_loaded',	array( $this, 'bp_loaded' ) );
-		add_action( 'init',			array( $this, 'add_rewrite_rules' ) );
+		
+		add_action( 'bp_before_activity_entry', array( $this, 'bbm_activity_privacy_override' ) );
+		
+		add_action( 'init',	array( $this, 'add_rewrite_rules' ) );
+		add_action( 'wp_head', array( $this, 'bbm_fav_icon_style' ) );
 	}
+
+    public function setup_admin_settings(){
+        if ( ( is_admin() || is_network_admin() ) && current_user_can( 'manage_options' ) )
+        {
+            $this->load_admin();
+        }
+    }
 
 	/**
 	 * Load plugin text domain
@@ -470,12 +513,8 @@ class BuddyBoss_Media_Plugin
 		if( $prev_db_version != BUDDYBOSS_MEDIA_PLUGIN_DB_VERSION ){
 			//databse update is required 
 			$network_wide = false;
-			if ( is_multisite() ) {
-				if ( ! function_exists( 'is_plugin_active_for_network' ) )
-					require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-				
-				if( is_plugin_active_for_network( 'buddyboss-media/buddyboss-media.php' ) )
-					$network_wide = true;
+			if ( $this->is_network_activated() ) { 
+				$network_wide = true;
 			}
 			
 			buddyboss_media_setup_db_tables( $network_wide );
@@ -746,7 +785,7 @@ class BuddyBoss_Media_Plugin
     ?>
     <div class="updated">
 	    <p><?php _e( 'To use the <strong>BuddyBoss Media</strong> plugin, please manually update your BuddyBoss theme to version 4.0 or above first. <a href="http://www.buddyboss.com/upgrading-to-buddyboss-4-0/">Read how &rarr;</a>', 'buddyboss-media' ); ?></p>
-			<p class="submit"><a href="<?php echo add_query_arg('disable_media_legacy_notice', 'true', admin_url('options-general.php?page=buddyboss-media/includes/admin.php') ); ?>" class="button-primary"><?php _e( 'Disable Notice', 'buddyboss-media' ); ?></a></p>
+			<p class="submit"><a href="<?php echo esc_url(add_query_arg('disable_media_legacy_notice', 'true', admin_url('options-general.php?page=buddyboss-media/includes/admin.php') )); ?>" class="button-primary"><?php _e( 'Disable Notice', 'buddyboss-media' ); ?></a></p>
     </div>
     <?php
 	}
@@ -777,7 +816,70 @@ class BuddyBoss_Media_Plugin
 			echo "<div class='error'><p>{$notice}</p></div>";
 		}
 	}
-}
+	
+	//Change Styling of fav icon in photo overlay if BB Wall Plugin is active
+	public function bbm_fav_icon_style() {
+		if ( ! function_exists( 'is_plugin_active' ) )
+			require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+
+		$this->is_bbwall_activated = is_plugin_active( 'buddyboss-wall/buddyboss-wall.php' );
+
+		if ( is_multisite() ) {
+			if ( is_plugin_active_for_network( 'buddyboss-wall/buddyboss-wall.php' ) ) {
+				$this->is_bbwall_network_activated = true;
+			}
+		}
+
+		if ( ! $this->is_bbwall_activated && ! $this->is_bbwall_network_activated ) {
+			//looks like BB wall plugin is not active,
+				return;
+		}
+
+		//Load the css
+		?><style> div.ps-toolbar-favorite div.ps-toolbar-content:before { content: "\f087"; } div.ps-toolbar .ps-toolbar-favorite.bbm-unfav div.ps-toolbar-content:before { content: "\f164"; } </style><?php
+
+	}
+	
+	//Override activity privacy of activity with album privacy
+	public function bbm_activity_privacy_override() {
+		
+			if ( ! function_exists( 'is_plugin_active' ) )
+				require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+
+			$this->is_bbwall_activated = is_plugin_active( 'buddyboss-wall/buddyboss-wall.php' );
+
+			if ( is_multisite() ) {
+				if ( is_plugin_active_for_network( 'buddyboss-wall/buddyboss-wall.php' ) ) {
+					$this->is_bbwall_network_activated = true;
+				}
+			}
+			if ( ! $this->is_bbwall_activated && ! $this->is_bbwall_network_activated ) {
+				//looks like BB wall plugin is not active,
+				return;
+			}
+
+			global $wpdb;
+			$activity_id = bp_get_activity_id();
+			$album_id = ( int ) bp_activity_get_meta( $activity_id, 'buddyboss_media_album_id', true );
+
+			if ( '0' == $album_id ) {
+				return;
+			}
+			//Hidding privacy button for album activities
+			?><style>#activity-<?php echo $activity_id; ?> a.buddyboss_privacy_filter { display: none !important; }</style><?php
+			
+			$privacy = $wpdb->get_var( $wpdb->prepare( "SELECT privacy FROM {$wpdb->prefix}buddyboss_media_albums WHERE id=%d", $album_id ) );
+
+			if ( 'private' == $privacy ) {
+				bp_activity_update_meta( $activity_id, 'bbwall-activity-privacy', 'onlyme' );
+			} elseif ( 'members' == $privacy ) {
+				bp_activity_update_meta( $activity_id, 'bbwall-activity-privacy', 'loggedin' );
+			} else {
+				bp_activity_update_meta( $activity_id, 'bbwall-activity-privacy', $privacy );
+			}
+		}
+
+	}
 // End class BuddyBoss_Media_Plugin
 
 endif;

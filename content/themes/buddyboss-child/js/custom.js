@@ -13,4 +13,6 @@ jQuery(document).ready(function($) {
 	// Reposition when a modal is shown
 	$('.modal').on('show.bs.modal', reposition);
 	$('[data-toggle="tooltip"]').tooltip();
+
+	$('.entry-header').prepend('<div id="profile-alerts"></div>');
 });
