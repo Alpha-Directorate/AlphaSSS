@@ -120,6 +120,18 @@
                                 unset($notifications[0]);
                                 ?>
 
+                                <?php if ( current_user_can('generate_invitation_code') ):?>
+
+                                    <div class="header-notifications">
+                                        <a class="notification-link" id="credits-icon" href="#"></a>
+
+                                        <div class="pop">
+                                            <a href="<?php echo str_replace( '/wp', '',  site_url( '/purchase-credits/', \AlphaSSS\HTTP\HTTP::protocol() ) );?>"><?php echo __('Buy Credits', 'alphasss');?></a>
+                                        </div>
+                                    </div>
+
+                                <?php endif;?>
+
                                 <!-- Notification -->
                                 <div class="header-notifications">
                                     <a class="notification-link fa fa-bell" href="<?php if($link) { echo $link->href; } ?>">
@@ -136,18 +148,6 @@
                                     ?>
                                     </div>
                                 </div>
-
-                                <?php if ( current_user_can('generate_invitation_code') ):?>
-
-                                    <div class="header-notifications">
-                                        <a class="notification-link fa fa-money" id="credits-icon" href="#"></a>
-
-                                        <div class="pop">
-                                            <a href="<?php echo str_replace( '/wp', '',  site_url( '/purchase-credits/', \AlphaSSS\HTTP\HTTP::protocol() ) );?>"><?php echo __('Buy Credits', 'alphasss');?></a>
-                                        </div>
-                                    </div>
-
-                                <?php endif;?>
             
                                 <?php 
                                 } 
