@@ -357,3 +357,11 @@ You're the boss, so have fun editing!
 #time-value-table a{
     cursor: pointer;
 }
+
+#credits-icon {
+    display: inline-block;
+    background-image: url("../images/icons/coin.png");
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+}
