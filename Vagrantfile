@@ -41,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
 
-  config.vm.synced_folder ".", "/var/www/alphasss.dev/", owner: "www-data", mount_options: [ "dmode=775", "fmode=774" ]
+  config.vm.synced_folder ".", "/var/www/alphasss.dev/", nfs: true
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -65,7 +65,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision "shell", path: "vagrant/ubuntu-packages-update.sh"
   config.vm.provision "shell", path: "vagrant/lemp.sh"
-  config.vm.provision "shell", path: "vagrant/phantomjs.sh"
   config.vm.provision "shell", path: "vagrant/wordpress.sh"
 
   # Enable provisioning with CFEngine. CFEngine Community packages are

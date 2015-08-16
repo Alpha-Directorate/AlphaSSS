@@ -1,12 +1,13 @@
 <?php 
 
 $I = new AcceptanceTester($scenario);
+$I->resizeWindow(1024, 1024);
 $I->wantTo('Check register Main flow first step');
 $I->amOnPage('/');
 $I->see('Register','li');
-$I->click("//a[text()='Register']");
+$I->click("#menu-item-107 a");
 $I->seeCurrentUrlEquals('/register/');
-$I->see('The Usual First Step');
+$I->see('Sign-up, the usual First Step...');
 $I->see('Your Nickname', 'label');
 $I->seeElement('input', ['id' => 'input_4_3']);
 $I->see('Your Email Address', 'label');
@@ -14,13 +15,13 @@ $I->seeElement('input', ['id' => 'input_4_22']);
 $I->seeElement('input', ['id' => 'choice_4_8_1']);
 $I->seeElement('input', ['value' => 'Next']);
 
-$username = md5(time());
+$username = substr(md5(time()), 0, 7);
 $password = md5('password');
 
 $I->fillField('#input_4_3',$username);
 $I->fillField('#input_4_4', $password);
 $I->fillField('#input_4_4_2', $password);
-$I->fillField('#input_4_22', md5(time()) . '@yahoo.com');
+$I->fillField('#input_4_22', $username . '@yahoo.com');
 $I->checkOption('#choice_4_8_1');
 $I->click("//input[@id='gform_next_button_4_9']");
 $I->see('Your Invitation Code','h1');

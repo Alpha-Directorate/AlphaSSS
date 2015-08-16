@@ -10,7 +10,7 @@ INSTALLATION
 2. Search for 'BuddyPress'
 3. Activate BuddyPress from your Plugins page
 
--BuddyBoss Wall-
+-BuddyBoss Media-
 
 1. Go to 'Plugins > Add New'
 2. Click 'Add New'
@@ -29,6 +29,9 @@ CHANGELOG
 ----------------------------------------------------------------
 Version 3
 ----------------------------------------------------------------
+3.0.5 - August 2, 2015
+3.0.4 - May 18, 2015
+3.0.3 - April 21, 2015
 3.0.2 - March 31, 2015
 3.0.1 - March 28, 2015
 3.0.0 - March 25, 2015
@@ -67,6 +70,122 @@ Version 1
 Version 3
 --------------------------------------------------------------*/
 /*--------------------------------------------------------------
+3.0.5 - August 2, 2015
+--------------------------------------------------------------*/
+
+FEATURES:
+
+	Updated Swedish translations, credits to Anton Andreasson
+
+BUG FIXES:
+
+	Fixed incorrect album photo counts
+	Fixed deleted photos displaying in Global Album activity post layout
+	Fixed issue with image sometimes not displaying after upload
+	Fixed database migration when using multisite
+	Fixed PHP error notices
+
+CHANGED FILES:
+
+	buddyboss-media.php
+	/includes/albums/album-template.php
+	/includes/bbm-migrate.php
+	/includes/main-class.php
+	/includes/media-template.php
+	/includes/types/photo-class.php
+	/includes/types/photo-hooks.php
+	/languages/buddyboss-media-en_US.po
+	/languages/buddyboss-media-en_US.mo
+	/languages/buddyboss-media-sv_SE.po
+	/languages/buddyboss-media-sv_SE.mo
+	readme.txt
+
+/*--------------------------------------------------------------
+3.0.4 - May 18, 2015
+--------------------------------------------------------------*/
+
+FEATURES:
+
+	Added "Like" (Favorite) icon to photo overlay
+	Added French translations, credits to Jean-Pierre Michaud
+
+BUG FIXES:
+
+	Improved CSS for bulk uploading
+	Better theme comptability when tagging friends
+	Fixed compatibility issues with Jetpack plugin
+	Fixed Wall Photo privacy overriding Album privacy
+	Fixed issues when deleting single image from a bulk upload
+	Fixed image counts in albums (requires migration script)
+	Fixed album creation timestamp
+	Removed incorrect admin update notice in multisite
+	"Max. Files per Batch" option now only accepts positive values
+	Security patch for XSS vulnerability
+
+CHANGED FILES:
+
+	/assets/css/buddyboss-media.css
+	/assets/css/buddyboss-media.min.css
+	/assets/js/buddyboss-media.js
+	/assets/js/buddyboss-media.min.js
+	/assets/vendor/photoswipe/photoswipe.css
+	buddyboss-media.php
+	/includes/admin.php
+	/includes/albums/album-functions.php
+	/includes/albums/album-template.php
+	/includes/bbm-migrate.php (added)
+	/includes/main-class.php
+	/includes/media-functions.php
+	/includes/media-template.php
+	/includes/tagging/class.BuddyBoss_Media_Tagging_Hooks.php
+	/includes/types/photo-class.php
+	/includes/types/photo-hooks.php
+	/languages/buddyboss-media-en_US.po
+	/languages/buddyboss-media-en_US.mo
+	/languages/buddyboss-media-fr_FR.po
+	/languages/buddyboss-media-fr_FR.mo
+	readme.txt
+	/templates/members/single/buddyboss-media-album.php
+	/templates/members/single/buddyboss-media-albums.php
+
+TESTED WITH:
+
+	WordPress 4.0, 4.1+
+	BuddyPress 2.1, 2.2+
+
+/*--------------------------------------------------------------
+3.0.3 - April 21, 2015
+--------------------------------------------------------------*/
+
+FEATURES:
+
+	Added comment count in photo overlay
+
+BUG FIXES:
+
+	Better support for Multisite activation
+
+CHANGED FILES:
+
+	/assets/css/buddyboss-media.css
+	/assets/css/buddyboss-media.min.css
+	/assets/js/buddyboss-media.js
+	/assets/js/buddyboss-media.min.js
+	buddyboss-media.php
+	/includes/admin.php
+	/includes/main-class.php
+	/languages/buddyboss-media-en_US.po
+	/languages/buddyboss-media-en_US.mo
+	/types/photo-class.php
+	/types/photo-hooks.php
+	readme.txt
+
+TESTED WITH:
+
+	WordPress 4.0, 4.1+
+	BuddyPress 2.1, 2.2+
+
+/*--------------------------------------------------------------
 3.0.2 - March 31, 2015
 --------------------------------------------------------------*/
 
@@ -90,6 +209,7 @@ TESTED WITH:
 
 	WordPress 4.1+
 	BuddyPress 2.1, 2.2+
+
 /*--------------------------------------------------------------
 3.0.1 - March 28, 2015
 --------------------------------------------------------------*/

@@ -6,7 +6,13 @@
  * Author:      AlphaSSS
  * Author URI:  http://alphasss.com
  * Version:     0.0.1
+ * Text Domain: alphasss
  */
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
 
 add_filter( 'login_redirect', function($redirect_to, $request, $user){
 
@@ -31,7 +37,7 @@ add_filter('wp_authenticate_user', function($user) {
 	$activation_link = $wpdb->get_row(sprintf("SELECT * FROM `wp_dmec` WHERE `user_login` = '%s'", $user->data->user_login), ARRAY_A);
 
 	return $activation_link != NULL
-		? new WP_Error('account_not_confirmed',__('Your account isn\'t active. Please click the link in your email to confirm it.'))
+		? new WP_Error('account_not_confirmed',__('Your account isn\'t active. Please click the link in your email to confirm it.', 'alphasss'))
 		: $user;
 
 }, 10, 2);

@@ -1,5 +1,6 @@
 <?php 
 $I = new AcceptanceTester($scenario);
+$I->resizeWindow(1024, 1024);
 $I->wantTo('Test validation of username');
 $I->amOnPage('/');
 $I->see('Register','li');
@@ -27,7 +28,6 @@ $I->see('Please enter the valid email address.');
 $I->fillField('#input_4_22','admin@alphasss.com');
 $I->click("//input[@id='gform_next_button_4_9']");
 $I->see('This email already in use. Please pick another one.');
-
 
 // Password validation
 $I->fillField('#input_4_4','awe3');

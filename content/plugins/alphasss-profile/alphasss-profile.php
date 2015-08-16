@@ -6,7 +6,13 @@
  * Author:      AlphaSSS
  * Author URI:  http://alphasss.com
  * Version:     0.0.1
+ * Text Domain: alphasss
  */
+
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
 
 add_action( 'plugins_loaded', function(){
 	add_action('xprofile_data_after_save', function($field){
@@ -28,7 +34,7 @@ add_action( 'plugins_loaded', function(){
 				if ( ! preg_match( '/^[a-z0-9\'_.-]+$/i', $field->value ) ) {
 
 					$field->field_id = 0;
-					bp_core_add_message(__("You may use only the following characters: letters (a-z), numbers (0-9), dashes (-), underscores (_), apostrophes ('), and periods (.). Try again please.", 'alpha-hooks'), 'error');
+					bp_core_add_message(__("You may use only the following characters: letters (a-z), numbers (0-9), dashes (-), underscores (_), apostrophes ('), and periods (.). Try again please.", 'alphasss'), 'error');
 				}
 
 				$display_name = bp_get_profile_field_data( [
@@ -46,7 +52,7 @@ add_action( 'plugins_loaded', function(){
 					if ( username_exists( $field->value ) ) {
 
 						$field->field_id = 0;
-						bp_core_add_message(__('This nickname is already taken. Please choose another one.', 'alpha-hooks'), 'error');
+						bp_core_add_message(__('This nickname is already taken. Please choose another one.', 'alphasss'), 'error');
 					}
 				}
 			break;
@@ -66,7 +72,7 @@ add_action( 'plugins_loaded', function(){
 			$dispaly_name = $_POST['display_name'];
 
 			if ( ! preg_match( '/^[a-z0-9\'_.-]+$/i', $dispaly_name ) ) {
-				$data['error'] = __("You may use only the following characters: letters (a-z), numbers (0-9), dashes (-), underscores (_), apostrophes ('), and periods (.). Try again please.", 'alpha-hooks');
+				$data['error'] = __("You may use only the following characters: letters (a-z), numbers (0-9), dashes (-), underscores (_), apostrophes ('), and periods (.). Try again please.", 'alphasss');
 			}
 
 			$exists_display_name = bp_get_profile_field_data( [
@@ -83,12 +89,12 @@ add_action( 'plugins_loaded', function(){
 				// User exists? Show validation error
 				if ( username_exists( $dispaly_name ) ) {
 
-					$data['error'] = __('This nickname is already taken. Please choose another one.', 'alpha-hooks');
+					$data['error'] = __('This nickname is already taken. Please choose another one.', 'alphasss');
 				}
 			}
 
 			if (! trim($dispaly_name)) {
-				$data['error'] = __('Please choose your nickname.', 'alpha-hooks');
+				$data['error'] = __('Please choose your nickname.', 'alphasss');
 			}
 		}
 

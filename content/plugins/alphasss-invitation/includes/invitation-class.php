@@ -15,7 +15,7 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 		{
 			parent::start(
 				'invitation',
-				__( 'Invitation' , 'alphasss-invitation' ),
+				__( 'Invitation' , 'alphasss' ),
 				dirname( __FILE__ )
 			);
 		}
@@ -55,19 +55,19 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 			$profile_link = $bp->loggedin_user->domain . $bp->activity->slug . '/';
 
 			bp_core_new_nav_item( array(
-				'name'                => __( 'Invitations', 'alphasss-invitation' ),
+				'name'                => __( 'Invitations', 'alphasss' ),
 				'slug'                => 'invitations',
 				'position'            => 100,
 				'screen_function'     => 'alphasss_invitation_screen_grid',
-				'default_subnav_slug' => 'my-invitations'
+				'default_subnav_slug' => 'invite-someone'
 			) );
 
 			$alphasss_invitation_link = $bp->displayed_user->domain . $this->slug . '/';
 
 			bp_core_new_subnav_item( array(
-				'name'            => __( 'Invitations', 'alphasss-invitation' ),
-				'slug'            => 'invitations',
-				'parent_slug'     => $this->slug,
+				'name'            => __( 'Invite Someone', 'alphasss' ),
+				'slug'            => 'invite-someone',
+				'parent_slug'     => 'invitations',
 				'parent_url'      => $alphasss_invitation_link,
 				'screen_function' => 'alphasss_invitation_screen_grid',
 				'position'        => 10
@@ -75,26 +75,6 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 		}
 
 		public function setup_admin_bar( $wp_admin_nav = array() ) {
-			if (is_user_logged_in()) {
-				global $bp;
-
-				$wp_admin_nav[] = array(
-					'parent'   => buddypress()->my_account_menu_id,
-					'id'       => 'my-account-invitations',
-					'title'    => __( 'Invitations', 'alphasss-invitation' ),
-					'href'     =>  $bp->loggedin_user->domain . $this->slug . 's/',
-					'position' => 100
-				);
-
-				// Personal/Wall
-				$wp_admin_nav[] = array(
-					'parent' => 'my-account-invitations',
-					'id'     => 'my-account-invitation-list',
-					'title'  => __( 'List', 'alphasss-invitation' ),
-					'href'   => $bp->loggedin_user->domain . $this->slug . 's/',
-				);
-			}
-
 			parent::setup_admin_bar($wp_admin_nav);
 		}
 	}
