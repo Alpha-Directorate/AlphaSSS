@@ -4,9 +4,9 @@
 	<table class="table" id="time-value-table" cellspacing="1">             
 		<thead>
 			<tr> 
-				<th class="header text-center"><?php _e('Check to Edit', 'alphasss');?></th> 
-				<th class="header text-center"><?php _e('Session Time', 'alphasss');?></th> 
-				<th class="header text-center"><?php _e('Session Value', 'alphasss');?></th> 
+				<th class="header text-center"><?php _e('Check to Edit', 'alphasss-gf-finances');?></th> 
+				<th class="header text-center"><?php _e('Session Time', 'alphasss-gf-finances');?></th> 
+				<th class="header text-center"><?php _e('Session Value', 'alphasss-gf-finances');?></th> 
 			</tr>
 		</thead> 
 		<tbody>
@@ -34,8 +34,8 @@
 			if ( ! data.data.is_gf_time_values){
 
 				$('#profile-alerts').prepend(dangerAlert(
-					"<p>" + "<?php _e('Session Values not configured...', 'alphasss');?>" + "</p><br />" + 
-					"<p>" + "<?php _e('You currently do not have any talk session values defined. Therefore, you cannot start audio-video. But you can change this in the table below.', 'alphasss');?>" + "</p>", true));
+					"<p>" + "<?php _e('Session Values not configured...', 'alphasss-gf-finances');?>" + "</p><br />" + 
+					"<p>" + "<?php _e('You currently do not have any talk session values defined. Therefore, you cannot start audio-video. But you can change this in the table below.', 'alphasss-gf-finances');?>" + "</p>", true));
 			}
 		}, 'json');
 

@@ -38,7 +38,7 @@ add_action( 'plugins_loaded', function(){
 		$main_include = ALPHASSS_MEMBERS_PLUGIN_DIR  . 'includes/main-class.php';
 
 		if ( ! file_exists( $main_include ) ) {
-			$msg = sprintf( __( "Couldn't load main class at:<br/>%s", 'alphasss' ), $main_include );
+			$msg = sprintf( __( "Couldn't load main class at:<br/>%s", 'alphasss-members' ), $main_include );
 			throw new Exception( $msg, 404 );
 		}
 
@@ -50,7 +50,7 @@ add_action( 'plugins_loaded', function(){
 
 	} catch (Exception $e) {
 
-		$msg = sprintf( __( "<h1>Fatal error:</h1><hr/><pre>%s</pre>", 'alphasss' ), $e->getMessage() );
+		$msg = sprintf( __( "<h1>Fatal error:</h1><hr/><pre>%s</pre>", 'alphasss-members' ), $e->getMessage() );
     	echo $msg;
 	}
 
@@ -80,8 +80,8 @@ add_action( 'plugins_loaded', function(){
 					'must_be_logged_in' => true,
 					'block_self'        => false,
 					'link_href'         => wp_nonce_url( bp_get_group_permalink( $group ) . 'request-session', 'groups_request_session' ),
-					'link_text'         => __( 'Request Session', 'alphasss' ),
-					'link_title'        => __( 'Request Session', 'alphasss' ),
+					'link_text'         => __( 'Request Session', 'alphasss-members' ),
+					'link_title'        => __( 'Request Session', 'alphasss-members' ),
 					'link_class'        => 'group-button request-session',
 				) );
 			} );
@@ -118,8 +118,8 @@ add_action( 'plugins_loaded', function(){
 					'must_be_logged_in' => false,
 					'block_self'        => false,
 					'link_href'         => wp_nonce_url( bp_get_group_permalink( $group ) . 'request-invitation', 'groups_request_membership' ),
-					'link_text'         => __( 'Request Invitation', 'alphasss' ),
-					'link_title'        => __( 'Request Invitation', 'alphasss' ),
+					'link_text'         => __( 'Request Invitation', 'alphasss-members' ),
+					'link_title'        => __( 'Request Invitation', 'alphasss-members' ),
 					'link_class'        => 'group-button request-invitation',
 				) );
 			} );
@@ -153,12 +153,12 @@ add_action( 'plugins_loaded', function(){
 	);
 
 	$params['i18n'] = array(
-		'RequestSent'            => sprintf(__('Okay! Great, we have sent your request to %s.<br />In a couple of seconds, we will display your code in this window, right here.', 'alphasss'), $params['nickname']),
-		'RequestSentShort'       => __('Request sent', 'alphasss'),
-		'UserLeaveAlphass'       => __('Sorry but the member %s went offline just a moment ago. Here\'s what you can do:<br /><p>&nbsp;&nbsp;1. The fastest: Request invitation from anybody who is online. You\'ll your code within seconds.</p><p>&nbsp;&nbsp;2. Post your invitation request in the general forum. Someone will read it and send you invitation.</p>', 'alphasss'),
-		'TopAlert'               => sprintf(__('Your registration is not quite finished yet. To complete it, go to <a href="%s">registration</a> page. Morbo will now introduce tonight\'s candidates... PUNY HUMAN NUMBER ONE, PUNY HUMAN NUMBER TWO, and Morbo\'s good friend, Richard Nixon. <a href="/browse/">Browse</a>. Would you censor the Venus de Venus just because you can see her spewers? Yeah, lots of people did. Soon enough.', 'alphasss'), get_pre_member_register_uri()),
-		'ConnectionError'        => __('Bendless Love<br /> Bender, we\'re trying our best. You wouldn\'t. Ask anyway! I saw you with those two \'\'ladies of the evening\'\' at Elzars. Explain that.','alphasss'),
-		'InvitationCodeGetAlert' => sprintf(__('%s has sent you and invitation code:<br />%s<br />Write it down, and use it to <a href="%s">register now</a>. The code will expire in 24 hours.', 'alphasss'), '%s','%s', get_pre_member_register_url())
+		'RequestSent'            => sprintf(__('Okay! Great, we have sent your request to %s.<br />In a couple of seconds, we will display your code in this window, right here.', 'alphasss-members'), $params['nickname']),
+		'RequestSentShort'       => __('Request sent', 'alphasss-members'),
+		'UserLeaveAlphass'       => __('Sorry but the member %s went offline just a moment ago. Here\'s what you can do:<br /><p>&nbsp;&nbsp;1. The fastest: Request invitation from anybody who is online. You\'ll your code within seconds.</p><p>&nbsp;&nbsp;2. Post your invitation request in the general forum. Someone will read it and send you invitation.</p>', 'alphasss-members'),
+		'TopAlert'               => sprintf(__('Your registration is not quite finished yet. To complete it, go to <a href="%s">registration</a> page. Morbo will now introduce tonight\'s candidates... PUNY HUMAN NUMBER ONE, PUNY HUMAN NUMBER TWO, and Morbo\'s good friend, Richard Nixon. <a href="/browse/">Browse</a>. Would you censor the Venus de Venus just because you can see her spewers? Yeah, lots of people did. Soon enough.', 'alphasss-members'), get_pre_member_register_uri()),
+		'ConnectionError'        => __('Bendless Love<br /> Bender, we\'re trying our best. You wouldn\'t. Ask anyway! I saw you with those two \'\'ladies of the evening\'\' at Elzars. Explain that.','alphasss-members'),
+		'InvitationCodeGetAlert' => sprintf(__('%s has sent you and invitation code:<br />%s<br />Write it down, and use it to <a href="%s">register now</a>. The code will expire in 24 hours.', 'alphasss-members'), '%s','%s', get_pre_member_register_url())
 	);
 
 	wp_localize_script( 'alphasss-members-base', 'php_vars', $params );
@@ -185,7 +185,7 @@ add_filter ('plugin_action_links', function($links, $file) {
 
 	if ($file == plugin_basename (__FILE__)) {
 
-		$settings_link = '<a href="' . add_query_arg( array( 'page' => 'alphasss-members/includes/admin.php'   ), admin_url( 'options-general.php' ) ) . '">' . esc_html__( 'Settings', 'alphasss' ) . '</a>';
+		$settings_link = '<a href="' . add_query_arg( array( 'page' => 'alphasss-members/includes/admin.php'   ), admin_url( 'options-general.php' ) ) . '">' . esc_html__( 'Settings', 'alphasss-members' ) . '</a>';
 
 		array_unshift ($links, $settings_link);
 	}

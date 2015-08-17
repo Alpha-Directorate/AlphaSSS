@@ -4,11 +4,11 @@
 		<table class="tablesorter table-striped" cellspacing="1">             
 			<thead>
 				<tr> 
-					<th><?php _e('Date', 'alphasss');?></th> 
-					<th><?php _e('Transaction Description', 'alphasss');?></th> 
-					<th><div><?php _e('Income', 'alphasss');?></div><div class="text-center"><small><?php _e('(Credits)');?></small></div></th> 
-					<th><div><?php _e('Withdrawal', 'alphasss');?></div><div class="text-center"><small><?php _e('(Credits)');?></small><div></th> 
-					<th><div><?php _e('Ending Ballance', 'alphasss');?></div><div class="text-center"><small><?php _e('(Credits)');?></small><div></th> 
+					<th><?php _e('Date', 'alphasss-gf-finances');?></th> 
+					<th><?php _e('Transaction Description', 'alphasss-gf-finances');?></th> 
+					<th><div><?php _e('Income', 'alphasss-gf-finances');?></div><div class="text-center"><small><?php _e('(Credits)');?></small></div></th> 
+					<th><div><?php _e('Withdrawal', 'alphasss-gf-finances');?></div><div class="text-center"><small><?php _e('(Credits)');?></small><div></th> 
+					<th><div><?php _e('Ending Ballance', 'alphasss-gf-finances');?></div><div class="text-center"><small><?php _e('(Credits)');?></small><div></th> 
 				</tr>
 			</thead> 
 			<tbody>
@@ -47,3 +47,4 @@
 		}); 
 	</script>
 
+152 028.11

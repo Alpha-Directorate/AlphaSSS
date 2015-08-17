@@ -15,7 +15,7 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 		{
 			parent::start(
 				'invitation',
-				__( 'Invitation' , 'alphasss' ),
+				__( 'Invitation' , 'alphasss-invitation' ),
 				dirname( __FILE__ )
 			);
 		}
@@ -55,7 +55,7 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 			$profile_link = $bp->loggedin_user->domain . $bp->activity->slug . '/';
 
 			bp_core_new_nav_item( array(
-				'name'                => __( 'Invitations', 'alphasss' ),
+				'name'                => __( 'Invitations', 'alphasss-invitation' ),
 				'slug'                => 'invitations',
 				'position'            => 100,
 				'screen_function'     => 'alphasss_invitation_screen_grid',
@@ -65,7 +65,7 @@ if ( ! class_exists( 'Alphasss_Invitation_BP_Component' ) ):
 			$alphasss_invitation_link = $bp->displayed_user->domain . $this->slug . '/';
 
 			bp_core_new_subnav_item( array(
-				'name'            => __( 'Invite Someone', 'alphasss' ),
+				'name'            => __( 'Invite Someone', 'alphasss-invitation' ),
 				'slug'            => 'invite-someone',
 				'parent_slug'     => 'invitations',
 				'parent_url'      => $alphasss_invitation_link,
