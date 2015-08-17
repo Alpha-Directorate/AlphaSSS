@@ -6,7 +6,7 @@
  * Author:      AlphaSSS
  * Author URI:  http://alphasss.com
  * Version:     0.0.1
- * Text Domain: alphasss
+ * Text Domain: alphasss-credits
  */
 
 // Exit if accessed directly
@@ -20,7 +20,7 @@ use AlphaSSS\Helpers\EmailAddressEncryption;
 
 add_action( 'bp_loaded', function(){
 
-	load_textdomain( 'alphasss', plugin_dir_path( __FILE__ ) . '/languages/alphasss-credits-' . get_locale() . '.mo' );
+	load_textdomain( 'alphasss-credits', plugin_dir_path( __FILE__ ) . '/languages/alphasss-credits-' . get_locale() . '.mo' );
 
 	if ( HTTP::isPost() AND $credits_amount = Arr::get( $_POST, 'credits-amount' ) ) {
 
