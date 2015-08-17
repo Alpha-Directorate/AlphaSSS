@@ -17,7 +17,7 @@ use \AlphaSSS\Helpers\Arr;
 use Carbon\Carbon;
 
 
-load_textdomain( 'alphasss', plugin_dir_path( __FILE__ ) . '/languages/alphasss-gf-finances-' . get_locale() . '.mo' );
+load_textdomain( 'alphasss-gf-finances', plugin_dir_path( __FILE__ ) . '/languages/alphasss-gf-finances-' . get_locale() . '.mo' );
 
 // Directory
 if ( ! defined( 'ALPHASSS_GF_FINANCES_PLUGIN_DIR' ) ) {

@@ -6,7 +6,7 @@
  * Author:      AlphaSSS
  * Author URI:  http://alphasss.com
  * Version:     0.0.1
- * Text Domain: alphasss
+ * Text Domain: alphasss-group
  */
 
 // Exit if accessed directly
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 use AlphaSSS\Repositories\User;
 use AlphaSSS\Helpers\Arr;
 
-load_textdomain( 'alphasss', plugin_dir_path( __FILE__ ) . '/languages/alphasss-group-' . get_locale() . '.mo' );
+load_textdomain( 'alphasss-group', plugin_dir_path( __FILE__ ) . '/languages/alphasss-group-' . get_locale() . '.mo' );
 
 add_action( 'plugins_loaded', function(){
 
