@@ -5,7 +5,7 @@ Plugin URI:
 Description: All filter and action hooks used for members register
 Author: Fractal Overflow
 Author URI:
-Text Domain: alphasss
+Text Domain: alphasss-register
 */
 
 // Exit if accessed directly

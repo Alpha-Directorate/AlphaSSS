@@ -6,7 +6,7 @@
  * Author:      AlphaSSS
  * Author URI:  http://alphasss.com
  * Version:     0.0.1
- * Text Domain: alphasss
+ * Text Domain: alphasss-members
  */
 
  // Exit if accessed directly

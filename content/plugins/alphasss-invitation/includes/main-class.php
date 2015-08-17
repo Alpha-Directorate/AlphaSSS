@@ -203,12 +203,12 @@ if ( ! class_exists( 'Alphasss_Invitation_Plugin' ) ):
 
 				if ( Carbon::now()->timestamp > Carbon::parse($record['expired_date'])->timestamp ){
 					$result['is_success'] = false;
-					$result['message']    = __('This code is older than 24 hours, and is no longer valid. Simply request a new invitation code.', 'alphasss');
+					$result['message']    = __('This code is older than 24 hours, and is no longer valid. Simply request a new invitation code.', 'alphasss-invitation');
 				}
 
 			} else {
 				$result['is_success'] = false;
-				$result['message']    = __('This is not a valid invitation code. If you don\'t have one, just ask for it.', 'alphasss');
+				$result['message']    = __('This is not a valid invitation code. If you don\'t have one, just ask for it.', 'alphasss-invitation');
 			}
 
 			return $result;
@@ -309,7 +309,7 @@ if ( ! class_exists( 'Alphasss_Invitation_Plugin' ) ):
 			$this->plugin_url = ALPHASSS_INVITATION_PLUGIN_URL;
 
 			// Languages
-			$this->lang_dir = dirname( $this->basename ) . '/languages/';
+			$this->lang_dir = ALPHASSS_INVITATION_PLUGIN_DIR . '/languages/';
 
 			// Includes
 			$this->includes_dir = $this->plugin_dir . 'includes';
@@ -345,7 +345,7 @@ if ( ! class_exists( 'Alphasss_Invitation_Plugin' ) ):
 		 * Method setup right localization
 		 */
 		private function setup_textdomain() {
-			load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
+			load_textdomain( 'alphasss-invitation', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
 		}
 
 		private function __construct() {}
