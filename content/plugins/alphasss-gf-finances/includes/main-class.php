@@ -179,7 +179,7 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_Plugin' ) ):
 		 * Method setup right localization
 		 */
 		private function setup_textdomain() {
-			load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
+			load_textdomain( 'alphasss', ALPHASSS_GF_FINANCES_PLUGIN_DIR . '/language/alphasss-gf-finances-' . get_locale() . '.mo' );
 		}
 
 		private function __construct() {}
