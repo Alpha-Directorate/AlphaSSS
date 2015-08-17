@@ -13,8 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 use AlphaSSS\Repositories\User as UserRepository;
 use AlphaSSS\Helpers\EmailAddressEncryption;
-
-load_textdomain( 'alphasss-register', plugin_dir_path( __FILE__ ) . '/languages/alphasss-register-' . get_locale() . '.mo' );
+load_textdomain( 'alphasss-register', plugin_dir_path( __FILE__ ) . 'languages/alphasss-register-' . get_locale() . '.mo' );
 
 // Require helper functions
 require_once( 'includes/alphasss-register-functions.php' );
