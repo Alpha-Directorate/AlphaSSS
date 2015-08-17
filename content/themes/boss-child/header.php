@@ -126,7 +126,7 @@
                                         <a class="notification-link" id="credits-icon" href="#"></a>
 
                                         <div class="pop">
-                                            <a href="<?php echo str_replace( '/wp', '',  site_url( '/purchase-credits/', \AlphaSSS\HTTP\HTTP::protocol() ) );?>"><?php echo __('Buy Credits', 'alphasss');?></a>
+                                            <a href="<?php echo str_replace( '/wp', '',  site_url( '/purchase-credits/', \AlphaSSS\HTTP\HTTP::protocol() ) );?>"><?php echo __('Buy Credits', 'boss');?></a>
                                         </div>
                                     </div>
 

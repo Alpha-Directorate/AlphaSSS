@@ -43,7 +43,7 @@ Template Name: Purchase Credits
 
 			<h1 class="entry-title"><?php _e('Pay with BitPay'); ?></h1>
 			<br />
-			<p id="credit-balance"><?php printf( __( 'Your current balance is %d credits' ), get_user_meta( get_current_user_id( ), 'credit_balance', true ) ); ?></p>
+			<p id="credit-balance"><?php printf( __( 'Your current balance is %d credits', 'boss' ), get_user_meta( get_current_user_id( ), 'credit_balance', true ) ); ?></p>
 
 			<?php $order = \AlphaSSS\Repositories\Order::getLastUserOrder( get_current_user_id( ) );?>
 
@@ -53,9 +53,9 @@ Template Name: Purchase Credits
 
 	<div id="secondary" class="widget-area secondary-custom-right" role="complementary">
 		<div class="information-box">
-			<h3><?php _e("The Day The Earth Stood Stoopid"); ?></h3>
+			<h3><?php _e("The Day The Earth Stood Stoopid", 'boss'); ?></h3>
 			<p>
-				<?php _e("Of all the friends I've had… you're the first. Dear God, they'll be killed on our doorstep! And there's no trash pickup until January 3rd. Goodbye, friends. I never thought I'd die like this. But I always really hoped. Yeah. Give a little credit to our public schools. You'll have all the Slurm you can drink when you're partying with Slurms McKenzie");?>
+				<?php _e("Of all the friends I've had… you're the first. Dear God, they'll be killed on our doorstep! And there's no trash pickup until January 3rd. Goodbye, friends. I never thought I'd die like this. But I always really hoped. Yeah. Give a little credit to our public schools. You'll have all the Slurm you can drink when you're partying with Slurms McKenzie", 'boss');?>
 			</p>
 		</div>
 	</div>

@@ -6,6 +6,7 @@
  * Author:      AlphaSSS
  * Author URI:  http://alphasss.com
  * Version:     0.0.1
+ * Text Domain: alphasss-invitation
  */
  
  // Exit if accessed directly
@@ -47,7 +48,7 @@ add_action( 'plugins_loaded', function(){
 		$main_include = ALPHASSS_INVITATION_PLUGIN_DIR  . 'includes/main-class.php';
 
 		if ( ! file_exists( $main_include ) ) {
-			$msg = sprintf( __( "Couldn't load main class at:<br/>%s", 'alphasss' ), $main_include );
+			$msg = sprintf( __( "Couldn't load main class at:<br/>%s", 'alphasss-invitation' ), $main_include );
 			throw new Exception( $msg, 404 );
 		}
 
@@ -59,7 +60,7 @@ add_action( 'plugins_loaded', function(){
 
 	} catch (Exception $e) {
 
-		$msg = sprintf( __( "<h1>Fatal error:</h1><hr/><pre>%s</pre>", 'alphasss' ), $e->getMessage() );
+		$msg = sprintf( __( "<h1>Fatal error:</h1><hr/><pre>%s</pre>", 'alphasss-invitation' ), $e->getMessage() );
     	echo $msg;
 	}
 
@@ -83,7 +84,7 @@ function alphasss_invitation()
 add_filter ('plugin_action_links', function($links, $file) {
 
 	if ($file == plugin_basename (__FILE__)) {
-		$settings_link = '<a href="' . add_query_arg( array( 'page' => 'alphasss-invitation/includes/admin.php'   ), admin_url( 'options-general.php' ) ) . '">' . esc_html__( 'Settings', 'alphasss' ) . '</a>';
+		$settings_link = '<a href="' . add_query_arg( array( 'page' => 'alphasss-invitation/includes/admin.php'   ), admin_url( 'options-general.php' ) ) . '">' . esc_html__( 'Settings', 'alphasss-invitation' ) . '</a>';
 
 		array_unshift ($links, $settings_link);
 	}

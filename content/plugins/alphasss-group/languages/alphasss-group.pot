@@ -1,0 +1,96 @@
+# Loco Gettext template
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: AlphaSSS Group\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Mon Aug 17 2015 17:49:30 GMT+0300 (EEST)\n"
+"POT-Revision-Date: Mon Aug 17 2015 17:49:33 GMT+0300 (EEST)\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#: ../alphasss-group.php:62
+msgctxt "My Account Groups"
+msgid "Groups"
+msgstr ""
+
+#: ../alphasss-group.php:63
+msgctxt "My Account Groups sub nav"
+msgid "No Pending Invites"
+msgstr ""
+
+#: ../alphasss-group.php:66
+#, php-format
+msgctxt "My Account Groups nav"
+msgid "Groups <span class=\"count\">%s</span>"
+msgstr ""
+
+#: ../alphasss-group.php:67
+#, php-format
+msgctxt "My Account Groups sub nav"
+msgid "Pending Invites <span class=\"count\">%s</span>"
+msgstr ""
+
+#: ../alphasss-group.php:74
+msgctxt "My Account Groups sub nav"
+msgid "Memberships"
+msgstr ""
+
+#: ../alphasss-group.php:90
+msgctxt "My Account Groups sub nav"
+msgid "Group Created"
+msgstr ""
+
+#: ../alphasss-group.php:102
+#, php-format
+msgid "%s's Group"
+msgstr ""
+
+#: ../alphasss-group.php:166
+msgid "Sorry, you are not allowed to create groups."
+msgstr ""
+
+#: ../alphasss-group.php:194 ../alphasss-group.php:229 ../alphasss-group.php:253
+msgid "There was an error saving group details. Please try again."
+msgstr ""
+
+#: ../alphasss-group.php:209
+msgid "Only the group creator may continue editing this group."
+msgstr ""
+
+#: ../alphasss-group.php:222
+msgid "Please fill in all of the required fields"
+msgstr ""
+
+#: ../alphasss-group.php:370
+msgid "Invite successfully removed"
+msgstr ""
+
+#: ../alphasss-group.php:374
+msgid "There was an error removing the invite"
+msgstr ""
+
+#: ../alphasss-group.php:405
+msgid ""
+"There was an error saving the group profile photo, please try uploading "
+"again."
+msgstr ""
+
+#: ../alphasss-group.php:407
+msgid "The group profile photo was uploaded successfully!"
+msgstr ""

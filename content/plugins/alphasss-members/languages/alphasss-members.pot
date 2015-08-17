@@ -1,0 +1,128 @@
+# Loco Gettext template
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Alphasss Members\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Mon Aug 17 2015 17:15:52 GMT+0300 (EEST)\n"
+"POT-Revision-Date: Mon Aug 17 2015 17:15:54 GMT+0300 (EEST)\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#: /alphasss-members.php:41
+#, php-format
+msgid "Couldn't load main class at:<br/>%s"
+msgstr ""
+
+#: /alphasss-members.php:53
+#, php-format
+msgid "<h1>Fatal error:</h1><hr/><pre>%s</pre>"
+msgstr ""
+
+#: /alphasss-members.php:83 /alphasss-members.php:84
+msgid "Request Session"
+msgstr ""
+
+#: /alphasss-members.php:121 /alphasss-members.php:122
+msgid "Request Invitation"
+msgstr ""
+
+#: /alphasss-members.php:156
+#, php-format
+msgid ""
+"Okay! Great, we have sent your request to %s.<br />In a couple of seconds, "
+"we will display your code in this window, right here."
+msgstr ""
+
+#: /alphasss-members.php:157
+msgid "Request sent"
+msgstr ""
+
+#: /alphasss-members.php:158
+#, php-format
+msgid ""
+"Sorry but the member %s went offline just a moment ago. Here's what you can "
+"do:<br /><p>&nbsp;&nbsp;1. The fastest: Request invitation from anybody who "
+"is online. You'll your code within seconds.</p><p>&nbsp;&nbsp;2. Post your "
+"invitation request in the general forum. Someone will read it and send you "
+"invitation.</p>"
+msgstr ""
+
+#: /alphasss-members.php:159
+#, php-format
+msgid ""
+"Your registration is not quite finished yet. To complete it, go to <a "
+"href=\"%s\">registration</a> page. Morbo will now introduce tonight's "
+"candidates... PUNY HUMAN NUMBER ONE, PUNY HUMAN NUMBER TWO, and Morbo's good "
+"friend, Richard Nixon. <a href=\"/browse/\">Browse</a>. Would you censor the "
+"Venus de Venus just because you can see her spewers? Yeah, lots of people "
+"did. Soon enough."
+msgstr ""
+
+#: /alphasss-members.php:160
+msgid ""
+"Bendless Love<br /> Bender, we're trying our best. You wouldn't. Ask anyway! "
+"I saw you with those two ''ladies of the evening'' at Elzars. Explain that."
+msgstr ""
+
+#: /alphasss-members.php:161
+#, php-format
+msgid ""
+"%s has sent you and invitation code:<br />%s<br />Write it down, and use it "
+"to <a href=\"%s\">register now</a>. The code will expire in 24 hours."
+msgstr ""
+
+#: /alphasss-members.php:188
+msgid "Settings"
+msgstr ""
+
+#: /includes/admin.php:69
+msgid "General Settings"
+msgstr ""
+
+#: /includes/admin.php:71
+msgid "Publish key"
+msgstr ""
+
+#: /includes/admin.php:72
+msgid "Subscribe key"
+msgstr ""
+
+#: /includes/admin.php:73
+msgid "Channel prefix"
+msgstr ""
+
+#: /includes/admin.php:84
+msgid "Add publish key"
+msgstr ""
+
+#: /includes/admin.php:96
+msgid "Add subscribe key"
+msgstr ""
+
+#: /includes/admin.php:107
+msgid "Add channel prefix"
+msgstr ""
+
+#: /includes/admin.php:141
+msgid "Save Changes"
+msgstr ""
+
+#: /includes/admin.php:154
+msgid "Some dummy text here"
+msgstr ""

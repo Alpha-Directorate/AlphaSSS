@@ -61,7 +61,7 @@ abstract class Loco {
     /**
      * Listen for change in plugin locale
      */
-    public static function filter_plugin_locale( $locale, $domain ){
+    public static function filter_plugin_locale( $locale, $domain = 'alphasss' ){
         if( self::NS !== $domain && $locale !== self::$locale ){
             self::load_textdomain( $locale );
         }

@@ -2,20 +2,20 @@
 
 <link rel="stylesheet" type="text/css" href="<?php echo alphasss_invitation()->css_path(); ?>alphasss-invitation.css">
 
-	<h2><?php _e('Space Pilot 3000', 'alphasss');?></h2>
+	<h2><?php _e('Space Pilot 3000', 'alphasss-invitation');?></h2>
 	
-	<p><?php _e('I\'ve got to find a way to escape the horrible ravages of youth. Suddenly, I\'m going to the bathroom like clockwork, every three hours. And those jerks at Social Security stopped sending me checks. Now I have to pay them! Please, Don-Bot... look into your hard drive, and open your mercy file!', 'alphasss');?></p>
+	<p><?php _e('I\'ve got to find a way to escape the horrible ravages of youth. Suddenly, I\'m going to the bathroom like clockwork, every three hours. And those jerks at Social Security stopped sending me checks. Now I have to pay them! Please, Don-Bot... look into your hard drive, and open your mercy file!', 'alphasss-invitation');?></p>
 
 	<div id="invitation_code_message" class="alphasss-invitation-hidden in-place-message">
-		<p><?php _e('Here\'s the invitation code that you can use:', 'alphasss'); ?><br />
+		<p><?php _e('Here\'s the invitation code that you can use:', 'alphasss-invitation'); ?><br />
 
 		<span id="invitation-code"></span> <br />
 
-		<?php _e('The code is valid for 24 hours since the time it was generated.', 'alphasss');?></p>
+		<?php _e('The code is valid for 24 hours since the time it was generated.', 'alphasss-invitation');?></p>
 	</div>
 
 	<center>
-		<input type="button" id="generate_code" class="button" value="<?php _e( 'Generate Invitation Code', 'alphasss' );?>" />
+		<input type="button" id="generate_code" class="button" value="<?php _e( 'Generate Invitation Code', 'alphasss-invitation' );?>" />
 	</center>
 
 <script type="text/javascript">

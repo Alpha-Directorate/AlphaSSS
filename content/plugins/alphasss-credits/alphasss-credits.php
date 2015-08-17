@@ -6,7 +6,7 @@
  * Author:      AlphaSSS
  * Author URI:  http://alphasss.com
  * Version:     0.0.1
- * Text Domain: alphasss
+ * Text Domain: alphasss-credits
  */
 
 // Exit if accessed directly
@@ -20,7 +20,7 @@ use AlphaSSS\Helpers\EmailAddressEncryption;
 
 add_action( 'bp_loaded', function(){
 
-	load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
+	load_textdomain( 'alphasss-credits', plugin_dir_path( __FILE__ ) . '/languages/alphasss-credits-' . get_locale() . '.mo' );
 
 	if ( HTTP::isPost() AND $credits_amount = Arr::get( $_POST, 'credits-amount' ) ) {
 
@@ -53,7 +53,7 @@ add_action( 'bp_loaded', function(){
 
 			$item = new \Bitpay\Item();
 			$item->setPrice((float) $credits_amount);
-			$item->setDescription(sprintf(__("Purchase %.2f Credits ($%.2f USD)", 'alphasss'), $credits_amount, $credits_amount));
+			$item->setDescription(sprintf(__("Purchase %.2f Credits ($%.2f USD)", 'alphasss-credits'), $credits_amount, $credits_amount));
 
 			$invoice = new \Bitpay\Invoice();
 			$invoice->setCurrency(new \Bitpay\Currency('USD'))

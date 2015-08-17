@@ -6,19 +6,20 @@
  * Author:      AlphaSSS
  * Author URI:  http://alphasss.com
  * Version:     0.0.1
+ * Text Domain: alphasss-top-navigation
  */
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 //Loads the plugin's translated strings
-load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
+load_textdomain( 'alphasss', plugin_dir_path( __FILE__ ) . '/languages/alphasss-top-navigation-' . get_locale() . '.mo' );
 
-__('Blog', 'alphasss');
-__('Register', 'alphasss');
-__('Home', 'alphasss');
-__('Browse', 'alphasss');
-__('Forum', 'alphasss');
+__('Blog', 'alphasss-top-navigation');
+__('Register', 'alphasss-top-navigation');
+__('Home', 'alphasss-top-navigation');
+__('Browse', 'alphasss-top-navigation');
+__('Forum', 'alphasss-top-navigation');
 
 add_action( 'plugins_loaded', function(){
 
@@ -26,7 +27,7 @@ add_action( 'plugins_loaded', function(){
 	add_filter('wp_nav_menu_items', function($items, $args) {
 		ob_start();
 		wp_loginout('/');
-		$loginoutlink = str_replace('Log in', __('Login', 'alphasss'), ob_get_contents());
+		$loginoutlink = str_replace('Log in', __('Login', 'alphasss-top-navigation'), ob_get_contents());
 		ob_end_clean();
 
 		// Add login element to navigation menu
@@ -42,7 +43,7 @@ add_action( 'plugins_loaded', function(){
 	add_filter('wp_get_nav_menu_items', function($items, $menu){
 
 		foreach ( $items as $key => $item ) {
-			$items[$key]->title = __($items[$key]->title, 'alphasss');
+			$items[$key]->title = __($items[$key]->title, 'alphasss-top-navigation');
 
 			if ($items[$key]->title == 'Register') {
 				if (is_user_logged_in()) {

@@ -1,0 +1,182 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: AlphaSSS GF Finances\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Mon Aug 17 2015 16:17:01 GMT+0300 (EEST)\n"
+"PO-Revision-Date: Mon Aug 17 2015 16:18:14 GMT+0300 (EEST)\n"
+"Last-Translator: Counselor <andrew.voyticky@gmail.com>\n"
+"Language-Team: \n"
+"Language: English\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Loco-Target-Locale: en_US"
+
+#: ../alphasss-gf-finances.php:50
+#, php-format
+msgid "Couldn't load main class at:<br/>%s"
+msgstr ""
+
+#: ../alphasss-gf-finances.php:62
+#, php-format
+msgid "<h1>Fatal error:</h1><hr/><pre>%s</pre>"
+msgstr ""
+
+#: ../includes/gf-finances-class.php:21 ../includes/gf-finances-class.php:81
+msgid "Financials"
+msgstr ""
+
+#: ../includes/gf-finances-class.php:91
+msgid "Accounting"
+msgstr ""
+
+#: ../includes/gf-finances-class.php:100
+msgid "Time Value"
+msgstr ""
+
+#: ../includes/gf-finances-class.php:109
+msgid "Levels"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-accounting.php:7
+msgid "Date"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-accounting.php:8
+msgid "Transaction Description"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-accounting.php:9
+msgid "Income"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-accounting.php:9 ..
+#: templates/members/single/alphasss-gf-finances-accounting.php:10 ..
+#: templates/members/single/alphasss-gf-finances-accounting.php:11
+msgid "(Credits)"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-accounting.php:10
+msgid "Withdrawal"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-accounting.php:11
+msgid "Ending Ballance"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-time-value.php:7
+msgid "Check to Edit"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-time-value.php:8
+msgid "Session Time"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-time-value.php:9
+msgid "Session Value"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-time-value.php:17
+#, php-format
+msgid "%d min"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-time-value.php:37
+msgid "Session Values not configured..."
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-time-value.php:38
+msgid ""
+"You currently do not have any talk session values defined. Therefore, you "
+"cannot start audio-video. But you can change this in the table below."
+msgstr ""
+
+#: ../templates/members/single/alphasss_gf_finances_activity_text.php:3
+msgid ""
+"Congratulations! You are now at the highest level <b>10</b>, and your "
+"earnings share is <b>100%</b>, and AlphaSSS makes no commission. Read more "
+"about <a href='#'>levels</a>."
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-levels.php:3
+msgid "The Deep South"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-levels.php:5
+msgid ""
+"No! The cat shelter's on to me. Shinier than yours, meatbag. I'll get my kit!"
+" Kids don't turn rotten just from watching TV."
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-levels.php:7 ..
+#: templates/members/single/alphasss-gf-finances-levels.php:11 ..
+#: templates/members/single/alphasss-gf-finances-levels.php:15 ..
+#: templates/members/single/alphasss-gf-finances-levels.php:19 ..
+#: templates/members/single/alphasss-gf-finances-levels.php:23 ..
+#: templates/members/single/alphasss-gf-finances-levels.php:27 ..
+#: templates/members/single/alphasss-gf-finances-levels.php:31 ..
+#: templates/members/single/alphasss-gf-finances-levels.php:35 ..
+#: templates/members/single/alphasss-gf-finances-levels.php:39 ..
+#: templates/members/single/alphasss-gf-finances-levels.php:43 ..
+#: templates/members/single/alphasss-gf-finances-levels.php:47
+#, php-format
+msgid "Level %d"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-levels.php:9
+msgid "Now Fry, it's been a few years since medical school, so remind me."
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-levels.php:13
+msgid "Disemboweling in your species: fatal or non-fatal?"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-levels.php:17
+msgid "And those jerks at Social Security stopped sending me checks."
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-levels.php:21
+msgid ""
+"You'll have all the Slurm you can drink when you're partying with Slurms "
+"McKenzie!"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-levels.php:25
+msgid "Robot 1-X, save my friends! And Zoidberg!"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-levels.php:29
+msgid "As an interesting side note, as a head without a body, I envy the dead."
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-levels.php:33
+msgid ""
+"Well I'da done better, but it's plum hard pleading a case while awaiting "
+"trial for that there incompetence."
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-levels.php:37
+msgid "Leela, are you alright? You got wanged on the head."
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-levels.php:41
+msgid "I'll get my kit! Stop it, stop it. It's fine. I will 'destroy' you!"
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-levels.php:45
+msgid "Who am I making this out to? File not found. It must be wonderful."
+msgstr ""
+
+#: ../templates/members/single/alphasss-gf-finances-levels.php:49
+msgid "We live long and are celebrated poopers."
+msgstr ""
