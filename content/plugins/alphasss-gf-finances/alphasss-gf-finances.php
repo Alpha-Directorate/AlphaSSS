@@ -16,6 +16,9 @@ use \AlphaSSS\Repositories\AccountingEvent;
 use \AlphaSSS\Helpers\Arr;
 use Carbon\Carbon;
 
+
+load_textdomain( 'alphasss', plugin_dir_path( __FILE__ ) . '/languages/alphasss-gf-finances-' . get_locale() . '.mo' );
+
 // Directory
 if ( ! defined( 'ALPHASSS_GF_FINANCES_PLUGIN_DIR' ) ) {
 	define( 'ALPHASSS_GF_FINANCES_PLUGIN_DIR', trailingslashit( plugin_dir_path( __FILE__ ) ) );
@@ -44,7 +47,7 @@ add_action( 'plugins_loaded', function(){
 		$main_include = ALPHASSS_GF_FINANCES_PLUGIN_DIR  . 'includes/main-class.php';
 
 		if ( ! file_exists( $main_include ) ) {
-			$msg = sprintf( __( "Couldn't load main class at:<br/>%s", 'alphasss' ), $main_include );
+			$msg = sprintf( __( "Couldn't load main class at:<br/>%s", 'alphasss-gf-finances' ), $main_include );
 			throw new Exception( $msg, 404 );
 		}
 
@@ -56,7 +59,7 @@ add_action( 'plugins_loaded', function(){
 
 	} catch (Exception $e) {
 
-		$msg = sprintf( __( "<h1>Fatal error:</h1><hr/><pre>%s</pre>", 'alphasss' ), $e->getMessage() );
+		$msg = sprintf( __( "<h1>Fatal error:</h1><hr/><pre>%s</pre>", 'alphasss-gf-finances' ), $e->getMessage() );
     	echo $msg;
 	}
 

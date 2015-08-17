@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 use AlphaSSS\Repositories\User;
 use AlphaSSS\Helpers\Arr;
 
-load_textdomain( 'alphasss', WP_LANG_DIR . '/plugins/alphasss/alphasss-' . get_locale() . '.mo' );
+load_textdomain( 'alphasss', plugin_dir_path( __FILE__ ) . '/languages/alphasss-group-' . get_locale() . '.mo' );
 
 add_action( 'plugins_loaded', function(){
 
@@ -59,19 +59,19 @@ add_action( 'plugins_loaded', function(){
 
 			// Pending group invites
 			$count   = groups_get_invite_count_for_user();
-			$title   = _x( 'Groups', 'My Account Groups', 'buddypress' );
-			$pending = _x( 'No Pending Invites', 'My Account Groups sub nav', 'buddypress' );
+			$title   = _x( 'Groups', 'My Account Groups', 'alphasss-group' );
+			$pending = _x( 'No Pending Invites', 'My Account Groups sub nav', 'alphasss-group' );
 
 			if ( !empty( $count['total'] ) ) {
-				$title   = sprintf( _x( 'Groups <span class="count">%s</span>', 'My Account Groups nav', 'buddypress' ), $count );
-				$pending = sprintf( _x( 'Pending Invites <span class="count">%s</span>', 'My Account Groups sub nav', 'buddypress' ), $count );
+				$title   = sprintf( _x( 'Groups <span class="count">%s</span>', 'My Account Groups nav', 'alphasss-group' ), $count );
+				$pending = sprintf( _x( 'Pending Invites <span class="count">%s</span>', 'My Account Groups sub nav', 'alphasss-group' ), $count );
 			}
 
 			// My Groups
 			$wp_admin_bar->add_menu( array(
 				'parent' => 'my-account-groups',
 				'id'     => 'my-account-groups-memberships',
-				'title'  => _x( 'Memberships', 'My Account Groups sub nav', 'buddypress' ),
+				'title'  => _x( 'Memberships', 'My Account Groups sub nav', 'alphasss-group' ),
 				'href'   => trailingslashit( $groups_link )
 			) );
 
@@ -87,7 +87,7 @@ add_action( 'plugins_loaded', function(){
 			$wp_admin_bar->add_menu( array(
 				'parent'   => 'my-account-groups',
 				'id'       => 'my-account-group-created',
-				'title'    => _x( 'Group Created', 'My Account Groups sub nav' ,'alphasss' ),
+				'title'    => _x( 'Group Created', 'My Account Groups sub nav' ,'alphasss-group' ),
 				'position' => 0
 			) );
 		}
@@ -99,7 +99,7 @@ add_action( 'plugins_loaded', function(){
 	add_action( 'bp_get_new_group_name', function($group_name){
 
 		if (! $group_name) {
-			$group_name = sprintf( __( "%s's Group", 'alphasss' ), bp_core_get_user_displayname( bp_loggedin_user_id() ) );
+			$group_name = sprintf( __( "%s's Group", 'alphasss-group' ), bp_core_get_user_displayname( bp_loggedin_user_id() ) );
 		}
 
 		return $group_name;
@@ -163,7 +163,7 @@ add_action('bp_loaded', function(){
 			return false;
 
 	 	if ( !bp_user_can_create_groups() ) {
-			bp_core_add_message( __( 'Sorry, you are not allowed to create groups.', 'buddypress' ), 'error' );
+			bp_core_add_message( __( 'Sorry, you are not allowed to create groups.', 'alphasss-group' ), 'error' );
 			bp_core_redirect( bp_get_groups_directory_permalink() );
 		}
 
@@ -191,7 +191,7 @@ add_action('bp_loaded', function(){
 
 		// If this is a creation step that is not recognized, just redirect them back to the first screen
 		if ( bp_get_groups_current_create_step() && empty( $bp->groups->group_creation_steps[bp_get_groups_current_create_step()] ) ) {
-			bp_core_add_message( __('There was an error saving group details. Please try again.', 'buddypress'), 'error' );
+			bp_core_add_message( __('There was an error saving group details. Please try again.', 'alphasss-group'), 'error' );
 			bp_core_redirect( trailingslashit( bp_get_groups_directory_permalink() . 'create' ) );
 		}
 
@@ -206,7 +206,7 @@ add_action('bp_loaded', function(){
 
 			// Only allow the group creator to continue to edit the new group
 			if ( ! bp_is_group_creator( $bp->groups->current_group, bp_loggedin_user_id() ) ) {
-				bp_core_add_message( __( 'Only the group creator may continue editing this group.', 'buddypress' ), 'error' );
+				bp_core_add_message( __( 'Only the group creator may continue editing this group.', 'alphasss-group' ), 'error' );
 				bp_core_redirect( trailingslashit( bp_get_groups_directory_permalink() . 'create' ) );
 			}
 		}
@@ -219,14 +219,14 @@ add_action('bp_loaded', function(){
 
 			if ( 'group-details' == bp_get_groups_current_create_step() ) {
 				if ( empty( $_POST['group-name'] ) || empty( $_POST['group-desc'] ) || !strlen( trim( $_POST['group-name'] ) ) || !strlen( trim( $_POST['group-desc'] ) ) ) {
-					bp_core_add_message( __( 'Please fill in all of the required fields', 'buddypress' ), 'error' );
+					bp_core_add_message( __( 'Please fill in all of the required fields', 'alphasss-group' ), 'error' );
 					bp_core_redirect( trailingslashit( bp_get_groups_directory_permalink() . 'create/step/' . bp_get_groups_current_create_step() ) );
 				}
 
 				$new_group_id = isset( $bp->groups->new_group_id ) ? $bp->groups->new_group_id : 0;
 
 				if ( !$bp->groups->new_group_id = groups_create_group( array( 'group_id' => $new_group_id, 'name' => $_POST['group-name'], 'description' => $_POST['group-desc'], 'slug' => groups_check_slug( sanitize_title( esc_attr( $_POST['group-name'] ) ) ), 'date_created' => bp_core_current_time(), 'status' => 'public' ) ) ) {
-					bp_core_add_message( __( 'There was an error saving group details. Please try again.', 'buddypress' ), 'error' );
+					bp_core_add_message( __( 'There was an error saving group details. Please try again.', 'alphasss-group' ), 'error' );
 					bp_core_redirect( trailingslashit( bp_get_groups_directory_permalink() . 'create/step/' . bp_get_groups_current_create_step() ) );
 				}
 			}
@@ -250,7 +250,7 @@ add_action('bp_loaded', function(){
 					$group_status = 'hidden';
 
 				if ( !$bp->groups->new_group_id = groups_create_group( array( 'group_id' => $bp->groups->new_group_id, 'status' => $group_status, 'enable_forum' => $group_enable_forum ) ) ) {
-					bp_core_add_message( __( 'There was an error saving group details. Please try again.', 'buddypress' ), 'error' );
+					bp_core_add_message( __( 'There was an error saving group details. Please try again.', 'alphasss-group' ), 'error' );
 					bp_core_redirect( trailingslashit( bp_get_groups_directory_permalink() . 'create/step/' . bp_get_groups_current_create_step() ) );
 				}
 
@@ -367,11 +367,11 @@ add_action('bp_loaded', function(){
 				return false;
 			}
 
-			$message = __( 'Invite successfully removed', 'buddypress' );
+			$message = __( 'Invite successfully removed', 'alphasss-group' );
 			$error   = false;
 
 			if( ! groups_uninvite_user( (int) $_REQUEST['user_id'], $bp->groups->new_group_id ) ) {
-				$message = __( 'There was an error removing the invite', 'buddypress' );
+				$message = __( 'There was an error removing the invite', 'alphasss-group' );
 				$error   = 'error';
 			}
 
@@ -402,9 +402,9 @@ add_action('bp_loaded', function(){
 				// Normally we would check a nonce here, but the group save nonce is used instead
 
 				if ( !bp_core_avatar_handle_crop( array( 'object' => 'group', 'avatar_dir' => 'group-avatars', 'item_id' => $bp->groups->current_group->id, 'original_file' => $_POST['image_src'], 'crop_x' => $_POST['x'], 'crop_y' => $_POST['y'], 'crop_w' => $_POST['w'], 'crop_h' => $_POST['h'] ) ) )
-					bp_core_add_message( __( 'There was an error saving the group profile photo, please try uploading again.', 'buddypress' ), 'error' );
+					bp_core_add_message( __( 'There was an error saving the group profile photo, please try uploading again.', 'alphasss-group' ), 'error' );
 				else
-					bp_core_add_message( __( 'The group profile photo was uploaded successfully!', 'buddypress' ) );
+					bp_core_add_message( __( 'The group profile photo was uploaded successfully!', 'alphasss-group' ) );
 			}
 		}
 

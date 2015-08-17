@@ -18,7 +18,7 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 		{
 			parent::start(
 				'gf-finances',
-				__( 'Financials' , 'alphasss' ),
+				__( 'Financials' , 'alphasss-gf-finances' ),
 				dirname( __FILE__ )
 			);
 		}
@@ -78,7 +78,7 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 				( $bp->displayed_user->domain != $bp->loggedin_user->domain ) ) return;
 
 			bp_core_new_nav_item( array(
-				'name'                => __( 'Financials', 'alphasss' ),
+				'name'                => __( 'Financials', 'alphasss-gf-finances' ),
 				'slug'                => $this->slug,
 				'position'            => 200,
 				'screen_function'     => 'alphasss_gf_finances_screen_grid',
@@ -88,7 +88,7 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 			$alphasss_gf_finances_link = $bp->displayed_user->domain . $this->slug . '/';
 
 			bp_core_new_subnav_item( array(
-				'name'            => __( 'Accounting', 'alphasss' ),
+				'name'            => __( 'Accounting', 'alphasss-gf-finances' ),
 				'slug'            => 'my-accounting',
 				'parent_slug'     => $this->slug,
 				'parent_url'      => $alphasss_gf_finances_link,
@@ -97,7 +97,7 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 			) );
 
 			bp_core_new_subnav_item( array(
-				'name'            => __( 'Time Value', 'alphasss' ),
+				'name'            => __( 'Time Value', 'alphasss-gf-finances' ),
 				'slug'            => 'my-time-value',
 				'parent_slug'     => $this->slug,
 				'parent_url'      => $alphasss_gf_finances_link,
@@ -106,7 +106,7 @@ if ( ! class_exists( 'Alphasss_Gf_Finances_BP_Component' ) ):
 			) );
 
 			bp_core_new_subnav_item( array(
-				'name'            => __( 'Levels', 'alphasss' ),
+				'name'            => __( 'Levels', 'alphasss-gf-finances' ),
 				'slug'            => 'levels',
 				'parent_slug'     => $this->slug,
 				'parent_url'      => $alphasss_gf_finances_link,
