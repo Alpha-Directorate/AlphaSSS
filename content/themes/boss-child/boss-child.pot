@@ -1,0 +1,336 @@
+# Loco Gettext template
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Boss. Child Theme\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Mon Aug 17 2015 18:08:05 GMT+0300 (EEST)\n"
+"POT-Revision-Date: Mon Aug 17 2015 18:08:52 GMT+0300 (EEST)\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Loco - https://localise.biz/"
+
+#: /purchase-credits-step2.php:44
+msgid "Pay with BitPay"
+msgstr ""
+
+#: /purchase-credits-step2.php:46
+#, php-format
+msgid "Your current balance is %d credits"
+msgstr ""
+
+#: /purchase-credits-step2.php:56
+msgid "The Day The Earth Stood Stoopid"
+msgstr ""
+
+#: /purchase-credits-step2.php:58
+msgid ""
+"Of all the friends I've had… you're the first. Dear God, they'll be killed "
+"on our doorstep! And there's no trash pickup until January 3rd. Goodbye, "
+"friends. I never thought I'd die like this. But I always really hoped. Yeah. "
+"Give a little credit to our public schools. You'll have all the Slurm you "
+"can drink when you're partying with Slurms McKenzie"
+msgstr ""
+
+#: /header.php:55
+msgid "Menu"
+msgstr ""
+
+#: /header.php:61
+msgid "Profile"
+msgstr ""
+
+#: /header.php:129
+msgid "Buy Credits"
+msgstr ""
+
+#: /header.php:198
+msgid "My Sites"
+msgstr ""
+
+#: /header.php:202
+msgid "Network Admin"
+msgstr ""
+
+#: /header.php:206 /header.php:228 /header.php:247 /header.php:262
+msgid "Dashboard"
+msgstr ""
+
+#: /header.php:207
+msgid "Sites"
+msgstr ""
+
+#: /header.php:208 /header.php:229
+msgid "Users"
+msgstr ""
+
+#: /header.php:209 /header.php:230 /header.php:255 /header.php:270
+msgid "Themes"
+msgstr ""
+
+#: /header.php:210 /header.php:231 /header.php:254 /header.php:269
+msgid "Plugins"
+msgstr ""
+
+#: /header.php:251 /header.php:266
+msgid "Customize"
+msgstr ""
+
+#: /header.php:252 /header.php:267
+msgid "Widgets"
+msgstr ""
+
+#: /header.php:253 /header.php:268
+msgid "Menus"
+msgstr ""
+
+#: /header.php:294
+msgid "Logout"
+msgstr ""
+
+#: /header.php:310 /header.php:427
+msgid "Register"
+msgstr ""
+
+#: /header.php:313 /header.php:430
+msgid "Login"
+msgstr ""
+
+#: /purchase-credits.php:43
+msgid "Select Credits"
+msgstr ""
+
+#: /purchase-credits.php:45
+msgid "How many Credits would you like to buy?"
+msgstr ""
+
+#: /purchase-credits.php:49
+msgid "Any amount you choose:"
+msgstr ""
+
+#: /purchase-credits.php:51
+#, php-format
+msgid "%.2f Credits ($%.2f USD)"
+msgstr ""
+
+#: /purchase-credits.php:56
+msgid "Proceed to Payment"
+msgstr ""
+
+#: /purchase-credits.php:65
+msgid "What are Bitcoins?"
+msgstr ""
+
+#: /purchase-credits.php:67
+msgid ""
+"Oh sure! Blame the wizards! You know the worst thing about being a slave? "
+"They make you work, but they don't pay you or let you go. Ah, yes! John "
+"Quincy Adding Machine. He struck a chord with the voters when he pledged not "
+"to go on a killing spree."
+msgstr ""
+
+#: /purchase-credits.php:72
+msgid "What are Credits?"
+msgstr ""
+
+#: /purchase-credits.php:74
+msgid ""
+"You don't know how to do any of those. Doomsday device? Ah, now the ball's "
+"in Farnsworth's court! Good news, everyone! There's a report on TV with some "
+"very bad news! That's a popular name today. Little \"e\", big \"B\"? Moving "
+"along… Isn't it true that you have been paid for your testimony?"
+msgstr ""
+
+#: /buddypress/groups/create.php:31 /buddypress/groups/create.php:34 
+#: /buddypress/groups/create.php:38
+msgid "characters left"
+msgstr ""
+
+#: /buddypress/groups/create.php:46
+msgid "Group Name (required)"
+msgstr ""
+
+#: /buddypress/groups/create.php:47
+msgid "Group Name Create Tooltip"
+msgstr ""
+
+#: /buddypress/groups/create.php:56
+msgid "Group Description (required)"
+msgstr ""
+
+#: /buddypress/groups/create.php:57
+msgid "Group Description Create Tooltip"
+msgstr ""
+
+#: /buddypress/groups/create.php:77
+msgid "Privacy Options"
+msgstr ""
+
+#: /buddypress/groups/create.php:80
+msgid "This is a public group"
+msgstr ""
+
+#: /buddypress/groups/create.php:82
+msgid "Any site member can join this group."
+msgstr ""
+
+#: /buddypress/groups/create.php:83 /buddypress/groups/create.php:94
+msgid "This group will be listed in the groups directory and in search results."
+msgstr ""
+
+#: /buddypress/groups/create.php:84
+msgid "Group content and activity will be visible to any site member."
+msgstr ""
+
+#: /buddypress/groups/create.php:90
+msgid "This is a private group"
+msgstr ""
+
+#: /buddypress/groups/create.php:93
+msgid "Only users who request membership and are accepted can join the group."
+msgstr ""
+
+#: /buddypress/groups/create.php:95 /buddypress/groups/create.php:106
+msgid "Group content and activity will only be visible to members of the group."
+msgstr ""
+
+#: /buddypress/groups/create.php:101
+msgid "This is a hidden group"
+msgstr ""
+
+#: /buddypress/groups/create.php:104
+msgid "Only users who are invited can join the group."
+msgstr ""
+
+#: /buddypress/groups/create.php:105
+msgid "This group will not be listed in the groups directory or search results."
+msgstr ""
+
+#: /buddypress/groups/create.php:111
+msgid "Group Invitations"
+msgstr ""
+
+#: /buddypress/groups/create.php:113
+msgid "Which members of this group are allowed to invite others?"
+msgstr ""
+
+#: /buddypress/groups/create.php:118
+msgid "All group members"
+msgstr ""
+
+#: /buddypress/groups/create.php:123
+msgid "Group admins and mods only"
+msgstr ""
+
+#: /buddypress/groups/create.php:128
+msgid "Group admins only"
+msgstr ""
+
+#: /buddypress/groups/create.php:134
+msgid "Group Forums"
+msgstr ""
+
+#: /buddypress/groups/create.php:138
+msgid "Should this group have a forum?"
+msgstr ""
+
+#: /buddypress/groups/create.php:141
+msgid "Enable discussion forum"
+msgstr ""
+
+#: /buddypress/groups/create.php:145
+#, php-format
+msgid ""
+"<strong>Attention Site Admin:</strong> Group forums require the <a "
+"href=\"%s\">correct setup and configuration</a> of a bbPress installation."
+msgstr ""
+
+#: /buddypress/groups/create.php:178
+msgid ""
+"Upload an image to use as a profile photo for this group. The image will be "
+"shown on the main group page, and in search results."
+msgstr ""
+
+#: /buddypress/groups/create.php:182
+msgid "Upload Image"
+msgstr ""
+
+#: /buddypress/groups/create.php:186
+msgid "To skip the group profile photo upload process, hit the \"Next Step\" button."
+msgstr ""
+
+#: /buddypress/groups/create.php:201
+msgid "Crop Group Profile Photo"
+msgstr ""
+
+#: /buddypress/groups/create.php:203
+msgid "Profile photo to crop"
+msgstr ""
+
+#: /buddypress/groups/create.php:206
+msgid "Profile photo preview"
+msgstr ""
+
+#: /buddypress/groups/create.php:209
+msgid "Crop Image"
+msgstr ""
+
+#: /buddypress/groups/create.php:255
+msgid "Select people to invite from your friends list."
+msgstr ""
+
+#: /buddypress/groups/create.php:273
+msgid "Remove Invite"
+msgstr ""
+
+#: /buddypress/groups/create.php:290
+msgid ""
+"Once you have built up friend connections you will be able to invite others "
+"to your group."
+msgstr ""
+
+#: /buddypress/groups/create.php:312
+msgid "Back to Previous Step"
+msgstr ""
+
+#: /buddypress/groups/create.php:319
+msgid "Next Step"
+msgstr ""
+
+#: /buddypress/groups/create.php:326
+msgid "Create My Group and Continue"
+msgstr ""
+
+#: /buddypress/groups/create.php:333
+msgid "Finish"
+msgstr ""
+
+#: /buddypress/members/members-loop.php:78
+msgid "Friends"
+msgstr ""
+
+#: /buddypress/members/members-loop.php:80
+msgid "Friend"
+msgstr ""
+
+#: /buddypress/members/members-loop.php:85
+msgid "Followers"
+msgstr ""
+
+#: /buddypress/members/members-loop.php:150
+msgid "Sorry, no members were found."
+msgstr ""
