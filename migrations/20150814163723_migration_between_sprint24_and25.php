@@ -17,6 +17,10 @@ class MigrationBetweenSprint24And25 extends AbstractMigration
             activate_plugin( $plugin->file, '' );
         }
 
+        if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'wp-fullpage' ) ) {
+            activate_plugin( $plugin->file, '' );
+        }
+
         // Upgrade WordPress database
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         wp_upgrade();
@@ -95,6 +99,10 @@ class MigrationBetweenSprint24And25 extends AbstractMigration
     public function down()
     {
         if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'loco-translate' ) ) {
+            deactivate_plugins( $plugin->file, '' );
+        }
+
+        if ( $plugin = ( new \WP_CLI\Fetchers\Plugin )->get( 'wp-fullpage' ) ) {
             deactivate_plugins( $plugin->file, '' );
         }
 
