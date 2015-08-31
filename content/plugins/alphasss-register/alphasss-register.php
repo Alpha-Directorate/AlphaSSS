@@ -313,7 +313,8 @@ add_action( 'plugins_loaded', function(){
 			"$('#input_9_20').val($.cookie('invintation_code'));" .
 			"$('#input_4_20').bind('input', function(){
 				$(this).val($(this).val().replace(/\s+/g, ''));
-			});})(jQuery);";
+			});".
+			"$('#gform_submit_button_4').parent().parent().append(\"<h1>".__("Don't have any invitation code? Then ask the members.", 'alphasss-register')."</h1><p>".__("Get the code from one of the members currently online. Who said that? SURE you <a href='/browse/'>members online</a>! Ummm…to eBay? Stop! Don't shoot fire stick in space canoe! Cause explosive decompression!",'alphasss-register')."</p>\"); })(jQuery);";
 
 		// Inject script into form
 		GFFormDisplay::add_init_script($form['id'], 'gform_my_function', GFFormDisplay::ON_PAGE_RENDER, $script);
@@ -328,27 +329,18 @@ add_action( 'plugins_loaded', function(){
 
 			switch ( $field['id'] ) {
 
+				case 21:
+					$field['content'] = str_replace( '%%RegisterInvintationTitleUnder%%', __('Problems with the invitation code?', 'alphasss-register'), $field['content'] );
+					$field['content'] = str_replace( '%%RegisterInvintationTextUnder%%', __("No, I'm Santa Claus! You, minion. Lift my arm. <a>Meh. No!</a>", 'alphasss-register'), $field['content'] );
+				break;
+
 				case 22:
 					$field['content'] = str_replace( '%%RegisterInvintationTitle%%', __('Your Invitation Code', 'alphasss-register'), $field['content'] );
-					$field['content'] = str_replace( '%%RegisterPageTextUnderTitle%%', __('I meant \'physically\'. Look, perhaps you could let me work for a little food? I could clean the floors or paint a fence, or service you sexually? Hello, little man. I will destroy you! But existing is basically all I do! So, how \'bout them Knicks?', 'alphasss-register'), $field['content'] );
+					$field['content'] = str_replace( '%%RegisterPageTextUnderTitle%%', __("Belligerent and numerous. And I'm his friend Jesus. With a warning label this big, you know they gotta be fun!", 'alphasss-register'), $field['content'] );
 				break;
 
 				case 20:
 					$field['label'] = __('Invitation Code:', 'alphasss-register');
-				break;
-
-				case 21:
-					$field['content'] = str_replace( 
-						[
-							'%%RegisterInvintationTitleUnder%%',
-							'%%RegisterInvintationTextUnder%%'
-						], 
-						[
-							__('Don\'t have any invitation code? Then ask the members.', 'alphasss-register'),
-							__('Get the code from one of the members currently online. Who said that? Sure you <a href="/browse/">members online</a>! Ummm...to eBay? Stop! Don\'t shoot fire stick in space canoe! Cause explosive decompression!', 'alphasss-register')
-						],
-						$field['content']
-					);
 				break;
 			}
 		}
@@ -405,23 +397,14 @@ add_action( 'plugins_loaded', function(){
 					$field['content'] = str_replace( '%%RegisterInvintationTitle%%', __('Your Invitation Code', 'alphasss-register'), $field['content'] );
 				break;
 
+				case 19:
+					$field['content'] = str_replace( '%%RegisterInvintationTextUnder%%', __("I meant 'physically'. Look, perhaps you could let me work for a little food? I could clean the floors or paint a fence, or service you sexually? Hello, little man. I will destroy you! But existing is basically all I do! So, how 'bout them Knicks?", 'alphasss-register'), $field['content'] );
+				break;
+
 				case 20:
 					$field['label'] = __('Invitation Code:', 'alphasss-register');
 				break;
 
-				case 21:
-					$field['content'] = str_replace( 
-						[
-							'%%RegisterInvintationTitleUnder%%',
-							'%%RegisterInvintationTextUnder%%'
-						], 
-						[
-							__('Don\'t have any invitation code?', 'alphasss-register'),
-							__('Who said that? SURE you can die! You want to die?!', 'alphasss-register')
-						],
-						$field['content']
-					);
-				break;
 
 				case 22:
 					$field['label']       = str_replace( '%%RegisterEmailLabel%%', __('Your Email Address:', 'alphasss-register'), $field['label'] );
