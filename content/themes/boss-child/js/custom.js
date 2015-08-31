@@ -15,4 +15,6 @@ jQuery(document).ready(function($) {
 	$('[data-toggle="tooltip"]').tooltip();
 
 	$('#subnav').append('<div id="profile-alerts"></div>');
+
+	$('#adminbar-links .screen-reader-shortcut').hide();
 });
